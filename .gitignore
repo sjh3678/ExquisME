@@ -1,0 +1,11 @@
+/.metadata/
+/target/**
+*/target/*
+/target/**
+target/
+/target/
+.class
+pom.properties
+.settings
+.classpath
+.project
