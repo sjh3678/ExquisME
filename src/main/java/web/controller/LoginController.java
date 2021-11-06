@@ -5,5 +5,6 @@ public class LoginController {
 		System.out.println("111");
 		System.out.println("재현");
 		System.out.println("55555555555");
+		System.out.println("현빈");
 	}
 }
