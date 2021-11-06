@@ -8,5 +8,6 @@ public class LoginController {
 //		System.out.println("현빈");
 //		System.out.println("재현찐막가자 제발!!");
 		System.out.println("창무");
+		System.out.println("다들 주말 잘 보내세요~");
 	}
 }
