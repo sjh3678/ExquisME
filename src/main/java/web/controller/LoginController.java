@@ -10,6 +10,7 @@ public class LoginController {
 		System.out.println("창무");
 		System.out.println("다들 주말 잘 보내세요~");
 		System.out.println("클래스다이어그램");
+		System.out.println("창무창무");
 		
 	}
 }
