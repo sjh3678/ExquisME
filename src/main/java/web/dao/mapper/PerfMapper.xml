@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.dao.face.PerfDao">
+
+<select id="selectCntPerfAll">
+</select>
+
+<select id="selectPerfAll">
+</select>
+
+<select id="selectPerfByFilter">
+</select>
+
+<select id="selectListByKeyword">
+</select>
+
+<select id="selectPerfByPerfNo">
+</select>
+
+<update id="updatePerfLike">
+</update>
+
+<update id="updatePerfDislike">
+</update>
+
+<update id="updatePerf">
+</update>
+
+<delete id="deletePerf">
+</delete>
+
+<insert id="insertPerf">
+</insert>
+
+</mapper>
