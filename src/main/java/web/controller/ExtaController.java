@@ -23,7 +23,7 @@ public class ExtaController {
 	private static final Logger logger = LoggerFactory.getLogger(ExtaController.class);
 
 	
-	
+	//
 	
 	@RequestMapping(value="/extagram/list")
 	public void extaList(Paging paramData, Model model) {
