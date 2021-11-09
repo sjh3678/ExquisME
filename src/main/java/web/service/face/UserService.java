@@ -1,5 +1,7 @@
 package web.service.face;
 
+import java.util.List;
+
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.User;
@@ -50,12 +52,34 @@ public interface UserService {
 	 */
 	public User getUserInfo(User user);
 
-	public Extagram getExtaHistory(int userNo);
+	/**
+	 * 회원의 Exragram 기록 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Extagram> getExtaHistory(int userNo);
 
-	public Extagram searchExtaHistory(String search, int userNo);
+	/**
+	 * 회원의 Exragram 기록 검색
+	 * @param userNo - 조회할 회원 번호
+	 * @param search - 입력된 검색어
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Extagram> searchExtaHistory(String search, int userNo);
 
-	public ExComm getHistory(int userNo);
+	/**
+	 * 회원의 댓글 기록 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<ExComm> getHistory(int userNo);
 
-	public ExComm searchCommentHistory(String search, int userNo);
+	/**
+	 * 회원의 Exragram 기록 검색
+	 * @param userNo - 조회할 회원 번호
+	 * @param search - 입력된 검색어
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<ExComm> searchCommentHistory(String search, int userNo);
 
 }

@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -133,20 +135,20 @@ public class UserController {
 	@RequestMapping(value="/view/history", method=RequestMethod.POST)
 	public void viewExtraHistory(int userNo) {
 		logger.info("/search/history");
-		Extagram extagram = userService.getExtaHistory(userNo);
+		List<Extagram> extagram = userService.getExtaHistory(userNo);
 		
 	}
 	
 	@RequestMapping(value="/search/history", method=RequestMethod.POST)
 	public void searchExtraHistory(int userNo, String search) {
 		logger.info("/search/history");
-		Extagram extagram = userService.searchExtaHistory(search, userNo);
+		List<Extagram> extagram = userService.searchExtaHistory(search, userNo);
 	}
 	
 	@RequestMapping(value="/view/history", method=RequestMethod.POST)
 	public void viewCommentHistory(int userNo) {
 		logger.info("/search/history");
-		ExComm exComm = userService.getHistory(userNo);
+		List<ExComm> exComm = userService.getHistory(userNo);
 		
 	}
 
@@ -154,6 +156,6 @@ public class UserController {
 	@RequestMapping(value="/search/history", method=RequestMethod.POST)
 	public void searchCommentHistory(int userNo, String search) {
 		logger.info("/search/history");
-		ExComm exComm = userService.searchCommentHistory(search, userNo);
+		List<ExComm> exComm = userService.searchCommentHistory(search, userNo);
 	}
 }

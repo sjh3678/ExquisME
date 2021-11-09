@@ -1,6 +1,7 @@
 package web.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,25 +118,25 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Extagram getExtaHistory(int userNo) {
+	public List<Extagram> getExtaHistory(int userNo) {
 		
 		return userDao.selectExtraByUserNo(userNo);
 	}
 
 	@Override
-	public Extagram searchExtaHistory(String search, int userNo) {
+	public List<Extagram> searchExtaHistory(String search, int userNo) {
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectSearchExtaByUserNo(map);
 	}
 
 	@Override
-	public ExComm getHistory(int userNo) {
+	public List<ExComm> getHistory(int userNo) {
 		
 		return userDao.selectCommentByUserNo(userNo);
 	}
 
 	@Override
-	public ExComm searchCommentHistory(String search, int userNo) {
+	public List<ExComm> searchCommentHistory(String search, int userNo) {
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectCommentByUserNo(map);
 	}

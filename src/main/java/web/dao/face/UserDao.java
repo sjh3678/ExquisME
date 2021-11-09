@@ -1,6 +1,7 @@
 package web.dao.face;
 
 import java.util.HashMap;
+import java.util.List;
 
 import web.dto.ExComm;
 import web.dto.Extagram;
@@ -41,15 +42,39 @@ public interface UserDao {
 	 */
 	public User selectUserByUserno(int userno);
 
+	/**
+	 * 회원 탈퇴 요청
+	 * @param userno - 탈퇴할 회원 번호 
+	 */
 	public void deleteUserByUserno(int userno);
 
-	public Extagram selectExtraByUserNo(int userNo);
+	/**
+	 * 회원의 Extagram 기록 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Extagram> selectExtraByUserNo(int userNo);
 
-	public Extagram selectSearchExtaByUserNo(HashMap<String, Object> map);
+	/**
+	 * 회원의 Extagram 기록 검색
+	 * @param map - 검색할 조건
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Extagram> selectSearchExtaByUserNo(HashMap<String, Object> map);
 
-	public ExComm selectCommentByUserNo(int userNo);
+	/**
+	 * 회원의 댓글 기록 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<ExComm> selectCommentByUserNo(int userNo);
 
-	public ExComm selectCommentByUserNo(HashMap<String, Object> map);
+	/**
+	 * 회원의 댓글 기록 검색
+	 * @param map - 검색할 조건
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<ExComm> selectCommentByUserNo(HashMap<String, Object> map);
 
 
 }
