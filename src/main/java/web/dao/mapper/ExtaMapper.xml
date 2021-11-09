@@ -5,6 +5,40 @@
 
 <mapper namespace="web.dao.face.ExtaDao">
 
+<select id="selectExtaAll">
+</select>
 
+<select id="selectExtaCntAll">
+</select>
+
+<insert id="insertExtaWrite">
+</insert>
+
+<update id="updateExtaByExPostNo">
+</update>
+
+<delete id="deleteExtaByExPostNo">
+</delete>
+
+<select id="selectExtaViewByExPostNo">
+</select>
+
+<update id="updateHit]">
+</update>
+
+<insert id="insertExtaReportByExPostNo">
+</insert>
+
+<insert id="insertExtaHeart">
+</insert>
+
+<delete id="deleteExtaHeart">
+</delete>
+
+<insert id="insertExtaComm">
+</insert>
+
+<delete id="deleteExtaComm">
+</delete>
 
 </mapper>

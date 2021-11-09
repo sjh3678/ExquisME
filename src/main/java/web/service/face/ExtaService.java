@@ -45,15 +45,27 @@ public interface ExtaService {
 	
 	/**
 	 * 게시글 상세보기
-	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼  게시글 선정
+	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼 게시글 선정
 	 * @return
 	 */
 	public Extagram getExtaViewByExPostNo(Extagram extagram);
 	
+	/**
+	 * 게시글 신고
+	 * @param extagram - Extagram DTO의 ExPostNo값으로 신고할 게시글 선정
+	 */
 	public void setExtaReportByExPostNo(Extagram extagram);
 	
+	/**
+	 * 좋아요
+	 * @param exLike
+	 */
 	public void setHeart(ExLike exLike);
 	
+	/**
+	 * 좋지않아요
+	 * @param exLike
+	 */
 	public void setHeartDelete(ExLike exLike);
 	
 }

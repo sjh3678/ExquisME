@@ -1843,7 +1843,7 @@
                       </listeners>
                       <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                       <name>getExtaHistory</name>
-                      <type>Extagram</type>
+                      <type>List&lt;Extagram&gt;</type>
                       <params>
                         <net.java.amateras.uml.classdiagram.model.Argument>
                           <name>userNo</name>
@@ -1870,7 +1870,7 @@
                       </listeners>
                       <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                       <name>searchExtaHistory</name>
-                      <type>Extagram</type>
+                      <type>List&lt;Extagram&gt;</type>
                       <params>
                         <net.java.amateras.uml.classdiagram.model.Argument>
                           <name>search</name>
@@ -1901,7 +1901,7 @@
                       </listeners>
                       <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                       <name>getHistory</name>
-                      <type>ExComm</type>
+                      <type>List&lt;ExComm&gt;</type>
                       <params>
                         <net.java.amateras.uml.classdiagram.model.Argument>
                           <name>userNo</name>
@@ -1928,7 +1928,7 @@
                       </listeners>
                       <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                       <name>searchCommentHistory</name>
-                      <type>ExComm</type>
+                      <type>List&lt;ExComm&gt;</type>
                       <params>
                         <net.java.amateras.uml.classdiagram.model.Argument>
                           <name>search</name>
@@ -2225,7 +2225,7 @@
                 </listeners>
                 <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                 <name>getExtaHistory</name>
-                <type>Extagram</type>
+                <type>List&lt;Extagram&gt;</type>
                 <params>
                   <net.java.amateras.uml.classdiagram.model.Argument>
                     <name>userNo</name>
@@ -2252,7 +2252,7 @@
                 </listeners>
                 <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                 <name>searchExtaHistory</name>
-                <type>Extagram</type>
+                <type>List&lt;Extagram&gt;</type>
                 <params>
                   <net.java.amateras.uml.classdiagram.model.Argument>
                     <name>search</name>
@@ -2283,7 +2283,7 @@
                 </listeners>
                 <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                 <name>getHistory</name>
-                <type>ExComm</type>
+                <type>List&lt;ExComm&gt;</type>
                 <params>
                   <net.java.amateras.uml.classdiagram.model.Argument>
                     <name>userNo</name>
@@ -2310,7 +2310,7 @@
                 </listeners>
                 <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
                 <name>searchCommentHistory</name>
-                <type>ExComm</type>
+                <type>List&lt;ExComm&gt;</type>
                 <params>
                   <net.java.amateras.uml.classdiagram.model.Argument>
                     <name>search</name>
@@ -2560,7 +2560,7 @@
           </listeners>
           <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
           <name>selectExtraByUserNo</name>
-          <type>Extagram</type>
+          <type>List&lt;Extagram&gt;</type>
           <params>
             <net.java.amateras.uml.classdiagram.model.Argument>
               <name>userNo</name>
@@ -2587,7 +2587,7 @@
           </listeners>
           <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
           <name>selectSearchExtaByUserNo</name>
-          <type>Extagram</type>
+          <type>List&lt;Extagram&gt;</type>
           <params>
             <net.java.amateras.uml.classdiagram.model.Argument>
               <name>map</name>
@@ -2614,7 +2614,7 @@
           </listeners>
           <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
           <name>selectCommentByUserNo</name>
-          <type>ExComm</type>
+          <type>List&lt;ExComm&gt;</type>
           <params>
             <net.java.amateras.uml.classdiagram.model.Argument>
               <name>userNo</name>
@@ -2641,7 +2641,7 @@
           </listeners>
           <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/target/sourceConnections/net.java.amateras.uml.classdiagram.model.AggregationModel/target/children/net.java.amateras.uml.classdiagram.model.OperationModel/visibility"/>
           <name>selectCommentByUserNo</name>
-          <type>ExComm</type>
+          <type>List&lt;ExComm&gt;</type>
           <params>
             <net.java.amateras.uml.classdiagram.model.Argument>
               <name>map</name>
