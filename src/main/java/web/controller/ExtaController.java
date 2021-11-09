@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dto.ExComm;
+import web.dto.ExLike;
 import web.dto.Extagram;
 import web.service.face.ExtaService;
 import web.util.Paging;

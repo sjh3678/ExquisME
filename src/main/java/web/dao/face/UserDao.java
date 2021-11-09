@@ -3,7 +3,7 @@ package web.dao.face;
 import java.util.HashMap;
 
 import web.dto.ExComm;
-import web.dto.Extragram;
+import web.dto.Extagram;
 import web.dto.User;
 
 public interface UserDao {
@@ -43,13 +43,13 @@ public interface UserDao {
 
 	public void deleteUserByUserno(int userno);
 
-	public Extragram selectExtraByUserNo(int userNo);
+	public Extagram selectExtraByUserNo(int userNo);
 
-	public Extragram selectSearchExtraByUserNo(HashMap<String, Object> map);
+	public Extagram selectSearchExtaByUserNo(HashMap<String, Object> map);
 
 	public ExComm selectCommentByUserNo(int userNo);
 
-	public Extragram selectCommentByUserNo(HashMap<String, Object> map);
+	public ExComm selectCommentByUserNo(HashMap<String, Object> map);
 
 
 }

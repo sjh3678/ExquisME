@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.ExComm;
-import web.dto.Extragram;
+import web.dto.Extagram;
 import web.dto.SocialAccount;
 import web.dto.User;
 import web.service.face.UserService;
@@ -133,14 +133,14 @@ public class UserController {
 	@RequestMapping(value="/view/history", method=RequestMethod.POST)
 	public void viewExtraHistory(int userNo) {
 		logger.info("/search/history");
-		Extragram extragram = userService.getExtraHistory(userNo);
+		Extagram extagram = userService.getExtaHistory(userNo);
 		
 	}
 	
 	@RequestMapping(value="/search/history", method=RequestMethod.POST)
 	public void searchExtraHistory(int userNo, String search) {
 		logger.info("/search/history");
-		Extragram extragram = userService.searchExtraHistory(search, userNo);
+		Extagram extagram = userService.searchExtaHistory(search, userNo);
 	}
 	
 	@RequestMapping(value="/view/history", method=RequestMethod.POST)
@@ -154,6 +154,6 @@ public class UserController {
 	@RequestMapping(value="/search/history", method=RequestMethod.POST)
 	public void searchCommentHistory(int userNo, String search) {
 		logger.info("/search/history");
-		Extragram extragram = userService.searchCommentHistory(search, userNo);
+		ExComm exComm = userService.searchCommentHistory(search, userNo);
 	}
 }

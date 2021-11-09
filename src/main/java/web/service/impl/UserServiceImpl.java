@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import web.dao.face.UserDao;
 import web.dto.ExComm;
-import web.dto.Extragram;
+import web.dto.Extagram;
 import web.dto.User;
 import web.service.face.UserService;
 
@@ -117,15 +117,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Extragram getExtraHistory(int userNo) {
+	public Extagram getExtaHistory(int userNo) {
 		
 		return userDao.selectExtraByUserNo(userNo);
 	}
 
 	@Override
-	public Extragram searchExtraHistory(String search, int userNo) {
+	public Extagram searchExtaHistory(String search, int userNo) {
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
-		return userDao.selectSearchExtraByUserNo(map);
+		return userDao.selectSearchExtaByUserNo(map);
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Extragram searchCommentHistory(String search, int userNo) {
+	public ExComm searchCommentHistory(String search, int userNo) {
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectCommentByUserNo(map);
 	}

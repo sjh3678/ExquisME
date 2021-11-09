@@ -1,7 +1,7 @@
 package web.service.face;
 
 import web.dto.ExComm;
-import web.dto.Extragram;
+import web.dto.Extagram;
 import web.dto.User;
 
 public interface UserService {
@@ -50,12 +50,12 @@ public interface UserService {
 	 */
 	public User getUserInfo(User user);
 
-	public Extragram getExtraHistory(int userNo);
+	public Extagram getExtaHistory(int userNo);
 
-	public Extragram searchExtraHistory(String search, int userNo);
+	public Extagram searchExtaHistory(String search, int userNo);
 
 	public ExComm getHistory(int userNo);
 
-	public Extragram searchCommentHistory(String search, int userNo);
+	public ExComm searchCommentHistory(String search, int userNo);
 
 }
