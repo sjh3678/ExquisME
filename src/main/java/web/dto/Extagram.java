@@ -2,18 +2,28 @@ package web.dto;
 
 import java.util.Date;
 
-public class Extragram {
+public class Extagram {
 	private int exPostNo;
 	private int fileNo;
 	private int userNo;
 	private String content;
 	private Date exDate;
 	private int exViews;
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Extragram [exPostNo=" + exPostNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", content=" + content
+		return "Extagram [exPostNo=" + exPostNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", content=" + content
 				+ ", exDate=" + exDate + ", exViews=" + exViews + "]";
 	}
+	
+	
+	
+	
+	
 	public int getExPostNo() {
 		return exPostNo;
 	}
@@ -50,5 +60,6 @@ public class Extragram {
 	public void setExViews(int exViews) {
 		this.exViews = exViews;
 	}
+
 	
 }
