@@ -2,7 +2,7 @@ package web.dto;
 
 import java.util.Date;
 
-public class Extragram {
+public class Extagram {
 	private int exPostNo;
 	private int fileNo;
 	private int userNo;
