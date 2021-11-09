@@ -1,26 +1,36 @@
 package web.service.impl;
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.face.UserDao;
+import web.dto.ExComm;
+import web.dto.Extragram;
 import web.dto.User;
 import web.service.face.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
+	
 	@Autowired UserDao userDao;
+	
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
+	
 	@Override
-	public boolean getLoginChk(User param) {
+	public boolean getLoginCheck(User param) {
 		logger.info("getLoginChk called");
-		int userCnt = userDao.selectCntById(param);
+		
+		int userCnt = userDao.selectUserCntById(param);
+		
 		if(userCnt == 1) {
 			//아이디 매칭 성공
-			User user = userDao.selectById(param);// 유저 정보 조회
+			User user = userDao.selectUserById(param);// 유저 정보 조회
 			
+			//솔트값 비교
 			if(param.getSalt().equals(user.getSalt())) {
 				//로그인 성공
 				return true;
@@ -35,9 +45,14 @@ public class UserServiceImpl implements UserService{
 		}
 
 	}
+	
 	@Override
-	public boolean getJoinChk(User param) {
-		int userCnt = userDao.selectCntById(param);
+	public boolean getJoinCheck(User param) {
+		
+		logger.info("getJoinCheck called");
+		
+		int userCnt = userDao.selectUserCntById(param);
+		
 		if(userCnt == 0) {
 			//회원가입 가능
 			userDao.insertUserJoin(param);
@@ -48,20 +63,82 @@ public class UserServiceImpl implements UserService{
 		}
 
 	}
+	
 	@Override
-	public boolean setChangePw(String pw, String pwChk) {
+	public boolean getCheckPassword(String salt, int userno) {
 		
-		return false;
+		logger.info("getCheckPassword called");
+		
+		User user = userDao.selectUserByUserno(userno);
+		
+		if(salt.equals(user.getSalt())) {
+			//비밀번호 일치
+			return true;
+		}else {
+			//비밀번호 불일치
+			return false;
+		}
 	}
+	
 	@Override
-	public boolean deleteUser(int userno) {
+	public boolean setUpdatePw(String pw, String pwChk, int userno) {
 		
-		return false;
+		logger.info("setChangePw called");
+		
+		//변경값 확인
+		if(pw == pwChk) {
+			User user = userDao.selectUserByUserno(userno);
+			//비밀번호 변경
+			userDao.updatePw(user);
+			
+			return true;
+		}else {
+			//변경할 비밀번호와 확인값이 맞지 않음
+			return false;
+		}
 	}
+	
 	@Override
-	public boolean getCheckPassword(String pw) {
+	public void deleteUser(int userno) {
+		logger.info("deleteUser called");
 		
-		return false;
-	}	
+		//회원정보 삭제
+		userDao.deleteUserByUserno(userno);
+	}
+
+	@Override
+	public User getUserInfo(User user) {
+		logger.info("getUserInfo called");
+		
+		//회원의 세부정보 조회
+		user = userDao.selectUserById(user);
+		
+		return user;
+	}
+
+	@Override
+	public Extragram getExtraHistory(int userNo) {
+		
+		return userDao.selectExtraByUserNo(userNo);
+	}
+
+	@Override
+	public Extragram searchExtraHistory(String search, int userNo) {
+		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
+		return userDao.selectSearchExtraByUserNo(map);
+	}
+
+	@Override
+	public ExComm getHistory(int userNo) {
+		
+		return userDao.selectCommentByUserNo(userNo);
+	}
+
+	@Override
+	public Extragram searchCommentHistory(String search, int userNo) {
+		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
+		return userDao.selectCommentByUserNo(map);
+	}
+
 	
 }

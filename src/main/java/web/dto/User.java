@@ -6,7 +6,7 @@ public class User {
 	private int userNo;
 	private int fileNo;
 	private String id;
-	private String pwd;
+	private String pw;
 	private String salt;
 	private String nick;
 	private String email;
@@ -17,7 +17,7 @@ public class User {
 	private int questionNo;
 	@Override
 	public String toString() {
-		return "User [userNo=" + userNo + ", fileNo=" + fileNo + ", id=" + id + ", pwd=" + pwd + ", salt=" + salt
+		return "User [userNo=" + userNo + ", fileNo=" + fileNo + ", id=" + id + ", pw=" + pw + ", salt=" + salt
 				+ ", nick=" + nick + ", email=" + email + ", birth=" + birth + ", isAdmin=" + isAdmin + ", createDate="
 				+ createDate + ", questionAnwser=" + questionAnwser + ", questionNo=" + questionNo + "]";
 	}
@@ -39,11 +39,11 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getPw() {
+		return pw;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public String getSalt() {
 		return salt;
