@@ -35,12 +35,12 @@ $(document).ready(function(){
 
 <div class="form-group">
 	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control"/>
+	<input type="text" id="title" name="noticeTitle" class="form-control"/>
 </div>
 
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content"></textarea>
+	<textarea rows="10" style="width: 100%;" id="content" name="noticeContent"></textarea>
 </div>
 
 <div class="form-group">

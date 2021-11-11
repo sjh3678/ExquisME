@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import web.dto.Notice;
 import web.util.PagingNotice;
 
@@ -28,7 +30,7 @@ public interface NoticeService {
 	 * Notice를 작성한다.
 	 * @param notice
 	 */
-	public void setNoticeWrite(Notice notice);
+	public void setNoticeWrite(Notice notice, MultipartFile file);
 
 	/**
 	 * Notice를 조회한다.
