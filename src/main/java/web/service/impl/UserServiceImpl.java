@@ -1,9 +1,6 @@
 package web.service.impl;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import web.dao.face.UserDao;
 import web.dto.ExComm;
@@ -32,22 +27,28 @@ public class UserServiceImpl implements UserService{
 		logger.info("getLoginChk called");
 		
 		int userCnt = userDao.selectUserCntById(param);
-		
+		logger.info("userCnt : {}", userCnt);
 		if(userCnt == 1) {
 			//아이디 매칭 성공
-			User user = userDao.selectUserById(param);// 유저 정보 조회
+			logger.info("아이디 매칭 성공");
 			
-			//해시값
+			User user = userDao.selectUserById(param);// 유저 정보 조회
+			logger.info("db : {}", user.getPw());
+			logger.info("input : {}", param.getPw());
+			//해시값 비교
 			if(param.getPw().equals(user.getPw())) {
 				//로그인 성공
+				logger.info("로그인 성공");
 				return true;
 			}else {
 				//로그인 실패
+				logger.info("로그인 실패");
 				return false;
 			}
 				
 		}else {
 			//로그인 실패
+			logger.info("로그인 실패");
 			return false;
 		}
 
@@ -106,6 +107,12 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	public User getUserNickByUserno(User param) {
+		User user = userDao.selectUserByUserno(param);
+		return user;
+	}
+	
+	@Override
 	public void deleteUser(int userno) {
 		logger.info("deleteUser called");
 		
@@ -146,5 +153,6 @@ public class UserServiceImpl implements UserService{
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectCommentByUserNo(map);
 	}
+
 	
 }

@@ -37,7 +37,7 @@ public interface UserDao {
 
 	/**
 	 * 회원 번호로 회원 정보 조회
-	 * @param userno - 조회할 회원 번호
+	 * @param user - 조회할 회원 번호
 	 * @return - 조회된 세부정보 반환
 	 */
 	public User selectUserByUserno(int userno);
@@ -75,6 +75,8 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<ExComm> selectCommentByUserNo(HashMap<String, Object> map);
+
+	public User selectUserByUserno(User param);
 
 
 }

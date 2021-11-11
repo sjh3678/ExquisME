@@ -37,7 +37,9 @@ public class UserController {
 		logger.info("/login [POST]");
 		
 		//비밀번호 암호화
-		user.setPw(UserSHA256.encrypt(user));
+		String encPw = UserSHA256.encrypt(user);
+		
+		user.setPw(encPw);
 		
 		boolean isLogin = userService.getLoginCheck(user);
 		
@@ -48,11 +50,12 @@ public class UserController {
 			session.setAttribute("login", isLogin);
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
-		
-		}else {
 			
+			return "layout/main";
+		}else {
+			return "redirect:/user/login";
 		}
-		return null;
+		
 	}
 	
 	@RequestMapping(value="/logout")

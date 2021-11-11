@@ -82,4 +82,10 @@ public interface UserService {
 	 */
 	public List<ExComm> searchCommentHistory(String search, int userNo);
 
+	/**
+	 * 유저 번호를 사용하여 유저의 닉네임 반환
+	 * @param user - 유저 정보 DTO
+	 * @return - 조회결과 반환
+	 */
+	public User getUserNickByUserno(User user);
 }

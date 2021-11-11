@@ -4,5 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="web.dao.face.UserDao">
-
+	
+	<resultMap type="web.dto.User" id="User">
+		<id column="user_no" property="userNo"/>
+		<result column="file_no" property="fileNo"/>
+		<result column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="nick" property="nick"/>
+		<result column="phone" property="phone"/>
+		<result column="birth" property="birth"/>
+		<result column="gender" property="gender"/>
+		<result column="craete_date" property="createDate"/>
+		<result column="question_anwser" property="questionAnwser"/>
+		<result column="question_no" property="quesionNo"/>
+	</resultMap>
+	
+	<select id="selectUserCntById" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_user
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectUserById" parameterType="web.dto.User" resultMap="User">
+		SELECT 
+			user_no, file_no, id, pw, nick, phone, birth, gender, create_date
+		FROM tb_user
+		WHERE id = #{id}
+	</select>
+	<select id="selectUserByUserno" parameterType="web.dto.User" resultMap="User">
+		SELECT user_no, file_no, id, pw, nick, phone, birth, gender, create_date FROM tb_user
+		WHERE user_no = #{userNo } 
+	</select>
 </mapper>
