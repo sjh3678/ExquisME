@@ -51,7 +51,7 @@ public class UserController {
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
 			
-			return "layout/main";
+			return "redirect:/user/main";
 		}else {
 			return "redirect:/user/login";
 		}
@@ -59,8 +59,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/logout")
-	public void logout() {
+	public String logout(HttpSession session) {
 		logger.info("/logout");
+		session.invalidate();
+		
+		return "redirect:/user/main";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
@@ -69,7 +72,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinProc(User user) {
+	public String joinProc(User user, String pwCheck) {
 		logger.info("/join [POST]");
 		boolean isJoin = userService.getJoinCheck(user);
 		return null;
@@ -160,5 +163,9 @@ public class UserController {
 	public void searchCommentHistory(int userNo, String search) {
 		logger.info("/search/history [POST]");
 		List<ExComm> exComm = userService.searchCommentHistory(search, userNo);
+	}
+	@RequestMapping(value="/main")
+	public void main() {
+		logger.info("임시 메인 페이지 접속");
 	}
 }
