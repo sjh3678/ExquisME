@@ -3,32 +3,22 @@ package web.dto;
 import java.util.Date;
 
 public class Extagram {
-	private int exPostNo;
+	private int exNo;
 	private int fileNo;
 	private int userNo;
 	private String content;
 	private Date exDate;
 	private int exViews;
-	
-	
-	
-	
-	
 	@Override
 	public String toString() {
-		return "Extagram [exPostNo=" + exPostNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", content=" + content
+		return "Extagram [exNo=" + exNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", content=" + content
 				+ ", exDate=" + exDate + ", exViews=" + exViews + "]";
 	}
-	
-	
-	
-	
-	
-	public int getExPostNo() {
-		return exPostNo;
+	public int getExNo() {
+		return exNo;
 	}
-	public void setExPostNo(int exPostNo) {
-		this.exPostNo = exPostNo;
+	public void setExNo(int exNo) {
+		this.exNo = exNo;
 	}
 	public int getFileNo() {
 		return fileNo;
@@ -60,6 +50,5 @@ public class Extagram {
 	public void setExViews(int exViews) {
 		this.exViews = exViews;
 	}
-
 	
 }

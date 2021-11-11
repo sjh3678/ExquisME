@@ -35,7 +35,7 @@ public class AdminFaqController {
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public void faqUpdateProc(Faq faq) {}
 	
-	@RequestMapping(value="delete")
+	@RequestMapping(value="/delete")
 	public void faqDelete(Faq faq) {}
 	
 }

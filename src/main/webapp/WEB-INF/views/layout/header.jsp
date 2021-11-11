@@ -34,5 +34,13 @@
 <div class="wrap">
 
 <header class="header">
-HEADER
+HEADER<br>
+<a href="/notice/list">/notice/list</a>|
+<a href="/admin/notice/list">/admin/notice/list</a>|
+<a href="/faq">/faq</a>|
+<a href="/admin/faq">/admin/faq</a>|
+<a href="/user/login">/user/login</a>|
+<a href="/user/logout">/user/logout</a>|
+<a href="/extagram/list">/extagram/logout</a>|
+
 </header>
