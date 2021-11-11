@@ -39,7 +39,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public Notice getNoticeView(Notice notice) {
-		return null;
+		return noticeDao.selectNoticeByNoticeNo(notice);
 	}
 	
 	@Override

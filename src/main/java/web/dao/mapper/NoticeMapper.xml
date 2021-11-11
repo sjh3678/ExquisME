@@ -5,4 +5,16 @@
 
 <mapper namespace="web.dao.face.NoticeDao">
 
+	<select id="selectCntAll">
+		SELECT COUNT(*) FROM tb_notice
+	</select>
+
+	<select id="selectNoticeAll" parameterType="web.util.Paging" resultType="web.dto.Notice">
+		SELECT * FROM tb_notice
+	</select>
+
+	<select id="selectNoticeByNoticeNo" parameterType="web.dto.Notice" resultType="web.dto.Notice">
+		SELECT * FROM tb_notice WHERE notice_no = #{noticeNo }
+	</select>
+
 </mapper>

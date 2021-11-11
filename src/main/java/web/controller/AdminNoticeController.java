@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,13 @@ public class AdminNoticeController {
 	@Autowired NoticeService noticeService;
 	
 	@RequestMapping(value="/list")
-	public void noticeList(Paging paging, Model model) {}
+	public void noticeList(Paging paging, Model model) {
+		
+		List<Notice> noticeList = noticeService.getNoticeList(paging);
+		
+		model.addAttribute("noticeList", noticeList);
+		
+	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public void noticeWrite() {}
