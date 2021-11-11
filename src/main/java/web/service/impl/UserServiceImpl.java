@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService{
 			//아이디 매칭 성공
 			User user = userDao.selectUserById(param);// 유저 정보 조회
 			
-			//솔트값 비교
-			if(param.getSalt().equals(user.getSalt())) {
+			//해시값
+			if(param.getPw().equals(user.getPw())) {
 				//로그인 성공
 				return true;
 			}else {
