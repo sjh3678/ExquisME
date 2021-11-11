@@ -33,7 +33,7 @@ td:nth-child(2) {
 		<th style="width: 10%;">파일 번호</th>
 		<th style="width: 30%;">향수 이름</th>
 		<th style="width: 20%;">지속력</th>
-		<th style="width: 10%;">성별</th>
+		<th style="width: 10%;">사진</th>
 	</tr>
 </thead>
 <tbody>
