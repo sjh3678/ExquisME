@@ -21,7 +21,7 @@ public interface UserDao {
 	 * @param param - 조회할 회원의 정보
 	 * @return - 조회된 회원의 세부정보 반환
 	 */
-	public User selectUserById(User param);
+	public User selectUserById(User user);
 
 	/**
 	 * 회원가입 DB 처리
