@@ -2,35 +2,47 @@ package web.service.impl;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.face.NoticeDao;
 import web.dto.Notice;
 import web.service.face.NoticeService;
-import web.util.Paging;
+import web.util.PagingNotice;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired NoticeDao noticeDao;
 	
+	private static final Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
+	
 	@Override
-	public Paging getPaging(Paging paramData) {
+	public PagingNotice getPaging(HttpServletRequest req) {
 		
-		//총 게시글 수 조회
+		String param = req.getParameter("curPage");
+		
+		int curPage = 0;
+		
+		if(param != null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		} else {
+			logger.info("curPage 값이 null입니다.");
+		}
+		
 		int totalCount = noticeDao.selectCntAll();
 		
-		//페이징 계산
-		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		PagingNotice paging = new PagingNotice(totalCount, curPage);
 		
 		return paging;
 	}
 
 	@Override
-	public List<Notice> getNoticeList(Paging paging) {
+	public List<Notice> getNoticeList(PagingNotice paging) {
 		return noticeDao.selectNoticeAll(paging);
 	}
 

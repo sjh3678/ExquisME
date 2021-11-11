@@ -15,10 +15,10 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 }
 </style>
 
+<div class="container">
+
 <h1>admin notice list</h1>
 <hr>
-
-<div class="container">
 
 <table class="table table-striped table-hover">
 <tr>

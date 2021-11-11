@@ -5,12 +5,17 @@
 
 <mapper namespace="web.dao.face.NoticeDao">
 
-	<select id="selectCntAll">
+	<select id="selectCntAll" resultType="int">
 		SELECT COUNT(*) FROM tb_notice
 	</select>
 
-	<select id="selectNoticeAll" parameterType="web.util.Paging" resultType="web.dto.Notice">
-		SELECT * FROM tb_notice
+	<select id="selectNoticeAll" parameterType="web.util.PagingNotice" resultType="web.dto.Notice">
+		SELECT * FROM (
+			SELECT rownum rnum, A.* FROM (
+				SELECT notice_no, user_no, file_no, notice_title, notice_content, notice_date FROM tb_notice ORDER BY notice_no DESC			
+			) A
+		) tb_notice
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
 	<select id="selectNoticeByNoticeNo" parameterType="web.dto.Notice" resultType="web.dto.Notice">

@@ -2,24 +2,26 @@ package web.service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import web.dto.Notice;
-import web.util.Paging;
+import web.util.PagingNotice;
 
 public interface NoticeService {
 
 	/**
 	 * 
-	 * @param paramData
+	 * @param req
 	 * @return
 	 */
-	public Paging getPaging(Paging paramData);
+	public PagingNotice getPaging(HttpServletRequest req);
 
 	/**
 	 * 모든 Notice를 조회하여 List로 반환한다. 
 	 * @param paging
 	 * @return
 	 */
-	public List<Notice> getNoticeList(Paging paging);
+	public List<Notice> getNoticeList(PagingNotice paging);
 
 	/**
 	 * Notice를 작성한다.
