@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,7 @@ public class PerfServiceImpl implements PerfService{
 	}
 
 	@Override
-	public List<Perf> getPerfList(Paging paging) {
+	public List<HashMap<String, Object>> getPerfList(Paging paging) {
 		return perfDao.selectPerfAll(paging);
 	}
 

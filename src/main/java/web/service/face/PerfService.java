@@ -1,5 +1,6 @@
 package web.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public interface PerfService {
 	 * @param paging
 	 * @return
 	 */
-	public List<Perf> getPerfList(Paging paging);
+	public List<HashMap<String, Object>> getPerfList(Paging paging);
 	
 	/**
 	 * 향수 상세보기 하기위해 향수하나의 객체 정보 가져오기

@@ -1,5 +1,6 @@
 package web.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public interface PerfDao {
 	 * @param paing
 	 * @return
 	 */
-	public List<Perf> selectPerfAll(Paging paging);
+	public List<HashMap<String, Object>> selectPerfAll(Paging paging);
 	
 	/**
 	 * 필터링 정보로 향수리스트 가져오기

@@ -39,12 +39,13 @@ td:nth-child(2) {
 <tbody>
 <c:forEach items="${list }" var="perf">
 	<tr>
-		<td>${perf.perfumeNo }</td>
-		<td>${perf.brandNo }</td>
-		<td>${perf.fileNo }</td>
-		<td>${perf.perfumeName }</td>
-		<td>${perf.perfumeVitality }</td>
-		<td>${perf.perfumeGender }</td>
+		<td>${perf.PERFUME_NO }</td>
+		<td>${perf.BRAND_NO }</td>
+		<td>${perf.FILE_NO }</td>
+		<td>${perf.PERFUME_NAME }</td>
+		<td>${perf.PERFUME_VITALITY }</td>
+		<td><img style="width:30px;height:30px;object-fit:cover;margin-right:2px;"
+					src="/resources/img/perf/${perf.STORED_NAME }"></td>
 	</tr>
 </c:forEach>
 </tbody>

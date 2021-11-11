@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +31,13 @@ public class PerfController {
 		//페이징 계산
 		Paging paging = perfService.getPaging( paramData );
 		
-		List<Perf> list = perfService.getPerfList(paging);
+		List<HashMap<String, Object>> list = perfService.getPerfList(paging);
 		
-		for(Perf f : list) {
-			logger.info("{}", f);
-		}
 		
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("linkUrl", "/perf/list");
 	}
 	
 	@RequestMapping(value= "/list_ok")
