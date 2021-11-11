@@ -73,14 +73,14 @@ public class UserController {
 	}
 	
 	//이거도 아직...
-	@RequestMapping(value="/social/join")
+	@RequestMapping(value="/social/join", method=RequestMethod.GET)
 	public String socialJoin(SocialAccount social) {
 		logger.info("/social/join");
 		return null;
 	}
 	
 	//이거 모름....
-	@RequestMapping(value="/social/join")
+	@RequestMapping(value="/social/join", method=RequestMethod.POST)
 	public String socialLogin() {
 		logger.info("/social/login");
 		return null;
@@ -126,36 +126,36 @@ public class UserController {
 		return null;
 	}
 	
-	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	@RequestMapping(value="/delete")
 	public void userDelete(int userno) {
 		logger.info("/delete [GET]");
 		userService.deleteUser(userno);
 	}
 	
-	@RequestMapping(value="/view/history", method=RequestMethod.POST)
+	@RequestMapping(value="/view/extagram/history", method=RequestMethod.GET)
 	public void viewExtraHistory(int userNo) {
-		logger.info("/search/history");
+		logger.info("/search/history [GET]");
 		List<Extagram> extagram = userService.getExtaHistory(userNo);
 		
 	}
 	
-	@RequestMapping(value="/search/history", method=RequestMethod.POST)
-	public void searchExtraHistory(int userNo, String search) {
-		logger.info("/search/history");
+	@RequestMapping(value="/search/extagram/history", method=RequestMethod.POST)
+	public void searchExtaHistory(int userNo, String search) {
+		logger.info("/search/history [POST]");
 		List<Extagram> extagram = userService.searchExtaHistory(search, userNo);
 	}
 	
-	@RequestMapping(value="/view/history", method=RequestMethod.POST)
+	@RequestMapping(value="/view/comment/history", method=RequestMethod.GET)
 	public void viewCommentHistory(int userNo) {
-		logger.info("/search/history");
+		logger.info("/search/history [GET]");
 		List<ExComm> exComm = userService.getHistory(userNo);
 		
 	}
 
 	
-	@RequestMapping(value="/search/history", method=RequestMethod.POST)
+	@RequestMapping(value="/search/comment/history", method=RequestMethod.POST)
 	public void searchCommentHistory(int userNo, String search) {
-		logger.info("/search/history");
+		logger.info("/search/history [POST]");
 		List<ExComm> exComm = userService.searchCommentHistory(search, userNo);
 	}
 }
