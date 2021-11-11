@@ -51,8 +51,8 @@
 
 <div class="container">
 
+<a href="/extagram/write"><button class="btn">write</button></a><br><br>
 <div class="flex-container">
-<a href="/extagram/list?exNo=${list.exNo }"><button></button></a>
 <c:forEach items="${list}" var="list">
     <div id="flex-items">
 		<div id="a">프로필사진 닉네임${list.exNo }</div>
