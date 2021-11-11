@@ -10,16 +10,37 @@
 	flex-wrap: wrap;
 	width: 90%;
 	min-width: 1080px;
-	border:1px dotted #FF00FF;
 }
-
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 300px;
-	background:#999;
+	height: 400px;
+	border: 1px solid;
 	border-radius: 3px; 
 	margin:4px;
+}
+#a {
+	border: 1px solid #ccc;
+	margin: 10px;
+}
+#b {
+	border: 1px solid #ccc;
+	margin: 10px;
+	height: 90px;
+}
+#c {
+	border: 1px solid #ccc;
+	margin: 10 0;
+	height: 180px;
+	width: 260px;
+}
+#d {
+	border: 1px solid #ccc;
+	margin: 10px;
+}
+#e {
+	border: 1px solid #ccc;
+	margin: 10px;
 }
 
 }
@@ -31,25 +52,14 @@
 <div class="container">
 
 <div class="flex-container">
+<a href="/extagram/list?exNo=${list.exNo }"><button></button></a>
 <c:forEach items="${list}" var="list">
-    <div id="flex-items" style="background: #2E9AFE;">
-	<table>
-		<tr>
-			<td>프로필사진</td><td>${list.exNo }</td>
-		</tr>
-		<tr>
-			<td>${list.exContent }</td><td></td>
-		</tr>
-		<tr>
-			<td>사진</td>
-		</tr>
-		<tr>
-			<td>♡ 0 </td>
-		</tr>
-		<tr>
-			<td>${list.exDate }</td>
-		</tr>
-	</table>
+    <div id="flex-items">
+		<div id="a">프로필사진 닉네임${list.exNo }</div>
+		<div id="b">${list.exContent }</div>
+		<div id="c">사진</div>
+		<div id="d">♡ 0</div>
+		<div id="e">${list.exDate }</div>
     </div>
 </c:forEach>
 </div>
