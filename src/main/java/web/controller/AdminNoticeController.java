@@ -11,29 +11,30 @@ import web.service.face.NoticeService;
 import web.util.Paging;
 
 @Controller
+@RequestMapping(value="/admin/notice")
 public class AdminNoticeController {
 
 	@Autowired NoticeService noticeService;
 	
-	@RequestMapping(value="/notice/list")
+	@RequestMapping(value="/list")
 	public void noticeList(Paging paging, Model model) {}
 	
-	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
+	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public void noticeWrite() {}
 	
-	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
+	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public void noticeWriteProc(Notice notice) {}
 	
-	@RequestMapping(value="/notice/view")
+	@RequestMapping(value="/view")
 	public void noticeView(Notice notice) {}
 	
-	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
+	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public void noticeUpdate(Notice notice) {}
 	
-	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public void noticeUpdateProc(Notice notice) {}
 
-	@RequestMapping(value="")
+	@RequestMapping(value="/delete")
 	public void noticeDelete(Notice notice) {}
 	
 }
