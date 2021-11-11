@@ -6,14 +6,24 @@ public class Extagram {
 	private int exNo;
 	private int fileNo;
 	private int userNo;
-	private String content;
+	private String exContent;
 	private Date exDate;
 	private int exViews;
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Extagram [exNo=" + exNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", content=" + content
+		return "Extagram [exNo=" + exNo + ", fileNo=" + fileNo + ", userNo=" + userNo + ", exContent=" + exContent
 				+ ", exDate=" + exDate + ", exViews=" + exViews + "]";
 	}
+	
+	
+	
+	
+	
 	public int getExNo() {
 		return exNo;
 	}
@@ -32,11 +42,11 @@ public class Extagram {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-	public String getContent() {
-		return content;
+	public String getExContent() {
+		return exContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setExContent(String exContent) {
+		this.exContent = exContent;
 	}
 	public Date getExDate() {
 		return exDate;
@@ -50,5 +60,7 @@ public class Extagram {
 	public void setExViews(int exViews) {
 		this.exViews = exViews;
 	}
+
+	
 	
 }

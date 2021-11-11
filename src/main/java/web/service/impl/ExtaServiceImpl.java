@@ -3,6 +3,7 @@ package web.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dao.face.ExtaDao;
@@ -11,6 +12,7 @@ import web.dto.Extagram;
 import web.service.face.ExtaService;
 import web.util.Paging;
 
+@Service
 public class ExtaServiceImpl implements ExtaService {
 	
 	@Autowired ExtaDao extaDao;
@@ -36,23 +38,23 @@ public class ExtaServiceImpl implements ExtaService {
 	}
 	
 	@Override
-	public void setExtaUpdateByExPostNo(Extagram extagram) {
+	public void setExtaUpdate(Extagram extagram) {
 		
 	}
 	
 	@Override
-	public void setExtaDeleteByExPostNo(Extagram extagram) {
+	public void setExtaDelete(Extagram extagram) {
 		
 	}
 	
 	@Override
-	public Extagram getExtaViewByExPostNo(Extagram extagram) {
+	public Extagram getExtaView(Extagram extagram) {
 		return null;
 	}
 	
 	
 	@Override
-	public void setExtaReportByExPostNo(Extagram extagram) {
+	public void setExtaReport(Extagram extagram) {
 		
 	}
 	

@@ -5,49 +5,50 @@
 
 <mapper namespace="web.dao.face.ExtaDao">
 
-<select id="selectExtaAll" resultType="web.dto.Extagram" parameterType="web.util.Paging">
-	SELECT * FROM (
-		SELECT rownum rnum, E.* FROM (
-			SELECT
-				ex_no, file_no, user_no, content, ex_date, ex_views
-			FROM board
-			ORDER BY ex_no DESC
-		) E
-	) extagram
-	WHERE rnum BETWEEN #{startNo} AND #{endNo}
-</select>
-
-<select id="selectExtaCntAll">
-</select>
-
-<insert id="insertExtaWrite">
-</insert>
-
-<update id="updateExtaByExPostNo">
-</update>
-
-<delete id="deleteExtaByExPostNo">
-</delete>
-
-<select id="selectExtaViewByExPostNo">
-</select>
-
-<update id="updateHit]">
-</update>
-
-<insert id="insertExtaReportByExPostNo">
-</insert>
-
-<insert id="insertExtaHeart">
-</insert>
-
-<delete id="deleteExtaHeart">
-</delete>
-
-<insert id="insertExtaComm">
-</insert>
-
-<delete id="deleteExtaComm">
-</delete>
+	<select id="selectExtaAll" resultType="web.dto.Extagram" parameterType="web.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, E.* FROM (
+				SELECT
+					ex_no, file_no, user_no, ex_content, ex_date, ex_views
+				FROM tb_extagram
+				ORDER BY ex_no DESC
+			) E
+		) tb_extagram
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="selectExtaCntAll" resultType="int">
+		SELECT count(*) FROM tb_extagram
+	</select>
+	
+	<insert id="insertExtaWrite">
+	</insert>
+	
+	<update id="updateExtaByExPostNo">
+	</update>
+	
+	<delete id="deleteExtaByExPostNo">
+	</delete>
+	
+	<select id="selectExtaViewByExPostNo">
+	</select>
+	
+	<update id="updateHit]">
+	</update>
+	
+	<insert id="insertExtaReportByExPostNo">
+	</insert>
+	
+	<insert id="insertExtaHeart">
+	</insert>
+	
+	<delete id="deleteExtaHeart">
+	</delete>
+	
+	<insert id="insertExtaComm">
+	</insert>
+	
+	<delete id="deleteExtaComm">
+	</delete>
 
 </mapper>

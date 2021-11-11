@@ -35,26 +35,26 @@ public interface ExtaService {
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
 	 */
-	public void setExtaUpdateByExPostNo(Extagram extagram);
+	public void setExtaUpdate(Extagram extagram);
 	
 	/**
 	 * 게시글 삭제
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 삭제할 게시글 선정
 	 */
-	public void setExtaDeleteByExPostNo(Extagram extagram);
+	public void setExtaDelete(Extagram extagram);
 	
 	/**
 	 * 게시글 상세보기
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼 게시글 선정
 	 * @return
 	 */
-	public Extagram getExtaViewByExPostNo(Extagram extagram);
+	public Extagram getExtaView(Extagram extagram);
 	
 	/**
 	 * 게시글 신고
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 신고할 게시글 선정
 	 */
-	public void setExtaReportByExPostNo(Extagram extagram);
+	public void setExtaReport(Extagram extagram);
 	
 	/**
 	 * 좋아요
