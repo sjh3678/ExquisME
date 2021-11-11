@@ -1,5 +1,7 @@
 package web.service.impl;
 
+import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class ExtaServiceImpl implements ExtaService {
 	@Autowired ExtaDao extaDao;
 	
 	@Override
-	public List<Extagram> getExtaList(Paging paging) {
+	public List<HashMap<String, Object>> getExtaList(Paging paging) {
 		return extaDao.selectExtaAll(paging);
 	}
 	@Override

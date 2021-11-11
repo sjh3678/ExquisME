@@ -1,5 +1,6 @@
 package web.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import web.dto.ExComm;
@@ -14,7 +15,7 @@ public interface ExtaDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Extagram> selectExtaAll(Paging paging);
+	public List<HashMap<String, Object>> selectExtaAll(Paging paging);
 	
 	/**
 	 * 전체 Extagram 수를 조회

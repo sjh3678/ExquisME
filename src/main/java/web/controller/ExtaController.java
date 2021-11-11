@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import web.dto.Extagram;
 import web.service.face.ExtaService;
 import web.util.Paging;
 
@@ -26,11 +26,14 @@ public class ExtaController {
 		
 		Paging paging = extaService.getExtaPaging(paramData);
 		
-		List<Extagram> list = extaService.getExtaList(paging);
+		List<HashMap<String, Object>> list = extaService.getExtaList(paging);
+		
+		
 		
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
+		model.addAttribute("linkUrl", "/extagram/list");
 	}
 	
 //	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)

@@ -5,13 +5,21 @@
 
 <mapper namespace="web.dao.face.ExtaDao">
 
-	<select id="selectExtaAll" resultType="web.dto.Extagram" parameterType="web.util.Paging">
+	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, E.* FROM (
 				SELECT
-					ex_no, file_no, user_no, ex_content, ex_date, ex_views
-				FROM tb_extagram
-				ORDER BY ex_no DESC
+				        u.nick, u.file_no As profile,
+				        x.ex_content, x.ex_date, x.file_no As picture,
+				        f.origin_name, f.stored_name, f.file_size
+				FROM
+				        tb_user u,
+				        tb_extagram x,
+				        tb_file f
+				WHERE
+				        u.user_no = x.user_no
+					AND x.file_no = f.file_no
+					AND x.ex_no = #{exNo}
 			) E
 		) tb_extagram
 		WHERE rnum BETWEEN #{startNo} AND #{endNo}

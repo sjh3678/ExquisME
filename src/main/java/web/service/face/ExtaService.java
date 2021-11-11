@@ -1,5 +1,6 @@
 package web.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +16,7 @@ public interface ExtaService {
 	 * @param paramData - 페이징 정보 객체
 	 * @return 페이징이 적영된 게시글 목록
 	 */
-	public List<Extagram> getExtaList(Paging paging);
+	public List<HashMap<String, Object>> getExtaList(Paging paging);
 
 	/**
 	 * 페이징 처리
