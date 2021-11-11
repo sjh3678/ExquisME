@@ -12,10 +12,15 @@ public class Paging {
 	private int endPage;	//화면에 보이는 끝 페이지네이션 번호
 	
 	private int startNo;	//화면에 보이는 게시글의 시작 번호
-	private int endNo;		//화면에 보이는 게시글의 끝 번호
+	private int endNo;	//화면에 보이는 게시글의 끝 번호
 	
-	//default constructor - no paging
-	public Paging() {}
+	private String search; //검색어
+
+	
+
+	
+	//디폴트 생성자 - 페이징 계산이 완료되지 않는다
+	public Paging() { }
 	
 	//총 게시글 수를 입력하는 생성자
 	public Paging(int totalCount) {
@@ -24,7 +29,7 @@ public class Paging {
 		makePaging();
 	}
 	
-	//총 게시글 수, 현재 페이지번호를 입력하는 생성자
+	//총 게시글 수, 현제 페이지번호를 입력하는 생성자
 	public Paging(int totalCount, int curPage) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
@@ -32,7 +37,7 @@ public class Paging {
 		makePaging();
 	}
 
-	//총 게시글 수, 현재 페이지번호, 보여질 게시글 수를 입력하는 생성자
+	//총 게시글 수, 현제 페이지번호, 보여질 게시글 수를 입력하는 생성자
 	public Paging(int totalCount, int curPage, int listCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
@@ -41,7 +46,7 @@ public class Paging {
 		makePaging();
 	}
 	
-	//총 게시글 수, 현재 페이지번호, 보여질 게시글 수, 보여질 페이지 수를 입력하는 생성자
+	//총 게시글 수, 현제 페이지번호, 보여질 게시글 수, 보여질 페이지 수를 입력하는 생성자
 	public Paging(int totalCount, int curPage, int listCount, int pageCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
@@ -50,6 +55,10 @@ public class Paging {
 		
 		makePaging();
 	}
+	
+	
+	
+	
 	
 	//페이징 정보를 생성하는 메소드
 	private void makePaging() {
@@ -83,8 +92,9 @@ public class Paging {
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + "]";
 	}
+
 	public int getCurPage() {
 		return curPage;
 	}
@@ -139,4 +149,11 @@ public class Paging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 }

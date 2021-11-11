@@ -17,11 +17,17 @@ public class ExtaServiceImpl implements ExtaService {
 	
 	@Override
 	public List<Extagram> getExtaList(Paging paging) {
-		return null;
+		return extaDao.selectExtaAll(paging);
 	}
 	@Override
 	public Paging getExtaPaging(Paging paramData) {
-		return null;
+		
+		int totalCount = extaDao.selectExtaCntAll(paramData);
+		
+		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		
+		return paging;
 	}
 	
 	@Override

@@ -5,7 +5,16 @@
 
 <mapper namespace="web.dao.face.ExtaDao">
 
-<select id="selectExtaAll">
+<select id="selectExtaAll" resultType="web.dto.Extagram" parameterType="web.util.Paging">
+	SELECT * FROM (
+		SELECT rownum rnum, E.* FROM (
+			SELECT
+				ex_no, file_no, user_no, content, ex_date, ex_views
+			FROM board
+			ORDER BY ex_no DESC
+		) E
+	) extagram
+	WHERE rnum BETWEEN #{startNo} AND #{endNo}
 </select>
 
 <select id="selectExtaCntAll">

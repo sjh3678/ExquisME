@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,16 +19,20 @@ import web.service.face.ExtaService;
 import web.util.Paging;
 
 public class ExtaController {
+	private static final Logger logger = LoggerFactory.getLogger(ExtaController.class);
 	
 	@Autowired ExtaService extaService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ExtaController.class);
-
-	
-	//
 	
 	@RequestMapping(value="/extagram/list")
 	public void extaList(Paging paramData, Model model) {
+		
+		Paging paging = extaService.getExtaPaging(paramData);
+		
+		List<Extagram> list = extaService.getExtaList(paging);
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("list", list);
 		
 	}
 	

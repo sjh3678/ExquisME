@@ -20,7 +20,7 @@ public interface ExtaDao {
 	 * 전체 Extagram 수를 조회
 	 * @return 총 게시글 수
 	 */
-	public int selectExtaCntAll();
+	public int selectExtaCntAll(Paging paging);
 	
 	/**
 	 * 작성한 Extagram DB에 삽입
