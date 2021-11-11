@@ -18,13 +18,19 @@ public class PerfServiceImpl implements PerfService{
 	@Autowired PerfDao perfDao;
 	
 	@Override
-	public Paging getPaging(Paging paging) {
-		return null;
+	public Paging getPaging(Paging paramData) {
+		//총 게시글 수 조회
+		int totalCount = perfDao.selectCntPerfAll();
+				
+		//페이징 계산
+		Paging paging = new Paging(totalCount, paramData.getCurPage());
+				
+		return paging;
 	}
 
 	@Override
 	public List<Perf> getPerfList(Paging paging) {
-		return null;
+		return perfDao.selectPerfAll(paging);
 	}
 
 	@Override

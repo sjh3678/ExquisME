@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -23,8 +25,19 @@ public class PerfController {
 	@Autowired PerfService perfService;
 	
 	@RequestMapping(value = "/list")
-	public void perfList(Paging paging, Model model) {
+	public void perfList(Paging paramData, Model model) {
 		
+		//페이징 계산
+		Paging paging = perfService.getPaging( paramData );
+		
+		List<Perf> list = perfService.getPerfList(paging);
+		
+		for(Perf f : list) {
+			logger.info("{}", f);
+		}
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value= "/list_ok")

@@ -5,10 +5,29 @@
 
 <mapper namespace="web.dao.face.PerfDao">
 
-<select id="selectCntPerfAll">
+	<resultMap type="web.dto.Perf" id="Perf">
+		<id column="board_no" property="boardNo"/>
+		<result column="writer_id" property="writerId"/>
+		<result column="writer_nick" property="writerNick"/>
+		<result column="write_date" property="writeDate"/>
+	</resultMap>
+
+
+<select id="selectCntPerfAll" resultType="int">
+	SELECT count(*) FROM tb_perf
 </select>
 
-<select id="selectPerfAll">
+<select id="selectPerfAll" resultType="web.dto.Perf" parameterType="web.util.Paging">
+	SELECT * FROM (
+		SELECT rownum rnum, F.* FROM (
+			SELECT
+				PERFUME_NO, BRAND_NO, FILE_NO
+				, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER
+			FROM TB_PERF
+			ORDER BY PERFUME_NO ASC
+		) F
+	) BOARD
+	WHERE rnum BETWEEN #{startNo } AND #{endNo }
 </select>
 
 <select id="selectPerfByFilter">

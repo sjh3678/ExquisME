@@ -15,7 +15,7 @@ public interface PerfService {
 	 * @param paging
 	 * @return
 	 */
-	public Paging getPaging(Paging paging);
+	public Paging getPaging(Paging paramData);
 	
 	/**
 	 * 페이징 적용하여 향수리스트 가져오기

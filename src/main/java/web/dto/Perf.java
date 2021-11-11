@@ -6,11 +6,12 @@ public class Perf {
 	private int fileNo;
 	private String perfumeName;
 	private String perfumeVitality;
+	private int perfumeGender;
 	
 	@Override
 	public String toString() {
 		return "Perf [perfumeNo=" + perfumeNo + ", brandNo=" + brandNo + ", fileNo=" + fileNo + ", perfumeName="
-				+ perfumeName + ", perfumeVitality=" + perfumeVitality + "]";
+				+ perfumeName + ", perfumeVitality=" + perfumeVitality + ", perfumeGender=" + perfumeGender + "]";
 	}
 	
 	public int getPerfumeNo() {
@@ -43,5 +44,13 @@ public class Perf {
 	public void setPerfumeVitality(String perfumeVitality) {
 		this.perfumeVitality = perfumeVitality;
 	}
+	public int getPerfumeGender() {
+		return perfumeGender;
+	}
+	public void setPerfumeGender(int perfumeGender) {
+		this.perfumeGender = perfumeGender;
+	}
+	
+	
 	
 }

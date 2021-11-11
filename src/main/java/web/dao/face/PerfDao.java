@@ -22,7 +22,7 @@ public interface PerfDao {
 	 * @param paing
 	 * @return
 	 */
-	public List<Perf> selectPerfAll(Paging paing);
+	public List<Perf> selectPerfAll(Paging paging);
 	
 	/**
 	 * 필터링 정보로 향수리스트 가져오기
