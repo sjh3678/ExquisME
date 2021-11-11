@@ -4,8 +4,24 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <style type="text/css">
-#extagram {
-	border : 1px solid #ccc;
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 90%;
+	min-width: 1080px;
+	border:1px dotted #FF00FF;
+}
+
+#flex-items {
+	min-width: 260px;
+	width: 260px;
+	height: 300px;
+	background:#999;
+	border-radius: 3px; 
+	margin:4px;
+}
+
 }
 </style>
 
@@ -14,27 +30,29 @@
 
 <div class="container">
 
-<div id="extagram" class="table table-striped table-hover">
-<table>
-	<tr>
-		<td>사진</td><td>닉네임</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-	</tr>
-	<tr>
-		<td>사진</td>
-	</tr>
-	<tr>
-		<td>좋아요 댓글</td>
-	</tr>
-	<tr>
-		<td>시간</td>
-	</tr>
-</table>
+<div class="flex-container">
+<c:forEach items="${list}" var="list">
+    <div id="flex-items" style="background: #2E9AFE;">
+	<table>
+		<tr>
+			<td>프로필사진</td><td>${list.exNo }</td>
+		</tr>
+		<tr>
+			<td>${list.exContent }</td><td></td>
+		</tr>
+		<tr>
+			<td>사진</td>
+		</tr>
+		<tr>
+			<td>♡ 0 </td>
+		</tr>
+		<tr>
+			<td>${list.exDate }</td>
+		</tr>
+	</table>
+    </div>
+</c:forEach>
 </div>
-
-
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 
 </div><!-- .container -->
