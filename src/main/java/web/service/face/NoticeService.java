@@ -1,5 +1,6 @@
 package web.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public interface NoticeService {
 	 * @param paging
 	 * @return
 	 */
-	public List<Notice> getNoticeList(PagingNotice paging);
+	public List<HashMap<String, Object>> getNoticeList(PagingNotice paging);
 
 	/**
 	 * Notice를 작성한다.

@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<Notice> getNoticeList(PagingNotice paging) {
+	public List<HashMap<String, Object>> getNoticeList(PagingNotice paging) {
 		return noticeDao.selectNoticeAll(paging);
 	}
 

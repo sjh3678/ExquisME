@@ -22,19 +22,23 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 
 <table class="table table-striped table-hover">
 <tr>
-	<th style="width: 10%;">게시글번호</th>
-	<th style="width: 45%;">제목</th>
-	<th style="width: 20%;">작성자</th>
-	<th style="width: 10%;">내용</th>
-	<th style="width: 15%;">작성일</th>
+	<th>게시글번호</th>
+	<th>제목</th>
+	<th>작성자</th>
+	<th>내용</th>
+	<th>작성일</th>
+	<th>orginname</th>
+	<th>storedname</th>
 </tr>
 <c:forEach items="${noticeList }" var="i">
 <tr>
-	<td>${i.noticeNo}</td>
-	<td>${i.noticeTitle}</a></td>
-	<td>${i.userNo}</td>
-	<td>${i.noticeContent}</td>
-	<td><fmt:formatDate value="${i.noticeDate}" pattern="YY-MM-dd"/></td>
+	<td>${i.NOTICE_NO}</td>
+	<td>${i.NOTICE_TITLE}</a></td>
+	<td>${i.NICK}</td>
+	<td>${i.NOTICE_CONTENT}</td>
+	<td><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY-MM-dd"/></td>
+	<td>${i.ORIGIN_NAME}</td>
+	<td>${i.STORED_NAME}</td>
 </tr>
 </c:forEach>
 </table>
@@ -44,7 +48,7 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 <hr>
-<a href="admin/notice/write"><button id="btnWrite" class="btn btn-primary pull-left">WRITE</button></a>
+<a href="/admin/notice/write"><button id="btnWrite" class="btn btn-primary pull-left">WRITE</button></a>
 
 </div><%-- .container --%>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

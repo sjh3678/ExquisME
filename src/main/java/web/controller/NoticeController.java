@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class NoticeController {
 		PagingNotice paging = noticeService.getPaging(req);
 		model.addAttribute("paging", paging);
 		
-		List<Notice> noticeList = noticeService.getNoticeList(paging);
+		List<HashMap<String, Object>> noticeList = noticeService.getNoticeList(paging);
 		model.addAttribute("noticeList", noticeList);
 	}
 	

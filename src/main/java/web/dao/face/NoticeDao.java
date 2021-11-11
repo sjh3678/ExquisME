@@ -1,10 +1,10 @@
 package web.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import web.dto.FileUpload;
 import web.dto.Notice;
-import web.util.Paging;
 import web.util.PagingNotice;
 
 public interface NoticeDao {
@@ -20,7 +20,7 @@ public interface NoticeDao {
 	 * @param paging
 	 * @return
 	 */
-	public List<Notice> selectNoticeAll(PagingNotice paging);
+	public List<HashMap<String, Object>> selectNoticeAll(PagingNotice paging);
 
 	/**
 	 * 공지사항 작성 시 신규 파일 삽입
