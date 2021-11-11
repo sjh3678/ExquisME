@@ -17,12 +17,13 @@ import web.dto.Extagram;
 import web.dto.SocialAccount;
 import web.dto.User;
 import web.service.face.UserService;
+import web.util.UserSHA256;
 
 @Controller
 @RequestMapping(value="/user")
 public class UserController {
 		
-	private Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired UserService userService;
 	
@@ -32,17 +33,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc(
-			@RequestParam(value="id", required=false) String id
-			, @RequestParam(value="pw", required=false) String pw
-			, HttpSession session){
+	public String loginProc( User user, HttpSession session){
 		logger.info("/login [POST]");
-		User user = new User();
-		user.setId(id);
-		String salt = pw;//암호화....
-		user.setSalt(salt);//암호화시 고정되는 솔트값
+		
+		//비밀번호 암호화
+		user.setPw(UserSHA256.encrypt(user));
+		
 		boolean isLogin = userService.getLoginCheck(user);
+		
 		if(isLogin) {
+			
 			user = userService.getUserInfo(user);
 			
 			session.setAttribute("login", isLogin);
@@ -103,7 +103,7 @@ public class UserController {
 		
 		String pwSalt = pw;
 		
-		int userno = (int) session.getAttribute("userNo");
+		int userno = 0;
 		
 		boolean pwCheck = userService.getCheckPassword(pwSalt, userno);
 	}
@@ -116,7 +116,7 @@ public class UserController {
 	@RequestMapping(value="/pw/update", method=RequestMethod.POST)
 	public String pwUpdateProc(String pw, String pwChk, HttpSession session) {
 		logger.info("/pw/update [POST]");
-		int userno = (int) session.getAttribute("userNo");
+		int userno = 0;
 		
 		String pwSalt = pw;
 		String pwChkSalt = pwChk;

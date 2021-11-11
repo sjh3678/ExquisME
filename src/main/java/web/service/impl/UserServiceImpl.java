@@ -1,5 +1,9 @@
 package web.service.impl;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import web.dao.face.UserDao;
 import web.dto.ExComm;
@@ -140,6 +146,5 @@ public class UserServiceImpl implements UserService{
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectCommentByUserNo(map);
 	}
-
 	
 }
