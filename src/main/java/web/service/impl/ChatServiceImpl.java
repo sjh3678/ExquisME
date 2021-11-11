@@ -3,6 +3,7 @@ package web.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import web.dao.face.ChatDao;
 import web.dto.Message;
@@ -10,6 +11,7 @@ import web.dto.Room;
 import web.dto.User;
 import web.service.face.ChatService;
 
+@Service
 public class ChatServiceImpl implements ChatService {
 
 	@Autowired ChatDao chatDao;
