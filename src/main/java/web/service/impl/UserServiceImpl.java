@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService{
 		
 		logger.info("getJoinCheck called");
 		
+		//아이디 중복검사
 		int userCnt = userDao.selectUserCntById(param);
 		
 		if(userCnt == 0) {

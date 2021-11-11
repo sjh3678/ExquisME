@@ -74,8 +74,20 @@ public class UserController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinProc(User user, String pwCheck) {
 		logger.info("/join [POST]");
-		boolean isJoin = userService.getJoinCheck(user);
-		return null;
+		if(user.getPw().equals(pwCheck)) {
+			String encPw = UserSHA256.encrypt(user);
+			user.setPw(encPw);
+			boolean isJoin = userService.getJoinCheck(user);
+			if(isJoin) {
+				return "redirect:/user/main";	
+			}else {
+				return "redirect:/user/join";
+			}
+		}else {
+			//회원가입 페이지 리다이렉트
+			return "redirect:/user/join";
+		}
+		
 	}
 	
 	//이거도 아직...

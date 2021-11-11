@@ -34,4 +34,8 @@
 		SELECT user_no, file_no, id, pw, nick, phone, birth, gender, create_date FROM tb_user
 		WHERE user_no = #{userNo } 
 	</select>
+	<insert id="insertUserJoin" parameterType="web.dto.User">
+		INSERT INTO tb_user (user_no, file_no, id, pw, nick, phone, birth, gender, question_no, question_anwser)
+		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
+	</insert>
 </mapper>
