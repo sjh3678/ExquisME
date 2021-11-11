@@ -9,7 +9,7 @@ public class Layer {
 	private int perfumeNo1;
 	private int perfumeNo2;
 	private int perfume1Per;
-	private int layeringContent;
+	private String layeringContent;
 	private Date layeringDate;
 	@Override
 	public String toString() {
@@ -47,10 +47,10 @@ public class Layer {
 	public void setPerfume1Per(int perfume1Per) {
 		this.perfume1Per = perfume1Per;
 	}
-	public int getLayeringContent() {
+	public String getLayeringContent() {
 		return layeringContent;
 	}
-	public void setLayeringContent(int layeringContent) {
+	public void setLayeringContent(String layeringContent) {
 		this.layeringContent = layeringContent;
 	}
 	public Date getLayeringDate() {
@@ -59,6 +59,7 @@ public class Layer {
 	public void setLayeringDate(Date layeringDate) {
 		this.layeringDate = layeringDate;
 	}
+
 	
 	
 }

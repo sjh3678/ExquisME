@@ -1,30 +1,47 @@
 package web.controller;
 
-import java.util.List;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.Layer;
 import web.service.face.LayerService;
 import web.util.Paging;
+import web.util.PagingLayer;
 
 @Controller
 public class LayerController {
 
+	private static final Logger logger = LoggerFactory.getLogger(LayerController.class);
+	
 	//서비스 객체
 	@Autowired LayerService layerService;
 	
-	@RequestMapping(value="/layer/list")
-	public void layerList(Model model, Paging paging) {	//리스트 조회
-		//페이징 처리한 카테고리 별 리스트 조회
-		List<Layer> list = layerService.getList(model, paging);
+	@RequestMapping(value="/layer/list", method = RequestMethod.GET)
+	public void layerList(Model model, Paging paramData) {	//리스트 조회
 		
-		model.addAttribute(list);
+		
+		
+		PagingLayer paging = layerService.getLayerPaging(paramData);
+		
+		//페이징 처리한 카테고리 별 리스트 조회
+		HashMap<String, Object> list = layerService.getList(model, paging);
+		
+		logger.debug("paging {} ", paging);
+		
+		
+		model.addAttribute("paging",paging);
+		model.addAttribute("list",list);
+		model.addAttribute("linkurl", "/layer/list");
 	}
 	
 	@RequestMapping(value="/layer/view")

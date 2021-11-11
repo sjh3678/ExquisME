@@ -1,5 +1,6 @@
 package web.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 import web.dto.Layer;
+import web.dto.LayerLike;
+import web.util.Paging;
 
 public interface LayerDao {
 
@@ -16,7 +19,7 @@ public interface LayerDao {
 	 * @param model - 선택한 정렬 방법
 	 * @return - List<Layer> 선택한 정렬 방법으로 조회한 레이어드 리스트
 	 */
-	public List<Layer> selectLayerListByTarget(Model model);
+	public HashMap<String, Object> selectLayerListByTarget(HashMap<String, Object> map);
 
 	/**
 	 * userNo로 레이어드 상세정보 조회
@@ -54,5 +57,9 @@ public interface LayerDao {
 	 * @param model - 등록될 레이어드 정보
 	 */
 	public void insertLayerByUserNo(Model model);
+
+	public int selectLayerCntAll();
+
+
 	
 }

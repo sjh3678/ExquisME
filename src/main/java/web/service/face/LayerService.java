@@ -1,5 +1,6 @@
 package web.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,18 +9,19 @@ import org.springframework.ui.Model;
 
 import web.dto.Layer;
 import web.util.Paging;
+import web.util.PagingLayer;
 
 public interface LayerService {
 
 	/**
-	 * 전달받은 카테고리 번호와 페이징을 전달하여
+	 * 페이징을 전달하여
 	 * 레이어드 리스트 조회
 	 * 
-	 * @param model - 카테고리 번호 객체
+	 * @param model - 카테고리 종류 객체
 	 * @param paging - 페이징 객체 
 	 * @return 
 	 */
-	public List<Layer> getList(Model model, Paging paging);
+	public HashMap<String, Object> getList(Model model, PagingLayer paging);
 
 	/**
 	 * 전달받은 userNo로 등록된 레이어링 조회 
@@ -44,6 +46,14 @@ public interface LayerService {
 	 * @param model
 	 */
 	public void setLayer(HttpSession session,Model model);
-	
+
+	/**
+	 * paramData 로 페이징 처리
+	 * 
+	 * @param paramData
+	 * @return
+	 */
+	public PagingLayer getLayerPaging(Paging paramData);
+
 
 }

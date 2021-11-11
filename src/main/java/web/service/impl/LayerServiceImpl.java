@@ -1,29 +1,61 @@
 package web.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import web.dao.face.LayerDao;
 import web.dto.Layer;
+import web.dto.LayerLike;
 import web.service.face.LayerService;
 import web.util.Paging;
+import web.util.PagingLayer;
 
 @Service
 public class LayerServiceImpl implements LayerService {
 
+	private static final Logger logger = LoggerFactory.getLogger(LayerServiceImpl.class);
+	
 	@Autowired LayerDao layerDao;
 	
 	@Override
-	public List<Layer> getList(Model model, Paging paging) {
+	public HashMap<String, Object> getList(Model model, PagingLayer paging) {
+
+		HashMap<String, Object> map = new HashMap<>();
 		
-		List<Layer> list = layerDao.selectLayerListByTarget(model);
+		Object target = model.getAttribute("target");
+		
+		map.put("target",target);
+		
+		map.put("paging", paging);
+		
+		System.out.println("target "+target);
+		System.out.println("paging"+ paging);
+		
+		HashMap<String, Object> list = layerDao.selectLayerListByTarget(map);
 		
 		return list;
+	}
+	
+	@Override
+	public PagingLayer getLayerPaging(Paging paramData) {
+		
+		
+		//총 게시글 수 조회
+		int totalCount = layerDao.selectLayerCntAll();
+		
+		//페이징 계산
+		PagingLayer paging = new PagingLayer(totalCount, paramData.getCurPage());
+		
+		return paging;
 	}
 	
 	@Override
