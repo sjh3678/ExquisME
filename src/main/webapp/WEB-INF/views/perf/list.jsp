@@ -40,20 +40,18 @@ td:nth-child(2) {
 <c:forEach items="${list }" var="perf">
 	<tr>
 		<td>${perf.perfumeNo }</td>
-		<td>${board.brandNo }</td>
-		<td>${board.fileNo }</td>
-		<td>${board.perfumeName }</td>
-		<td>${board.perfumeVitality }</td>
-		<td>${board.perfumeGender }</td>
+		<td>${perf.brandNo }</td>
+		<td>${perf.fileNo }</td>
+		<td>${perf.perfumeName }</td>
+		<td>${perf.perfumeVitality }</td>
+		<td>${perf.perfumeGender }</td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
 
-<button id="btnWrite" class="btn btn-primary pull-left">글쓰기</button>
-<span class="pull-right">total : ${paging.totalCount }</span>
-<div class="clearfix"></div>
+
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 
