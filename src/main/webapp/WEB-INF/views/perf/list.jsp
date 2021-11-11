@@ -18,42 +18,59 @@ table, th {
 td:nth-child(2) {
 	text-align: left;
 }
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 90%;
+	min-width: 1080px;
+}
+#flex-items {
+	min-width: 260px;
+	width: 260px;
+	height: 400px;
+	border: 1px solid;
+	border-radius: 3px; 
+	margin:4px;
+}
+#perf_pic {
+	border: 1px solid #ccc;
+	margin: 10px;
+	height: 250px;
+}
+
+#perf_name {
+	border: 1px solid #ccc;
+	margin: 10px;
+	text-align: center;
+}
+#brand_name {
+	border: 1px solid #ccc;
+	margin: 10px;
+	text-align: center;
+}
+
+
+}
 </style>
+
 
 <div class="container">
 
-<h1>게시판 리스트</h1>
-<hr>
-
-<table class="table table-striped table-hover">
-<thead>
-	<tr>
-		<th style="width: 10%;">향수 번호</th>
-		<th style="width: 10%;">브랜드 번호</th>
-		<th style="width: 10%;">파일 번호</th>
-		<th style="width: 30%;">향수 이름</th>
-		<th style="width: 20%;">지속력</th>
-		<th style="width: 10%;">사진</th>
-	</tr>
-</thead>
-<tbody>
+<div class="flex-container">
 <c:forEach items="${list }" var="perf">
-	<tr>
-		<td>${perf.PERFUME_NO }</td>
-		<td>${perf.BRAND_NO }</td>
-		<td>${perf.FILE_NO }</td>
-		<td>${perf.PERFUME_NAME }</td>
-		<td>${perf.PERFUME_VITALITY }</td>
-		<td><img style="width:30px;height:30px;object-fit:cover;margin-right:2px;"
-					src="/resources/img/perf/${perf.STORED_NAME }"></td>
-	</tr>
+    <div id="flex-items">
+		<div id="perf_pic"><img class="imgg" style="width:230px; height:240px; display: block; margin: auto;"
+					src="/resources/img/perf/${perf.STORED_NAME }"></div>
+		<div id="perf_name">${perf.PERFUME_NAME }</div>
+		<div id="brand_name">${perf.BRAND_NAME }</div>
+    </div>
 </c:forEach>
-</tbody>
-</table>
+</div>
 
 
-
-
+<!-- ----------------------------------------------------------------------------------- -->
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 
 </div><!-- .container -->

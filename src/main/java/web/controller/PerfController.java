@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import web.dto.Perf;
 import web.service.face.PerfService;
-import web.util.Paging;
+import web.util.PagingPerf;
 
 @Controller
 @RequestMapping(value = "/perf")
@@ -26,22 +26,22 @@ public class PerfController {
 	@Autowired PerfService perfService;
 	
 	@RequestMapping(value = "/list")
-	public void perfList(Paging paramData, Model model) {
+	public void perfList(PagingPerf paramData, Model model) {
 		
 		//페이징 계산
-		Paging paging = perfService.getPaging( paramData );
+		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
-		List<HashMap<String, Object>> list = perfService.getPerfList(paging);
+		List<HashMap<String, Object>> list = perfService.getPerfList(pagingPerf);
 		
 		
-		model.addAttribute("paging", paging);
+		model.addAttribute("paging", pagingPerf);
 		model.addAttribute("list", list);
 		
 		model.addAttribute("linkUrl", "/perf/list");
 	}
 	
 	@RequestMapping(value= "/list_ok")
-	public String perListOk(Paging paging, HttpServletRequest req, ModelAndView mav ) {
+	public String perListOk(PagingPerf paging, HttpServletRequest req, ModelAndView mav ) {
 		return null;
 	}
 	

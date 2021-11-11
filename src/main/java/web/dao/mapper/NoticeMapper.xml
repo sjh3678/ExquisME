@@ -25,4 +25,17 @@
 		SELECT * FROM tb_notice WHERE notice_no = #{noticeNo }
 	</select>
 
+	<insert id="insertFile" parameterType="web.dto.FileUpload">
+		<selectKey order="BEFORE" resultType="int" keyProperty="fileNo">
+			SELECT tb_file_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO tb_file ( file_no, origin_name, stored_name, file_size )
+		VALUES ( #{fileNo }, #{originName }, #{storedName }, #{fileSize } )
+	</insert>
+
+	<insert id="insertBoard" parameterType="web.dto.Notice">
+		INSERT INTO tb_notice ( notice_no, user_no, file_no, notice_title, notice_content )
+		VALUES ( tb_notice_seq.nextval, #{userNo }, #{fileNo }, #{noticeTitle }, #{noticeContent } )
+	</insert>
+
 </mapper>

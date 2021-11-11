@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Perf;
-import web.util.Paging;
+import web.util.PagingPerf;
 
 public interface PerfDao {
 
@@ -23,7 +23,7 @@ public interface PerfDao {
 	 * @param paing
 	 * @return
 	 */
-	public List<HashMap<String, Object>> selectPerfAll(Paging paging);
+	public List<HashMap<String, Object>> selectPerfAll(PagingPerf pagingPerf);
 	
 	/**
 	 * 필터링 정보로 향수리스트 가져오기
@@ -32,7 +32,7 @@ public interface PerfDao {
 	 * @param req
 	 * @return
 	 */
-	public List<Perf>  selectPerfByFilter(Paging paging, HttpServletRequest req);
+	public List<Perf>  selectPerfByFilter(PagingPerf pagingPerf, HttpServletRequest req);
 	
 	/**
 	 * 검색 키워드로 향수리스트 가져오기
@@ -41,7 +41,7 @@ public interface PerfDao {
 	 * @param req
 	 * @return
 	 */
-	public List<Perf> selectListByKeyword(Paging paging, HttpServletRequest req);
+	public List<Perf> selectListByKeyword(PagingPerf pagingPerf, HttpServletRequest req);
 	
 	/**
 	 * 상세보기시 향수번호로 향수하나의 객체 가져오기

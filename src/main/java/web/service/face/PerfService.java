@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Perf;
 import web.util.Paging;
+import web.util.PagingPerf;
 
 public interface PerfService {
 
@@ -16,7 +17,7 @@ public interface PerfService {
 	 * @param paging
 	 * @return
 	 */
-	public Paging getPaging(Paging paramData);
+	public PagingPerf getPaging(PagingPerf paramData);
 	
 	/**
 	 * 페이징 적용하여 향수리스트 가져오기
@@ -24,7 +25,7 @@ public interface PerfService {
 	 * @param paging
 	 * @return
 	 */
-	public List<HashMap<String, Object>> getPerfList(Paging paging);
+	public List<HashMap<String, Object>> getPerfList(PagingPerf pagingPerf);
 	
 	/**
 	 * 향수 상세보기 하기위해 향수하나의 객체 정보 가져오기

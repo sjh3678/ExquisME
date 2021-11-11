@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import web.dao.face.PerfDao;
 import web.dto.Perf;
 import web.service.face.PerfService;
-import web.util.Paging;
+import web.util.PagingPerf;
 
 @Service
 public class PerfServiceImpl implements PerfService{
@@ -19,19 +19,19 @@ public class PerfServiceImpl implements PerfService{
 	@Autowired PerfDao perfDao;
 	
 	@Override
-	public Paging getPaging(Paging paramData) {
+	public PagingPerf getPaging(PagingPerf paramData) {
 		//총 게시글 수 조회
 		int totalCount = perfDao.selectCntPerfAll();
 				
 		//페이징 계산
-		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		PagingPerf pagingPerf = new PagingPerf(totalCount, paramData.getCurPage());
 				
-		return paging;
+		return pagingPerf;
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getPerfList(Paging paging) {
-		return perfDao.selectPerfAll(paging);
+	public List<HashMap<String, Object>> getPerfList(PagingPerf pagingPerf) {
+		return perfDao.selectPerfAll(pagingPerf);
 	}
 
 	@Override
