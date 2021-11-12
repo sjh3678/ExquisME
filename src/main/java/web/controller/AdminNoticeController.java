@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,14 +65,21 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public void noticeUpdate(Notice notice, Model model) {
-		logger.info("{}", noticeService.getNoticeView(notice));
 		model.addAttribute("i", noticeService.getNoticeView(notice));
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public void noticeUpdateProc(Notice notice) {}
+	public String noticeUpdateProc(Notice notice, MultipartFile file, HttpSession session) {
+		noticeService.setNoticeUpdate(notice, file);
+		return "redirect:/admin/notice/list";
+	}
 
 	@RequestMapping(value="/delete")
-	public void noticeDelete(Notice notice) {}
+	public String noticeDelete(Notice notice) {
+		notice.setFileNo(((BigDecimal)noticeService.getNoticeView(notice).get("FILE_NO")).intValue());
+		noticeService.setNoticeDelete(notice);
+		noticeService.setFileDelete(notice);
+		return "redirect:/admin/notice/list";
+	}
 	
 }

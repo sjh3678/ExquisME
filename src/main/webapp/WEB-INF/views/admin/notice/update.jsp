@@ -18,7 +18,7 @@ $(document).ready(function(){
 		submitContents($("#btnWrite"));
 		$("form").submit();
 	})
-	$("#cancel").click(function(){
+	$("#btnCancel").click(function(){
 		history.go(-1);
 	})
 })
@@ -66,11 +66,22 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 </tr>
 </table>
 
-<form action="/admin/notice/write" method="post" enctype="multipart/form-data">
+<form action="/admin/notice/update" method="post" enctype="multipart/form-data">
+
+<div class="form-group">
+	<label for="curFile">현재 등록된 이미지</label>
+	<input type="text" name="fileNo" value="${i.FILE_NO }"/>
+	<img class="curFile" src="#">
+</div>
+
+<div class="form-group">
+	<label for="file">교체할 이미지 업로드</label>
+	<input type="file" id="file" name="file" />
+</div>
 
 <div class="form-group">
 	<label for="title">공지번호</label>
-	<input type="text" id="title" name="noticeTitle" class="form-control" value="${i.NOTICE_NO}"/>
+	<input type="text" name="noticeNo" class="form-control" value="${i.NOTICE_NO}" readonly="readonly"/>
 </div>
 
 <div class="form-group">
@@ -83,25 +94,12 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 	<textarea rows="10" style="width: 100%;" id="content" name="noticeContent">${i.NOTICE_CONTENT}</textarea>
 </div>
 
-<div class="form-group">
-	<label for="curFile">현재 등록된 이미지</label>
-	<img class="curFile" src="#">
-</div>
-
-<div class="form-group">
-	<label for="file">첨부파일</label>
-	<input type="file" id="file" name="file" />
-</div>
-
 <div class="text-center">
 	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
+	<input type="reset" id="btnCancel" class="btn btn-danger" value="취소"/>
 </div>
 
 </form>
-
-<a href="/admin/notice/update?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-primary">확인</button></a>
-<a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-danger">삭제</button></a>
 
 <%-- ################################################## --%>
 

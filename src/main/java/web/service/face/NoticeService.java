@@ -42,14 +42,21 @@ public interface NoticeService {
 	/**
 	 * Notice를 수정한다.
 	 * @param notice
+	 * @param file 
 	 */
-	public void setNoticeUpdate(Notice notice);
+	public void setNoticeUpdate(Notice notice, MultipartFile file);
 
 	/**
 	 * Notice를 삭제한다.
 	 * @param notice
 	 */
 	public void setNoticeDelete(Notice notice);
+
+	/**
+	 * Notice에 연결된 파일을 삭제한다.
+	 * @param notice
+	 */
+	public void setFileDelete(Notice notice);
 
 	
 }

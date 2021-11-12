@@ -57,4 +57,10 @@ public interface NoticeDao {
 	 * @param notice
 	 */
 	public void DeleteNoticeByNoticeNo(Notice notice);
+
+	/**
+	 * 공지사항 내 파일 삭제
+	 * @param notice
+	 */
+	public void DeleteFileByNoticeNo(Notice notice);
 }

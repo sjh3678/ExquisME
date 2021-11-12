@@ -42,4 +42,26 @@
 		VALUES ( tb_notice_seq.nextval, #{userNo }, #{fileNo }, #{noticeTitle }, #{noticeContent } )
 	</insert>
 
+	<update id="updateFile" parameterType="web.dto.FileUpload">
+		UPDATE tb_file SET
+			origin_name = #{originName },
+			stored_name = #{storedName },
+			file_size = #{fileSize }
+		WHERE file_no = #{fileNo }
+	</update>
+	
+	<update id="updateNoticeByNoticeNo" parameterType="web.dto.Notice">
+		UPDATE tb_notice SET
+			notice_title = #{noticeTitle },
+			notice_content = #{noticeContent }
+		WHERE notice_no = #{noticeNo }
+	</update>
+	
+	<delete id="DeleteNoticeByNoticeNo" parameterType="web.dto.Notice">
+		DELETE FROM tb_notice WHERE notice_no = #{noticeNo }
+	</delete>
+	
+	<delete id="DeleteFileByNoticeNo" parameterType="web.dto.Notice">
+		DELETE FROM tb_file WHERE file_no = #{fileNo }
+	</delete>
 </mapper>

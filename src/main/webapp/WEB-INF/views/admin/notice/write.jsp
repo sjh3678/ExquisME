@@ -18,7 +18,7 @@ $(document).ready(function(){
 		submitContents($("#btnWrite"));
 		$("form").submit();
 	})
-	$("#cancel").click(function(){
+	$("#bntCancel").click(function(){
 		history.go(-1);
 	})
 })
@@ -50,7 +50,7 @@ $(document).ready(function(){
 
 <div class="text-center">
 	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
+	<input type="reset" id="btnCancel" class="btn btn-danger" value="취소"/>
 </div>
 
 </form>
