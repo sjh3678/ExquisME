@@ -14,32 +14,27 @@
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 400px;
-	border: 1px solid;
+	height: 380px;
 	border-radius: 3px; 
 	margin:4px;
+	border: 1px solid #ccc;
 }
 #a {
-	border: 1px solid #ccc;
 	margin: 10px;
 }
 #b {
-	border: 1px solid #ccc;
 	margin: 10px;
-	height: 90px;
+	height: 80px;
 }
 #c {
-	border: 1px solid #ccc;
 	margin: 10 0;
 	height: 180px;
-	width: 260px;
+	width: 258px;
 }
 #d {
-	border: 1px solid #ccc;
 	margin: 10px;
 }
 #e {
-	border: 1px solid #ccc;
 	margin: 10px;
 }
 
@@ -54,12 +49,15 @@
 <a href="/extagram/write"><button class="btn">write</button></a><br><br>
 <div class="flex-container">
 <c:forEach items="${list}" var="list">
-    <div id="flex-items">
-		<div id="a">프로필사진 닉네임${list.exNo }</div>
-		<div id="b">${list.exContent }</div>
-		<div id="c">사진</div>
-		<div id="d">♡ 0</div>
-		<div id="e">${list.exDate }</div>
+	<div id="flex-items">
+    <a href="/extagram/view?exNo=${list.EX_NO }">
+		<div id="a">프로필사진 ${list.NICK }</div>
+		<div id="b">${list.EX_CONTENT }</div>
+		<div id="c"><img style="width:258px; height:180px; display: block; margin: auto;"
+					src="/resources/img/perf/${list.STORED_NAME}"></div>
+		<div id="d">♡ ${list.HEART }	댓글 ${list.COMM }</div>
+		<div id="e">${list.EX_DATE }</div>
+    </a>
     </div>
 </c:forEach>
 </div>

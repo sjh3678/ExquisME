@@ -33,7 +33,6 @@ public class ExtaController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
-		model.addAttribute("linkUrl", "/extagram/list");
 	}
 	
 //	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)

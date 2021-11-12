@@ -8,18 +8,16 @@
 	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, E.* FROM (
-				SELECT
-				        u.nick, u.file_no As profile,
-				        x.ex_content, x.ex_date, x.file_no As picture,
-				        f.origin_name, f.stored_name, f.file_size
-				FROM
-				        tb_user u,
-				        tb_extagram x,
-				        tb_file f
-				WHERE
-				        u.user_no = x.user_no
-					AND x.file_no = f.file_no
-					AND x.ex_no = #{exNo}
+				SELECT 
+                	x.ex_no, u.nick, u.file_no As profile, x.file_no As picture, x.ex_content,x.ex_date, f.origin_name, f.stored_name,
+					(SELECT count(*) FROM tb_ex_comm WHERE c.ex_post_no = x.ex_no) As comm ,
+					(SELECT count(*) FROM tb_ex_like WHERE l.ex_post_no = x.ex_no) As heart
+			FROM tb_extagram x
+				LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
+				LEFT OUTER JOIN tb_file f ON x.file_no = f.file_no
+				LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
+				LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
+			ORDER BY x.ex_no DESC
 			) E
 		) tb_extagram
 		WHERE rnum BETWEEN #{startNo} AND #{endNo}
