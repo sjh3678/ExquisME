@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-</body>
-</html>
+
+
+
+<div class="flex-container">
+<c:forEach items="${list }" var="perf">
+    <div class="flex-items">
+		<div class="perf_pic"><img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
+					src="/resources/img/perf/${perf.STORED_NAME }"></div>
+		<div class="perf_name">${perf.PERFUME_NAME }</div>
+		<div class="brand_name">${perf.BRAND_NAME }</div>
+    </div>
+</c:forEach>
+</div>

@@ -28,25 +28,23 @@ public class PerfController {
 	@RequestMapping(value = "/list")
 	public void perfList(PagingPerf paramData, Model model) {
 		
-		//페이징 계산
-		PagingPerf pagingPerf = perfService.getPaging( paramData );
-		
-		List<HashMap<String, Object>> list = perfService.getPerfList(pagingPerf);
-		
-		
-		model.addAttribute("paging", pagingPerf);
-		model.addAttribute("list", list);
-		
-		model.addAttribute("linkUrl", "/perf/list");
+
 	}
 	
 	@RequestMapping(value= "/list_ok")
-	public String perListOk(PagingPerf paging, HttpServletRequest req, ModelAndView mav ) {
+	public String perListOk(PagingPerf paramData, String search, Model model ) {
 		
-		logger.info("ajax 요청");
+		logger.info("/list_ok");
 		
-		logger.info("데이터 : {}", req.getAttribute("search"));
-		return null;
+		//페이징 가져오기
+		PagingPerf pagingPerf = perfService.getPaging( paramData );
+		
+		List<HashMap<String, Object>> list = perfService.getPerfList(pagingPerf);
+		model.addAttribute("paging", pagingPerf);
+		model.addAttribute("list", list);
+
+				
+		return "/perf/list_ok";
 	}
 	
 	@RequestMapping(value = "/view")

@@ -35,9 +35,30 @@
 
 
 
-<select id="selectCntPerfAll" resultType="int">
+<select id="selectCntPerfAll" resultType="int" parameterType="String">
 	SELECT count(*) FROM tb_perf
+	<trim prefix="WHERE" prefixOverrides="AND">
+			<choose>
+				<when test="search != null and search.equals('')">
+					AND PERFUME_NAME LIKE '%' || #{search } || '%'
+				</when>
+		
+				<when test="gender != null and gender.equals('')">
+					AND PERFUME_GENDER = #{gender }
+				</when>
+				
+				<when test="note != null and note.equals('')">
+					AND note = #{keyword }
+				</when>
+				
+				
+				
+			</choose>
+		</trim>
+	
 </select>
+
+
 
 <!-- <select id="selectPerfAll" resultType="web.dto.Perf" parameterType="web.util.Paging">
 	SELECT * FROM (

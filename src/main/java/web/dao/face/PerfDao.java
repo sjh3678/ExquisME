@@ -41,7 +41,7 @@ public interface PerfDao {
 	 * @param req
 	 * @return
 	 */
-	public List<Perf> selectListByKeyword(PagingPerf pagingPerf, HttpServletRequest req);
+	public List<Perf> selectListByKeyword(PagingPerf pagingPerf, String search);
 	
 	/**
 	 * 상세보기시 향수번호로 향수하나의 객체 가져오기

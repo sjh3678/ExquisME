@@ -8,43 +8,43 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#search").click(function(){
+	
+	loadList(); //init list
+	
+	$("#more").click(function(){
 		console.log("#ajax clicked")
 		
-		$.ajax({
-			type: "get"
-			, url: "/perf/list_ok"
-			, data: {
-				search: $("input[name=search]").val()
-			}
-			, dataType: "html"
-			, success: function(res){
-				console.log("AJAX 성공")
-				
-				$(".flex-container").html(res)
-			}
-			, error: function(){
-				console.log("AJAX 실패")
-			}
-		})
+		loadList();
 	})
+	
+// 	$(window).scroll
+
 });
+
+var curPage = 1;
+function loadList() {
+	$.ajax({
+		type: "get"
+		, url: "/perf/list_ok"
+		, data: { 
+			curPage: curPage++
+		}
+		, dataType: "html"
+		, success: function(res){
+			console.log("AJAX 성공")
+			result.innerHTML += res;
+// 			$("#result").html( $("#result").html() + res );
+		}
+		, error: function(){
+			console.log("AJAX 실패")
+		}
+	})
+	$("#cur").html(curPage)
+}
 </script>
 
 
 <style type="text/css">
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-td:nth-child(2) {
-	text-align: left;
-}
-
 .flex-container {
 	display: flex;
 	flex-direction: row;
@@ -76,32 +76,24 @@ td:nth-child(2) {
 	margin: 10px;
 	text-align: center;
 }
-
-
-}
 </style>
 
 
-<div class="container">
 
+
+<div class="container">
 <div class="search">
-	<form style="text-align: center;"> 
-		<input type="text" name="search" size="50" maxlength="30" placeholder="상품을 검색해보세요." /><input id="search" type="button" value="검색" />
+	<form action="/perf/list" method="get" style="text-align: center;"> 
+		<input type="text" name="search" size="50" maxlength="30" placeholder="상품을 검색해보세요." /><input id="search" type="submit" value="검색" />
 	</form>
 </div>
 
 
-<div class="flex-container">
-<c:forEach items="${list }" var="perf">
-    <div class="flex-items">
-		<div class="perf_pic"><img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
-					src="/resources/img/perf/${perf.STORED_NAME }"></div>
-		<div class="perf_name">${perf.PERFUME_NAME }</div>
-		<div class="brand_name">${perf.BRAND_NAME }</div>
-    </div>
-</c:forEach>
+<div id="result">
+
 </div>
 
+<button id="more">더 보기</button>
 
 <!-- ----------------------------------------------------------------------------------- -->
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
