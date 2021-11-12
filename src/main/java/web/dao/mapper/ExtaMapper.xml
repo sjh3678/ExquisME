@@ -5,18 +5,20 @@
 
 <mapper namespace="web.dao.face.ExtaDao">
 
+
+<!-- LIST -->
 	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, E.* FROM (
-				SELECT 
+				SELECT DISTINCT
                 	x.ex_no, u.nick, u.file_no As profile, x.file_no As picture, x.ex_content,x.ex_date, f.origin_name, f.stored_name,
 					(SELECT count(*) FROM tb_ex_comm WHERE c.ex_post_no = x.ex_no) As comm ,
 					(SELECT count(*) FROM tb_ex_like WHERE l.ex_post_no = x.ex_no) As heart
-			FROM tb_extagram x
-				LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
-				LEFT OUTER JOIN tb_file f ON x.file_no = f.file_no
-				LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
-				LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
+				FROM tb_extagram x
+					LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
+					LEFT OUTER JOIN tb_file f ON x.file_no = f.file_no
+					LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
+					LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
 			ORDER BY x.ex_no DESC
 			) E
 		) tb_extagram
@@ -27,10 +29,11 @@
 		SELECT count(*) FROM tb_extagram
 	</select>
 
-	
+
+<!-- VIEW -->	
 	<select id="selectExtaView" resultType="hashmap" parameterType="web.dto.Extagram">
-		SELECT
-			u.nick, x.ex_no, x.ex_date, x.ex_content, c.ex_comm, c.ex_comm_date, 
+		SELECT DISTINCT
+			u.nick as nn, x.ex_no, x.ex_content, x.ex_date, 
 			f.stored_name AS picture_s, f.origin_name As picture_o,
 			(SELECT count(*) FROM tb_ex_comm WHERE c.ex_post_no = x.ex_no) As comm, 
 			(SELECT count(*) FROM tb_ex_like WHERE l.ex_post_no = x.ex_no) As heart
@@ -42,6 +45,19 @@
 		WHERE ex_no = #{exNo }
 	</select>
 	
+	<select id="selectExtaComment" resultType="hashmap" parameterType="web.dto.Extagram">
+		SELECT
+		    u.file_no, u.nick, c.ex_comm, c.ex_comm_date, f.stored_name, f.origin_name
+		FROM tb_extagram x
+		    LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
+		    LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
+		    LEFT OUTER JOIN tb_file f ON u.file_no = f.file_no
+		WHERE x.ex_no = #{exNo }
+		ORDER BY c.ex_comm_date
+	</select>
+
+
+<!-- WRITE -->	
 	<insert id="insertExtaWrite">
 	</insert>
 	

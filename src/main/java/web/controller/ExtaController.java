@@ -34,7 +34,6 @@ public class ExtaController {
 		List<HashMap<String, Object>> list = extaService.getExtaList(paging);
 		
 		
-		
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
@@ -44,6 +43,17 @@ public class ExtaController {
 //VIEW	
 	@RequestMapping(value="/extagram/view")
 	public String extaView(Extagram viewExta, Model model, HttpSession session, MultipartFile file) {
+		
+		if(viewExta.getExNo() < 1) {
+			return "redirect:/board/list";
+		}
+		
+		
+//		ExComm comment = new ExComm();
+		List<HashMap<String, Object>> commentList = extaService.getCommentList(viewExta);
+		logger.info("해쉬맵 전달값 확인 : {}", commentList);
+		model.addAttribute("viewComm", commentList);
+		
 		
 		model.addAttribute("viewExta",extaService.getExtaView(viewExta));
 		

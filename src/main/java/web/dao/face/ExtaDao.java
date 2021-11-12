@@ -33,6 +33,12 @@ public interface ExtaDao {
 	 */
 	public HashMap<String, Object> selectExtaView(Extagram viewExta);
 
+	/**
+	 * 게시글 상세보기의 댓글 목록 불러오기
+	 * @param viewExta - 댓글을 불러올 게시글 번호
+	 * @return - 댓글LIST
+	 */
+	public List<HashMap<String, Object>> selectExtaComment(Extagram viewExta);
 	
 //WRITE	
 	/**
@@ -82,5 +88,6 @@ public interface ExtaDao {
 	 * @param exComm
 	 */
 	public void deleteExtaComm(ExComm exComm);
+
 	
 }

@@ -18,6 +18,16 @@
 	border-radius: 3px; 
 	margin: 0px;
 }
+.commentBox {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 98%;
+	min-width: 510;
+	margin: 10px;
+	padding: 10px;
+}
+
 
 
 </style>
@@ -42,14 +52,21 @@ ${viewExta.EX_CONTENT }
 		</div>
 	</div>
 	<div class="flex-items">
-		<div id="viewComment" style="height: 323px; background-color: #ccc;">
-			${viewExta.EX_COMM }
+		<div id="viewComment" style="height: 323px; background-color: #ccc; overflow-y: scroll; ">
+			<c:forEach items="${viewComm }" var="viewComm">
+				<div class="commentBox">
+					<div><img style="width:30px; height:30px;"src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
+					<div style="padding: 5px;">${viewComm.NICK}&nbsp;&nbsp;&nbsp;</div>
+					<div style="padding: 5px;">${viewComm.EX_COMM }</div>
+					<div style="padding: 5px;">${viewComm.EX_COMM_DATE}</div>
+				</div>
+			</c:forEach>
 		</div>
 		<div style="background: #ccc;">
-			<SPAN>♡${viewExta.HEART }</SPAN><SPAN>댓글${viewExta.COMM }</SPAN>
+			<SPAN>♡ ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
 		</div>
 		<div style="background: #ccc; height: 34px;">
-			<input type="text" id="comment" name="comment" style="width: 471px; height: 30px; border: none; background: #ccc;"/>
+			<input type="text" id="comment" name="comment" style="width: 475px; height: 34px; border: none; background: #ddd;"/>
 			<button class="btn pull-right">POST</button>
 		</div>
 	</div>
