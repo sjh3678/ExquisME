@@ -15,6 +15,7 @@ public class PagingLayer {
 	private int endNo;	//화면에 보이는 게시글의 끝 번호
 	
 	private String search; //검색어
+	private String target; // 정렬 기준
 
 	
 
@@ -66,7 +67,7 @@ public class PagingLayer {
 		
 		//기본값 설정
 		if(curPage == 0)	setCurPage(1);	//첫 페이지를 기본 페이지로 설정한다
-		if(listCount == 0)	setListCount(10);	//화면에 보여질 게시글 수를 기본 10개로 설정한다
+		if(listCount == 0)	setListCount(20);	//화면에 보여질 게시글 수를 기본 10개로 설정한다
 		if(pageCount == 0)	setPageCount(10);	//화면에 보여질 페이지 수를 기본 10페이지로 설정한다
 		
 		//총 페이지 수 계산
@@ -88,11 +89,16 @@ public class PagingLayer {
 		endNo = curPage * listCount;
 	}
 	
+
+
+
+
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + "]";
+		return "PagingLayer [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
+				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", target=" + target
+				+ "]";
 	}
 
 	public int getCurPage() {
@@ -155,5 +161,11 @@ public class PagingLayer {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	
 }

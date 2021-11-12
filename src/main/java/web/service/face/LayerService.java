@@ -21,7 +21,7 @@ public interface LayerService {
 	 * @param paging - 페이징 객체 
 	 * @return 
 	 */
-	public HashMap<String, Object> getList(Model model, PagingLayer paging);
+	public List<HashMap<String, Object>> getList(Model model, PagingLayer paging);
 
 	/**
 	 * 전달받은 userNo로 등록된 레이어링 조회 
@@ -53,7 +53,9 @@ public interface LayerService {
 	 * @param paramData
 	 * @return
 	 */
-	public PagingLayer getLayerPaging(Paging paramData);
+	public PagingLayer getLayerPaging(PagingLayer paramData);
+
+	public List<HashMap<String, Object>> getImageList(Model model, PagingLayer paging);
 
 
 }

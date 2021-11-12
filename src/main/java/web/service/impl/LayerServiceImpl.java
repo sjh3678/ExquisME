@@ -14,9 +14,7 @@ import org.springframework.ui.Model;
 
 import web.dao.face.LayerDao;
 import web.dto.Layer;
-import web.dto.LayerLike;
 import web.service.face.LayerService;
-import web.util.Paging;
 import web.util.PagingLayer;
 
 @Service
@@ -27,26 +25,25 @@ public class LayerServiceImpl implements LayerService {
 	@Autowired LayerDao layerDao;
 	
 	@Override
-	public HashMap<String, Object> getList(Model model, PagingLayer paging) {
+	public List<HashMap<String, Object>> getList(Model model, PagingLayer paging) {
 
 		HashMap<String, Object> map = new HashMap<>();
 		
 		Object target = model.getAttribute("target");
 		
-		map.put("target",target);
-		
 		map.put("paging", paging);
 		
 		System.out.println("target "+target);
 		System.out.println("paging"+ paging);
-		
-		HashMap<String, Object> list = layerDao.selectLayerListByTarget(map);
+		System.out.println("map : " + map);
+		System.out.println("map : " + map.get("paging"));
+		List<HashMap<String, Object>> list = layerDao.selectLayerListByTarget(map);
 		
 		return list;
 	}
 	
 	@Override
-	public PagingLayer getLayerPaging(Paging paramData) {
+	public PagingLayer getLayerPaging(PagingLayer paramData) {
 		
 		
 		//총 게시글 수 조회
@@ -54,6 +51,7 @@ public class LayerServiceImpl implements LayerService {
 		
 		//페이징 계산
 		PagingLayer paging = new PagingLayer(totalCount, paramData.getCurPage());
+		paging.setTarget(paramData.getTarget());
 		
 		return paging;
 	}
@@ -82,6 +80,11 @@ public class LayerServiceImpl implements LayerService {
 	public void setLayer(HttpSession session, Model model) {
 		
 		layerDao.insertLayerByUserNo(model);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getImageList(Model model, PagingLayer paging) {
+		return null;
 	}
 
 

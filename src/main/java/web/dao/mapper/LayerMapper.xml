@@ -6,14 +6,21 @@
   
 <mapper namespace="web.dao.face.LayerDao">
 	<select id="selectLayerListByTarget" resultType="HashMap" parameterType="HashMap">
-   SELECT * FROM ( 
+    SELECT * FROM ( 
         SELECT rownum rnum, A.*FROM(
             SELECT
                 l.LAYERING_NO, l.USER_NO, l.PERFUME_NO1
                 , l.PERFUME_NO2, l.PERFUME1_PER, l.LAYERING_CONTENT, l.LAYERING_DATE
+                , P1.PERFUME_NAME Pname1, P2.perfume_name Pname2
+                , F1.file_no file1, F1.origin_name fileO1, F1.stored_name fileS1
+                , F2.file_no file2, F2.origin_name fileO2, F2.stored_name fileS2
                 , u.nick, (SELECT count(*) FROM tb_layer_like where layering_no = l.layering_no) SCnt
             FROM tb_layer l 
             LEFT OUTER JOIN tb_user u ON  l.user_no = u.user_no  
+            LEFT OUTER JOIN tb_perf P1 ON l.PERFUME_NO1 = P1.PERFUME_NO 
+            LEFT OUTER JOIN tb_perf P2 ON l.PERFUME_NO2 = P2.PERFUME_NO 
+            LEFT OUTER JOIN tb_file F1  ON P1.file_no = F1.file_no
+            LEFT OUTER JOIN tb_file F2  ON P2.file_no = F2.file_no
             <choose>
             <when test="target == 1 || target == null">
             	ORDER BY LAYERING_NO DESC
@@ -24,9 +31,9 @@
             </choose>
         )A
     )layer_list
-     WHERE rnum BETWEEN #{startNo } AND #{endNo }
+     WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
 	</select>
 	<select id="selectLayerCntAll" resultType="int">
 		SELECT count(*) FROM tb_layer
 	</select>
-</mapper>
+</mapper> 

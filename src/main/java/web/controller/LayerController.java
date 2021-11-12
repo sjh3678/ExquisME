@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.Layer;
 import web.service.face.LayerService;
-import web.util.Paging;
 import web.util.PagingLayer;
 
 @Controller
@@ -26,22 +25,41 @@ public class LayerController {
 	//서비스 객체
 	@Autowired LayerService layerService;
 	
-	@RequestMapping(value="/layer/list", method = RequestMethod.GET)
-	public void layerList(Model model, Paging paramData) {	//리스트 조회
+	@RequestMapping(value="/layer/list")
+	public void layerList(PagingLayer paramData, Model model) {
+
 		
+	}
+	
+	@RequestMapping(value="/layer/list_ok", method = RequestMethod.GET)
+	public String layerListOk(Model model, PagingLayer paramData, String target) {	//리스트 조회
 		
+		System.out.println("target : " + paramData.getTarget());
+		System.out.println("paramData : " + paramData);
+		System.out.println("target : " + target);
 		
 		PagingLayer paging = layerService.getLayerPaging(paramData);
 		
 		//페이징 처리한 카테고리 별 리스트 조회
-		HashMap<String, Object> list = layerService.getList(model, paging);
+		List<HashMap<String, Object>> list = layerService.getList(model, paging);
 		
-		logger.debug("paging {} ", paging);
+		//페이징 처리한 카테고리 별 이미지 리스트 조회 
+		List<HashMap<String, Object>> img = layerService.getImageList(model, paging);
+		
+		logger.info("paging {} ", paging);
 		
 		
 		model.addAttribute("paging",paging);
 		model.addAttribute("list",list);
+		logger.debug("list {}", list);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("list" + list.get(i).get("FILES2"));
+			System.out.println("list" + list.get(i).get("NICK"));
+			
+		}
 		model.addAttribute("linkurl", "/layer/list");
+		
+		return "/layer/list_ok";
 	}
 	
 	@RequestMapping(value="/layer/view")
