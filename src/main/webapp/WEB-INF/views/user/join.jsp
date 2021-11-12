@@ -26,11 +26,54 @@ $(document).ready(function(){
 			console.log("약관 동의 완료");
 			joinCnt++;
 			$("#info").css("color", "black");
+			$("#agree").css("color", "#877b9e");
+			$("#agreement").css("display", "none");
+			$("#joinForm").css("display", "inline");
 		}else if(joinCnt == 1){
+			$.ajax({
+				type: "get"
+					, url: "/user/join/input/check"
+					, data: { 
+						$("#id").val, $("pw").val, $("#pwCheck").val, $("#nick").val, 
+						$("#phone").val, $("#email").val, $("#gender").val
+						, $("#birth").val, $("#questionAnwser").val
+					}
+					, dataType: "json"
+					, success: function(res){
+						console.log("AJAX 성공");
+						if(res === 'id'){
+							$("#id").forcus();
+						}else{
+							
+						}
+						$('form').submit();
+						
+					}
+					, error: function(){
+						console.log("AJAX 실패");
+					}
+			})
 			$("form").submit();
 		}
 	});
-	
+	        
+	$("#cancleBtn").click(function(){
+		if(joinCnt == 0 ){
+			joinCnt--;
+			$(history).go(-1);
+			
+		}else if(joinCnt == 1){
+			
+			console.log("정보 입력 취소");
+			joinCnt--;
+			$("#info").css("color", "black");
+			$("#agree").css("color", "#877b9e");
+			$("#agreement").css("display", "inline");
+			$("#joinForm").css("display", "none");
+			$("#info").css("color", "#877b9e");
+			$("#agree").css("color", "black");
+		}
+	})
 	$.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -52,11 +95,15 @@ $(document).ready(function(){
     $(function() {
         $("#birth").datepicker();
     });
-
-
+    
 })
+
 </script>
 <style>
+.span{
+	color:red;
+	display:none;
+}
 #ltitle{
 	background: #ccc;
 	color: #877b9e;
@@ -65,15 +112,20 @@ $(document).ready(function(){
     width: 200px;
     height: 30px;
 }
-/* #joinForm { */
+ #joinForm { 
+ 	display: none; 
+} 
+/* #agreement { */
 /* 	display: none; */
 /* } */
-#agreement {
-	display: none;
-}
-#agree{
+#agree {
 	color: black;
 }
+
+.form-control {
+	width:500px;
+}
+
 </style>
 <div class="container">
 <div class="text-center" id="pageName">
@@ -107,78 +159,60 @@ $(document).ready(function(){
 </div>
 </div>
 <form action="/user/join" method="post" id="joinForm" class="form-horizontal"  style="dispaly:flex;">
+<label for="id" class="col-xs-3 control-label">아이디 </label>
+<input type="text" class="form-control" id="id" name="id" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
+<span id="idChk" class="span col-xs-offset-3">아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.</span>
+<br><br>
 
-<div class="form-group">
-    <label for="id" class="col-xs-3 control-label">아이디 </label>
-    <div class="col-xs-6">
-      <input type="text" class="form-control" id="id" name="id" placeholder="Id">
-    </div>
-</div>
+<label for="pw" class="col-xs-3 control-label">비밀번호 </label>
+<input type="password" class="form-control" id="pw" name="pw" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
+<span id="pwChk" class="span col-xs-offset-3">비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.</span>
+<br><br>
 
-<div class="form-group">
-    <label for="pw" class="col-xs-3 control-label">비밀번호 </label>
-    <div class="col-xs-6">
-      <input type="password" class="form-control" id="pw" name="pw" placeholder="Password">
-    </div>
-</div>
+<label for="pwCheck" class="col-xs-3 control-label">비밀번호 확인 </label>
+<input type="password" class="form-control" id="pwCheck" name="pwCheck" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
+<span id="pwCheckChk" class="span col-xs-offset-3">비밀번호가 일치하지 않습니다.</span>
+<br><br>
 
-<div class="form-group">
-    <label for="pw" class="col-xs-3 control-label">비밀번호 확인 </label>
-    <div class="col-xs-6">
-      <input type="password" class="form-control" id="pw" name="pw" placeholder="Password">
-    </div>
-</div>
+<label for="nick" class="col-xs-3 control-label">닉네임 </label>
+<input type="text" class="form-control" id="nick" name="nick" placeholder="닉네임을 입력해 주세요">
+<span id="nickChk" class="span col-xs-offset-3">닉네임을 입력해주세요</span>
+<br><br>
 
-<div class="form-group">
-    <label for="nick" class="col-xs-3 control-label">닉네임 </label>
-    <div class="col-xs-6">
-      <input type="text" class="form-control" id="nick" name="nick" placeholder="nick">
-    </div>
-</div>
+<label for="phone" class="col-xs-3 control-label">전화번호 </label>
+<input type="text" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" class="form-control" id="phone" name="phone" placeholder="'-'없이 11자리 입력">
+<span id="phoneChk" class="span col-xs-offset-3">'-'를 제외한 11자리의 전화번호를 입력해주세요</span>
+<br><br>
 
-<div class="form-group">
-    <label for="nick" class="col-xs-3 control-label">전화번호 </label>
-    <div class="col-xs-6">
-      <input type="text" class="form-control" id="phone" name="phone" placeholder="phone">
-    </div>
-</div>
+<label for="email" class="col-xs-3 control-label">이메일 </label>
+<input  type="email" class="form-control" id="email" name="email" placeholder="ex) asdf1234@gmail.com">
+<span id="emailChk" class="span col-xs-offset-3">@와 유효한 이메일형식을 입력해주세요</span>
+<br><br>
 
-<div class="form-group">
-    <label for="nick" class="col-xs-3 control-label">이메일 </label>
-    <div class="col-xs-6">
-      <input type="email" class="form-control" id="email" name="email" placeholder="email">
-    </div>
-</div>
+<label for="gender" class="col-xs-3 control-label">성별 </label>
+<input type="radio" name="gender" value="F" id="female"/> <label id="woman">여성</label>
+<input type="radio" name="gender" value="M" id="male"/> <label id="woman">남성</label><br>
+<span id="genderChk" class="span col-xs-offset-3">성별을 선택해주세요</span>
+<br><br>
 
-<div class="form-group">
-    <label for="nick" class="col-xs-3 control-label">이메일 </label>
-    <div class="col-xs-6">
-      <input type="email" class="form-control" id="email" name="email" placeholder="email">
-    </div>
-</div>
-<div class="form-group">
-    <label for="birth" class="col-xs-3 control-label">생일 </label>
-    <div class="col-xs-6">
-      <input type="text" class="form-control" id="birth" name="birth" placeholder="birth">
-    </div>
-</div>
+<label for="birth" class="col-xs-3 control-label">생일 </label>
+<input type="text" class="form-control" id="birth" name="birth" placeholder="birth">
+<span id="birthChk" class="span col-xs-offset-3">생일을 선택해주세요</span>
+<br><br>
 
-<div class="form-group">
-    <label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
-    <div class="col-xs-3">
-    	<select id="questionNo" name="questionNo" style="width:500px;">
-      		<option value="1">내가 좋아하는 캐릭터(인물)는?</option>
-      		<option value="2">다시 태어나면 되고 싶은 것은?</option>
-      		<option value="3">가장 감명깊게 본 영화는?</option>
-      		<option value="4">자신의 보물 1호는?</option>
-      		<option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
-      		<option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
-    	</select>
-
-      	<input type="text" class="form-control" style="width:500px;" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
-	</div>
-</div>
-
+<label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
+<select id="questionNo" name="questionNo" style="width:500px;">
+      <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
+      <option value="2">다시 태어나면 되고 싶은 것은?</option>
+      <option value="3">가장 감명깊게 본 영화는?</option>
+      <option value="4">자신의 보물 1호는?</option>
+      <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
+      <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
+</select>
+<input type="text" class="col-xs-offset-3 form-control" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<br>
+	<span id="answerChk" class="span col-xs-offset-3">답을 입력해주세요</span>
+<br>
 </form>
 <div class="text-center"> 
    	<button class="btn btn-primary" type="button" id="nextBtn">다음</button>
