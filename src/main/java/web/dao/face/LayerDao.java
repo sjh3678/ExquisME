@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import web.dto.Layer;
 import web.dto.LayerLike;
 import web.util.Paging;
-import web.util.PagingLayer;
 
 public interface LayerDao {
 
@@ -20,7 +19,7 @@ public interface LayerDao {
 	 * @param model - 선택한 정렬 방법
 	 * @return - List<Layer> 선택한 정렬 방법으로 조회한 레이어드 리스트
 	 */
-	public List<HashMap<String, Object>> selectLayerListByTarget(PagingLayer paging);
+	public List<HashMap<String, Object>> selectLayerListByTarget(HashMap<String, Object> map);
 
 	/**
 	 * userNo로 레이어드 상세정보 조회

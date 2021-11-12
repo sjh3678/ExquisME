@@ -46,17 +46,17 @@ public class LayerController {
 		//페이징 처리한 카테고리 별 이미지 리스트 조회 
 		List<HashMap<String, Object>> img = layerService.getImageList(model, paging);
 		
-		logger.debug("paging {} ", paging);
+		logger.info("paging {} ", paging);
 		
 		
 		model.addAttribute("paging",paging);
 		model.addAttribute("list",list);
 		logger.debug("list {}", list);
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println("list" + list.get(i).get("FILES2"));
-//			System.out.println("list" + list.get(i).get("NICK"));
-//			
-//		}
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("list" + list.get(i).get("FILES2"));
+			System.out.println("list" + list.get(i).get("NICK"));
+			
+		}
 		model.addAttribute("linkurl", "/layer/list");
 		
 		return "/layer/list_ok";

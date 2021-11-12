@@ -16,7 +16,7 @@
 	</logger>
 	
 	<logger name="web">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	
 	

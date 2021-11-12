@@ -11,48 +11,26 @@ $(document).ready(function(){
 	
 	loadList(); //init list
 	
-
-$("#last").click(function(){
-	console.log("#last")
-	$.ajax({
-        type: "get"
-        , url: "/layer/list_ok"
-        , data: {
-            target: $("#last").val()
-        }
-        , dataType: "html"
-        , success: function(res){
-       		console.log("AJAX 성공")
-       		result.innerHTML = res;
-            //응답데이터 확인
-            console.log( res )
-        }
-        , error: function(res){
-            console.log("AJAX 실패")
-        }
-    })
-});
-	
-$("#like").click(function(){
-	console.log("#like")
-	$.ajax({
-		type: "get"
-		, url: "/layer/list_ok"
-		, data: {
-			target: $("#like").val()
-        }
-        , dataType: "html"
-        , success: function(res){
-            console.log("AJAX 성공")
-            result.innerHTML = res;
-            //응답데이터 확인
-            console.log( res )
-        }
-        , error: function(res){
-		console.log("AJAX 실패")
-		}
+	$("#more").click(function(){
+		console.log("#ajax clicked")
+		
+		loadList();
 	})
-});
+
+	$("#last").click(function(){
+		console.log("#ajax clicked")
+		console.log($("#last").val());
+		console.log($("[name = 'target']").val());
+  		location.href="/layer/list?target=" + $("#last").val();  
+		
+	})
+	$("#like").click(function(){
+		console.log("#ajax clicked")
+  		location.href="/layer/list?target=" + $("#like").val();  
+		console.log($("#like").val());
+		console.log($("[name = 'target']").val());
+		
+	})
 	
 // 	$(window).scroll
 
@@ -68,16 +46,20 @@ window.onscroll = function(e) {
     	//실행할 로직 (콘텐츠 추가)
     	loadList();
         count++;
+        var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
+        //article에 추가되는 콘텐츠를 append
+        $('article').append(addContent);
     }
 };
 
 var curPage = 1;
-function loadList() {		
+function loadList() {
 	$.ajax({
 		type: "get"
 		, url: "/layer/list_ok"
 		, data: { 
 			curPage: curPage++
+			
 		}
 		, dataType: "html"
 		, success: function(res){
@@ -91,17 +73,6 @@ function loadList() {
 	})
 	$("#cur").html(curPage)
 }
-
-//$("#perf_pic").click(function(){
-//	location.href="/layer/view?" + (this).${layer.LAYERING_NO};
-//});
-
-var view = document.getElementById("perf_pic");
-view.click(function(){
-	location.href="/layer/view";
-});
-
-
 </script>
 
 <style type="text/css">
@@ -201,10 +172,12 @@ td:nth-child(2) {
 <a href="/layer/write"><button class="btn btn-primary pull-left">레이어링등록</button></a>
 
 
+
 <div id="result">
 
 </div>
 
+<button id="more">더 보기</button>
 
 <!-- ----------------------------------------------------------------------------------- -->
 
