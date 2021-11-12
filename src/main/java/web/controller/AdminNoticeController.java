@@ -50,19 +50,23 @@ public class AdminNoticeController {
 	public void noticeWrite() {}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public void noticeWriteProc(Notice notice, MultipartFile file, HttpSession session) {
+	public String noticeWriteProc(Notice notice, MultipartFile file, HttpSession session) {
 				
 		notice.setUserNo((Integer)session.getAttribute("userNo"));
 
 		noticeService.setNoticeWrite(notice, file);
 		
+		return "redirect:/admin/notice/list";
 	}
 	
 	@RequestMapping(value="/view")
 	public void noticeView(Notice notice) {}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public void noticeUpdate(Notice notice) {}
+	public void noticeUpdate(Notice notice, Model model) {
+		logger.info("{}", noticeService.getNoticeView(notice));
+		model.addAttribute("i", noticeService.getNoticeView(notice));
+	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public void noticeUpdateProc(Notice notice) {}

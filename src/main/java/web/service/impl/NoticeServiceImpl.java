@@ -56,14 +56,14 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public void setNoticeWrite(Notice notice, MultipartFile file) {
-		
+
 		//-----파일업로드-----
 		
 		//빈 파일일 경우
 		if(file.getSize() <= 0) {
-			return;
+			logger.info("첨부된 파일이 없습니다.");
 		}
-			
+		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
 		
@@ -91,7 +91,8 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeFile.setFileSize(fileSize);
 		logger.info("{}", noticeFile);
 		noticeDao.insertFile(noticeFile);		
-
+		notice.setFileNo(noticeFile.getFileNo());
+		
 		//-----게시물업로드-----
 		
 		//제목이 비어있을 경우
@@ -100,13 +101,13 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		
 		//DB에 게시물 정보 + 파일 번호 넣기
-		notice.setFileNo(noticeFile.getFileNo());
 		logger.info("{}", notice);
 		noticeDao.insertNotice(notice);
+
 	}
 	
 	@Override
-	public Notice getNoticeView(Notice notice) {
+	public HashMap<String, Object> getNoticeView(Notice notice) {
 		return noticeDao.selectNoticeByNoticeNo(notice);
 	}
 	

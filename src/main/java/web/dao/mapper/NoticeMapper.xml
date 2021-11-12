@@ -21,8 +21,12 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
-	<select id="selectNoticeByNoticeNo" parameterType="web.dto.Notice" resultType="web.dto.Notice">
-		SELECT * FROM tb_notice WHERE notice_no = #{noticeNo }
+	<select id="selectNoticeByNoticeNo" parameterType="web.dto.Notice" resultType="hashmap">
+		SELECT n.notice_no, n.user_no, n.file_no, n.notice_title, n.notice_content, n.notice_date, u.nick, f.origin_name, f.stored_name FROM tb_notice n
+		LEFT OUTER JOIN tb_user u ON n.user_no = u.user_no
+		LEFT OUTER JOIN tb_file f ON n.file_no = f.file_no
+		WHERE notice_no = #{noticeNo }
+		ORDER BY n.notice_no DESC
 	</select>
 
 	<insert id="insertFile" parameterType="web.dto.FileUpload">
@@ -33,7 +37,7 @@
 		VALUES ( #{fileNo }, #{originName }, #{storedName }, #{fileSize } )
 	</insert>
 
-	<insert id="insertBoard" parameterType="web.dto.Notice">
+	<insert id="insertNotice" parameterType="web.dto.Notice">
 		INSERT INTO tb_notice ( notice_no, user_no, file_no, notice_title, notice_content )
 		VALUES ( tb_notice_seq.nextval, #{userNo }, #{fileNo }, #{noticeTitle }, #{noticeContent } )
 	</insert>

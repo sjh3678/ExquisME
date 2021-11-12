@@ -38,7 +38,7 @@ public interface NoticeDao {
 	 * 공지사항 상세 조회
 	 * @param notice
 	 */
-	public Notice selectNoticeByNoticeNo(Notice notice);
+	public HashMap<String, Object> selectNoticeByNoticeNo(Notice notice);
 	
 	/**
 	 * 공지사항 수정 시 파일 수정

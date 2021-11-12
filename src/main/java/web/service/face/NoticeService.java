@@ -37,7 +37,7 @@ public interface NoticeService {
 	 * @param notice
 	 * @return
 	 */
-	public Notice getNoticeView(Notice notice);
+	public HashMap<String, Object> getNoticeView(Notice notice);
 
 	/**
 	 * Notice를 수정한다.

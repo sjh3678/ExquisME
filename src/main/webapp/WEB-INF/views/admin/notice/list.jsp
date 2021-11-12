@@ -29,6 +29,8 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 	<th>작성일</th>
 	<th>orginname</th>
 	<th>storedname</th>
+	<th>수정</th>
+	<th>삭제</th>
 </tr>
 <c:forEach items="${noticeList }" var="i">
 <tr>
@@ -38,7 +40,9 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 	<td>${i.NOTICE_CONTENT}</td>
 	<td><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY-MM-dd"/></td>
 	<td>${i.ORIGIN_NAME}</td>
-	<td>${i.STORED_NAME}</td>
+	<td><img width="50" height="50" src="/resources/img/empty"></td>
+	<td><a href="/admin/notice/update?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-primary">수정</button></a></td>
+	<td><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-danger">삭제</button></a></td>
 </tr>
 </c:forEach>
 </table>
