@@ -6,6 +6,32 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#search").click(function(){
+		console.log("#ajax clicked")
+		
+		$.ajax({
+			type: "get"
+			, url: "/perf/list_ok"
+			, data: {
+				search: $("input[name=search]").val()
+			}
+			, dataType: "html"
+			, success: function(res){
+				console.log("AJAX 성공")
+				
+				$(".flex-container").html(res)
+			}
+			, error: function(){
+				console.log("AJAX 실패")
+			}
+		})
+	})
+});
+</script>
+
+
 <style type="text/css">
 table {
 	table-layout: fixed;
@@ -26,7 +52,7 @@ td:nth-child(2) {
 	width: 90%;
 	min-width: 1080px;
 }
-#flex-items {
+.flex-items {
 	min-width: 260px;
 	width: 260px;
 	height: 400px;
@@ -34,18 +60,18 @@ td:nth-child(2) {
 	border-radius: 3px; 
 	margin:4px;
 }
-#perf_pic {
+.perf_pic {
 	border: 1px solid #ccc;
 	margin: 10px;
 	height: 250px;
 }
 
-#perf_name {
+.perf_name {
 	border: 1px solid #ccc;
 	margin: 10px;
 	text-align: center;
 }
-#brand_name {
+.brand_name {
 	border: 1px solid #ccc;
 	margin: 10px;
 	text-align: center;
@@ -58,13 +84,20 @@ td:nth-child(2) {
 
 <div class="container">
 
+<div class="search">
+	<form style="text-align: center;"> 
+		<input type="text" name="search" size="50" maxlength="30" placeholder="상품을 검색해보세요." /><input id="search" type="button" value="검색" />
+	</form>
+</div>
+
+
 <div class="flex-container">
 <c:forEach items="${list }" var="perf">
-    <div id="flex-items">
-		<div id="perf_pic"><img class="imgg" style="width:230px; height:240px; display: block; margin: auto;"
+    <div class="flex-items">
+		<div class="perf_pic"><img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
 					src="/resources/img/perf/${perf.STORED_NAME }"></div>
-		<div id="perf_name">${perf.PERFUME_NAME }</div>
-		<div id="brand_name">${perf.BRAND_NAME }</div>
+		<div class="perf_name">${perf.PERFUME_NAME }</div>
+		<div class="brand_name">${perf.BRAND_NAME }</div>
     </div>
 </c:forEach>
 </div>

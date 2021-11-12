@@ -42,6 +42,10 @@ public class PerfController {
 	
 	@RequestMapping(value= "/list_ok")
 	public String perListOk(PagingPerf paging, HttpServletRequest req, ModelAndView mav ) {
+		
+		logger.info("ajax 요청");
+		
+		logger.info("데이터 : {}", req.getAttribute("search"));
 		return null;
 	}
 	
