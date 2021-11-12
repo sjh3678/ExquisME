@@ -56,4 +56,5 @@ public interface PerfService {
 	 * @param req
 	 */
 	public void setPerfWrite(HttpServletRequest req);
+
 }

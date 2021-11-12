@@ -36,6 +36,8 @@ public class PerfController {
 		
 		logger.info("/list_ok");
 		
+		
+		
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
@@ -43,7 +45,7 @@ public class PerfController {
 		model.addAttribute("paging", pagingPerf);
 		model.addAttribute("list", list);
 
-				
+		
 		return "/perf/list_ok";
 	}
 	
