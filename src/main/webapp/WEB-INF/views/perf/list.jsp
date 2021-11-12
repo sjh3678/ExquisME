@@ -93,10 +93,6 @@ function loadList() {
 	margin: 0 auto;
 	text-align: center;
 }
-.filter-item{
-	border: 1px solid #ccc;
-	margin: 10px;
-}
 </style>
 
 
@@ -108,17 +104,17 @@ function loadList() {
 <form action="/perf/list" method="get" style="text-align: center;"> 
 		<input type="text" name="search" size="50" maxlength="30" placeholder="상품을 검색해보세요." /><input id="search" type="submit" value="검색" />
 	
-	<div>
-		<label for="genderCode"> sex </label>
-		<div>
+	<div class="filter-container">
+		<label for="genderCode" style="padding: 10px;"> sex </label>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 1
 			name="genderCode" /> female
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 2
 			name="genderCode" /> male
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 3
 			name="genderCode" /> unisex
 		</div>
@@ -215,24 +211,24 @@ function loadList() {
 	<hr>
 	
 	<div id="vitality" class="filter-container">
-		<lable for="vitalityCode"> vitality </lable>
-		<div>
+		<lable for="vitalityCode" style="padding: 10px;"> vitality </lable>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 1 class="filter-item"
 			name="vitalityCode" />  parfum
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 2 class="filter-item"
 			name="vitalityCode" />  eau de parfum
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 3 class="filter-item"
 			name="vitalityCode" />  eau de toilette
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 4 class="filter-item"
 			name="vitalityCode" />  eau de cologne
 		</div>
-		<div>
+		<div style="padding: 10px;">
 			<input type="checkbox" value= 5 class="filter-item"
 			name="vitalityCode" />  shower cologne
 		</div>
