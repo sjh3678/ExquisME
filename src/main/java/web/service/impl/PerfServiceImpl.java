@@ -20,9 +20,10 @@ public class PerfServiceImpl implements PerfService{
 	
 	@Override
 	public PagingPerf getPaging(PagingPerf paramData) {
+		
 		//총 게시글 수 조회
-		int totalCount = perfDao.selectCntPerfAll();
-				
+		int totalCount = perfDao.selectCntPerfAll(paramData);
+
 		//페이징 계산
 		PagingPerf pagingPerf = new PagingPerf(totalCount, paramData.getCurPage());
 				

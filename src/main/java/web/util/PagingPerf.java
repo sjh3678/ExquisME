@@ -15,6 +15,9 @@ public class PagingPerf {
 	private int endNo;	//화면에 보이는 게시글의 끝 번호
 	
 	private String search; //검색어
+	private int gender;
+	private int note;
+	private int vitality;
 
 	
 
@@ -87,73 +90,121 @@ public class PagingPerf {
 		startNo = (curPage-1) * listCount + 1;
 		endNo = curPage * listCount;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + "]";
+		return "PagingPerf [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
+				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", gender=" + gender
+				+ ", note=" + note + ", vitality=" + vitality + "]";
 	}
 
 	public int getCurPage() {
 		return curPage;
 	}
+
 	public void setCurPage(int curPage) {
 		this.curPage = curPage;
 	}
+
 	public int getTotalCount() {
 		return totalCount;
 	}
+
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
+
 	public int getListCount() {
 		return listCount;
 	}
+
 	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
+
 	public int getTotalPage() {
 		return totalPage;
 	}
+
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
+
 	public int getPageCount() {
 		return pageCount;
 	}
+
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+
 	public int getStartPage() {
 		return startPage;
 	}
+
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
+
 	public int getEndPage() {
 		return endPage;
 	}
+
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
+
 	public int getStartNo() {
 		return startNo;
 	}
+
 	public void setStartNo(int startNo) {
 		this.startNo = startNo;
 	}
+
 	public int getEndNo() {
 		return endNo;
 	}
+
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+
 	public String getSearch() {
 		return search;
 	}
+
 	public void setSearch(String search) {
 		this.search = search;
 	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public int getNote() {
+		return note;
+	}
+
+	public void setNote(int note) {
+		this.note = note;
+	}
+
+	public int getVitality() {
+		return vitality;
+	}
+
+	public void setVitality(int vitality) {
+		this.vitality = vitality;
+	}
+
+	
+	
+	
 
 }

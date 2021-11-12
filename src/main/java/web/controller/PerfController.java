@@ -26,22 +26,27 @@ public class PerfController {
 	@Autowired PerfService perfService;
 	
 	@RequestMapping(value = "/list")
-	public void perfList(PagingPerf paramData, Model model) {
-		
+	public void perfList(PagingPerf paramData, String search, Model model) {
+		logger.info("search: {}", search);
 
 	}
 	
 	@RequestMapping(value= "/list_ok")
-	public String perListOk(PagingPerf paramData, String search, Model model ) {
+	public String perListOk(PagingPerf paramData, Model model ) {
 		
 		logger.info("/list_ok");
-		
+		logger.info("search: {}", paramData.getSearch());
+		logger.info("gender: {}", paramData.getGender());
+		logger.info("note: {}", paramData.getNote());
+		logger.info("Vitality: {}", paramData.getVitality());
 		
 		
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
-		List<HashMap<String, Object>> list = perfService.getPerfList(pagingPerf);
+		pagingPerf.setSearch(paramData.getSearch());
+				
+		List<HashMap<String, Object>> list = perfService.getPerfList( pagingPerf );
 		model.addAttribute("paging", pagingPerf);
 		model.addAttribute("list", list);
 

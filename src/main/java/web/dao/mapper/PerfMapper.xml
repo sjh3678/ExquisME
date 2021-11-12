@@ -35,27 +35,16 @@
 
 
 
-<select id="selectCntPerfAll" resultType="int" parameterType="String">
+<select id="selectCntPerfAll" resultType="int" parameterType="web.util.PagingPerf">
 	SELECT count(*) FROM tb_perf
-	<trim prefix="WHERE" prefixOverrides="AND">
-			<choose>
-				<when test="search != null and search.equals('')">
-					AND PERFUME_NAME LIKE '%' || #{search } || '%'
-				</when>
-		
-				<when test="gender != null and gender.equals('')">
-					AND PERFUME_GENDER = #{gender }
-				</when>
-				
-				<when test="note != null and note.equals('')">
-					AND note = #{keyword }
-				</when>
-				
-				
-				
-			</choose>
-		</trim>
-	
+	<if test='search != null and !search.equals("")'>
+			WHERE PERFUME_NAME LIKE '%' || #{search } || '%'
+	</if>
+</select>
+
+<select id="selectCntPerfBySearch">
+	SELECT count(*) FROM tb_perf
+	WHERE PERFUME_NAME = #{search }
 </select>
 
 
@@ -73,7 +62,7 @@
 	WHERE rnum BETWEEN #{startNo } AND #{endNo }
 </select> -->
 
-<select id="selectPerfAll" resultType="hashmap" parameterType="web.util.Paging">
+<select id="selectPerfAll" resultType="hashmap" parameterType="web.util.PagingPerf">
     SELECT * FROM (
 		SELECT rownum rnum, L.* FROM (
 			SELECT
@@ -84,6 +73,11 @@
 			FROM	tb_perf P
 			LEFT OUTER JOIN tb_file F ON P.FILE_NO = F.FILE_NO
 			LEFT OUTER JOIN tb_brand B ON P.BRAND_NO = B.BRAND_NO
+			
+			<if test='search != null and !search.equals("")'>
+			WHERE PERFUME_NAME LIKE '%' || #{search } || '%'
+			</if>
+			
 			ORDER BY P.PERFUME_NO ASC
 		) L
 	) PerfList

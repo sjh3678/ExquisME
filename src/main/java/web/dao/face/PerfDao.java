@@ -15,7 +15,7 @@ public interface PerfDao {
 	 * 
 	 * @return
 	 */
-	public int selectCntPerfAll();
+	public int selectCntPerfAll( PagingPerf paramData);
 	
 	/**
 	 * 향수 전체 리스트 가져오기
