@@ -27,17 +27,8 @@ public class LayerServiceImpl implements LayerService {
 	@Override
 	public List<HashMap<String, Object>> getList(Model model, PagingLayer paging) {
 
-		HashMap<String, Object> map = new HashMap<>();
 		
-		Object target = model.getAttribute("target");
-		
-		map.put("paging", paging);
-		
-		System.out.println("target "+target);
-		System.out.println("paging"+ paging);
-		System.out.println("map : " + map);
-		System.out.println("map : " + map.get("paging"));
-		List<HashMap<String, Object>> list = layerDao.selectLayerListByTarget(map);
+		List<HashMap<String, Object>> list = layerDao.selectLayerListByTarget(paging);
 		
 		return list;
 	}

@@ -11,24 +11,47 @@ $(document).ready(function(){
 	
 	loadList(); //init list
 	
-	$("#more").click(function(){
-		console.log("#ajax clicked")
-		
-		loadList();
-	})
 
 	$("#last").click(function(){
 		console.log("#ajax clicked")
-		console.log($("#last").val());
-		console.log($("[name = 'target']").val());
-  		location.href="/layer/list?target=" + $("#last").val();  
+		$.ajax({
+			type: "get"
+			, url: "/layer/list_ok"
+			, data: {
+				target: 1
+			}
+			, dataType: "html"
+			, success: function(res){
+				console.log("AJAX 성공")	
+				
+				result.innerHTML = res;
+				console.log( res )	
+			}
+			, error: function(res){
+				console.log("AJAX 실패")	
+			}
+		})
 		
 	})
 	$("#like").click(function(){
 		console.log("#ajax clicked")
-  		location.href="/layer/list?target=" + $("#like").val();  
-		console.log($("#like").val());
-		console.log($("[name = 'target']").val());
+		$.ajax({
+			type: "get"
+			, url: "/layer/list_ok"
+			, data: {
+				target: 2
+			}
+			, dataType: "html"
+			, success: function(res){
+				console.log("AJAX 성공")	
+				
+				result.innerHTML = res;
+				console.log( res )	
+			}
+			, error: function(res){
+				console.log("AJAX 실패")	
+			}
+		})
 		
 	})
 	
@@ -46,9 +69,6 @@ window.onscroll = function(e) {
     	//실행할 로직 (콘텐츠 추가)
     	loadList();
         count++;
-        var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
-        //article에 추가되는 콘텐츠를 append
-        $('article').append(addContent);
     }
 };
 
@@ -177,7 +197,6 @@ td:nth-child(2) {
 
 </div>
 
-<button id="more">더 보기</button>
 
 <!-- ----------------------------------------------------------------------------------- -->
 

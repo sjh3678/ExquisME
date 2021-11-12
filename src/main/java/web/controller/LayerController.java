@@ -43,8 +43,6 @@ public class LayerController {
 		//페이징 처리한 카테고리 별 리스트 조회
 		List<HashMap<String, Object>> list = layerService.getList(model, paging);
 		
-		//페이징 처리한 카테고리 별 이미지 리스트 조회 
-		List<HashMap<String, Object>> img = layerService.getImageList(model, paging);
 		
 		logger.info("paging {} ", paging);
 		
