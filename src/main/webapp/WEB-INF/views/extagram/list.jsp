@@ -36,9 +36,9 @@
 #e {
 	margin: 10px;
 }
-img {
-
-}
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
 </style>
 
 <h1>Extagram</h1>
