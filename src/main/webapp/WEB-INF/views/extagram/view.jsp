@@ -28,19 +28,22 @@
 	padding: 10px;
 }
 
-
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: underline;}
 
 </style>
+
+<div class="container">
 <h1>Extagram view</h1>
 <hr>
 
-<div class="container">
 
 <div>
 <SPAN>사진</SPAN><SPAN>${viewExta.NICK }</SPAN><SPAN>${viewExta.EX_DATE }</SPAN>
 </div>
 
-<div id="viewContent">
+<div id="viewContent" style="margin: 20px; height: 100px; width: 500px;">
 ${viewExta.EX_CONTENT }
 </div>
 
@@ -52,7 +55,7 @@ ${viewExta.EX_CONTENT }
 		</div>
 	</div>
 	<div class="flex-items">
-		<div id="viewComment" style="height: 323px; background-color: #ccc; overflow-y: scroll; ">
+		<div id="viewComment" style="height: 323px; overflow-y: scroll; ">
 			<c:forEach items="${viewComm }" var="viewComm">
 				<div class="commentBox">
 					<div><img style="width:30px; height:30px;"src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
@@ -66,7 +69,7 @@ ${viewExta.EX_CONTENT }
 			<SPAN>♡ ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
 		</div>
 		<div style="background: #ccc; height: 34px;">
-			<input type="text" id="comment" name="comment" style="width: 475px; height: 34px; border: none; background: #ddd;"/>
+			<input type="text" id="comment" name="comment" placeholder="댓글을 작성해 보세요" style="width: 475px; height: 34px; border: none; background: #ddd;"/>
 			<button class="btn pull-right">POST</button>
 		</div>
 	</div>
