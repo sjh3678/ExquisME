@@ -17,7 +17,7 @@ import web.util.Paging;
 public class ExtaServiceImpl implements ExtaService {
 	
 	@Autowired ExtaDao extaDao;
-
+	
 	
 //LIST	
 	@Override
@@ -39,11 +39,13 @@ public class ExtaServiceImpl implements ExtaService {
 //VIEW
 	@Override
 	public HashMap<String, Object> getExtaView(Extagram viewExta) {
-		
 		return extaDao.selectExtaView(viewExta);
 	}
 	
-	
+	@Override
+	public List<HashMap<String, Object>> getCommentList(Extagram viewExta) {
+		return extaDao.selectExtaComment(viewExta);
+	}
 	
 	
 	

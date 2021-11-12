@@ -40,6 +40,13 @@ public interface ExtaService {
 	public void setExtaWrite(Extagram extagram, MultipartFile file);
 	
 	/**
+	 * 게시글 상세보기 댓글
+	 * @param viewExta
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getCommentList(Extagram viewExta);
+
+	/**
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
 	 */
@@ -68,5 +75,6 @@ public interface ExtaService {
 	 * @param exLike
 	 */
 	public void setHeartDelete(ExLike exLike);
+
 	
 }
