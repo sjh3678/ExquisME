@@ -1,7 +1,6 @@
 package web.service.impl;
 
 import java.util.HashMap;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,9 @@ import web.util.Paging;
 public class ExtaServiceImpl implements ExtaService {
 	
 	@Autowired ExtaDao extaDao;
+
 	
+//LIST	
 	@Override
 	public List<HashMap<String, Object>> getExtaList(Paging paging) {
 		return extaDao.selectExtaAll(paging);
@@ -34,6 +35,18 @@ public class ExtaServiceImpl implements ExtaService {
 		return paging;
 	}
 	
+
+//VIEW
+	@Override
+	public HashMap<String, Object> getExtaView(Extagram viewExta) {
+		
+		return extaDao.selectExtaView(viewExta);
+	}
+	
+	
+	
+	
+	
 	@Override
 	public void setExtaWrite(Extagram extagram, MultipartFile file) {
 		
@@ -48,12 +61,6 @@ public class ExtaServiceImpl implements ExtaService {
 	public void setExtaDelete(Extagram extagram) {
 		
 	}
-	
-	@Override
-	public Extagram getExtaView(Extagram extagram) {
-		return null;
-	}
-	
 	
 	@Override
 	public void setExtaReport(Extagram extagram) {

@@ -10,6 +10,8 @@ import web.util.Paging;
 
 public interface ExtaDao {
 
+	
+//LIST	
 	/**
 	 * 페이징을 적용하여 DB의 게시글 목록 조회
 	 * @param paging - 페이징 정보 객체
@@ -22,7 +24,17 @@ public interface ExtaDao {
 	 * @return 총 게시글 수
 	 */
 	public int selectExtaCntAll(Paging paramData);
+
+//VIEW
+	/**
+	 * Extagram 상세보기
+	 * @param extagram - 상세보기할 게시글의 DTO
+	 * @return 
+	 */
+	public HashMap<String, Object> selectExtaView(Extagram viewExta);
+
 	
+//WRITE	
 	/**
 	 * 작성한 Extagram DB에 삽입
 	 * @param extagram - 작성할 게시글의 DTO
@@ -40,18 +52,6 @@ public interface ExtaDao {
 	 * @param extagram - 삭제할 게시글의 DTO
 	 */
 	public void deleteExtaByExPostNo(Extagram extagram);
-	
-	/**
-	 * Extagram 상세보기
-	 * @param extagram - 상세보기할 게시글의 DTO
-	 */
-	public void selectExtaViewByExPostNo(Extagram extagram);
-	
-	/**
-	 * 조회수 증가
-	 * @param extagram 상세보기를 할 경우 조회수 증가
-	 */
-	public void updateHit(Extagram extagram);
 	
 	/**
 	 * 신고하는 Extagram글을 신고DTO에 삽입

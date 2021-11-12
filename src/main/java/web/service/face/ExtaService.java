@@ -26,6 +26,13 @@ public interface ExtaService {
 	public Paging getExtaPaging(Paging paramData);
 	
 	/**
+	 * 게시글 상세보기
+	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼 게시글 선정
+	 * @return
+	 */
+	public HashMap<String, Object> getExtaView(Extagram viewExta);
+	
+	/**
 	 * 게시글 + 첨부파일 처리
 	 * @param extagram - 게시글 정보 DTO
 	 * @param file - 첨부파일 정보 DTO
@@ -43,13 +50,6 @@ public interface ExtaService {
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 삭제할 게시글 선정
 	 */
 	public void setExtaDelete(Extagram extagram);
-	
-	/**
-	 * 게시글 상세보기
-	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼 게시글 선정
-	 * @return
-	 */
-	public Extagram getExtaView(Extagram extagram);
 	
 	/**
 	 * 게시글 신고
