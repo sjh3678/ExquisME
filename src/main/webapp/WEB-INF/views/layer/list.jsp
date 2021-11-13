@@ -34,6 +34,7 @@ $(document).ready(function(){
 		
 	})
 	$("#like").click(function(){
+		var target;
 		console.log("#ajax clicked")
 		$.ajax({
 			type: "get"
@@ -67,7 +68,27 @@ window.onscroll = function(e) {
     //window height + window scrollY 값이 document height보다 클 경우,
     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     	//실행할 로직 (콘텐츠 추가)
-    	loadList();
+    	if (target == 2) {
+    		$.ajax({
+    			type: "get"
+    			, url: "/layer/list_ok"
+    			, data: {
+    				target: 2
+    			}
+    			, dataType: "html"
+    			, success: function(res){
+    				console.log("AJAX 성공")	
+    				
+    				result.innerHTML += res;
+    				console.log( res )	
+    			}
+    			, error: function(res){
+    				console.log("AJAX 실패")	
+    			}
+    		})
+		} else{
+    		loadList();
+		}
         count++;
     }
 };

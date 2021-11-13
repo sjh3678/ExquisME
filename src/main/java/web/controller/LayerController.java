@@ -49,12 +49,12 @@ public class LayerController {
 		
 		model.addAttribute("paging",paging);
 		model.addAttribute("list",list);
-		logger.debug("list {}", list);
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("list" + list.get(i).get("FILES2"));
-			System.out.println("list" + list.get(i).get("NICK"));
-			
-		}
+//		logger.debug("list {}", list);
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println("list" + list.get(i).get("FILES2"));
+//			System.out.println("list" + list.get(i).get("NICK"));
+//			
+//		}
 		model.addAttribute("linkurl", "/layer/list");
 		
 		return "/layer/list_ok";
