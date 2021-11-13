@@ -31,8 +31,14 @@
 a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: underline;}
-
 </style>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+})
+</script>
 
 <div class="container">
 <h1>Extagram view</h1>
@@ -69,10 +75,24 @@ ${viewExta.EX_CONTENT }
 			<SPAN>하트 ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
 		</div>
 		<div style="border: 1px solid #ddd; height: 37px;">
-			<input type="text" id="comment" name="comment" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
-			<button class="btn pull-right">POST</button>
+
+			<c:if test="${not login }">
+				<input type="text" placeholder="로그인이 필요합니다." readonly="readonly" style="width: 470px; height: 34px; border: none;"/>
+				<button onclick='location.href="/user/login";' class="btn pull-right">LOGIN</button>
+			</c:if>
+			
+			<c:if test="${login }">
+			<div class="form-inline text-center">
+			<form action="/extagram/view?exNo=${viewExta.EX_NO }" method="post">
+				<input type="text" id="commentContent" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
+				<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }"/>
+				<button id="btnComInsert" class="btn pull-right">POST</button>
+			</form>
+			</div>
+			</c:if>
 		</div>
 	</div>
+	
 </div><br>
 
 <div class="text-center">

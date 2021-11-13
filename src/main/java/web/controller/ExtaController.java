@@ -48,7 +48,7 @@ public class ExtaController {
 	public String extaView(Extagram viewExta, Model model, HttpSession session, MultipartFile file) {
 		
 		if(viewExta.getExNo() < 1) {
-			return "redirect:/board/list";
+			return "redirect:/extagram/list";
 		}
 		
 		
@@ -57,7 +57,7 @@ public class ExtaController {
 		logger.info("해쉬맵 전달값 확인 : {}", commentList);
 		model.addAttribute("viewComm", commentList);
 		
-		//게시글
+		//상세보기
 		model.addAttribute("viewExta",extaService.getExtaView(viewExta));
 		
 		return "/extagram/view";
@@ -67,7 +67,9 @@ public class ExtaController {
 	@RequestMapping(value="/extagram/view", method=RequestMethod.POST)
 	public String extaComment(ExComm comment, Model model, HttpSession session) {
 		
-		extaService.setComment((ExComm) session.getAttribute("nick"));
+		comment.setUserNo((Integer) session.getAttribute("userNo"));
+		
+		extaService.setComment(comment);
 		
 		return "redirect:/extagram/view?exNo=" + comment.getExPostNo();
 		
