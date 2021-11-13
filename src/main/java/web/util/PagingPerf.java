@@ -1,5 +1,7 @@
 package web.util;
 
+import java.util.Arrays;
+
 public class PagingPerf {
 	private int curPage;	//현재 페이지 번호
 	
@@ -16,8 +18,8 @@ public class PagingPerf {
 	
 	private String search; //검색어
 	private int gender;
-	private int note;
-	private int vitality;
+	private int[] note;
+	private String vitality;
 
 	
 
@@ -96,7 +98,7 @@ public class PagingPerf {
 		return "PagingPerf [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
 				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", gender=" + gender
-				+ ", note=" + note + ", vitality=" + vitality + "]";
+				+ ", note=" + Arrays.toString(note) + ", vitality=" + vitality + "]";
 	}
 
 	public int getCurPage() {
@@ -187,21 +189,30 @@ public class PagingPerf {
 		this.gender = gender;
 	}
 
-	public int getNote() {
+	public int[] getNote() {
 		return note;
 	}
 
-	public void setNote(int note) {
+	public void setNote(int[] note) {
 		this.note = note;
 	}
 
-	public int getVitality() {
+	public String getVitality() {
 		return vitality;
 	}
 
-	public void setVitality(int vitality) {
+	public void setVitality(String vitality) {
 		this.vitality = vitality;
 	}
+
+
+	
+
+	
+
+	
+
+	
 
 	
 	

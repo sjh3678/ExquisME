@@ -98,17 +98,34 @@ $(document).ready(function(){
 	
 	$("input[name=genderCode]:checkbox").change(
          function() {// 체크박스들이 변경됬을때
-            var cnt = 1;
-            if (cnt == $("input[name=genderCode]:checkbox:checked").length) {
+            var cnt_gender = 1;
+            if (cnt_gender == $("input[name=genderCode]:checkbox:checked").length) {
                   $("input[name=genderCode]:checkbox:not(:checked)").attr("disabled", "disabled");
             } else {
                   $("input[name=genderCode]:checkbox").removeAttr("disabled");
             }
     })
+    
+    $("input[name=vitalityCode]:checkbox").change(
+         function() {// 체크박스들이 변경됬을때
+            var cnt_vitality = 1;
+            if (cnt_vitality == $("input[name=vitalityCode]:checkbox:checked").length) {
+                  $("input[name=vitalityCode]:checkbox:not(:checked)").attr("disabled", "disabled");
+            } else {
+                  $("input[name=vitalityCode]:checkbox").removeAttr("disabled");
+            }
+    })
+    
+    
 // 	$(window).scroll
 
-	$("#search").click(function(){
-		console.log("#search clicked")
+	$("input[class=filter-item]:checkbox").change(function(){
+		
+		var noteArray = [];
+            $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
+            	noteArray.push($(this).val());
+            });
+        
 		
 		$.ajax({
 			type: "get"
@@ -116,7 +133,39 @@ $(document).ready(function(){
 			, data: {
 				search: $("#keyWord").val()
 				, gender: $("input[name=genderCode]:checkbox:checked").val()
-				, note: $("input[name=noteCode]:checkbox:checked").val()
+				, note: noteArray
+				, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
+			}
+			, dataType: "html"
+			, success: function(res){
+				console.log("AJAX 성공")	
+				
+				result.innerHTML = res;
+				console.log( res )	
+			}
+			, error: function(res){
+				console.log("AJAX 실패")	
+			}
+		})
+	})
+	
+	
+	
+	$("#keyWord").change(function(){
+		
+		var noteArray = [];
+            $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
+            	noteArray.push($(this).val());
+            });
+        
+		
+		$.ajax({
+			type: "get"
+			, url: "/perf/list_ok"
+			, data: {
+				search: $("#keyWord").val()
+				, gender: $("input[name=genderCode]:checkbox:checked").val()
+				, note: noteArray
 				, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
 			}
 			, dataType: "html"
@@ -133,7 +182,6 @@ $(document).ready(function(){
 	})
 });
 
-var count = 0;
 //스크롤 바닥 감지
 window.onscroll = function(e) {
   //추가되는 임시 콘텐츠
@@ -141,8 +189,6 @@ window.onscroll = function(e) {
   if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
   	//실행할 로직 (콘텐츠 추가)
   	loadList();
-      count++;
-      $('#result').append(addContent);
   }
 };
 
@@ -232,20 +278,20 @@ function loadList() {
 
 <form action="/perf/list" method="get" style="text-align: center;"> 
 	<div class="search_div">
-		<input type="text" id="keyWord"name="search" size="15px" maxlength="30" placeholder="상품을 검색해보세요." /><input id="search" type="button" value="검색" /><br><br>
+		<input type="text" id="keyWord" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." /><br><br>
 	</div>
 	<label for="genderCode"> gender </label>
 	<div class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 1
+			<input type="checkbox" value= 1 class="filter-item"
 			name="genderCode" /> female
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 2
+			<input type="checkbox" value= 2 class="filter-item"
 			name="genderCode" /> male
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 3
+			<input type="checkbox" value= 3 class="filter-item"
 			name="genderCode" /> unisex
 		</div>
 	</div>
@@ -353,25 +399,25 @@ function loadList() {
 	<lable for="vitalityCode" style="padding: 10px;"> vitality </lable>
 	<div id="vitality" class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 1 class="filter-item"
+			<input type="checkbox" value= "parfum" class="filter-item"
 			name="vitalityCode" />  parfum
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 2 class="filter-item"
+			<input type="checkbox" value= "eau de parfum" class="filter-item"
 			name="vitalityCode" />  eau de parfum
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 3 class="filter-item"
+			<input type="checkbox" value= "eau de toilette" class="filter-item"
 			name="vitalityCode" />  eau de toilette
 		</div>
 	</div>
 	<div class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 4 class="filter-item"
+			<input type="checkbox" value= "eau de cologne" class="filter-item"
 			name="vitalityCode" />  eau de cologne
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 5 class="filter-item"
+			<input type="checkbox" value= "shower cologne" class="filter-item"
 			name="vitalityCode" />  shower cologne
 		</div>
 	</div>

@@ -36,10 +36,28 @@
 
 
 <select id="selectCntPerfAll" resultType="int" parameterType="web.util.PagingPerf">
-	SELECT count(*) FROM tb_perf
-	<if test='search != null and !search.equals("")'>
-			WHERE PERFUME_NAME LIKE '%' || #{search } || '%'
-	</if>
+	SELECT count(*) FROM tb_perf P
+		LEFT OUTER JOIN tb_file F ON P.FILE_NO = F.FILE_NO
+		LEFT OUTER JOIN tb_brand B ON P.BRAND_NO = B.BRAND_NO
+		LEFT OUTER JOIN tb_perf_note N ON P.perfume_no = N.perfume_no
+			
+	<trim prefix="WHERE" prefixOverrides="AND">
+		<if test='search != null and !search.equals("")'>
+			AND PERFUME_NAME LIKE '%' || #{search } || '%'
+		</if>
+		<if test="gender != 0">
+			AND PERFUME_GENDER = #{gender }
+		</if>
+		<if test="note != null and !note.equals('')">
+			AND NOTE_NO IN
+			<foreach collection="note" item="note" open="(" close=")" separator=", ">
+				#{note }
+			</foreach>
+		</if>
+		<if test="vitality != null and !vitality.equals('')">
+			AND PERFUME_VITALITY = #{vitality }
+		</if>
+		</trim>
 </select>
 
 <select id="selectCntPerfBySearch">
@@ -65,19 +83,35 @@
 <select id="selectPerfAll" resultType="hashmap" parameterType="web.util.PagingPerf">
     SELECT * FROM (
 		SELECT rownum rnum, L.* FROM (
-			SELECT
+			SELECT DISTINCT
 			    P.PERFUME_NO, P.BRAND_NO, P.FILE_NO
 			    , P.PERFUME_NAME, P.PERFUME_VITALITY, P.PERFUME_GENDER
-			    , F.ORIGIN_NAME, F.STORED_NAME, F.FILE_SIZE
+			    , F.ORIGIN_NAME, F.STORED_NAME
 			    , B.BRAND_NAME
 			FROM	tb_perf P
 			LEFT OUTER JOIN tb_file F ON P.FILE_NO = F.FILE_NO
 			LEFT OUTER JOIN tb_brand B ON P.BRAND_NO = B.BRAND_NO
+			LEFT OUTER JOIN tb_perf_note N ON P.perfume_no = N.perfume_no
+
 			
-			<if test='search != null and !search.equals("")'>
-			WHERE PERFUME_NAME LIKE '%' || #{search } || '%'
-			</if>
-			
+			<trim prefix="WHERE" prefixOverrides="AND">
+				<if test='search != null and !search.equals("")'>
+					AND PERFUME_NAME LIKE '%' || #{search } || '%'
+				</if>
+				<if test="gender != 0">
+					AND PERFUME_GENDER = #{gender }
+				</if>
+				<if test="note != null and !note.equals('')">
+					AND NOTE_NO IN
+					<foreach collection="note" item="note" open="(" close=")" separator=", ">
+						#{note }
+					</foreach>
+				</if>
+				<if test="vitality != null and !vitality.equals('')">
+					AND PERFUME_VITALITY = #{vitality }
+				</if>
+			</trim>
+        
 			ORDER BY P.PERFUME_NO ASC
 		) L
 	) PerfList

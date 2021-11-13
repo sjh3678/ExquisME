@@ -40,11 +40,15 @@ public class PerfController {
 		logger.info("note: {}", paramData.getNote());
 		logger.info("Vitality: {}", paramData.getVitality());
 		
-		
+		logger.info("paramDate {} : ", paramData);
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
 		pagingPerf.setSearch(paramData.getSearch());
+		pagingPerf.setGender(paramData.getGender());
+		pagingPerf.setNote(paramData.getNote());
+		pagingPerf.setVitality(paramData.getVitality());
+		
 				
 		List<HashMap<String, Object>> list = perfService.getPerfList( pagingPerf );
 		model.addAttribute("paging", pagingPerf);
