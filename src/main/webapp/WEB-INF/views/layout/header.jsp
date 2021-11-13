@@ -66,9 +66,9 @@
 .header, .footer{
 	font-size: 21px;
  	font-weight: 700;
-	color: #ECE6CC;
+	color: #35312B;
 	text-align: center;
-	background: #35312B;
+	background: #8A7E6B;
 }
 
 .container{
@@ -76,9 +76,18 @@
 }
 
 .unique a:link{
-	color: #8A7E6B;
+	color: #ECE6CC;
 }
-
+.unique a:hover{
+	color: #35312B;
+}
+.header{
+	position: fixed;
+	top: 0;
+/* 	width: 100%; */
+	left: 0;
+	right: 0;
+}
 </style>
 
 </head>
@@ -89,13 +98,15 @@
 <header class="header">
 EXQUISME<br>
 <div class="unique">
-	<a href="/notice/list">/notice/list</a> |
-	<a href="/admin/notice/list">/admin/notice/list</a> |
-	<a href="/faq">/faq</a> |
-	<a href="/admin/faq">/admin/faq</a> |
-	<a href="/user/login">/user/login</a> |
-	<a href="/user/logout">/user/logout</a> |
-	<a href="/extagram/list">/extagram/logout</a> |
-	<a href="/layer/list">/layer/list</a> |
+	<a href="/notice/list">notice/list</a> |
+	<a href="/admin/notice/list">admin/notice/list</a> |
+	<a href="/faq">faq</a> |
+	<a href="/admin/faq">admin/faq</a> |
+	<a href="/user/login">login</a> |
+	<a href="/user/logout">logout</a> |
+	<a href="/extagram/list">extagram/list</a> |
+	<a href="/perf/list">perf/list</a> |
+	<a href="/layer/list">layer/list</a>
+	
 </div>
 </header>

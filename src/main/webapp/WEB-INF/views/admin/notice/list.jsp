@@ -4,48 +4,77 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <style type="text/css">
-table{
-	table-layout: fixed;
+.row{
+	width: 1100px;
 }
-table, th{
-	text-align: center;
+.title{
+	background: #8A7E6B;
+	color: #ECE6CC;
+	font-size: 21px;
+	font-weight: 700;
+ 	margin-bottom: 5px;
 }
-td:nth-child(2){/*제목은 왼쪽 정렬*/
-	text-align: left;
+.titleText{
+	margin: 20px;
+}
+.contentChild{
+	min-height: 300px;
+	background: #ECE6CC;
+	margin-bottom: 5px;
+/* 	overflow-y: scroll; */
+}
+.contentFile{
+	height: 300px;
+ 	float: left;
+}
+.contentDate{
+	text-align: right;
 }
 </style>
+
+<script>
+$(document).ready(function(){
+	
+    $(".titleChild").click(function(){
+		$(this).parent().next("div").children().slideToggle();
+    });
+	
+})
+</script>
 
 <div class="container">
 
 <h1>admin notice list</h1>
 <hr>
 
-<table class="table table-striped table-hover">
-<tr>
-	<th>게시글번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>내용</th>
-	<th>작성일</th>
-	<th>orginname</th>
-	<th>storedname</th>
-	<th>수정</th>
-	<th>삭제</th>
-</tr>
 <c:forEach items="${noticeList }" var="i">
-<tr>
-	<td>${i.NOTICE_NO}</td>
-	<td>${i.NOTICE_TITLE}</a></td>
-	<td>${i.NICK}</td>
-	<td>${i.NOTICE_CONTENT}</td>
-	<td><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY-MM-dd"/></td>
-	<td>${i.ORIGIN_NAME}</td>
-	<td><img width="50" height="50" src="/resources/img/empty"></td>
-	<td><a href="/admin/notice/update?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-primary">수정</button></a></td>
-	<td><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO }"><button id="btnUpdate" class="btn btn-danger">삭제</button></a></td>
-</tr>
+<div class="row">
+	<div class="title">
+		<div class="titleChild" style="cursor: pointer;">
+		<span class="titleText">${i.NOTICE_TITLE}</span>
+		<a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}"><button id="btnUpdate" class="btn btn-danger" style="float: right;">DELETE</button></a>
+		<a href="/admin/notice/update?noticeNo=${i.NOTICE_NO}"><button id="btnUpdate" class="btn btn-primary" style="float: right;">UPDATE</button></a>
+<%-- 		<a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" style="float: right;">DELETE</a> --%>
+<%-- 		<a href="/admin/notice/update?noticeNo=${i.NOTICE_NO}" style="float: right;">UPDATE</a> --%>
+		</div>
+	</div>
+	<div class="content">
+		<div class="contentChild" style="display: none;">
+			<div><img class="contentFile" src="/upload/${i.STORED_NAME}"/></div>
+			<div class="contentText">${i.NOTICE_CONTENT}</div>
+			<div class="contentDate">
+				<br>
+				<br>
+				<br>
+				<fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
+				<br>
+				<br>
+				${i.NICK } 올림
+			</div>
+		</div>
+	</div>
+</div>
 </c:forEach>
-</table>
 
 <span class="pull-left">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
