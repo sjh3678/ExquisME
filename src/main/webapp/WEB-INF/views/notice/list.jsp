@@ -4,16 +4,43 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <style type="text/css">
+.row{
+	width: 1100px;
+}
 .title{
-	font-size: 33px;
+	background: #8A7E6B;
+	color: #ECE6CC;
+	font-size: 21px;
 	font-weight: 700;
+ 	margin-bottom: 5px;
+}
+.titleText{
+	margin: 20px;
+}
+.contentChild{
+	min-height: 300px;
+	background: #ECE6CC;
+	margin-bottom: 5px;
+/* 	overflow-y: scroll; */
+}
+.contentFile{
+	wdith: 300px;
+	height: 300px;
+	float: left;
+	margin: 5px;
+}
+.contentDate{
+	text-align: right;
 }
 </style>
 
 <script>
-$('#content').hide();
-$('#title').click(function(){
-	$('#content').slideDown();
+$(document).ready(function(){
+	
+    $(".titleChild").click(function(){
+		$(this).parent().next("div").children().slideToggle();
+    });
+	
 })
 </script>
 
@@ -23,18 +50,27 @@ $('#title').click(function(){
 <hr>
 
 <c:forEach items="${noticeList }" var="i">
-<div class="title">${i.NOTICE_TITLE}</div>
-<div class="content" style="padding: 1em; width:200px; height:100px; background-color: lightskyblue;">
-	<ul>
-		<li>${i.NOTICE_CONTENT}</li>
-		<li><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY-MM-dd"/></li>
-		<li>${i.STORED_NAME}</li>
-	</ul>
+<div class="row">
+	<div class="title">
+		<div class="titleChild" style="cursor: pointer;"><span class="titleText">${i.NOTICE_TITLE}</span></div>
+	</div>
+	<div class="content">
+		<div class="contentChild" style="display: none;">
+			<img class="contentFile" src="/upload/${i.STORED_NAME}"/>
+			<div class="contentText">${i.NOTICE_CONTENT}</div>
+			<div class="contentDate">
+				<br>
+				<br>
+				<br>
+				<fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
+				<br>
+				<br>
+				${i.NICK } 올림
+			</div>
+		</div>
+	</div>
 </div>
-<hr>
 </c:forEach>
-
-<span class="pull-left">total : ${paging.totalCount }</span>
 
 <div class="clearfix"></div>
 <c:import url="/WEB-INF/views/layout/paging.jsp" />

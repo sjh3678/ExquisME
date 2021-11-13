@@ -36,6 +36,10 @@ table, th{
 td:nth-child(2){/*제목은 왼쪽 정렬*/
 	text-align: left;
 }
+.curFile{
+	text-align: center;
+	height: 300px;
+}
 </style>
 
 <div class="container">
@@ -43,35 +47,10 @@ td:nth-child(2){/*제목은 왼쪽 정렬*/
 <h1>admin notice list</h1>
 <hr>
 
-<table class="table table-striped table-hover">
-<tr>
-	<th>게시글번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>내용</th>
-	<th>작성일</th>
-	<th>orginname</th>
-	<th>storedname</th>
-	<th>수정</th>
-	<th>삭제</th>
-</tr>
-<tr>
-	<td>${i.NOTICE_NO}</td>
-	<td>${i.NOTICE_TITLE}</td>
-	<td>${nick }</td>
-	<td>${i.NOTICE_CONTENT}</td>
-	<td><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY-MM-dd"/></td>
-	<td>${i.ORIGIN_NAME}</td>
-	<td><img width="50" height="50" src="/resources/img/empty"></td>
-</tr>
-</table>
-
 <form action="/admin/notice/update" method="post" enctype="multipart/form-data">
 
 <div class="form-group">
-	<label for="curFile">현재 등록된 이미지</label>
-	<input type="text" name="fileNo" value="${i.FILE_NO }"/>
-	<img class="curFile" src="#">
+	<img class="curFile" src="/upload/${i.STORED_NAME}">
 </div>
 
 <div class="form-group">
