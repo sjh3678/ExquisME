@@ -40,6 +40,12 @@ public interface ExtaDao {
 	 */
 	public List<HashMap<String, Object>> selectExtaComment(Extagram viewExta);
 	
+	/**
+	 * 신규 댓글 삽입
+	 * @param comm - 삽입하려는 댓글 정보
+	 * @return 
+	 */
+	public void insertComment(ExComm comm);
 //WRITE	
 	/**
 	 * 작성한 Extagram DB에 삽입
@@ -88,6 +94,7 @@ public interface ExtaDao {
 	 * @param exComm
 	 */
 	public void deleteExtaComm(ExComm exComm);
+
 
 	
 }

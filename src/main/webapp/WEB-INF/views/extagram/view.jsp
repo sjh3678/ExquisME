@@ -50,12 +50,12 @@ ${viewExta.EX_CONTENT }
 <div id="flex-container">
 	<div class="flex-items">
 		<div id="viewPicture">
-			<img style="width:530px; height:375px; display: block; margin: auto;"
+			<img style="width:auto; height:350px; display: block; margin: auto;"
 				 src="/resources/img/perf/${viewExta.PICTURE_S}">
 		</div>
 	</div>
 	<div class="flex-items">
-		<div id="viewComment" style="height: 323px; overflow-y: scroll; ">
+		<div id="viewComment" style="height: 321px; overflow-y: scroll; ">
 			<c:forEach items="${viewComm }" var="viewComm">
 				<div class="commentBox">
 					<div><img style="width:30px; height:30px;"src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
@@ -65,11 +65,11 @@ ${viewExta.EX_CONTENT }
 				</div>
 			</c:forEach>
 		</div>
-		<div style="background: #ccc;">
-			<SPAN>♡ ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
+		<div>
+			<SPAN>하트 ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
 		</div>
-		<div style="background: #ccc; height: 34px;">
-			<input type="text" id="comment" name="comment" placeholder="댓글을 작성해 보세요" style="width: 475px; height: 34px; border: none; background: #ddd;"/>
+		<div style="border: 1px solid #ddd; height: 37px;">
+			<input type="text" id="comment" name="comment" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
 			<button class="btn pull-right">POST</button>
 		</div>
 	</div>

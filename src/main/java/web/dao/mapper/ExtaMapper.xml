@@ -33,14 +33,14 @@
 <!-- VIEW -->	
 	<select id="selectExtaView" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT DISTINCT
-			u.nick as nn, x.ex_no, x.ex_content, x.ex_date, 
-			f.stored_name AS picture_s, f.origin_name As picture_o,
+			u.nick, x.ex_no, x.ex_content, x.ex_date, 
+			f.stored_name AS picture_s,
 			(SELECT count(*) FROM tb_ex_comm WHERE c.ex_post_no = x.ex_no) As comm, 
 			(SELECT count(*) FROM tb_ex_like WHERE l.ex_post_no = x.ex_no) As heart
 		FROM tb_extagram X
 			LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
-			LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
 			LEFT OUTER JOIN tb_file f ON x.file_no = f.file_no
+			LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
     		LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
 		WHERE ex_no = #{exNo }
 	</select>
@@ -48,13 +48,20 @@
 	<select id="selectExtaComment" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT
 		    u.file_no, u.nick, c.ex_comm, c.ex_comm_date, f.stored_name, f.origin_name
-		FROM tb_extagram x
-		    LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
-		    LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
-		    LEFT OUTER JOIN tb_file f ON u.file_no = f.file_no
-		WHERE x.ex_no = #{exNo }
-		ORDER BY c.ex_comm_date
+		FROM tb_user u
+		    LEFT OUTER JOIN tb_file f ON f.file_no = u.file_no
+		    LEFT OUTER JOIN tb_ex_comm c ON u.user_no = c.user_no
+		    LEFT OUTER JOIN tb_extagram x ON x.ex_no = c.ex_post_no
+		WHERE ex_no = #{exNo}
+		ORDER BY ex_comm_date
 	</select>
+	
+	<insert id="insertComment" parameterType="web.dto.ExComm">
+		INSERT INTO tb_ex_comm
+			( ex_comm_no, user_no, ex_post_no, ex_comm, ex_comm_date)
+		VALUES
+			(tb_ex_comm_seq.nextval, #{userNo}, #{exPostNo}, #{exComm}, sysdate
+	</insert>	
 
 
 <!-- WRITE -->	

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.util.Paging;
@@ -39,6 +40,13 @@ public interface ExtaService {
 	 */
 	public void setExtaWrite(Extagram extagram, MultipartFile file);
 	
+	/**
+	 * 새로운 댓글 삽입
+	 * @param comm - 입력된 댓글 정보
+	 * @return 
+	 */
+	public void setComment(ExComm comm);
+
 	/**
 	 * 게시글 상세보기 댓글
 	 * @param viewExta
@@ -75,6 +83,8 @@ public interface ExtaService {
 	 * @param exLike
 	 */
 	public void setHeartDelete(ExLike exLike);
+
+
 
 	
 }

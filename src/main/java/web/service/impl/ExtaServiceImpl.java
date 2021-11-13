@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dao.face.ExtaDao;
+import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.service.face.ExtaService;
@@ -47,6 +48,10 @@ public class ExtaServiceImpl implements ExtaService {
 		return extaDao.selectExtaComment(viewExta);
 	}
 	
+	@Override
+	public void setComment(ExComm comm) {
+		extaDao.insertComment(comm);
+	}
 	
 	
 	@Override
