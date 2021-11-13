@@ -126,7 +126,7 @@ $(document).ready(function(){
             	noteArray.push($(this).val());
             });
         
-		
+            curPage = 2;
 		$.ajax({
 			type: "get"
 			, url: "/perf/list_ok"
@@ -142,6 +142,7 @@ $(document).ready(function(){
 				
 				result.innerHTML = res;
 				console.log( res )	
+				console.log( curPage )	
 			}
 			, error: function(res){
 				console.log("AJAX 실패")	
@@ -158,7 +159,7 @@ $(document).ready(function(){
             	noteArray.push($(this).val());
             });
         
-		
+		curPage = 2;
 		$.ajax({
 			type: "get"
 			, url: "/perf/list_ok"
@@ -173,7 +174,8 @@ $(document).ready(function(){
 				console.log("AJAX 성공")	
 				
 				result.innerHTML = res;
-				console.log( res )	
+				console.log( res )
+				console.log( curPage )
 			}
 			, error: function(res){
 				console.log("AJAX 실패")	
@@ -194,17 +196,28 @@ window.onscroll = function(e) {
 
 var curPage = 1;
 function loadList() {
+	
+	var noteArray = [];
+    $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
+    	noteArray.push($(this).val());
+    });
+	
 	$.ajax({
 		type: "get"
 		, url: "/perf/list_ok"
 		, data: { 
-			curPage: curPage++
+			search: $("#keyWord").val()
+			, gender: $("input[name=genderCode]:checkbox:checked").val()
+			, note: noteArray
+			, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
+			, curPage: curPage++
 		}
 		, dataType: "html"
 		, success: function(res){
 			console.log("AJAX 성공")
 			result.innerHTML += res;
 // 			$("#result").html( $("#result").html() + res );
+			console.log( curPage )
 		}
 		, error: function(){
 			console.log("AJAX 실패")

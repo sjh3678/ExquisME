@@ -36,12 +36,14 @@
 
 
 <select id="selectCntPerfAll" resultType="int" parameterType="web.util.PagingPerf">
-	SELECT count(*) FROM tb_perf P
-		LEFT OUTER JOIN tb_file F ON P.FILE_NO = F.FILE_NO
-		LEFT OUTER JOIN tb_brand B ON P.BRAND_NO = B.BRAND_NO
-		LEFT OUTER JOIN tb_perf_note N ON P.perfume_no = N.perfume_no
+	SELECT COUNT(*) FROM (
+		SELECT DISTINCT P.* FROM tb_perf P
+			LEFT OUTER JOIN tb_file F ON P.FILE_NO = F.FILE_NO
+			LEFT OUTER JOIN tb_brand B ON P.BRAND_NO = B.BRAND_NO
+			LEFT OUTER JOIN tb_perf_note N ON P.perfume_no = N.perfume_no
+		
 			
-	<trim prefix="WHERE" prefixOverrides="AND">
+		<trim prefix="WHERE" prefixOverrides="AND">
 		<if test='search != null and !search.equals("")'>
 			AND PERFUME_NAME LIKE '%' || #{search } || '%'
 		</if>
@@ -58,6 +60,7 @@
 			AND PERFUME_VITALITY = #{vitality }
 		</if>
 		</trim>
+		)
 </select>
 
 <select id="selectCntPerfBySearch">
