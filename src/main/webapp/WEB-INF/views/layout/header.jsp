@@ -82,7 +82,7 @@
 	color: #35312B;
 }
 .header{
-	position: fixed;
+/* 	position: fixed; */
 	top: 0;
 /* 	width: 100%; */
 	left: 0;
