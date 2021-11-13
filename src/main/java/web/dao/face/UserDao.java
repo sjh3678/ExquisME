@@ -10,11 +10,11 @@ import web.dto.User;
 public interface UserDao {
 
 	/**
-	 * id를 검색 조건으로 맞는 아이디가 있으면 카운트 값 반환
+	 * 검색 조건으로 맞는 아이디가 있으면 카운트 값 반환
 	 * @param param - 조회할 회원의 정보
 	 * @return - 조회된 회원의 총 수를 반환(유니크 값이기에 1 또는 0)
 	 */
-	public int selectUserCntById(User param);
+	public int selectUserCnt(User param);
 
 	/**
 	 * id를 검색조건으로 회원정보 조회
@@ -76,7 +76,6 @@ public interface UserDao {
 	 */
 	public List<ExComm> selectCommentByUserNo(HashMap<String, Object> map);
 
-	public User selectUserByUserno(User param);
 
 
 }

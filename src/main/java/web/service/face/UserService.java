@@ -88,4 +88,25 @@ public interface UserService {
 	 * @return - 조회결과 반환
 	 */
 	public User getUserNickByUserno(User user);
+
+	/**
+	 * 유저 아이디 중복검사 요청
+	 * @param user - 검사할 입력값
+	 * @return - 중복 여부 반환
+	 */
+	public boolean searchId(User user);
+
+	/**
+	 * 유저 이메일 중복검사 요청
+	 * @param user - 검사할 입력값
+	 * @return - 중복 여부 반환
+	 */
+	public boolean searchEmail(User user);
+
+	/**
+	 * 유저 닉네임 중복검사 요청
+	 * @param user - 검사할 입력값
+	 * @return - 중복 여부 반환
+	 */
+	public boolean searchNick(User user);
 }

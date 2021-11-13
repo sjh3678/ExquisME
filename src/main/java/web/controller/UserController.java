@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.dto.ExComm;
 import web.dto.Extagram;
@@ -90,6 +90,32 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/check/id", method=RequestMethod.POST)
+	public @ResponseBody boolean checkId(User user) {
+		logger.info("checkId called");
+		logger.info("id : {}", user.getId());
+		boolean isIdExist = userService.searchId(user);
+		logger.info("{}",isIdExist);
+		return isIdExist;
+	}
+	
+	@RequestMapping(value="/check/email", method=RequestMethod.POST)
+	public @ResponseBody boolean checkEmail(User user) {
+		logger.info("checkEmail called");
+		logger.info("email : {}", user.getEmail());
+		boolean isEmailExist = userService.searchEmail(user);
+		logger.info("{}",isEmailExist);
+		return isEmailExist;
+	}
+	
+	@RequestMapping(value="/check/nick", method=RequestMethod.POST)
+	public @ResponseBody boolean checkNick(User user) {
+		logger.info("checkNick called");
+		logger.info("email : {}", user.getEmail());
+		boolean isEmailExist = userService.searchNick(user);
+		logger.info("{}",isEmailExist);
+		return isEmailExist;
+	}
 	//이거도 아직...
 	@RequestMapping(value="/social/join", method=RequestMethod.GET)
 	public String socialJoin(SocialAccount social) {

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService{
 	public boolean getLoginCheck(User param) {
 		logger.info("getLoginChk called");
 		
-		int userCnt = userDao.selectUserCntById(param);
+		int userCnt = userDao.selectUserCnt(param);
 		logger.info("userCnt : {}", userCnt);
 		if(userCnt == 1) {
 			//아이디 매칭 성공
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService{
 		logger.info("getJoinCheck called");
 		
 		//아이디 중복검사
-		int userCnt = userDao.selectUserCntById(param);
+		int userCnt = userDao.selectUserCnt(param);
 		
 		if(userCnt == 0) {
 			//회원가입 가능
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User getUserNickByUserno(User param) {
-		User user = userDao.selectUserByUserno(param);
+		User user = userDao.selectUserByUserno(param.getUserNo());
 		return user;
 	}
 	
@@ -153,6 +153,41 @@ public class UserServiceImpl implements UserService{
 	public List<ExComm> searchCommentHistory(String search, int userNo) {
 		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
 		return userDao.selectCommentByUserNo(map);
+	}
+
+	@Override
+	public boolean searchId(User user) {
+		System.out.println(user);
+		int cnt = userDao.selectUserCnt(user);
+		if(cnt == 0) {
+			logger.info("매칭된 아이디 없음");
+			return false;	
+		}
+		logger.info("아이디 중복");
+		return true;
+		
+	}
+
+	@Override
+	public boolean searchEmail(User user) {
+		int cnt = userDao.selectUserCnt(user);
+		if(cnt == 0) {
+			logger.info("매칭된 이메일 없음");
+			return false;	
+		}
+		logger.info("이메일 중복");
+		return true;
+	}
+
+	@Override
+	public boolean searchNick(User user) {
+		int cnt = userDao.selectUserCnt(user);
+		if(cnt == 0) {
+			logger.info("매칭된 닉네임 없음");
+			return false;	
+		}
+		logger.info("닉네임 중복");
+		return true;
 	}
 
 	
