@@ -159,6 +159,8 @@ $(document).ready(function(){
             	noteArray.push($(this).val());
             });
         
+        $(location).attr("href", "#top");
+        
 		curPage = 2;
 		$.ajax({
 			type: "get"
@@ -202,6 +204,8 @@ function loadList() {
     	noteArray.push($(this).val());
     });
 	
+    $(location).attr("href", "#top");
+    
 	$.ajax({
 		type: "get"
 		, url: "/perf/list_ok"
@@ -223,7 +227,6 @@ function loadList() {
 			console.log("AJAX 실패")
 		}
 	})
-	$("#cur").html(curPage)
 }
 </script>
 
@@ -439,7 +442,7 @@ function loadList() {
 
 <!-- 헤더 -->
 <div class="wrap">
-
+<div id="top"></div>
 <header class="header">
 EXQUISME<br>
 <div class="unique">
@@ -453,7 +456,6 @@ EXQUISME<br>
 </div>
 </header>
 <!-- 헤더 -->
-
 <div class="container">
 <div id="result">
 

@@ -44,6 +44,8 @@ public class PerfController {
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
+		logger.info("pagingPerf {} : ", pagingPerf);
+		
 		pagingPerf.setSearch(paramData.getSearch());
 		pagingPerf.setGender(paramData.getGender());
 		pagingPerf.setNote(paramData.getNote());
