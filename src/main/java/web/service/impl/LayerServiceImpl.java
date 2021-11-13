@@ -1,6 +1,5 @@
 package web.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,9 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import web.dao.face.LayerDao;
-import web.dto.Layer;
 import web.service.face.LayerService;
+import web.util.Paging;
 import web.util.PagingLayer;
+import web.util.PagingLayerWrite;
+import web.util.PagingPerf;
 
 @Service
 public class LayerServiceImpl implements LayerService {
@@ -48,9 +49,9 @@ public class LayerServiceImpl implements LayerService {
 	}
 	
 	@Override
-	public Layer getView(int userNo) {
+	public HashMap<String, Object> getView(Model model) {
 		
-		return layerDao.selectLayerViewByuserNo(userNo);
+		return layerDao.selectLayerViewByLayeringNo(model);
 	}
 
 	@Override
@@ -74,8 +75,24 @@ public class LayerServiceImpl implements LayerService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getImageList(Model model, PagingLayer paging) {
+	public List<HashMap<String, Object>> getPerfImageList(PagingLayer paging) {
 		return null;
+	}
+
+	@Override
+	public PagingLayerWrite getPaging(PagingLayerWrite paramData) {
+		//총 게시글 수 조회
+		int totalCount = layerDao.selectCntPerfAll(paramData);
+
+		//페이징 계산
+		PagingLayerWrite paging = new PagingLayerWrite(totalCount, paramData.getCurPage());
+				
+		return paging;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getPerfList(PagingLayerWrite paging) {
+		return layerDao.selectPerfAll(paging);
 	}
 
 

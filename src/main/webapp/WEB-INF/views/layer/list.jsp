@@ -23,7 +23,6 @@ $(document).ready(function(){
 			, dataType: "html"
 			, success: function(res){
 				console.log("AJAX 성공")	
-				
 				result.innerHTML = res;
 				console.log( res )	
 			}
@@ -40,12 +39,11 @@ $(document).ready(function(){
 			type: "get"
 			, url: "/layer/list_ok"
 			, data: {
-				target: 2
+			target: 2
 			}
 			, dataType: "html"
 			, success: function(res){
 				console.log("AJAX 성공")	
-				
 				result.innerHTML = res;
 				console.log( res )	
 			}
@@ -56,8 +54,6 @@ $(document).ready(function(){
 		
 	})
 	
-// 	$(window).scroll
-
 });
 
 //Javascript
@@ -68,28 +64,9 @@ window.onscroll = function(e) {
     //window height + window scrollY 값이 document height보다 클 경우,
     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     	//실행할 로직 (콘텐츠 추가)
-    	if (target == 2) {
-    		$.ajax({
-    			type: "get"
-    			, url: "/layer/list_ok"
-    			, data: {
-    				target: 2
-    			}
-    			, dataType: "html"
-    			, success: function(res){
-    				console.log("AJAX 성공")	
-    				
-    				result.innerHTML += res;
-    				console.log( res )	
-    			}
-    			, error: function(res){
-    				console.log("AJAX 실패")	
-    			}
-    		})
-		} else{
-    		loadList();
-		}
+    	loadList();
         count++;
+        //$('#result').append(addContent);
     }
 };
 
@@ -99,8 +76,7 @@ function loadList() {
 		type: "get"
 		, url: "/layer/list_ok"
 		, data: { 
-			curPage: curPage++
-			
+		curPage: curPage++
 		}
 		, dataType: "html"
 		, success: function(res){
@@ -114,6 +90,8 @@ function loadList() {
 	})
 	$("#cur").html(curPage)
 }
+
+
 </script>
 
 <style type="text/css">
@@ -150,27 +128,36 @@ td:nth-child(2) {
 	margin: 10px;
 	height: 250px;
 	overflow: hidden;
+	border-radius: 150px;
 }
 
-#writer_name {
+#writer {
 	border: 1px solid #ccc;
-	margin: 10px;
-	text-align: center;
+	margin: 5px 10px 0px 10px;
+	text-align: left;
 }
 #perf_name1 {
 	border: 1px solid #ccc;
-	margin: 10px;
+	margin: 5px 10px 0px 10px;
 	text-align: center;
 }
 #perf_name2 {
 	border: 1px solid #ccc;
-	margin: 10px;
+	margin: 5px 10px 0px 10px;
+	text-align: center;
+}
+#heart {
+	margin: 0px 10px 0px 10px;
 	text-align: center;
 }
 #heart_cnt {
-	border: 1px solid #ccc;
-	margin: 10px;
+	margin: 0px 10px 0px 10px;
 	text-align: center;
+}
+#content {
+	border: 1px solid #ccc;
+	margin: 5px 10px 0px 10px;
+	text-align: left;
 }
 .imgcontainer1{
 	overflow: hidden;
@@ -195,6 +182,7 @@ td:nth-child(2) {
 	background-size: 230px 240px;
 	background-position-x: right;
 }
+#profile {float: left;}
 /* .imgcontainer1 img{
 	max-width: 230px;
 	height:240px;

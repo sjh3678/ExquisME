@@ -11,6 +11,7 @@ import web.dto.Layer;
 import web.dto.LayerLike;
 import web.util.Paging;
 import web.util.PagingLayer;
+import web.util.PagingLayerWrite;
 
 public interface LayerDao {
 
@@ -25,10 +26,10 @@ public interface LayerDao {
 	/**
 	 * userNo로 레이어드 상세정보 조회
 	 * 
-	 * @param userNo - 상세정보를 조회 할 회원번호
+	 * @param model - 상세정보를 조회 할 회원번호
 	 * @return Layer 상세정보 객체 반환
 	 */
-	public Layer selectLayerViewByuserNo(int userNo);
+	public HashMap<String, Object> selectLayerViewByLayeringNo(Model model);
 
 	/**
 	 * userNo로 등록된 좋아요 조회
@@ -60,6 +61,11 @@ public interface LayerDao {
 	public void insertLayerByUserNo(Model model);
 
 	public int selectLayerCntAll();
+
+	public int selectCntPerfAll(PagingLayerWrite paramData);
+
+	public List<HashMap<String, Object>> selectPerfAll(PagingLayerWrite paging);
+
 
 
 	

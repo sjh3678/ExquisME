@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import web.dto.Layer;
 import web.service.face.LayerService;
+import web.service.face.PerfService;
+import web.util.Paging;
 import web.util.PagingLayer;
+import web.util.PagingLayerWrite;
+import web.util.PagingPerf;
 
 @Controller
 public class LayerController {
@@ -25,11 +29,9 @@ public class LayerController {
 	//서비스 객체
 	@Autowired LayerService layerService;
 	
+	
 	@RequestMapping(value="/layer/list")
-	public void layerList(PagingLayer paramData, Model model) {
-
-		
-	}
+	public void layerList(PagingLayer paramData, Model model) {}
 	
 	@RequestMapping(value="/layer/list_ok", method = RequestMethod.GET)
 	public String layerListOk(Model model, PagingLayer paramData, String target) {	//리스트 조회
@@ -60,12 +62,14 @@ public class LayerController {
 		return "/layer/list_ok";
 	}
 	
-	@RequestMapping(value="/layer/view")
-	public void layerView(HttpSession session) {	// 레이어드 상세보기
+	@RequestMapping(value="/layer/view", method = RequestMethod.GET)
+	public void layerView(HttpSession session,Model model) {	// 레이어드 상세보기
 		//세션에서 userNo 가져오기
-		int userNo = (int) session.getAttribute("userNo");
+		logger.info("");
 		
-		Layer view = layerService.getView(userNo);
+		
+		
+		HashMap<String, Object> view = layerService.getView(model);
 	}
 	
 	@RequestMapping(value="/layer/like")
@@ -75,9 +79,46 @@ public class LayerController {
 		int like = layerService.getCntLike(userNo);
 		
 	}
-	@RequestMapping(value="/layer/")
-	public void layerInsert(HttpSession session, Model model) { //레이어드 등록
+	
+	@RequestMapping(value="/layer/write")
+	public void layerInsert(PagingLayerWrite paramData, Model model) {
+		
+//		PagingLayerWrite paging = layerService.getPaging( paramData );
+//		
+//		paging.setSearch(paramData.getSearch());
+//		
+//		List<HashMap<String, Object>> list = layerService.getPerfList( paging );
+//		
+//		model.addAttribute("paging", paging);
+//		model.addAttribute("list", list);
+//		
+//		model.addAttribute("linkUrl","/layer/write");
 		
 	}
+	
+	@RequestMapping(value="/layer/write", method = RequestMethod.POST)
+	public void layerInsertProc(HttpSession session, Model model) { //레이어드 등록
+		int userNo = (int) session.getAttribute("userNo");
+		
+		
+	}
+
+	@RequestMapping(value="/layer/write_ok", method = RequestMethod.POST)
+	public String layerInsert_ok(PagingLayerWrite paramData, Model model) {
+		
+		PagingLayerWrite paging = layerService.getPaging( paramData );
+		
+		paging.setSearch(paramData.getSearch());
+		
+		List<HashMap<String, Object>> list = layerService.getPerfList( paging );
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("list", list);
+		
+		model.addAttribute("linkUrl","/layer/write");
+		
+		return "/layer/write_ok";
+	}
+
 
 }

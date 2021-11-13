@@ -96,5 +96,6 @@ EXQUISME<br>
 	<a href="/user/login">/user/login</a> |
 	<a href="/user/logout">/user/logout</a> |
 	<a href="/extagram/list">/extagram/logout</a> |
+	<a href="/layer/list">/layer/list</a> |
 </div>
 </header>
