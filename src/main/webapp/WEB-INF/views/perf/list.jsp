@@ -151,39 +151,6 @@ $(document).ready(function(){
 	})
 	
 	
-	
-	$("#keyWord").change(function(){
-		
-		var noteArray = [];
-            $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
-            	noteArray.push($(this).val());
-            });
-        
-        $(location).attr("href", "#top");
-        
-		curPage = 2;
-		$.ajax({
-			type: "get"
-			, url: "/perf/list_ok"
-			, data: {
-				search: $("#keyWord").val()
-				, gender: $("input[name=genderCode]:checkbox:checked").val()
-				, note: noteArray
-				, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
-			}
-			, dataType: "html"
-			, success: function(res){
-				console.log("AJAX 성공")	
-				
-				result.innerHTML = res;
-				console.log( res )
-				console.log( curPage )
-			}
-			, error: function(res){
-				console.log("AJAX 실패")	
-			}
-		})
-	})
 });
 
 //스크롤 바닥 감지
@@ -228,6 +195,40 @@ function loadList() {
 		}
 	})
 }
+
+function keyword(){
+	
+	var noteArray = [];
+        $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
+        	noteArray.push($(this).val());
+        });
+    
+        curPage = 2;
+	$.ajax({
+		type: "get"
+		, url: "/perf/list_ok"
+		, data: {
+			search: $("#keyWord").val()
+			, gender: $("input[name=genderCode]:checkbox:checked").val()
+			, note: noteArray
+			, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
+		}
+		, dataType: "html"
+		, success: function(res){
+			console.log("AJAX 성공")	
+			
+			result.innerHTML = res;
+			console.log( res )	
+			console.log( curPage )	
+		}
+		, error: function(res){
+			console.log("AJAX 실패")	
+		}
+	})
+}
+
+
+
 </script>
 
 
@@ -294,7 +295,7 @@ function loadList() {
 
 <form action="/perf/list" method="get" style="text-align: center;"> 
 	<div class="search_div">
-		<input type="text" id="keyWord" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." /><br><br>
+		<input type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." /><br><br>
 	</div>
 	<label for="genderCode"> gender </label>
 	<div class="filter-container">
