@@ -36,9 +36,23 @@ a:hover { color: black; text-decoration: underline;}
 
 <script type="text/javascript">
 $(document).ready(function() {
-	
+	$("#btnComInsert").click(function() {
+		$.ajax({
+			type: "post"
+			, url: "/extagram/view_ok"
+			, data: { $("#inputForm").serialize() }
+			, dataType: "json"
+			, success: function(res) {
+				console.log("댓글 성공")
+			}
+			, error: function() {
+				console.log("댓글 실패")
+			}
+		})		
+	})
 })
 </script>
+
 
 <div class="container">
 <h1>Extagram view</h1>
@@ -83,9 +97,9 @@ ${viewExta.EX_CONTENT }
 			
 			<c:if test="${login }">
 			<div class="form-inline text-center">
-			<form action="/extagram/view?exNo=${viewExta.EX_NO }" method="post">
+			<form id="inputForm" action="/extagram/view_ok" method="post">
 				<input type="text" id="commentContent" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
-				<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }"/>
+				<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
 				<button id="btnComInsert" class="btn pull-right">POST</button>
 			</form>
 			</div>
@@ -98,7 +112,7 @@ ${viewExta.EX_CONTENT }
 <div class="text-center">
 	<a href="/extagram/report?exNo=${viewExta.EX_NO }"><button class="btn">신고</button></a>
 	<a href="/extagram/list"><button class="btn">목록</button></a>
-<%-- 	<c:if test="${세션ID eq view.writerId }"> --%>
+<%-- 	<c:if test="${sessionScope.userNo eq viewExta.Ex_NO }"> --%>
 		<a href="/extagram/update?exNo=${viewExta.EX_NO }"><button class="btn">수정</button></a>
 		<a href="/extagram/delete?exNo=${viewExta.EX_NO }"><button class="btn">삭제</button></a>
 <%-- 	</c:if> --%>

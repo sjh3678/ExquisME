@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dto.ExComm;
@@ -64,15 +65,15 @@ public class ExtaController {
 	}
 
 //COMMENT
-	@RequestMapping(value="/extagram/view", method=RequestMethod.POST)
+	@RequestMapping(value="/extagram/view_ok", method=RequestMethod.POST)
+	@ResponseBody
 	public String extaComment(ExComm comment, Model model, HttpSession session) {
 		
 		comment.setUserNo((Integer) session.getAttribute("userNo"));
 		
 		extaService.setComment(comment);
 		
-		return "redirect:/extagram/view?exNo=" + comment.getExPostNo();
-		
+		return "/extagram/view_ok";
 	}
 	
 //	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)
