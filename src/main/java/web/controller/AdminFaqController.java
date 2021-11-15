@@ -2,6 +2,8 @@ package web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ public class AdminFaqController {
 
 	@Autowired FaqService faqService;
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/list")
 	public void faqList(Model model) {
+		//총 게시글 수
+		model.addAttribute("faqTotal", faqService.getFaqCnt());
+		//게시글 리스트
 		List<Faq> list = faqService.getFaqList();
 		model.addAttribute("faqList", list);
 	}
@@ -27,15 +32,33 @@ public class AdminFaqController {
 	public void faqWrite() {}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public void faqWriteProc(Faq faq) {}
+	public String faqWriteProc(Faq faq, HttpSession session) {
+		//FAQ 게시글이 10개 이상일 때
+		if( faqService.getFaqCnt() >= 10 ) {
+			return "redirect:/admin/faq/list";
+		//FAQ 게시글이 10개 미만일 때에만 새로운 게시글 등록
+		} else {
+			faq.setUserNo((Integer)session.getAttribute("userNo"));
+			faqService.setFaqWrite(faq);
+			return "redirect:/admin/faq/list";			
+		}	
+	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public void faqUpdate(Faq faq) {}
+	public void faqUpdate(Faq faq, Model model) {
+		model.addAttribute("i", faqService.getFaqView(faq));
+	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public void faqUpdateProc(Faq faq) {}
+	public String faqUpdateProc(Faq faq) {
+		faqService.setFaqUpdate(faq);
+		return "redirect:/admin/faq/list";			
+	}
 	
 	@RequestMapping(value="/delete")
-	public void faqDelete(Faq faq) {}
+	public String faqDelete(Faq faq) {
+		faqService.setFaqDelete(faq);
+		return "redirect:/admin/faq/list";
+	}
 	
 }

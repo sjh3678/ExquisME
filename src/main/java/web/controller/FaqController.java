@@ -15,7 +15,7 @@ public class FaqController {
 	
 	@Autowired FaqService faqService;
 
-	@RequestMapping(value="/faq")
+	@RequestMapping(value="/faq/list")
 	public void faqList(Model model) {
 		List<Faq> list = faqService.getFaqList();
 		model.addAttribute("faqList", list);

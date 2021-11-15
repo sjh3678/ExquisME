@@ -29,5 +29,18 @@ public interface FaqDao {
 	 * @param faq
 	 */
 	public void deleteFaqByFaqNo(Faq faq);
+
+	/**
+	 * 자주묻는문의 총 게시글 수
+	 * @return
+	 */
+	public int selectCntAll();
+
+	/**
+	 * 글 번호로 행 조회
+	 * @param faq
+	 * @return
+	 */
+	public Faq selectFaqByFaqNo(Faq faq);
 	
 }

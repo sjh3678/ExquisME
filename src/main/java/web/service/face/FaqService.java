@@ -32,5 +32,18 @@ public interface FaqService {
 	 * @param faq
 	 */
 	public void setFaqDelete(Faq faq);
+
+	/**
+	 * 자주묻는문의 게시글의 총 수
+	 * @return
+	 */
+	public int getFaqCnt();
+
+	/**
+	 * 자주묻는문의 하나
+	 * @param faq
+	 * @return
+	 */
+	public Faq getFaqView(Faq faq);
 	
 }

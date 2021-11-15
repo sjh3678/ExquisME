@@ -52,7 +52,7 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String noticeWriteProc(Notice notice, MultipartFile file, HttpSession session) {
-				
+						
 		notice.setUserNo((Integer)session.getAttribute("userNo"));
 
 		noticeService.setNoticeWrite(notice, file);
@@ -69,7 +69,7 @@ public class AdminNoticeController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String noticeUpdateProc(Notice notice, MultipartFile file, HttpSession session) {
+	public String noticeUpdateProc(Notice notice, MultipartFile file) {
 		noticeService.setNoticeUpdate(notice, file);
 		return "redirect:/admin/notice/list";
 	}

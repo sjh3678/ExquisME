@@ -4,5 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="web.dao.face.FaqDao">
-
+	
+	<select id="selectFaqAll" resultType="web.dto.Faq">
+		SELECT faq_no, user_no, faq_title, faq_content, faq_date
+		FROM tb_faq
+		ORDER BY faq_no DESC
+	</select>
+	
+	<select id="selectCntAll" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_faq
+	</select>
+	
+	<delete id="deleteFaqByFaqNo" parameterType="web.dto.Faq">
+		DELETE FROM tb_faq WHERE faq_no = ${faqNo } 
+	</delete>
+	
+	<insert id="insertFaq" parameterType="web.dto.Faq">
+		INSERT INTO tb_faq ( faq_no, user_no, faq_title, faq_content )
+		VALUES ( tb_faq_seq.nextval, #{userNo }, #{faqTitle }, #{faqContent } )
+	</insert>
+	
+	<select id="selectFaqByFaqNo" resultType="web.dto.Faq" parameterType="web.dto.Faq">
+		SELECT faq_no, user_no, faq_title, faq_content, faq_date
+		FROM tb_faq
+		WHERE faq_no = #{faqNo }
+	</select>
+	
+	<update id="updateFaqByFaqNo" parameterType="web.dto.Faq">
+		UPDATE tb_faq SET
+			faq_title = #{faqTitle },
+			faq_content = #{faqContent }
+		WHERE faq_no = #{faqNo }
+	</update>
+	
 </mapper>

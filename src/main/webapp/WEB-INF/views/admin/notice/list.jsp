@@ -18,7 +18,7 @@
 	margin: 20px;
 }
 .contentChild{
-	min-height: 300px;
+/* 	min-height: 300px; */
 	background: #ECE6CC;
 	margin-bottom: 5px;
 /* 	overflow-y: scroll; */
@@ -29,6 +29,12 @@
 }
 .contentDate{
 	text-align: right;
+}
+.title a:link{
+	color: #ECE6CC;
+}
+.title a:hover{
+	color: #35312B;
 }
 </style>
 
@@ -44,7 +50,8 @@ $(document).ready(function(){
 
 <div class="container">
 
-<h1>admin notice list</h1>
+<h1>admin notice list&nbsp;&nbsp;&nbsp;<a href="/admin/notice/write"><button id="btnWrite" class="btn">WRITE</button></a></h1>
+<h1>admin notice list&nbsp;&nbsp;&nbsp;<span style="font-size: 18px; font-weight: 400;"><a href="/admin/notice/write">작성</a>&nbsp;&nbsp;&nbsp;</span></h1>
 <hr>
 
 <c:forEach items="${noticeList }" var="i">
@@ -52,10 +59,8 @@ $(document).ready(function(){
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
 		<span class="titleText">${i.NOTICE_TITLE}</span>
-		<a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}"><button id="btnUpdate" class="btn btn-danger" style="float: right;">DELETE</button></a>
-		<a href="/admin/notice/update?noticeNo=${i.NOTICE_NO}"><button id="btnUpdate" class="btn btn-primary" style="float: right;">UPDATE</button></a>
-<%-- 		<a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" style="float: right;">DELETE</a> --%>
-<%-- 		<a href="/admin/notice/update?noticeNo=${i.NOTICE_NO}" style="float: right;">UPDATE</a> --%>
+		<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}">삭제</a>&nbsp;&nbsp;&nbsp;</span>
+		<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/notice/update?noticeNo=${i.NOTICE_NO}">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>
 	</div>
 	<div class="content">
@@ -81,7 +86,6 @@ $(document).ready(function(){
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 <hr>
-<a href="/admin/notice/write"><button id="btnWrite" class="btn btn-primary pull-left">WRITE</button></a>
 
 </div><%-- .container --%>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

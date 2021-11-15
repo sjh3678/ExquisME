@@ -96,17 +96,14 @@
 <div class="wrap">
 
 <header class="header">
-EXQUISME<br>
-<div class="unique">
-	<a href="/notice/list">notice/list</a> |
-	<a href="/admin/notice/list">admin/notice/list</a> |
-	<a href="/faq">faq</a> |
-	<a href="/admin/faq">admin/faq</a> |
+헤더 영역
+<div class="unique" style="font-weight:300; font-size:21px; color:#ECE6CC;">
+	<a href="/notice/list">notice</a> |
+	<a href="/faq/list">faq</a> |
+	<a href="/extagram/list">extagram</a> |
+	<a href="/perf/list">perf</a> |
+	<a href="/layer/list">layer</a> |
 	<a href="/user/login">login</a> |
-	<a href="/user/logout">logout</a> |
-	<a href="/extagram/list">extagram/list</a> |
-	<a href="/perf/list">perf/list</a> |
-	<a href="/layer/list">layer/list</a>
-	
+	<a href="/user/logout">logout</a>
 </div>
 </header>

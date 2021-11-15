@@ -23,16 +23,26 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Override
 	public void setFaqWrite(Faq faq) {
-		
+		faqDao.insertFaq(faq);
 	}
 	
 	@Override
 	public void setFaqUpdate(Faq faq) {
-		
+		faqDao.updateFaqByFaqNo(faq);
 	}
 	
 	@Override
 	public void setFaqDelete(Faq faq) {
-		
+		faqDao.deleteFaqByFaqNo(faq);
+	}
+	
+	@Override
+	public int getFaqCnt() {
+		return faqDao.selectCntAll();
+	}
+	
+	@Override
+	public Faq getFaqView(Faq faq) {
+		return faqDao.selectFaqByFaqNo(faq);
 	}
 }
