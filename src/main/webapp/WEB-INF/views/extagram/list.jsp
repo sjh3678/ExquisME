@@ -58,7 +58,7 @@ a:hover { color: black; text-decoration: none;}
 		<div id="b">${list.EX_CONTENT }</div>
 		<div id="c"><img style="width:auto; height: 180px; display: block; margin: auto;"
 					src="/resources/img/perf/${list.PICTURE}"></div><!-- width: 258px -->
-		<div id="d">하트 ${list.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${list.COMM }</div>
+		<div id="d">하트 ${list.HEART }&nbsp;&nbsp;&nbsp;댓글 ${list.COMM }</div>
 		<div id="e">${list.EX_DATE }</div>
     </div>
     </a>

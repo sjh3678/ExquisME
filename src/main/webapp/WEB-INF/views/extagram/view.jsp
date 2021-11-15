@@ -43,8 +43,10 @@ $(document).ready(function() {
 			, data: $("#inputForm").serialize()
 			, dataType: "html"
 			, success: function(res) {
-				$("#ajaxComment").innerHtml(res)
-				getList();
+				console.log("댓글 성공")
+				$("#ajaxComment").html(res)
+				
+				$("#commentContent").val("");
 			}
 			, error: function() {
 				console.log("댓글 실패")
@@ -62,7 +64,10 @@ $(document).ready(function() {
 
 
 <div>
-<SPAN>사진</SPAN><SPAN>${viewExta.NICK }</SPAN><SPAN>${viewExta.EX_DATE }</SPAN>
+<SPAN><img style="width: 40px; height: 40px;" 
+		   src="/resources/img/perf/${viewExta.PROFILE}"></SPAN>
+		&nbsp;&nbsp;&nbsp;<SPAN>${viewExta.NICK }</SPAN>
+		&nbsp;&nbsp;&nbsp;<SPAN>${viewExta.EX_DATE }</SPAN>
 </div>
 
 <div id="viewContent" style="margin: 20px; height: 100px; width: 500px;">
@@ -73,23 +78,24 @@ ${viewExta.EX_CONTENT }
 	<div class="flex-items">
 		<div id="viewPicture">
 			<img style="width:auto; height:350px; display: block; margin: auto;"
-				 src="/resources/img/perf/${viewExta.PICTURE_S}">
+				 src="/resources/img/perf/${viewExta.PICTURE}">
 		</div>
 	</div>
 	<div class="flex-items">
 		<div id="viewComment" style="height: 321px; overflow-y: scroll; ">
 			<c:forEach items="${viewComm }" var="viewComm">
 				<div class="commentBox">
-					<div><img style="width:30px; height:30px;"src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
+					<div id="ajaxComment"></div>
+					<div><img style="width:30px; height:30px;" 
+							  src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
 					<div style="padding: 5px;">${viewComm.NICK}&nbsp;&nbsp;&nbsp;</div>
 					<div style="padding: 5px;">${viewComm.EX_COMM }</div>
-					<div style="padding: 5px;">${viewComm.EX_COMM_DATE}</div>
-					<div id=ajaxComment></div>
+					<div style="padding: 5px; inline-block; float: right;">${viewComm.EX_COMM_DATE}</div>
 				</div>
 			</c:forEach>
 		</div>
 		<div>
-			<SPAN>하트 ${viewExta.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
+			<SPAN>하트 ${viewExta.HEART }&nbsp;&nbsp;&nbsp;댓글 ${viewExta.COMM }</SPAN>
 		</div>
 		<div style="border: 1px solid #ddd; height: 37px;">
 
@@ -101,8 +107,9 @@ ${viewExta.EX_CONTENT }
 			<c:if test="${login }">
 			<div class="form-inline text-center">
 			<form id="inputForm">
-				<input type="text" id="commentContent" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
+				<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 				<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
+				<input type="text" id="commentContent" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
 				<button type="button" id="btnComInsert" class="btn pull-right">POST</button>
 			</form>
 			</div>

@@ -67,13 +67,12 @@ public class ExtaController {
 //COMMENT
 	@RequestMapping(value="/extagram/view_ok", method=RequestMethod.POST)
 	@ResponseBody
-	public String extaComment(ExComm comment, HttpSession session) {
+	public void extaComment(ExComm comment, HttpSession session) {
 		
 		comment.setUserNo((Integer) session.getAttribute("userNo"));
 		
 		extaService.setComment(comment);
 		
-		return "/extagram/view?exNo=" + comment.getExPostNo();
 	}
 	
 //	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)
