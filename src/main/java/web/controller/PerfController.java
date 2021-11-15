@@ -70,6 +70,25 @@ public class PerfController {
 	
 	@RequestMapping(value = "/view")
 	public String perfView(Perf perf, Model model) {
+		logger.info("perf : {}", perf);
+		
+		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
+		logger.info("viewPerf : {}", viewPerf);
+		
+		List<HashMap<String, Object>> viewPerfTopNote = perfService.getPerfTopNote(perf);
+		logger.info("viewPerfTopNote : {}", viewPerfTopNote);
+		
+		List<HashMap<String, Object>> viewPerfMiddleNote = perfService.getPerfMiddleNote(perf);
+		logger.info("viewPerfMiddleNote : {}", viewPerfMiddleNote);
+		
+		List<HashMap<String, Object>> viewPerfBaseNote = perfService.getPerfBaseNote(perf);
+		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
+		
+		
+		model.addAttribute("perf", viewPerf);
+		model.addAttribute("topNote", viewPerfTopNote);
+		model.addAttribute("middleNote", viewPerfMiddleNote);
+		model.addAttribute("baseNote", viewPerfBaseNote);
 		
 		
 		return null;

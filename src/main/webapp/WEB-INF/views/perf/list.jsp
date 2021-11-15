@@ -203,8 +203,9 @@ function keyword(){
         $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
         	noteArray.push($(this).val());
         });
-        $(location).attr("href", "#top");
+
         curPage = 1;
+        
 	$.ajax({
 		type: "get"
 		, url: "/perf/list_ok"

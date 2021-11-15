@@ -49,7 +49,7 @@ public interface PerfDao {
 	 * @param perf
 	 * @return
 	 */
-	public Perf selectPerfByPerfNo(Perf perf);
+	public HashMap<String, Object> selectPerfByPerfNo(Perf perf);
 	
 	/**
 	 * 향수 정보 좋아요 업데이트하기
@@ -88,4 +88,28 @@ public interface PerfDao {
 	 * @param req
 	 */
 	public void insertPerf(HttpServletRequest req);
+
+	/**
+	 * 상세보기시 향수의 topnote 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectTopNoteByPerfNo(Perf perf);
+
+	/**
+	 * 상세보기시 향수의 middlenote 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectMiddleNoteByPerfNo(Perf perf);
+
+	/**
+	 * 상세보기시 향수의 basenote 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectBaseNoteByPerfNo(Perf perf);
 }

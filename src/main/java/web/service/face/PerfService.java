@@ -33,7 +33,7 @@ public interface PerfService {
 	 * @param perf
 	 * @return
 	 */
-	public Perf getPerfView(Perf perf);
+	public HashMap<String, Object> getPerfView(Perf perf);
 	
 	/**
 	 * 향수정보 수정하기
@@ -56,5 +56,30 @@ public interface PerfService {
 	 * @param req
 	 */
 	public void setPerfWrite(HttpServletRequest req);
+
+	/**
+	 * 향수 상세보기 하기위해 향수하나의 topnote 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getPerfTopNote(Perf perf);
+
+	
+	/**
+	 * 향수 상세보기 하기위해 향수하나의 middlenote 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getPerfMiddleNote(Perf perf);
+
+	/**
+	 * 향수 상세보기 하기위해 향수하나의 basenote 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getPerfBaseNote(Perf perf);
 
 }

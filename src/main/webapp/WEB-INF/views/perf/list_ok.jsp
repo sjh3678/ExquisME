@@ -8,8 +8,12 @@
 <div class="flex-container">
 <c:forEach items="${list }" var="perf">
     <div class="flex-items">
-		<div class="perf_pic"><img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
-					src="/resources/img/perf/${perf.STORED_NAME }"></div>
+		<div class="perf_pic">
+			<a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">
+				<img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
+					src="/resources/img/perf/${perf.STORED_NAME }">
+			</a>
+		</div>
 		<div class="perf_name">${perf.PERFUME_NAME }</div>
 		<div class="brand_name">${perf.BRAND_NAME }</div>
     </div>

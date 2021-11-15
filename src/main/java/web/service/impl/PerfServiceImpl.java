@@ -36,7 +36,7 @@ public class PerfServiceImpl implements PerfService{
 	}
 
 	@Override
-	public Perf getPerfView(Perf perf) {
+	public HashMap<String, Object> getPerfView(Perf perf) {
 		return perfDao.selectPerfByPerfNo(perf);
 	}
 
@@ -53,6 +53,21 @@ public class PerfServiceImpl implements PerfService{
 	@Override
 	public void setPerfWrite(HttpServletRequest req) {
 		
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getPerfTopNote(Perf perf) {
+		return perfDao.selectTopNoteByPerfNo(perf);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getPerfMiddleNote(Perf perf) {
+		return perfDao.selectMiddleNoteByPerfNo(perf);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getPerfBaseNote(Perf perf) {
+		return perfDao.selectBaseNoteByPerfNo(perf);
 	}
 
 }
