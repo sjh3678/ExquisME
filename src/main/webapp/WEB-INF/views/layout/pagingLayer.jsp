@@ -29,12 +29,13 @@
 </c:if>
 
 <!-- 페이징 리스트 -->
+<% int i=0;%>
 <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 <c:if test="${paging.curPage eq i }">
-	<li class="active"><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${i }${searchParam }">${i }</a></li>
+	<li><span onclick=loadCurPage(${i })><input name ="curP" type="hidden" value="${i }"/>${i }</span></li>
 </c:if>
 <c:if test="${paging.curPage ne i }">
-	<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${i }${searchParam }">${i }</a></li>
+	<li><span onclick=loadCurPage(${i })><input name ="curP" type="hidden" value="${i }"/>${i }</span></li>
 </c:if>
 </c:forEach>
 

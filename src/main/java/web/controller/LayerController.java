@@ -12,14 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import web.dto.Layer;
 import web.service.face.LayerService;
-import web.service.face.PerfService;
-import web.util.Paging;
 import web.util.PagingLayer;
 import web.util.PagingLayerWrite;
-import web.util.PagingPerf;
 
 @Controller
 public class LayerController {
@@ -48,6 +45,9 @@ public class LayerController {
 		
 		logger.info("paging {} ", paging);
 		
+		if(paramData.getCurPage() > paging.getEndPage()) {
+			return null;
+		}
 		
 		model.addAttribute("paging",paging);
 		model.addAttribute("list",list);
@@ -93,6 +93,7 @@ public class LayerController {
 //		model.addAttribute("list", list);
 //		
 //		model.addAttribute("linkUrl","/layer/write");
+//		logger.info("paging {} ", paging);
 		
 	}
 	
@@ -116,7 +117,7 @@ public class LayerController {
 		model.addAttribute("list", list);
 		
 		model.addAttribute("linkUrl","/layer/write");
-		
+		logger.info("paging {} ", paging);
 		return "/layer/write_ok";
 	}
 

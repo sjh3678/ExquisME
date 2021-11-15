@@ -13,33 +13,15 @@ $(document).ready(function(){
 	
 
 	$("#last").click(function(){
+		target = 1;
+		var curPage = 1;
 		console.log("#ajax clicked")
 		$.ajax({
 			type: "get"
 			, url: "/layer/list_ok"
 			, data: {
-				target: 1
-			}
-			, dataType: "html"
-			, success: function(res){
-				console.log("AJAX 성공")	
-				result.innerHTML = res;
-				console.log( res )	
-			}
-			, error: function(res){
-				console.log("AJAX 실패")	
-			}
-		})
-		
-	})
-	$("#like").click(function(){
-		var target;
-		console.log("#ajax clicked")
-		$.ajax({
-			type: "get"
-			, url: "/layer/list_ok"
-			, data: {
-			target: 2
+			curPage: curPage++	
+			, target: target
 			}
 			, dataType: "html"
 			, success: function(res){
@@ -54,7 +36,30 @@ $(document).ready(function(){
 		
 	})
 	
-});
+	$("#like").click(function(){
+		target = 2;
+		var curPage = 1;
+		console.log("#ajax clicked")
+		$.ajax({
+			type: "get"
+			, url: "/layer/list_ok"
+			, data: {
+			curPage: curPage++	
+			, target: target
+			}
+			, dataType: "html"
+			, success: function(res){
+				console.log("AJAX 성공")	
+				result.innerHTML = res;
+				console.log( res )	
+			}
+			, error: function(res){
+				console.log("AJAX 실패")	
+			}
+		})
+		
+	})
+	
 
 //Javascript
 var count = 0;
@@ -64,12 +69,14 @@ window.onscroll = function(e) {
     //window height + window scrollY 값이 document height보다 클 경우,
     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     	//실행할 로직 (콘텐츠 추가)
-    	loadList();
-        count++;
+    		loadList();
         //$('#result').append(addContent);
     }
 };
 
+});
+
+var target = null;
 var curPage = 1;
 function loadList() {
 	$.ajax({
@@ -77,6 +84,7 @@ function loadList() {
 		, url: "/layer/list_ok"
 		, data: { 
 		curPage: curPage++
+		, target: target
 		}
 		, dataType: "html"
 		, success: function(res){
@@ -89,8 +97,7 @@ function loadList() {
 		}
 	})
 	$("#cur").html(curPage)
-}
-
+};
 
 </script>
 
@@ -196,8 +203,8 @@ td:nth-child(2) {
 
 <div class="container">
 
-<button type="submit" name="target" id="last" value="1" class="btn btn-primary pull-left">최신순</button>
-<button type="button" name="target" id="like" value="2" class="btn btn-primary pull-left">인기순</button>
+<input type="button" id="last" value="최신순" class="btn btn-primary pull-left"/>
+<input type="button" id="like" value="좋아요순" class="btn btn-primary pull-left"/>
 <a href="/layer/write"><button class="btn btn-primary pull-left">레이어링등록</button></a>
 
 
