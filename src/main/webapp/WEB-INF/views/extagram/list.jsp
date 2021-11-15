@@ -17,6 +17,7 @@
 	height: 380px;
 	border-radius: 3px; 
 	margin: 4px;
+	border: 1px solid #ddd;
 }
 #a {
 	margin: 10px;
@@ -24,6 +25,8 @@
 #b {
 	margin: 10px;
 	height: 80px;
+	display: block;
+	text-overflow: ellipsis;
 }
 #c {
 	margin: 10 0;
@@ -51,10 +54,10 @@ a:hover { color: black; text-decoration: none;}
 <c:forEach items="${list}" var="list">
     <a href="/extagram/view?exNo=${list.EX_NO }">
 	<div id="flex-items">
-		<div id="a">프로필사진 ${list.NICK }</div>
+		<div id="a"><img style="width: 20; height: 20px;" src="/resources/img/perf/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }</div>
 		<div id="b">${list.EX_CONTENT }</div>
-		<div id="imageBox"><img style="width:auto; height: 180px; display: block; margin: auto;"
-					src="/resources/img/perf/${list.STORED_NAME}"></div><!-- width: 258px -->
+		<div id="c"><img style="width:auto; height: 180px; display: block; margin: auto;"
+					src="/resources/img/perf/${list.PICTURE}"></div><!-- width: 258px -->
 		<div id="d">하트 ${list.HEART }&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${list.COMM }</div>
 		<div id="e">${list.EX_DATE }</div>
     </div>

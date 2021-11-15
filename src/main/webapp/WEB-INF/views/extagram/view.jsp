@@ -40,10 +40,11 @@ $(document).ready(function() {
 		$.ajax({
 			type: "post"
 			, url: "/extagram/view_ok"
-			, data: { $("#inputForm").serialize() }
-			, dataType: "json"
+			, data: $("#inputForm").serialize()
+			, dataType: "html"
 			, success: function(res) {
-				console.log("댓글 성공")
+				$("#ajaxComment").innerHtml(res)
+				getList();
 			}
 			, error: function() {
 				console.log("댓글 실패")
@@ -51,6 +52,7 @@ $(document).ready(function() {
 		})		
 	})
 })
+
 </script>
 
 
@@ -82,6 +84,7 @@ ${viewExta.EX_CONTENT }
 					<div style="padding: 5px;">${viewComm.NICK}&nbsp;&nbsp;&nbsp;</div>
 					<div style="padding: 5px;">${viewComm.EX_COMM }</div>
 					<div style="padding: 5px;">${viewComm.EX_COMM_DATE}</div>
+					<div id=ajaxComment></div>
 				</div>
 			</c:forEach>
 		</div>
@@ -97,10 +100,10 @@ ${viewExta.EX_CONTENT }
 			
 			<c:if test="${login }">
 			<div class="form-inline text-center">
-			<form id="inputForm" action="/extagram/view_ok" method="post">
+			<form id="inputForm">
 				<input type="text" id="commentContent" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
 				<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
-				<button id="btnComInsert" class="btn pull-right">POST</button>
+				<button type="button" id="btnComInsert" class="btn pull-right">POST</button>
 			</form>
 			</div>
 			</c:if>
@@ -116,13 +119,9 @@ ${viewExta.EX_CONTENT }
 		<a href="/extagram/update?exNo=${viewExta.EX_NO }"><button class="btn">수정</button></a>
 		<a href="/extagram/delete?exNo=${viewExta.EX_NO }"><button class="btn">삭제</button></a>
 <%-- 	</c:if> --%>
-	
-</div>
-
-<div class="text-center">
-작성한 글
 </div>
 
 
 </div><!-- .container -->
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
+

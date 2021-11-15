@@ -48,9 +48,9 @@ public class ExtaController {
 	@RequestMapping(value="/extagram/view", method=RequestMethod.GET)
 	public String extaView(Extagram viewExta, Model model, HttpSession session, MultipartFile file) {
 		
-		if(viewExta.getExNo() < 1) {
-			return "redirect:/extagram/list";
-		}
+//		if(viewExta.getExNo() < 1) {
+//			return "redirect:/extagram/list";
+//		}
 		
 		
 		//댓글
@@ -67,13 +67,13 @@ public class ExtaController {
 //COMMENT
 	@RequestMapping(value="/extagram/view_ok", method=RequestMethod.POST)
 	@ResponseBody
-	public String extaComment(ExComm comment, Model model, HttpSession session) {
+	public String extaComment(ExComm comment, HttpSession session) {
 		
 		comment.setUserNo((Integer) session.getAttribute("userNo"));
 		
 		extaService.setComment(comment);
 		
-		return "/extagram/view_ok";
+		return "/extagram/view?exNo=" + comment.getExPostNo();
 	}
 	
 //	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)
