@@ -125,8 +125,8 @@ $(document).ready(function(){
             $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
             	noteArray.push($(this).val());
             });
-        
-            curPage = 2;
+            $(location).attr("href", "#top");
+            curPage = 1;
 		$.ajax({
 			type: "get"
 			, url: "/perf/list_ok"
@@ -135,6 +135,7 @@ $(document).ready(function(){
 				, gender: $("input[name=genderCode]:checkbox:checked").val()
 				, note: noteArray
 				, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
+				, curPage: curPage++
 			}
 			, dataType: "html"
 			, success: function(res){
@@ -142,7 +143,7 @@ $(document).ready(function(){
 				
 				result.innerHTML = res;
 				console.log( res )	
-				console.log( curPage )	
+				console.log( curPage )
 			}
 			, error: function(res){
 				console.log("AJAX 실패")	
@@ -171,7 +172,6 @@ function loadList() {
     	noteArray.push($(this).val());
     });
 	
-    $(location).attr("href", "#top");
     
 	$.ajax({
 		type: "get"
@@ -189,6 +189,7 @@ function loadList() {
 			result.innerHTML += res;
 // 			$("#result").html( $("#result").html() + res );
 			console.log( curPage )
+//			console.log( endPage )
 		}
 		, error: function(){
 			console.log("AJAX 실패")
@@ -202,8 +203,8 @@ function keyword(){
         $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
         	noteArray.push($(this).val());
         });
-    
-        curPage = 2;
+        $(location).attr("href", "#top");
+        curPage = 1;
 	$.ajax({
 		type: "get"
 		, url: "/perf/list_ok"
@@ -212,6 +213,7 @@ function keyword(){
 			, gender: $("input[name=genderCode]:checkbox:checked").val()
 			, note: noteArray
 			, vitality: $("input[name=vitalityCode]:checkbox:checked").val()
+			, curPage: curPage++
 		}
 		, dataType: "html"
 		, success: function(res){

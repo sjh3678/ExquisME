@@ -37,7 +37,7 @@ public class PerfServiceImpl implements PerfService{
 
 	@Override
 	public Perf getPerfView(Perf perf) {
-		return null;
+		return perfDao.selectPerfByPerfNo(perf);
 	}
 
 	@Override

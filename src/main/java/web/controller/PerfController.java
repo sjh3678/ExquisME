@@ -39,8 +39,10 @@ public class PerfController {
 		logger.info("gender: {}", paramData.getGender());
 		logger.info("note: {}", paramData.getNote());
 		logger.info("Vitality: {}", paramData.getVitality());
-		
+		logger.info("CurPage: {}", paramData.getCurPage());
 		logger.info("paramDate {} : ", paramData);
+		
+		
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
 		
@@ -51,7 +53,13 @@ public class PerfController {
 		pagingPerf.setNote(paramData.getNote());
 		pagingPerf.setVitality(paramData.getVitality());
 		
-				
+		
+		logger.info("CurPage : {}", pagingPerf.getCurPage());
+		logger.info("EndPage : {}", pagingPerf.getEndPage());
+		
+		if(paramData.getCurPage() > pagingPerf.getEndPage()) {
+			return null;
+		}
 		List<HashMap<String, Object>> list = perfService.getPerfList( pagingPerf );
 		model.addAttribute("paging", pagingPerf);
 		model.addAttribute("list", list);
@@ -62,6 +70,8 @@ public class PerfController {
 	
 	@RequestMapping(value = "/view")
 	public String perfView(Perf perf, Model model) {
+		
+		
 		return null;
 	}
 }
