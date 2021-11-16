@@ -82,4 +82,28 @@ public interface PerfService {
 	 */
 	public List<HashMap<String, Object>> getPerfBaseNote(Perf perf);
 
+	/**
+	 * 향수 상세보기의 메인 어코드 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getPerfMainAccord(Perf perf);
+
+	/**
+	 * 향수 상세보기의 향수 좋아요 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public HashMap<String, Object> getPerfLike(Perf perf);
+
+	/**
+	 * 향수 상세보기의 향수 싫어요 정보 가져오기
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public HashMap<String, Object> getPerfDislike(Perf perf);
+
 }

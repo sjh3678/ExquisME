@@ -112,4 +112,29 @@ public interface PerfDao {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> selectBaseNoteByPerfNo(Perf perf);
+
+	/**
+	 * 상세보기시 향수의 mainaccord 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectMainAccordByPerfNo(Perf perf);
+
+	/**
+	 * 상세보기시 향수의 좋아요 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public HashMap<String, Object> selectPerfLikeByPerfNo(Perf perf);
+
+	
+	/**
+	 * 상세보기시 향수의 싫어요 정보 조회
+	 * 
+	 * @param perf
+	 * @return
+	 */
+	public HashMap<String, Object> selectPerfDislikeByPerfNo(Perf perf);
 }

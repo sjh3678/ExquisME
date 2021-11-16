@@ -70,4 +70,19 @@ public class PerfServiceImpl implements PerfService{
 		return perfDao.selectBaseNoteByPerfNo(perf);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getPerfMainAccord(Perf perf) {
+		return perfDao.selectMainAccordByPerfNo(perf);
+	}
+
+	@Override
+	public HashMap<String, Object> getPerfLike(Perf perf) {
+		return perfDao.selectPerfLikeByPerfNo(perf);
+	}
+
+	@Override
+	public HashMap<String, Object> getPerfDislike(Perf perf) {
+		return perfDao.selectPerfDislikeByPerfNo(perf);
+	}
+
 }

@@ -63,12 +63,6 @@
 		)
 </select>
 
-<select id="selectCntPerfBySearch">
-	SELECT count(*) FROM tb_perf
-	WHERE PERFUME_NAME = #{search }
-</select>
-
-
 
 <!-- <select id="selectPerfAll" resultType="web.dto.Perf" parameterType="web.util.Paging">
 	SELECT * FROM (
@@ -140,12 +134,38 @@
 
 </select>
 
+<select id="selectMainAccordByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
+	SELECT * FROM (
+		SELECT DENSE_RANK() OVER(ORDER BY CASE WHEN cnt IS NULL THEN 1 ELSE 0 END, cnt DESC) ranking, NR.* FROM (
+			SELECT MA.note_no, MA.cnt, N.note_name FROM (
+				SELECT note_no, count(note_like_no) cnt FROM(
+	            	SELECT p.note_no, nl.note_like_no FROM tb_perf_note P
+	                	LEFT OUTER JOIN tb_note_like NL ON p.perfume_no = nl.perfume_no AND p.note_no = nl.note_no
+	            	WHERE p.perfume_no = #{perfumeNo } )
+	            GROUP BY note_no
+	            ORDER BY cnt DESC) MA
+			LEFT OUTER JOIN tb_note N ON MA.note_no = N.note_no) NR
+			)
+	WHERE ranking = 1
+</select>
+
+<select id="selectPerfLikeByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
+	SELECT count(*) cnt FROM tb_perf_like
+	WHERE perfum_islike = 1 AND perfume_no = #{perfumeNo }
+</select>
+
+<select id="selectPerfDislikeByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
+	SELECT count(*) cnt FROM tb_perf_like
+	WHERE perfum_islike = 0 AND perfume_no = #{perfumeNo }
+</select>
+
+
 <select id="selectTopNoteByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
-SELECT 
-    N.*, cnt.cnt
-    FROM tb_note N
-	LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
-	LEFT OUTER JOIN (
+	SELECT 
+    	N.*, cnt.cnt
+    	FROM tb_note N
+		LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
+		LEFT OUTER JOIN (
 					SELECT n.note_no, count(*) cnt FROM tb_perf P
     					LEFT OUTER JOIN tb_perf_note PN ON p.perfume_no = pn.perfume_no
     					LEFT OUTER JOIN tb_note N ON pn.note_no = n.note_no
@@ -156,11 +176,11 @@ SELECT
 </select>
 
 <select id="selectMiddleNoteByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
-SELECT 
-    N.*, cnt.cnt
-    FROM tb_note N
-	LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
-	LEFT OUTER JOIN (
+	SELECT 
+   		N.*, cnt.cnt
+    	FROM tb_note N
+		LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
+		LEFT OUTER JOIN (
 					SELECT n.note_no, count(*) cnt FROM tb_perf P
     					LEFT OUTER JOIN tb_perf_note PN ON p.perfume_no = pn.perfume_no
     					LEFT OUTER JOIN tb_note N ON pn.note_no = n.note_no
@@ -171,11 +191,11 @@ SELECT
 </select>
 
 <select id="selectBaseNoteByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
-SELECT 
-    N.*, cnt.cnt
-    FROM tb_note N
-	LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
-	LEFT OUTER JOIN (
+	SELECT 
+	    N.*, cnt.cnt
+	    FROM tb_note N
+		LEFT OUTER JOIN tb_perf_note PN ON N.NOTE_NO = PN.NOTE_NO
+		LEFT OUTER JOIN (
 					SELECT n.note_no, count(*) cnt FROM tb_perf P
     					LEFT OUTER JOIN tb_perf_note PN ON p.perfume_no = pn.perfume_no
     					LEFT OUTER JOIN tb_note N ON pn.note_no = n.note_no

@@ -75,6 +75,15 @@ public class PerfController {
 		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
 		logger.info("viewPerf : {}", viewPerf);
 		
+		List<HashMap<String, Object>> viewPerfMainAccord = perfService.getPerfMainAccord(perf);
+		logger.info("viewPerfMainAccord : {}", viewPerfMainAccord);
+		
+		HashMap<String, Object> viewPerfLike = perfService.getPerfLike(perf);
+		logger.info("viewPerfLike : {}", viewPerfLike);
+		
+		HashMap<String, Object> viewPerfDislike = perfService.getPerfDislike(perf);
+		logger.info("viewPerfDislike : {}", viewPerfDislike);
+		
 		List<HashMap<String, Object>> viewPerfTopNote = perfService.getPerfTopNote(perf);
 		logger.info("viewPerfTopNote : {}", viewPerfTopNote);
 		
@@ -85,7 +94,10 @@ public class PerfController {
 		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
 		
 		
-		model.addAttribute("perf", viewPerf);
+		model.addAttribute("perf", viewPerf);		
+		model.addAttribute("mainAccord", viewPerfMainAccord);
+		model.addAttribute("perfLike", viewPerfLike);
+		model.addAttribute("perfDislike", viewPerfDislike);
 		model.addAttribute("topNote", viewPerfTopNote);
 		model.addAttribute("middleNote", viewPerfMiddleNote);
 		model.addAttribute("baseNote", viewPerfBaseNote);
