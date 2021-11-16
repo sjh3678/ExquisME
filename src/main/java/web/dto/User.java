@@ -11,16 +11,28 @@ public class User {
 	private String nick;
 	private String email;
 	private Date birth;
+	private String phone;
 	private String isAdmin;
 	private Date createDate;
 	private String questionAnwser;
 	private int questionNo;
+	
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", fileNo=" + fileNo + ", id=" + id + ", pw=" + pw + ", salt=" + salt
-				+ ", nick=" + nick + ", email=" + email + ", birth=" + birth + ", isAdmin=" + isAdmin + ", createDate="
-				+ createDate + ", questionAnwser=" + questionAnwser + ", questionNo=" + questionNo + "]";
+				+ ", nick=" + nick + ", email=" + email + ", birth=" + birth + ", phone=" + phone + ", isAdmin="
+				+ isAdmin + ", createDate=" + createDate + ", questionAnwser=" + questionAnwser + ", questionNo="
+				+ questionNo + "]";
 	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}
