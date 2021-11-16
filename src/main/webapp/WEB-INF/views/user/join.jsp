@@ -532,26 +532,23 @@ async function authKeyCheck(){
 async function submit() {
 	if (await checked() == true) {
 		var formData = $("#join-form").serialize();
-		
+		console.log("formData : ",formData)
 		$.ajax({
 			type: 'post',
 			url: '/user/join',
-			dataType: 'text',
+			dataType: 'json',
 			data: formData,
 			success: function(result) {
 				// 회원가입 성공
 				if (result == "true") {
-					alert("회원가입에 성공했습니다!");
-					
-					// 리다이렉션
-					window.location.replace("/user/main");
+					console.log("회원가입 성공")
+			
 				} else {
-					// 회원가입 실패
-					alert("회원가입에 실패했습니다.");
+					console.log("회원가입 실패")
 				}
 			},
 			error: function(xhr, status, error) {
-				alert(error);
+				console.log(xhr, status, error);
 			}
 		})
 	}
@@ -616,11 +613,7 @@ $(document).ready(function(){
 	$("#questionAnwser").blur(function(){
 		checkAnswer()
 	})
-	//가입 버튼 클릭 시 form submit
-	$("#btnSubmit").click(function() {
-		//가입 버튼 눌렀을 때
-		submit();
-	})
+	
 	$("#cancleBtn").click(function(){
 		if(joinCnt == 0){
 			joinCnt--;
