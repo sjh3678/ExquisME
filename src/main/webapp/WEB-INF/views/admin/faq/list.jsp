@@ -3,7 +3,125 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
+<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+
+<script type="text/javascript">
+//네이버se2 적용
+function submitContents(elClickedObj) {
+	oEditors.getById["contentWrite"].exec("UPDATE_CONTENTS_FIELD", []);
+	try {
+		elClickedObj.formWrite.submit();
+	} catch(e) {}
+}
+
+//네이버se2 적용
+function submitContents2(elClickedObj) {
+	oEditors.getById["contentUpdate"].exec("UPDATE_CONTENTS_FIELD", []);
+	try {
+		elClickedObj.formUpdate.submit();
+	} catch(e) {}
+}
+	
+$(document).ready(function(){
+	//버튼 클릭에 따른 동작
+	$("#btnWriteProc").click(function(){
+		submitContents($("#btnWriteProc"));
+		$("#formWrite").submit();
+	})
+	
+	//버튼 클릭에 따른 동작
+	$("#btnUpdateProc").click(function(){
+		submitContents2($("#btnUpdateProc"));
+		$("#formUpdate").submit();
+	})
+	
+
+	//게시글 상세보기 토글
+    $(".titleChild").click(function(){
+		$(this).parent().next("div").children().slideToggle();
+    })
+})
+
+	//버튼으로 할 시 동작
+// 	function btnDelete(e){
+// 		location.href="/admin/faq/delete?faqNo="+e
+// 	}
+	
+</script>
+
 <style type="text/css">
+#modalUpdate {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#modalUpdate.show {
+  display: block;
+}
+
+.modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 800px;
+  height: 600px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  background-color: #ECE6CC;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modalWrite {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalWrite.show {
+  display: block;
+}
+
+.modalWrite_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 800px;
+  height: 600px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  background-color: #ECE6CC;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
 .row{
 	width: 1100px;
 }
@@ -22,6 +140,9 @@
 	margin-bottom: 5px;
 /* 	overflow-y: scroll; */
 }
+.title button{
+	color: pink;
+}
 .title a:link{
 	color: #ECE6CC;
 }
@@ -30,29 +151,40 @@
 }
 </style>
 
-<script>
-$(document).ready(function(){
-	
-    $(".titleChild").click(function(){
-		$(this).parent().next("div").children().slideToggle();
-    });
-	
-})
-</script>
 
 <div class="container">
 
-<h1>admin faq list&nbsp;&nbsp;&nbsp;<a href="/admin/faq/write"><button id="btnWrite" class="btn btn-primary">WRITE</button></a></h1>
+<h1>admin faq list + write &nbsp;&nbsp;&nbsp;
+<a href="/admin/faq/write"><button id="btnWrite" class="btn">WRITE</button></a>
+<button id="modalWrite" class="btn btn-open-popup-write">모달 글쓰기</button></h1>
 총 게시글 수 : [${faqTotal }] (>= 10이면 글쓰기 버튼 비활성화 또는 알럹)
+
+
 <hr>
 
+<%-- 모달 글쓰기 영역 --%>
+<div class="modalWrite">
+	<div class="modalWrite_body">새로운 글 등록하기
+		<form id="formWrite" action="/admin/faq/write" method="post">
+			<label for="title">제목</label>
+			<input type="text" id="title" name="faqTitle" class="form-control"/>
+		
+			<label for="contentWrite">본문</label>
+			<textarea rows="10" style="width: 100%;" id="contentWrite" name="faqContent"></textarea>
+		</form>
+		<button class="btn" id="btnWriteProc">작성</button>
+	</div>
+</div>
+
 <c:forEach items="${faqList }" var="i">
-<div class="row">
+<div class="row" data-boardno="${i.faqNo }">
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
 		<span class="titleText">${i.faqTitle}</span>
 		<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/faq/delete?faqNo=${i.faqNo}">삭제</a>&nbsp;&nbsp;&nbsp;</span>
-		<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/faq/update?faqNo=${i.faqNo}">수정</a>&nbsp;&nbsp;&nbsp;</span>
+		<span style="float: right; font-size: 18px; font-weight: 400;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
+<%-- 		<span class="pull-right"><button class="btn pull-right" id="btnDelete" onclick="btnDelete(${i.faqNo})">삭제</button>&nbsp;&nbsp;&nbsp;</span> --%>
+<%-- 		<span class="pull-right"><button class="btn btn-open-popup-update pull-right">수정</button>&nbsp;&nbsp;&nbsp;</span> --%>
 		</div>
 	</div>
 	<div class="content">
@@ -60,11 +192,121 @@ $(document).ready(function(){
 			<div class="contentText">
 			${i.faqContent}
 			</div>
+			<div class="contentAnchor">
+			내가 찾는 내용이 아니에요 
+			<a href="#"><button>채팅 문의로 이동하기</button></a>
+			</div>
 		</div>
 	</div>
 </div>
 </c:forEach>
 
+<%-- 수정을 위해 모달로 띄울 영역 --%>
+<div id="modalUpdate" >
+	<div class="modal_body">모달 수정 영역
+		<form id="formUpdate" action="/admin/faq/update" method="post">
+		<input type="hidden" name="faqNo" id="boardNo" />
+		
+			<label for="title">제목</label>
+			<input type="text" id="title" name="faqTitle" class="form-control"/>
+		
+			<label for="contentUpdtae">본문</label>
+			<textarea rows="10" style="width: 100%;" id="contentUpdate" name="faqContent"></textarea>
+		</form>
+		<button class="btn" id="btnUpdateProc">작성</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+var oEditors = [];
+function initSEWrite() {
+	oEditors = []
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "contentWrite",
+		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+	});
+}
+
+function initSEUpdate() {
+	console.log("initSEUpdate")
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "contentUpdate",
+		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+	});
+}
+
+const bodyWrite = document.querySelector('body');
+const modalWrite = document.querySelector('.modalWrite');
+const btnOpenPopupWrite = document.querySelector('.btn-open-popup-write');
+
+btnOpenPopupWrite.addEventListener('click', () => {
+	$(".modalWrite iframe").remove()
+	
+	//btnOpenPopupWrite에 맞춰서 SE2 스킨 씌우기
+	initSEWrite();
+	
+	modalWrite.classList.toggle('show');
+	
+    if (modalWrite.classList.contains('show')) {
+    	bodyWrite.style.overflow = 'hidden';
+    }
+});
+
+modalWrite.addEventListener('click', (event) => {
+    if (event.target === modalWrite) {
+    	modalWrite.classList.toggle('show');
+	
+    	if (!modalWrite.classList.contains('show')) {
+			bodyWrite.style.overflow = 'auto';
+		}
+    }
+});
+
+const bodyUpdate = document.querySelector('body');
+const modalUpdate = document.querySelector('#modalUpdate');
+const btnOpenPopupUpdate = $(".btn-open-popup-update");
+
+btnOpenPopupUpdate.on("click", (e) => {
+	$("#modalUpdate iframe").remove()
+
+	//btnOpenPopupUpdate에 맞춰서 SE2 스킨 씌우기
+	initSEUpdate();
+	
+	var $row = $(e.target).parents(".row");
+	console.log( $row.attr("data-boardno") )
+	console.log( $row.find(".titleText") )
+	console.log( $row.find(".contentText") )
+	
+	var $modalUpdate = $("#modalUpdate");
+	$modalUpdate.find("#boardNo").val("")
+	$modalUpdate.find("#title").val("")
+	$modalUpdate.find("#contentUpdate").val("")
+	$modalUpdate.find("#boardNo").val( $row.attr("data-boardno") )
+	$modalUpdate.find("#title").val($row.find(".titleText").html())
+	$modalUpdate.find("#contentUpdate").val($row.find(".contentText").html())
+	
+	modalUpdate.classList.toggle('show');
+	
+    if (modalUpdate.classList.contains('show')) {
+    	bodyUpdate.style.overflow = 'hidden';
+    }
+});
+
+modalUpdate.addEventListener('click', (event) => {
+    if (event.target === modalUpdate) {
+    	modalUpdate.classList.toggle('show');
+	
+    	if (!modalUpdate.classList.contains('show')) {
+			bodyUpdate.style.overflow = 'auto';
+		}
+    }
+});
+</script>
 
 </div><%-- .container --%>
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

@@ -62,6 +62,7 @@ $(document).ready(function(){
 </div>
 </c:forEach>
 
+<div></div>
 
 </div><%-- .container --%>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
