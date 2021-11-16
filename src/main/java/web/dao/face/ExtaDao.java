@@ -28,7 +28,7 @@ public interface ExtaDao {
 //VIEW
 	/**
 	 * Extagram 상세보기
-	 * @param extagram - 상세보기할 게시글의 DTO
+	 * @param extagram, excomm - 상세보기할 게시글의 DTO
 	 * @return 
 	 */
 	public HashMap<String, Object> selectExtaView(Extagram viewExta);
@@ -46,7 +46,58 @@ public interface ExtaDao {
 	 * @return 
 	 */
 	public void insertComment(ExComm comm);
-//WRITE	
+
+	/**
+	 * 해당하는 댓글 데이터 삭제
+	 * @param comment - exCommNo
+	 */
+	public void deleteComment(ExComm comment);
+	
+	/**
+	 * comment의 exCommNo를 이용하여 나머지 DTO의 값을 불러옴
+	 * @param comment
+	 * @return 
+	 */
+	public ExComm selectInfoComment(ExComm comment);
+	public Extagram selectInfoViewExta(ExComm comment);
+
+	/**
+	 * 댓글 수 구하기
+	 * @param comment - 게시글에 작성된 댓글 개수 구하기
+	 * @return 댓글 개수
+	 */
+	public int countComment(ExComm comment);
+	
+	/**
+	 * 사용자가 해당 게시글을 좋아요 누른적이 있는지 조회
+	 * @param heart - 사용자와 게시글 정보를 가지고 있는 객체
+	 * @return 1 - 좋아요 누른적 있음, 0 - 좋아요 누른적 없음
+	 */
+	public int selectCntHeart(ExLike heart);
+
+	/**
+	 * 좋아요 상태 넣기
+	 * @param heart - 좋아요 정보 객체
+	 */
+	public void insertHeart(ExLike heart);
+
+	/**
+	 * 좋아요 상태 지우기
+	 * @param heart - 좋아요 정보 객체
+	 */
+	public void deleteHeart(ExLike heart);
+
+	/**
+	 * 게시글 전체 추천 수 조회
+	 * @param heart - 좋아요 수를 조회할 게시글 정보
+	 * @return 전체 좋아요 수
+	 */
+	public int selectTotalCntHeart(ExLike heart);
+	
+	
+	
+	
+	//WRITE	
 	/**
 	 * 작성한 Extagram DB에 삽입
 	 * @param extagram - 작성할 게시글의 DTO
@@ -82,18 +133,21 @@ public interface ExtaDao {
 	 * @param exLike
 	 */
 	public void deleteExtaHeart(ExLike exLike);
+
 	
-	/**
-	 * 작성된 댓글 DB에 삽입
-	 * @param exComm
-	 */
-	public void insertExtaComm(ExComm exComm);
 	
-	/**
-	 * 작성된 댓글 DB에서 삭제
-	 * @param exComm
-	 */
-	public void deleteExtaComm(ExComm exComm);
+	
+
+
+	
+
+
+
+
+
+	
+
+
 
 
 	

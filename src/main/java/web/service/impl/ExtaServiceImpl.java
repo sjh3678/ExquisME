@@ -53,6 +53,53 @@ public class ExtaServiceImpl implements ExtaService {
 		extaDao.insertComment(comm);
 	}
 	
+	@Override
+	public Extagram getInfoViewExta(ExComm comment) {
+		return extaDao.selectInfoViewExta(comment);
+	}
+	
+	@Override
+	public ExComm getInfoComment(ExComm comment) {
+		return extaDao.selectInfoComment(comment);
+	}
+
+	@Override
+	public void deleteComment(ExComm comment) {
+		
+		extaDao.deleteComment(comment);
+	}
+	
+	@Override
+	public boolean isHearted(ExLike heart) {
+		int cnt = extaDao.selectCntHeart(heart);
+		
+		if(cnt>0) { //좋아요 했음
+			return true;
+		} else { //좋아요 안했음
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean getHeart(ExLike heart) {
+		
+		if( isHearted(heart) ) { //좋아요 상태
+			extaDao.deleteHeart(heart);
+			return false;
+		} else { //좋아요 안한 상태
+			extaDao.insertHeart(heart);
+		}
+		
+		
+		return true;
+	}
+	
+	@Override
+	public int getTotalCntHeart(ExLike heart) {
+		return extaDao.selectTotalCntHeart(heart);
+	}
+	
+	
 	
 	@Override
 	public void setExtaWrite(Extagram extagram, MultipartFile file) {

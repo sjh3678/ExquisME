@@ -37,7 +37,7 @@
 <!-- VIEW -->	
 	<select id="selectExtaView" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT DISTINCT
-		    u.nick, x.ex_no, x.ex_date, x.ex_content, x.ex_date, x.file_no XX , u.file_no UU, FX.file_no FFXX,
+		    u.user_no, u.nick, x.ex_no, x.ex_date, x.ex_content, x.ex_date, x.file_no XX , u.file_no UU, FX.file_no FFXX,
 		    FX.stored_name AS PIC, FX.origin_name As PICTURE,
 		    FU.origin_name AS PRO, FU.stored_name AS PROFILE,
 		    (SELECT count(*) FROM tb_ex_comm WHERE ex_post_no = x.ex_no) As comm, 
@@ -53,7 +53,7 @@
 	
 	<select id="selectExtaComment" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT
-		    u.file_no, u.nick, c.ex_comm, c.ex_comm_date, f.stored_name, f.origin_name
+		    u.file_no, u.nick, c.ex_comm, c.ex_comm_no, c.ex_comm_date, f.stored_name, f.origin_name, c.ex_post_no
 		FROM tb_user u
 		    LEFT OUTER JOIN tb_file f ON f.file_no = u.file_no
 		    LEFT OUTER JOIN tb_ex_comm c ON u.user_no = c.user_no
@@ -62,10 +62,59 @@
 		ORDER BY ex_comm_date DESC
 	</select>
 	
+	<select id="selectInfoViewExta" resultType="web.dto.Extagram" parameterType="web.dto.ExComm">
+		SELECT * FROM tb_extagram
+		WHERE ex_no = #{exPostNo}
+	</select>
+	
 	<insert id="insertComment" parameterType="web.dto.ExComm">
 		INSERT INTO tb_ex_comm ( ex_comm_no, user_no, ex_post_no, ex_comm, ex_comm_date)
 		VALUES (tb_ex_comm_seq.nextval, #{userNo}, #{exPostNo}, #{exComm}, sysdate)
-	</insert>	
+	</insert>
+	
+	<delete id="deleteComment" parameterType="web.dto.ExComm">
+		DELETE tb_ex_comm
+		WHERE ex_comm_no = #{exCommNo}	
+	</delete>
+	
+	<select id="selectInfoComment" resultType="web.dto.ExComm" parameterType="web.dto.ExComm">
+		SELECT
+			ex_comm, ex_comm_no, ex_comm_date, ex_post_no, user_no
+		FROM tb_ex_comm
+		WHERE ex_comm_no = #{exCommNo}
+	</select>
+	
+	<select id="countComment" resultType="int" parameterType="web.dto.ExComm">
+		SELECT coutn(*) FROM tb_ex_comm WHERE ex_post_no = #{exPostNo}
+	</select>
+	
+
+<!-- 좋아요 맵퍼 -->
+	<select id="selectCntHeart" parameterType="web.dto.ExLike" resultType="int">
+		SELECT count(*) FROM tb_ex_like
+		WHERE user_no = #{userNo}
+			AND ex_post_no = #{exPostNo}
+	</select>
+
+	<insert id="insertHeart" parameterType="web.dto.ExLike">
+		INSERT INTO tb_ex_like
+		VALUES ( tb_ex_like_seq.nextval, #{userNo}, #{exPostNo} )
+	</insert>
+	
+	<delete id="deleteHeart" parameterType="web.dto.ExLike">
+		DELETE tb_ex_like
+		WHERE user_no = #{userNo}
+			AND ex_post_no = #{exPostNo}
+	</delete>
+	
+	<select id="selectTotalCntHeart" parameterType="web.dto.ExLike" resultType="int">
+		SELECT COUNT(*) FROM tb_ex_like
+		WHERE ex_post_no = #{exPostNo}
+	</select>
+	
+<!-- 여기까지 좋아요 맵퍼 -->
+
+
 
 
 <!-- WRITE -->	
