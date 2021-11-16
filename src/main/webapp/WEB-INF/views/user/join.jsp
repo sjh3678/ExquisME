@@ -532,11 +532,10 @@ async function authKeyCheck(){
 async function submit() {
 	if (await checked() == true) {
 		var formData = $("#join-form").serialize();
-		console.log("formData : ",formData)
 		$.ajax({
 			type: 'post',
 			url: '/user/join',
-			dataType: 'json',
+			dataType: 'text',
 			data: formData,
 			success: function(result) {
 				// 회원가입 성공
@@ -582,11 +581,9 @@ $(document).ready(function(){
 			}
 		}else if(joinCnt == 1){
 			console.log("회원 입력 페이지에서 이동")
-			var isChecked = checked();
-			if(isChecked){
-				//회원가입 전송
- 				submit()
-			}
+ 			// 모든 항목 검사 및 회원가입 실행
+			submit()
+			
 		}
 	});
 	//아이디 중복체크

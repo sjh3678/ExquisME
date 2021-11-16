@@ -84,7 +84,8 @@ public class UserController {
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinProc(User user, String pwCheck) {
-		logger.info("/join [POST]");
+		logger.info("/join [POST] {}", user);
+		
 		if(user.getPw().equals(pwCheck)) {
 			String encPw = UserSHA256.encrypt(user);
 			user.setPw(encPw);
