@@ -2,6 +2,8 @@ package web.service.face;
 
 import java.util.List;
 
+import org.apache.commons.fileupload.FileUpload;
+
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.User;
@@ -109,4 +111,12 @@ public interface UserService {
 	 * @return - 중복 여부 반환
 	 */
 	public boolean searchNick(User user);
+
+	/**
+	 * 프로필 사진의 정보를 요청
+	 * @param user - 정보를 요청할 DTO 객체
+	 * @return - 조회된 파일 정보 반환
+	 */
+	public FileUpload getFileInfo(User user);
+
 }

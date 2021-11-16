@@ -4,6 +4,7 @@ package web.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.User;
 import web.service.face.UserService;
+import web.util.UserSHA256;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -126,8 +128,11 @@ public class UserServiceImpl implements UserService{
 		logger.info("getUserInfo called");
 		
 		//회원의 세부정보 조회
-		user = userDao.selectUserById(user);
-		
+		if(!user.getId().equals("")) {
+			user = userDao.selectUserById(user);
+		}else if(user.getUserNo() !=0) {
+			user = userDao.selectUserByUserno(user.getUserNo());
+		}
 		return user;
 	}
 
@@ -190,5 +195,9 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 
-	
+	@Override
+	public FileUpload getFileInfo(User user) {
+		
+		return userDao.selectFileByUserNo(user);
+	}
 }

@@ -18,9 +18,9 @@ $(document).ready(function(){
 		console.log("#join clicked")
 		$(location).attr("href", "/user/join")
 	})
-	$("#boardList").click(function(){
-		console.log("#login clicked")
-		$(location).attr("href", "/board/list")
+	$("#mypage").click(function(){
+		console.log("#mypage clicked")
+		$(location).attr("href", "/user/mypage")
 	})
 })
 
@@ -37,6 +37,7 @@ $(document).ready(function(){
 <label>${nick }님 환영합니다.</label><br>
 <!-- <button id="mypage">마이페이지</button><br> -->
 <button id="logout">로그아웃</button><br>
+<button id="mypage">마이페이지</button><br>
 </c:if>
 
 <button id="boardList">게시글 목록</button><br>

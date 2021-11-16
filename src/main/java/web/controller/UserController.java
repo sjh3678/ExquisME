@@ -1,13 +1,21 @@
 package web.controller;
 
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +34,7 @@ public class UserController {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired UserService userService;
+	
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public void login() {
@@ -50,7 +59,9 @@ public class UserController {
 			session.setAttribute("login", isLogin);
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
-			
+			session.setMaxInactiveInterval(60*60); //1시간뒤 세션값 삭제
+			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
+			logger.info("{}",userNo);
 			return "redirect:/user/main";
 		}else {
 			return "redirect:/user/login";
@@ -196,14 +207,79 @@ public class UserController {
 		
 	}
 
-	
 	@RequestMapping(value="/search/comment/history", method=RequestMethod.POST)
 	public void searchCommentHistory(int userNo, String search) {
 		logger.info("/search/history [POST]");
 		List<ExComm> exComm = userService.searchCommentHistory(search, userNo);
 	}
+	
 	@RequestMapping(value="/main")
 	public void main() {
 		logger.info("임시 메인 페이지 접속");
+	}
+	
+	@RequestMapping(value="/profile")
+	public String profile(User user, FileUpload file, HttpSession session, Model model) {
+		logger.info("프로필 정보 ajax 통신 접속");
+		user.setUserNo((Integer)session.getAttribute("userNo"));
+		user = userService.getUserInfo(user);
+		file = userService.getFileInfo(user);
+		model.addAttribute("user", user);
+		model.addAttribute("file", file);
+		
+		return "profile";
+	}
+	@Autowired private JavaMailSenderImpl mailSender;
+
+	@RequestMapping(value="/send/mail", method=RequestMethod.POST)
+	public @ResponseBody boolean sendMail(String mail, HttpSession session, Random random) {
+		logger.info("인증번호 메일 전송");
+
+		String authKey="";
+		
+        int size = 6;
+        int num = 0;
+        
+        for(int i = 0; i< size; i++) {
+        	num = (int) (Math.random()*10);
+        	authKey += num; 
+        }
+        
+        //인증메일 보내기
+        MimeMessage mailSend = mailSender.createMimeMessage();
+        String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>" 
+                            +"<p> 인증 번호 : " + authKey + "</p>";
+
+        try {
+            mailSend.setSubject("회원가입 이메일 인증 ", "utf-8");
+            mailSend.setText(mailContent, "utf-8", "html");
+            mailSend.setRecipients(Message.RecipientType.TO, mail);
+            mailSender.send(mailSend);
+            logger.info("인증키 : " + authKey);
+
+            //세션에 인증키 + 메일 주소 저장
+            session.setAttribute("mail", mail);
+            session.setAttribute("authKey", authKey);
+            
+            session.setMaxInactiveInterval(5*60); //5분뒤 세션값 삭제
+            
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+	}
+	
+	@RequestMapping(value="/session/call")
+	public @ResponseBody boolean sessionCall(String authKey, HttpSession session) {
+		String authKey2 = (String) session.getAttribute("authKey");
+		logger.info("{} , {}", authKey, authKey2);
+		if(authKey.equals(authKey2)) {
+			logger.info("인증키 일치");
+			session.invalidate();
+			return true;
+		}
+		
+		return false;
 	}
 }
