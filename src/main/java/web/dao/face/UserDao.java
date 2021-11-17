@@ -84,8 +84,4 @@ public interface UserDao {
 	 * @return - 조회된 파일 정보 반환
 	 */
 	public FileUpload selectFileByUserNo(User user);
-
-
-
-
 }

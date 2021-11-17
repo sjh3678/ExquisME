@@ -32,13 +32,6 @@ public interface ExtaService {
 	 * @return
 	 */
 	public HashMap<String, Object> getExtaView(Extagram viewExta);
-
-	/**
-	 * 게시글 + 첨부파일 처리
-	 * @param extagram - 게시글 정보 DTO
-	 * @param file - 첨부파일 정보 DTO
-	 */
-	public void setExtaWrite(Extagram extagram, MultipartFile file);
 	
 	/**
 	 * 새로운 댓글 삽입
@@ -83,6 +76,27 @@ public interface ExtaService {
 	 */
 	public int getTotalCntHeart(ExLike heart);
 
+	/**
+	 * 게시글 + 첨부파일 처리
+	 * @param extagram - 게시글 정보 DTO
+	 * @param file - 첨부파일 정보 DTO
+	 */
+	public void setExtaWrite(Extagram extagram, MultipartFile file);
+
+//	/**
+//	 * 게시글 번호를 이용하여 업로드된 파일의 정보를 조회
+//	 * @param viewExta - 조회할 게시글 번호를 가진 객체
+//	 * @return 첨부파일 정보
+//	 */
+//	public FileUpload getAttachFile(Extagram viewExta);
+	
+	
+	/**
+	 * 게시글 + 첨부파일 삭제
+	 * @param extagram
+	 * @return
+	 */
+	public void deleteExta(Extagram extagram);
 	
 	
 	
@@ -94,30 +108,15 @@ public interface ExtaService {
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
 	 */
 	public void setExtaUpdate(Extagram extagram);
-	
-	/**
-	 * 게시글 삭제
-	 * @param extagram - Extagram DTO의 ExPostNo값으로 삭제할 게시글 선정
-	 */
-	public void setExtaDelete(Extagram extagram);
-	
+
+
 	/**
 	 * 게시글 신고
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 신고할 게시글 선정
 	 */
 	public void setExtaReport(Extagram extagram);
 	
-	/**
-	 * 좋아요
-	 * @param exLike
-	 */
-	public void setHeart(ExLike exLike);
-	
-	/**
-	 * 좋지않아요
-	 * @param exLike
-	 */
-	public void setHeartDelete(ExLike exLike);
+
 
 	/**
 	 * 댓글 삭제
@@ -131,6 +130,8 @@ public interface ExtaService {
 	 * @return
 	 */
 	public Extagram getInfoViewExta(ExComm comment);
+
+
 
 	
 	

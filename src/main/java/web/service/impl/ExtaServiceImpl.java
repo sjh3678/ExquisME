@@ -1,16 +1,23 @@
 package web.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dao.face.ExtaDao;
 import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.service.face.ExtaService;
 import web.util.Paging;
 
@@ -18,6 +25,7 @@ import web.util.Paging;
 public class ExtaServiceImpl implements ExtaService {
 	
 	@Autowired ExtaDao extaDao;
+	@Autowired ServletContext context;
 	
 	
 //LIST	
@@ -102,34 +110,84 @@ public class ExtaServiceImpl implements ExtaService {
 	
 	
 	@Override
+	@Transactional//트랜젝션
 	public void setExtaWrite(Extagram extagram, MultipartFile file) {
 		
+		
+	//------파일처리------
+		if(file.getSize() <= 0) {
+			return;
+		}
+
+		//저장될 경로
+		String storedPath = context.getRealPath("upload");
+		
+		//폴더생성
+		File stored = new File(storedPath);
+		if( !stored.exists() ) {
+			stored.mkdir();
+		}
+		
+		//원본파일이름 알아내기
+		String originName = file.getOriginalFilename();
+		
+		//UUID 설정
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//저장될 파일정보 객체
+		File dest = new File(stored, storedName);
+		
+		try {
+			//업로드된 파일 저장
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		FileUpload fileUpload = new FileUpload();
+		fileUpload.setFileNo(extagram.getFileNo());
+		fileUpload.setOriginName(originName);
+		fileUpload.setStoredName(storedName);
+		
+		extaDao.deleteFile(extagram);
+		extaDao.insertFile(fileUpload);
+		extagram.setFileNo(fileUpload.getFileNo());
+	//-------------------
+
+		
+	//-----게시글 처리-----
+		if( "".equals(extagram.getExContent()) ) {
+			extagram.setExContent("(비어있는 내용 입니다.)");
+		}
+		
+		extaDao.insertExtaWrite(extagram);
 	}
+	
+//	@Override
+//	public FileUpload getAttachFile(Extagram viewExta) {
+//		return extaDao.selectFileUploadByExNo(viewExta);
+//	}
+	
+	
+	@Override
+	public void deleteExta(Extagram extagram) {
+		extaDao.deleteExta(extagram);
+		extaDao.deleteFile(extagram);
+	}
+	
 	
 	@Override
 	public void setExtaUpdate(Extagram extagram) {
 		
 	}
 	
-	@Override
-	public void setExtaDelete(Extagram extagram) {
-		
-	}
-	
+
 	@Override
 	public void setExtaReport(Extagram extagram) {
 		
 	}
 	
-	@Override
-	public void setHeart(ExLike exLike) {
-		
-	}
-	@Override
-	public void setHeartDelete(ExLike exLike) {
-		
-	}
-	
-	
-	
+
 }

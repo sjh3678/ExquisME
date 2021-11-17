@@ -119,4 +119,11 @@ public interface UserService {
 	 */
 	public FileUpload getFileInfo(User user);
 
+	/**
+	 * 회원의 프로필 정보 조회
+	 * @param user - 조회할 유저 번호
+	 * @return - 조회된 정보 반환
+	 */
+	public User getUserProfile(User user);
+
 }
