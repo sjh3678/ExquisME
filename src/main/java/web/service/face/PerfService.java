@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Perf;
+import web.dto.PerfLike;
 import web.util.Paging;
 import web.util.PagingPerf;
 
@@ -93,17 +94,51 @@ public interface PerfService {
 	/**
 	 * 향수 상세보기의 향수 좋아요 정보 가져오기
 	 * 
-	 * @param perf
+	 * @param perfNo
 	 * @return
 	 */
-	public HashMap<String, Object> getPerfLike(Perf perf);
+	public HashMap<String, Object> getPerfLike(int perfNo);
 
 	/**
 	 * 향수 상세보기의 향수 싫어요 정보 가져오기
 	 * 
-	 * @param perf
+	 * @param perfNo
 	 * @return
 	 */
-	public HashMap<String, Object> getPerfDislike(Perf perf);
+	public HashMap<String, Object> getPerfDislike(int perfNo);
+
+
+	/**
+	 * 향수 좋아요 테이블에서 회원번호, 향수번호로 좋아요 튜플 카운트
+	 * 
+	 * @param perfNo
+	 * @param userNo
+	 * @return
+	 */
+	public int getPerfLikeCnt(int perfNo, int userNo);
+
+	/**
+	 * 향수 좋아요 테이블에서 회원번호, 향수번호로 싫어요 튜플 카운트
+	 * 
+	 * @param perfNo
+	 * @param userNo
+	 * @return
+	 */
+	public int getPerfDislikeCnt(int perfNo, int userNo);
+
+	/**
+	 * 향수 좋아요 추가
+	 * 
+	 * @param perfLike
+	 */
+	public void newPerfLike(PerfLike perfLike);
+
+	/**
+	 * 향수 좋아요/싫어요 삭제
+	 * 
+	 * @param perfLike
+	 */
+	public void deletePerfLike(PerfLike perfLike);
+
 
 }

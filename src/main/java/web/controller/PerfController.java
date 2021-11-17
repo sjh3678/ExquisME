@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.dto.Perf;
+import web.dto.PerfLike;
 import web.service.face.PerfService;
 import web.util.PagingPerf;
 
@@ -69,30 +72,53 @@ public class PerfController {
 	}
 	
 	@RequestMapping(value = "/view")
-	public String perfView(Perf perf, Model model) {
+	public String perfView(Perf perf, Model model, HttpSession session) {
 		logger.info("perf : {}", perf);
 		
+		//PERFUME_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER, ORIGIN_NAME, STORED_NAME, BRAND_NAME
 		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
 		logger.info("viewPerf : {}", viewPerf);
 		
+		//RANKING, NOTE_NO, CNT(노트 추천수), NOTE_NAME
 		List<HashMap<String, Object>> viewPerfMainAccord = perfService.getPerfMainAccord(perf);
 		logger.info("viewPerfMainAccord : {}", viewPerfMainAccord);
 		
-		HashMap<String, Object> viewPerfLike = perfService.getPerfLike(perf);
+		//CNT(향수 좋아요 수)
+		HashMap<String, Object> viewPerfLike = perfService.getPerfLike(perf.getPerfumeNo());
 		logger.info("viewPerfLike : {}", viewPerfLike);
 		
-		HashMap<String, Object> viewPerfDislike = perfService.getPerfDislike(perf);
+		//CNT(향수 싫어요 수)
+		HashMap<String, Object> viewPerfDislike = perfService.getPerfDislike(perf.getPerfumeNo());
 		logger.info("viewPerfDislike : {}", viewPerfDislike);
 		
+		// 탑노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
 		List<HashMap<String, Object>> viewPerfTopNote = perfService.getPerfTopNote(perf);
 		logger.info("viewPerfTopNote : {}", viewPerfTopNote);
 		
+		// 미들노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
 		List<HashMap<String, Object>> viewPerfMiddleNote = perfService.getPerfMiddleNote(perf);
 		logger.info("viewPerfMiddleNote : {}", viewPerfMiddleNote);
 		
+		// 베이스노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
 		List<HashMap<String, Object>> viewPerfBaseNote = perfService.getPerfBaseNote(perf);
 		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
 		
+		
+		if( session.getAttribute("login") != null) {
+			int userNo = (int) session.getAttribute("userNo");
+			logger.info("userNo : {}", userNo);
+		
+			//회원의 향수 좋아요 여부 count
+			int userLikeCnt = perfService.getPerfLikeCnt(perf.getPerfumeNo(), userNo);
+			logger.info("userLikeCnt : {}", userLikeCnt);
+			
+			//회원의 향수 싫어요 여부 count
+			int userDislikeCnt = perfService.getPerfDislikeCnt(perf.getPerfumeNo(), userNo);
+			logger.info("userDislikeCnt : {}", userDislikeCnt);
+			
+			model.addAttribute("userLikeCnt", userLikeCnt);
+			model.addAttribute("userDislikeCnt", userDislikeCnt);
+		}
 		
 		model.addAttribute("perf", viewPerf);		
 		model.addAttribute("mainAccord", viewPerfMainAccord);
@@ -102,7 +128,63 @@ public class PerfController {
 		model.addAttribute("middleNote", viewPerfMiddleNote);
 		model.addAttribute("baseNote", viewPerfBaseNote);
 		
-		
 		return null;
+	}
+	
+	@RequestMapping(value = "/like")
+	public String perfLike(PerfLike perfLike, Model model, HttpSession session) {
+		
+		perfLike.setUserNo( (int) session.getAttribute("userNo"));
+		logger.info("perfNo : {}", perfLike);
+		logger.info("likeType : {}", perfLike.getLikeType());
+		
+		
+		if("like".equals(perfLike.getLikeType()) ) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfService.deletePerfLike(perfLike);
+			
+			//향수 좋아요 튜플 삽입
+			perfService.newPerfLike(perfLike);
+			
+			model.addAttribute("perfLike", perfLike);
+			
+		}else if("likeCancel".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfService.deletePerfLike(perfLike);
+			
+		}else if("dislike".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfService.deletePerfLike(perfLike);
+			//향수 싫어요 튜플 삽입
+			
+		}else if("dislikeCancel".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfService.deletePerfLike(perfLike);
+			
+		}
+		
+		
+		//CNT(향수 좋아요 수)
+		HashMap<String, Object> viewPerfLike = perfService.getPerfLike(perfLike.getPerfumeNo());
+		logger.info("viewPerfLike : {}", viewPerfLike);
+		
+		//CNT(향수 싫어요 수)
+		HashMap<String, Object> viewPerfDislike = perfService.getPerfDislike(perfLike.getPerfumeNo());
+		logger.info("viewPerfDislike : {}", viewPerfDislike);
+		
+		//회원의 향수 좋아요 여부 count
+		int userLikeCnt = perfService.getPerfLikeCnt(perfLike.getPerfumeNo(), perfLike.getUserNo());
+		logger.info("userLikeCnt : {}", userLikeCnt);
+		
+		//회원의 향수 싫어요 여부 count
+		int userDislikeCnt = perfService.getPerfDislikeCnt(perfLike.getPerfumeNo(), perfLike.getUserNo());
+		logger.info("userDislikeCnt : {}", userDislikeCnt);
+		
+		model.addAttribute("perfLike", viewPerfLike);
+		model.addAttribute("perfDislike", viewPerfDislike);
+		model.addAttribute("userLikeCnt", userLikeCnt);
+		model.addAttribute("userDislikeCnt", userDislikeCnt);
+		
+		return "/perf/like";
 	}
 }

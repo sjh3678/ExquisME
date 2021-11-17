@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Perf;
+import web.dto.PerfLike;
 import web.util.PagingPerf;
 
 public interface PerfDao {
@@ -124,17 +125,50 @@ public interface PerfDao {
 	/**
 	 * 상세보기시 향수의 좋아요 정보 조회
 	 * 
-	 * @param perf
+	 * @param perfNo
 	 * @return
 	 */
-	public HashMap<String, Object> selectPerfLikeByPerfNo(Perf perf);
+	public HashMap<String, Object> selectPerfLikeByPerfNo(int perfNo);
 
 	
 	/**
 	 * 상세보기시 향수의 싫어요 정보 조회
 	 * 
-	 * @param perf
+	 * @param perfNo
 	 * @return
 	 */
-	public HashMap<String, Object> selectPerfDislikeByPerfNo(Perf perf);
+	public HashMap<String, Object> selectPerfDislikeByPerfNo(int perfNo);
+
+	/**
+	 * 상세보기시 유저의 좋아요 여부 확인
+	 * 
+	 * @param perf
+	 * @param userNo
+	 * @return
+	 */
+	public int selectPerfLikeCntByPerNoUserNo(HashMap<String, Object> hashmap);
+
+	
+	/**
+	 * 상세보기시 유저의 싫어요 여부 확인
+	 * 
+	 * @param perf
+	 * @param userNo
+	 * @return
+	 */
+	public int selectPerfDislikeCntByPerNoUserNo(HashMap<String, Object> hashmap);
+
+	/**
+	 * 향수 좋아요 추가
+	 * 
+	 * @param perfLike
+	 */
+	public void insertPerfLike(PerfLike perfLike);
+
+	/**
+	 * 향수 좋아요/싫어요 삭제
+	 * 
+	 * @param perfLike
+	 */
+	public void deletePerfLike(PerfLike perfLike);
 }

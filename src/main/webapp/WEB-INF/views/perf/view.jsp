@@ -3,10 +3,92 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-<style type="text/css">
+<script type="text/javascript">
+$(document).ready(function() {
 
-
-</style>
+	
+	
+	$("#perfLike").click(function() {
+		console.log("좋아요");
+		$.ajax({
+			type: "get"
+			, url: "/perf/like"
+			, data: {
+				perfumeNo: ${perf.PERFUME_NO }
+				, likeType: "like"
+			}
+			, dataType: "html"
+			, success: function(res) {
+					console.log("성공");
+					likeResult.innerHTML = res;
+			}
+			, error: function() {
+				console.log("실패");
+			}
+		}); //ajax end
+		
+	}); //$("#perfLike").click() end
+	
+	$("#perfLikeCancel").click(function() {
+		console.log("좋아요 취소");
+		$.ajax({
+			type: "get"
+			, url: "/perf/like"
+			, data: {
+				perfumeNo: ${perf.PERFUME_NO }
+				, likeType: "likeCancel"
+			}
+			, dataType: "html"
+			, success: function(res) {
+					console.log("성공");
+					likeResult.innerHTML = res;
+			}
+			, error: function() {
+				console.log("실패");
+			}
+		}); //ajax end
+	})
+	$("#perfDislike").click(function() {
+		console.log("싫어요");
+		$.ajax({
+			type: "get"
+			, url: "/perf/like"
+			, data: {
+				perfumeNo: ${perf.PERFUME_NO }
+				, likeType: "dislike"
+			}
+			, dataType: "html"
+			, success: function(res) {
+					console.log("성공");
+					likeResult.innerHTML = res;
+			}
+			, error: function() {
+				console.log("실패");
+			}
+		}); //ajax end
+	})
+	
+	$("#perfDislikeCancel").click(function() {
+		console.log("싫어요 취소");
+		$.ajax({
+			type: "get"
+			, url: "/perf/like"
+			, data: {
+				perfumeNo: ${perf.PERFUME_NO }
+				, likeType: "dislikeCancel"
+			}
+			, dataType: "html"
+			, success: function(res) {
+					console.log("성공");
+					likeResult.innerHTML = res;
+			}
+			, error: function() {
+				console.log("실패");
+			}
+		}); //ajax end
+	})
+})
+</script>
 
 
 
@@ -77,14 +159,33 @@
     ${perf.PERFUME_VITALITY }
     </th>
   </tr>
-  <tr>
+  <tr id="likeResult">
     <th class="tg-c3ow">
     <h4>Like</h4>
-    ${perfLike.CNT }
+    	<div id="perfLikeCnt">
+    	${perfLike.CNT }
+   		</div>
+   		<br>
+   		<c:if test="${userLikeCnt eq 0 && not empty login }">	
+    	<button id="perfLike">좋아요</button>
+    	</c:if>
+    	<c:if test="${userLikeCnt eq 1 && not empty login }">
+    	<button id="perfLikeCancel">좋아요 취소</button>
+    	</c:if>
     </th>
     <th class="tg-c3ow">
     <h4>Dislike</h4>
-    ${perfDislike.CNT }
+    	<div>
+    	${perfDislike.CNT }
+    	</div>
+    	<br>
+    	<c:if test="${userDislikeCnt eq 0 && not empty login }">
+    	<button id="perfDislike">싫어요</button>
+    	</c:if>
+    	<c:if test="${userDislikeCnt eq 1 && not empty login }">
+    	<button id="perfDislikeCancel">실어요 취소</button>
+    	</c:if>
+    
     </th>
   </tr>
 </thead>

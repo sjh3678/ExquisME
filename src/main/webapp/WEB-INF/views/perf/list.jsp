@@ -300,51 +300,52 @@ function keyword(){
 	<div class="search_div">
 		<input type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." /><br><br>
 	</div>
-	<label for="genderCode"> gender </label>
+	<h4> gender </h4>
 	<div class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 1 class="filter-item"
-			name="genderCode" /> female
+			<input type="checkbox" id="female" value= 1 class="filter-item"
+			name="genderCode" /> <label for="female"> female </lable>
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 2 class="filter-item"
-			name="genderCode" /> male
+			<input type="checkbox" id="male" value= 2 class="filter-item"
+			name="genderCode" /> <label for="male"> male </lable>
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= 3 class="filter-item"
-			name="genderCode" /> unisex
+			<input type="checkbox" id="unisex" value= 3 class="filter-item"
+			name="genderCode" /> <label for="unisex"> unisex </lable>
 		</div>
 	</div>
 	<hr>
 	
-	<lable for="noteCode" style="padding: 10px;"> top notes </lable>
+	<h4> top notes </h4>
 	<hr style="margin: 5px;">
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 1 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="clean" src="/resources/img/note/clean.jpg"> clean
+			<input type="checkbox" id="clean" value= 1 class="filter-item"
+			name="noteCode" /> <label for="clean"><img style="clip-path: circle(50% at 50% 50%);" alt="clean" src="/resources/img/note/clean.jpg"></label> clean
 		</div>
 		<div>
-			<input type="checkbox" value= 2 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="citrus" src="/resources/img/note/citrus.jpg"> citrus
+			<input type="checkbox" id="citrus" value= 2 class="filter-item"
+			name="noteCode" /> <label for="citrus"><img style="clip-path: circle(50% at 50% 50%);" alt="citrus" src="/resources/img/note/citrus.jpg"></label> citrus
 		</div>
 		<div>
-			<input type="checkbox" value= 3 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="water" src="/resources/img/note/water.jpg"> water
+			<input type="checkbox" id="water" value= 3 class="filter-item"
+			name="noteCode" /> <label for="water"><img style="clip-path: circle(50% at 50% 50%);" alt="water" src="/resources/img/note/water.jpg"></label> water
 		</div>
 	</div>
+	<br>
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 4 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="creamy" src="/resources/img/note/creamy.jpg"> creamy
+			<input type="checkbox" id="creamy" value= 4 class="filter-item"
+			name="noteCode" /> <label for="creamy"><img style="clip-path: circle(50% at 50% 50%);" alt="creamy" src="/resources/img/note/creamy.jpg"></label> creamy
 		</div>
 		<div>
-			<input type="checkbox" value= 5 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="fruit" src="/resources/img/note/fruit.jpg"> fruit
+			<input type="checkbox" id="fruit" value= 5 class="filter-item"
+			name="noteCode" /> <label for="fruit"><img style="clip-path: circle(50% at 50% 50%);" alt="fruit" src="/resources/img/note/fruit.jpg"></label> fruit
 		</div>
 		<div>
-			<input type="checkbox" value= 6 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="aroma" src="/resources/img/note/aroma.jpg"> aroma
+			<input type="checkbox" id="aroma" value= 6 class="filter-item"
+			name="noteCode" /> <label for="aroma"><img style="clip-path: circle(50% at 50% 50%);" alt="aroma" src="/resources/img/note/aroma.jpg"></label> aroma
 		</div>
 	</div>
 	
@@ -354,30 +355,31 @@ function keyword(){
 	<hr style="margin: 5px;">
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 7 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="green" src="/resources/img/note/green.jpg"> green
+			<input type="checkbox" id="green" value= 7 class="filter-item"
+			name="noteCode" /> <label for="green"><img style="clip-path: circle(50% at 50% 50%);" alt="green" src="/resources/img/note/green.jpg"></label> green
 		</div>
 		<div>
-			<input type="checkbox" value= 8 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="herbal" src="/resources/img/note/herbal.jpg"> herbal
+			<input type="checkbox" id="herbal" value= 8 class="filter-item"
+			name="noteCode" /> <label for="herbal"><img style="clip-path: circle(50% at 50% 50%);" alt="herbal" src="/resources/img/note/herbal.jpg"></label> herbal
 		</div>
 		<div>
-			<input type="checkbox" value= 9 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="floral" src="/resources/img/note/floral.jpg"> floral
+			<input type="checkbox" id="floral" value= 9 class="filter-item"
+			name="noteCode" /> <label for="floral"><img style="clip-path: circle(50% at 50% 50%);" alt="floral" src="/resources/img/note/floral.jpg"></label> floral
 		</div>
 	</div>
+	<br>
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 10 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="smoke" src="/resources/img/note/smoke.jpg"> smoke
+			<input type="checkbox" id="smoke" value= 10 class="filter-item"
+			name="noteCode" /> <label for="smoke"><img style="clip-path: circle(50% at 50% 50%);" alt="smoke" src="/resources/img/note/smoke.jpg"></label> smoke
 		</div>
 		<div>
-			<input type="checkbox" value= 11 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="rose" src="/resources/img/note/rose.jpg"> rose
+			<input type="checkbox" id="rose" value= 11 class="filter-item"
+			name="noteCode" /> <label for="rose"><img style="clip-path: circle(50% at 50% 50%);" alt="rose" src="/resources/img/note/rose.jpg"></label> rose
 		</div>
 		<div>
-			<input type="checkbox" value= 12 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="spice" src="/resources/img/note/spice.jpg"> spice
+			<input type="checkbox" id="spice" value= 12 class="filter-item"
+			name="noteCode" /> <label for="spice"><img style="clip-path: circle(50% at 50% 50%);" alt="spice" src="/resources/img/note/spice.jpg"></label> spice
 		</div>
 	</div>
 	
@@ -387,30 +389,31 @@ function keyword(){
 	<hr style="margin: 5px;">
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 13 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="leather" src="/resources/img/note/leather.jpg"> leather
+			<input type="checkbox" id="leather" value= 13 class="filter-item"
+			name="noteCode" /> <label for="leather"><img style="clip-path: circle(50% at 50% 50%);" alt="leather" src="/resources/img/note/leather.jpg"></label> leather
 		</div>
 		<div>
-			<input type="checkbox" value= 14 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="vanilla" src="/resources/img/note/vanilla.jpg"> vanilla
+			<input type="checkbox" id="vanilla" value= 14 class="filter-item"
+			name="noteCode" /> <label for="vanilla"><img style="clip-path: circle(50% at 50% 50%);" alt="vanilla" src="/resources/img/note/vanilla.jpg"></label> vanilla
 		</div>
 		<div>
-			<input type="checkbox" value= 15 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="chocolate" src="/resources/img/note/chocolate.jpg"> chocolate
+			<input type="checkbox" id="chocolate" value= 15 class="filter-item"
+			name="noteCode" /> <label for="chocolate"><img style="clip-path: circle(50% at 50% 50%);" alt="chocolate" src="/resources/img/note/chocolate.jpg"></label> chocolate
 		</div>
 	</div>
+	<br>
 	<div class="filter-container">
 		<div>
-			<input type="checkbox" value= 16 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="wood" src="/resources/img/note/wood.jpg"> wood
+			<input type="checkbox" id="wood" value= 16 class="filter-item"
+			name="noteCode" /> <label for="wood"><img style="clip-path: circle(50% at 50% 50%);" alt="wood" src="/resources/img/note/wood.jpg"></label> wood
 		</div>
 		<div>
-			<input type="checkbox" value= 17 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="earth" src="/resources/img/note/earth.jpg"> earth
+			<input type="checkbox" id="earth" value= 17 class="filter-item"
+			name="noteCode" /> <label for="earth"><img style="clip-path: circle(50% at 50% 50%);" alt="earth" src="/resources/img/note/earth.jpg"></label> earth
 		</div>
 		<div>
-			<input type="checkbox" value= 18 class="filter-item"
-			name="noteCode" /> <img style="clip-path: circle(50% at 50% 50%);" alt="musk" src="/resources/img/note/musk.jpg"> musk
+			<input type="checkbox" id="musk" value= 18 class="filter-item"
+			name="noteCode" /> <label for="musk"><img style="clip-path: circle(50% at 50% 50%);" alt="musk" src="/resources/img/note/musk.jpg"></label> musk
 		</div>
 	</div>
 
@@ -419,26 +422,26 @@ function keyword(){
 	<lable for="vitalityCode" style="padding: 10px;"> vitality </lable>
 	<div id="vitality" class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= "parfum" class="filter-item"
-			name="vitalityCode" />  parfum
+			<input type="checkbox" id = "parfum" value= "parfum" class="filter-item"
+			name="vitalityCode" /> <label for="parfum"> parfum </lable>
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= "eau de parfum" class="filter-item"
-			name="vitalityCode" />  eau de parfum
+			<input type="checkbox" id = "eaudeparfum" value= "eau de parfum" class="filter-item"
+			name="vitalityCode" /> <label for="eaudeparfum"> eau de parfum </lable>
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= "eau de toilette" class="filter-item"
-			name="vitalityCode" />  eau de toilette
+			<input type="checkbox" id = "eaudetoilette" value= "eau de toilette" class="filter-item"
+			name="vitalityCode" /> <label for="eaudetoilette"> eau de toilette </lable>
 		</div>
 	</div>
 	<div class="filter-container">
 		<div style="padding: 10px;">
-			<input type="checkbox" value= "eau de cologne" class="filter-item"
-			name="vitalityCode" />  eau de cologne
+			<input type="checkbox" id = "eaudecologne" value= "eau de cologne" class="filter-item"
+			name="vitalityCode" /> <label for="eaudecologne"> eau de cologne </lable>
 		</div>
 		<div style="padding: 10px;">
-			<input type="checkbox" value= "shower cologne" class="filter-item"
-			name="vitalityCode" />  shower cologne
+			<input type="checkbox" id = "showercologne" value= "shower cologne" class="filter-item"
+			name="vitalityCode" /> <label for="showercologne"> shower cologne </lable>
 		</div>
 	</div>
 </form>

@@ -5,17 +5,23 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.controller.PerfController;
 import web.dao.face.PerfDao;
 import web.dto.Perf;
+import web.dto.PerfLike;
 import web.service.face.PerfService;
 import web.util.PagingPerf;
 
 @Service
 public class PerfServiceImpl implements PerfService{
 
+	private Logger logger = LoggerFactory.getLogger(PerfServiceImpl.class);
+	
 	@Autowired PerfDao perfDao;
 	
 	@Override
@@ -76,13 +82,49 @@ public class PerfServiceImpl implements PerfService{
 	}
 
 	@Override
-	public HashMap<String, Object> getPerfLike(Perf perf) {
-		return perfDao.selectPerfLikeByPerfNo(perf);
+	public HashMap<String, Object> getPerfLike(int perfNo) {
+		return perfDao.selectPerfLikeByPerfNo(perfNo);
 	}
 
 	@Override
-	public HashMap<String, Object> getPerfDislike(Perf perf) {
-		return perfDao.selectPerfDislikeByPerfNo(perf);
+	public HashMap<String, Object> getPerfDislike(int perfNo) {
+		return perfDao.selectPerfDislikeByPerfNo(perfNo);
+	}
+
+	@Override
+	public int getPerfLikeCnt(int perfNo, int userNo) {
+		
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		hashmap.put("perfNo", perfNo);
+		hashmap.put("userNo", userNo);
+		
+		logger.info("hashmap : {}", hashmap);
+		
+		return perfDao.selectPerfLikeCntByPerNoUserNo(hashmap);
+	}
+
+	@Override
+	public int getPerfDislikeCnt(int perfNo, int userNo) {
+		
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		hashmap.put("perfNo", perfNo);
+		hashmap.put("userNo", userNo);
+		
+		return perfDao.selectPerfDislikeCntByPerNoUserNo(hashmap);
+	}
+
+	
+	@Override
+	public void newPerfLike(PerfLike perfLike) {
+		perfDao.insertPerfLike(perfLike);
+	}
+
+	
+	@Override
+	public void deletePerfLike(PerfLike perfLike) {
+		perfDao.deletePerfLike(perfLike);
 	}
 
 }
