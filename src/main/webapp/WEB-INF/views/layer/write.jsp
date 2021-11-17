@@ -59,35 +59,38 @@
 	width: 100%;
 	height: 350px;
 	margin: 10px auto;
-	border: solid 15px #8B4513;
+	border: solid 5px #8B4513;
 }
 .layer-item {
 	width: 20%;
-	height: 85%;
+	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
-	border: solid 15px #8B4513;
+	border: solid 5px #8B4513;
 	float: left;
 }
 .layer-img {
-	border: 15px solid #ccc;
+	border: 5px solid #ccc;
 	border-radius: 50px;
+}
+.layer-img div{
+	display: none;
 }
 .layer-result {
 	width: 20%;
-	height: 85%;
+	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
-	border: solid 15px #8B4513;
+	border: solid 5px #8B4513;
 	float: left;
 }
 
 .layer-operator {
 	width: 20%;
-	height: 85%;
+	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
-	border: solid 15px #8B4513;
+	border: solid 5px #8B4513;
 	float: left;
 	font-size: 20px;
 }
@@ -102,13 +105,13 @@
 	width:100%;
 	height: 70%;
 	margin: 0 auto;
-	boarder:solid 1px #ccc;
+	border:solid 5px #ccc;
 }
 .graf-bar {
 	width:100%;
 	height: 30%;
 	margin: 0 auto;
-	boarder:solid 1px #ccc;
+	border:solid 5px #ccc;
 }
 
 li span {
@@ -145,6 +148,31 @@ $(document).ready(function(){
 	}
 	
 //	$(document).on("click", "input[name='curP']", loadCurPage())
+	
+	
+/* 		var layerResult = ("#img1").children(":first-child");
+		var idx = $(this).children().attr("data-img");
+		$("[data-div='" + idx + "']").append( layerResult ); */
+
+	
+$(".layer-img").on("DOMNodeInserted", function() {
+// 	console.log("event")
+// 	console.log( $(this).children().length )
+
+	var len = $(this).children().length;
+		
+	if( len == 1 ) {
+// 		console.log('one')
+	} else {
+// 		console.log('more')
+		
+		var before = $(this).children(":first-child");
+		var idx = $(this).children().attr("data-img");
+		$("[data-div='" + idx + "']").append( before );
+	}
+	
+		
+})
 	
 
 });
@@ -206,8 +234,19 @@ function drag(ev) {
 
 function drop(ev) {
 	ev.preventDefault();
+	
 	var data = ev.dataTransfer.getData("text");
-	ev.target.appendChild(document.getElementById(data));
+
+	if( $(ev.target).hasClass("perf_img") ) {
+		console.log($(ev.target).parent().get(0).appendChild( document.getElementById(data) ));
+		$(ev.target).parent().get(0).appendChild( document.getElementById(data) )
+	
+		var idx = $(ev.target).attr("data-img");
+		console.log( idx )
+		$("[data-div='" + idx + "']").append( $(ev.target) );
+	} else {
+		ev.target.appendChild(document.getElementById(data));
+	}
 }
 
 </script>
@@ -215,21 +254,26 @@ function drop(ev) {
 
 <div class="container">
 
-<div class="layer-container">
-	<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
-	<div class="layer-item">
-		<div class="layer-img" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-		<div class="graf-bar">그래프</div>
+<form action="/layer/write" method="post">	
+	<div class="layer-container">
+		<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
+		<div class="layer-item">
+			<div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+			<div class="graf-bar" id="graf1">그래프1</div>
+		</div>
+		<div class="layer-operator" ><span class="child">+</span></div>
+		<div class="layer-item">
+			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+			<div class="graf-bar" id="graf2">그래프2</div>
+		</div>
+		<div class="layer-operator" ><span class="child">=</span></div>
+		<div class="layer-result">결과
+			<div class="imgbox1"></div>
+			<div class="imgbox2"></div>
+		</div>
 	</div>
-	<div class="layer-operator" ><span class="child">+</span></div>
-	<div class="layer-item">
-		<div class="layer-img" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-		<div class="graf-bar">그래프</div>
-	</div>
-	<div class="layer-operator" ><span class="child">=</span></div>
-	<div class="layer-result">결과</div>
-</div>
-
+	<input type="button" id="submit" value="전송" />
+</form>
 
 
 

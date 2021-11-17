@@ -29,7 +29,6 @@
 </c:if>
 
 <!-- 페이징 리스트 -->
-<% int i=0;%>
 <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 <c:if test="${paging.curPage eq i }">
 	<li><span onclick=loadCurPage(${i })><input name ="curP" type="hidden" value="${i }"/>${i }</span></li>

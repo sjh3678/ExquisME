@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="flex-container">
-<c:forEach items="${list }" var="perf">
+<c:forEach items="${list }" var="perf" varStatus="i">
     <div class="flex-items">
-		<div class="perf_pic" ondrop="drop(event)" ondragover="dragEnter(event)">
-			<img class="perf_img" id="${perf.STORED_NAME }" style="width:70px; height:80px; display: block; margin: auto;"
+<%-- 		<div class="perf_pic" data-div="${i.index }" ondrop="drop(event)" ondragover="dragEnter(event)"> --%>
+		<div class="perf_pic" data-div="${i.index }" ondragover="dragEnter(event)">
+			<img class="perf_img" data-img="${i.index }" id="${perf.STORED_NAME }" style="width:70px; height:80px; display: block; margin: auto;"
 			src="/resources/img/perf/${perf.STORED_NAME }" draggable="true" ondragstart="drag(event)">
 		</div>
 		<div class="perf_name">${perf.PERFUME_NAME }</div>

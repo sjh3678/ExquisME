@@ -26,6 +26,10 @@ public class LayerController {
 	//서비스 객체
 	@Autowired LayerService layerService;
 	
+	@RequestMapping(value="/layer/error")
+	public String layerError() {
+		return "/layout/error";
+	}
 	
 	@RequestMapping(value="/layer/list")
 	public void layerList(PagingLayer paramData, Model model) {}
@@ -79,6 +83,13 @@ public class LayerController {
 		int like = layerService.getCntLike(userNo);
 		
 	}
+	@RequestMapping(value="/layer/delete")
+	public void layerLikeDelete(HttpSession session) {	//레이어드 좋아요 취소
+		int userNo = (int) session.getAttribute("userNo");
+		//레이어드 좋아요 조회
+		int like = layerService.getCntLike(userNo);
+		
+	}
 	
 	@RequestMapping(value="/layer/write")
 	public void layerInsert(PagingLayerWrite paramData, Model model) {
@@ -98,10 +109,10 @@ public class LayerController {
 	}
 	
 	@RequestMapping(value="/layer/write", method = RequestMethod.POST)
-	public void layerInsertProc(HttpSession session, Model model) { //레이어드 등록
+	public String layerInsertProc(HttpSession session, Model model) { //레이어드 등록
 		int userNo = (int) session.getAttribute("userNo");
 		
-		
+		return "redirect: /layer/list";
 	}
 
 	@RequestMapping(value="/layer/write_ok", method = RequestMethod.POST)

@@ -8,7 +8,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	loadList(); //init list
 	
 
@@ -69,7 +68,7 @@ window.onscroll = function(e) {
     //window height + window scrollY 값이 document height보다 클 경우,
     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     	//실행할 로직 (콘텐츠 추가)
-    		loadList();
+	    	loadList();
         //$('#result').append(addContent);
     }
 };

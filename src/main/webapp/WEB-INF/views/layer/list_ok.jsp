@@ -27,7 +27,7 @@
 		<div id="perf_name1">1 :${layer.PNAME1 }</div>
 		<div id="perf_name2">2 :${layer.PNAME2 }</div>
 		
-		<div id="heart">♡</div>
+		<div id="heart"><img alt="heart" src="/resources/img/heart/heartBlank"></div>
 		<div id="heart_cnt">좋아요 수 : ${layer.SCNT }</div>
     </div>
 </c:forEach>
