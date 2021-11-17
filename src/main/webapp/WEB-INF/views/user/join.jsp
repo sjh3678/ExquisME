@@ -541,10 +541,10 @@ async function submit() {
 				// 회원가입 성공
 				if (result == "true") {
 					console.log("회원가입 성공")
-					$(location).attr("href", "/user/login");
+					return true;
 				} else {
 					console.log("회원가입 실패")
-					$(location).attr("href", "/user/join");
+					return false;
 				}
 			},
 			error: function(xhr, status, error) {
@@ -583,8 +583,15 @@ $(document).ready(function(){
 		}else if(joinCnt == 1){
 			console.log("회원 입력 페이지에서 이동")
  			// 모든 항목 검사 및 회원가입 실행
-			submit()
+			submit();
 			
+			$("#join-form").css("display", "none");
+			$("#info").css("color", "#877b9e");
+			$("#agree").css("color", "#877b9e");
+			$("#joinComplete").css("color", "black");
+			
+			$("#complete-join").css("display", "inline");
+			$("#pageBtn").css("display","none");
 		}
 	});
 	//아이디 중복체크
@@ -624,11 +631,9 @@ $(document).ready(function(){
 			$("#info").css("color", "black");
 			$("#agree").css("color", "#877b9e");
 			$("#agreement").css("display", "inline");
-			$("#join-form").css("display", "none");
-			$("#info").css("color", "#877b9e");
-			$("#agree").css("color", "black");
 		}
 	})
+	
 	$.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -690,6 +695,13 @@ $(document).ready(function(){
 		authKeyCheck();
 	})
    
+	$("#into-login").click(function(){
+		$(location).attr('href', '/user/login');
+	})
+	
+	$("#into-main").click(function(){
+		$(location).attr('href', '/user/main');
+	})
 })
 
 </script>
@@ -726,7 +738,7 @@ $(document).ready(function(){
 </style>
 <div class="container">
 <div class="text-center" id="pageName">
-<h1 id="ltitle"><span id="agree">약관 동의</span> <i class="fas fa-angle-right"></i> <span id="info">정보 입력</span> <i class="fas fa-angle-right"></i> <span id="sms">가입완료</span></h1>
+<h1 id="ltitle"><span id="agree">약관 동의</span> <i class="fas fa-angle-right"></i> <span id="info">정보 입력</span> <i class="fas fa-angle-right"></i> <span id="joinComplete">가입완료</span></h1>
 <hr>
 </div>
 <div class="text-center" id="agreement">
@@ -833,8 +845,16 @@ $(document).ready(function(){
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>
 </form>
-
-<div class="text-center"> 
+<div id="complete-join" Class="feedback text-center">
+<div class="text-center">
+<span>가입을 축하드립니다.</span><br>
+<img alt="이미지 불러오기 실패" src="/resources/img/profile/메일 그림.png">
+<br>
+<button id="into-login" class="btn btn-primary" type="button">로그인페이지로</button>
+<button id="into-main" class="btn btn-default" type="button">메인페이지로</button>
+</div>
+</div>
+<div class="text-center" id="pageBtn"> 
    	<button class="btn btn-primary" type="button" id="nextBtn">다음</button>
     <button class="btn btn-danger" type="button" id="cancleBtn">취소</button>
 </div>

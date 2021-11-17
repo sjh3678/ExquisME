@@ -29,10 +29,10 @@ $(document).ready(function(){
 <h3>메인 페이지</h3>
 <hr>
 <c:if test="${empty login }">
+
 <button id="login">로그인</button><br>
 <button id="join">회원가입</button><br>
 </c:if>
-
 <c:if test="${not empty login }">
 <label>${nick }님 환영합니다.</label><br>
 <!-- <button id="mypage">마이페이지</button><br> -->
