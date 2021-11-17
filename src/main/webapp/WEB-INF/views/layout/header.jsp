@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>exquis me</title>
 
 <%-- JQUERY --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
