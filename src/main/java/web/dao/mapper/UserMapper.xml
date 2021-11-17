@@ -14,6 +14,8 @@
 		<result column="phone" property="phone"/>
 		<result column="birth" property="birth"/>
 		<result column="gender" property="gender"/>
+		<result column="is_admin" property="isAdmin"/>
+		<result column="is_social" property="isSocial"/>
 		<result column="craete_date" property="createDate"/>
 		<result column="question_anwser" property="questionAnwser"/>
 		<result column="question_no" property="quesionNo"/>
@@ -47,19 +49,27 @@
 	
 	<select id="selectUserById" parameterType="web.dto.User" resultMap="User">
 		SELECT 
-			user_no, file_no, id, pw, nick, phone, birth, gender, create_date
+			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date
 		FROM tb_user
 		WHERE id = #{id}
 	</select>
 
 	<insert id="insertUserJoin" parameterType="web.dto.User">
-		INSERT INTO tb_user (user_no, file_no, id, pw, nick, phone, birth, gender, question_no, question_anwser)
-		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
+		INSERT INTO tb_user (user_no, file_no, id, pw, nick, email, phone, birth, gender, question_no, question_anwser)
+		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{email}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
 	</insert>
 	<select id="selectFileByUserNo" parameterType="web.dto.User" resultMap="File">
 		SELECT 
 			file_no, origin_name, stored_name, file_size
 		FROM tb_file
 		WHERE file_no = #{fileNo}
+	</select>
+	
+	<select id="selectUserByUserNo" parameterType="web.dto.User" resultMap="User">
+		SELECT 
+			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date,
+			is_admin, is_social
+		FROM tb_user
+		WHERE user_no = #{userNo}
 	</select>
 </mapper>

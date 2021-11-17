@@ -541,9 +541,10 @@ async function submit() {
 				// 회원가입 성공
 				if (result == "true") {
 					console.log("회원가입 성공")
-			
+					$(location).attr("href", "/user/login");
 				} else {
 					console.log("회원가입 실패")
+					$(location).attr("href", "/user/join");
 				}
 			},
 			error: function(xhr, status, error) {
@@ -813,7 +814,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" name="birth" placeholder="birth">
+<input type="text" class="form-control" id="birth" name="birthDate" placeholder="birth">
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>

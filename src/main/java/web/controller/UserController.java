@@ -1,5 +1,8 @@
 package web.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -83,21 +85,35 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinProc(User user, String pwCheck) {
+	public @ResponseBody boolean joinProc(User user, String pwCheck, String birthDate, Date date) {
 		logger.info("/join [POST] {}", user);
+		logger.info("형변환 전 생일 날짜 : {}", birthDate);
+		logger.info("생일 날짜 : {}", user.getBirth());
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date birth;
+		try {
+			birth = sDate.parse(birthDate);
+			System.out.println(birthDate);
+			user.setBirth(birth);
+			logger.info("전달된 날짜 : {}",birth);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(user.getPw().equals(pwCheck)) {
 			String encPw = UserSHA256.encrypt(user);
 			user.setPw(encPw);
+			logger.info("암호화 값 : {}", encPw);
 			boolean isJoin = userService.getJoinCheck(user);
 			if(isJoin) {
-				return "redirect:/user/main";	
+				return true;	
 			}else {
-				return "redirect:/user/join";
+				return false;
 			}
 		}else {
-			//회원가입 페이지 리다이렉트
-			return "redirect:/user/join";
+			return false;
 		}
 		
 	}
