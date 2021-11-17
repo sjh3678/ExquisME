@@ -106,63 +106,53 @@ $(document).ready(function() {
 	}
 	
 	
-	//ajax 좋아요
-	if( ${isHearted} ) {
+	//좋아요
+	if( ${isHearted} ) { //좋아요 상태
 		$("#btnHeart")
 			.addClass("btn-warning")
 			.html('좋아요 취소하기');
-	} else {
+	} else { // 좋아요 아닌 상태
 		$("#btnHeart")
 			.addClass("btn")
 			.html('좋아요');
 	}	
-	
-	
-
-	
-	
-	
 })
 
+//ajax 좋아요
 function heartClick() {
-			$.ajax({
-				type: "get"
-				, url: "/extagram/heart"
-				, data: { exPostNo: ${viewExta.EX_NO} }
-				, dataType: "json"
-				, success: function(res) {
-					console.log("좋아요 성공")
-					
-					if(res.result) { //좋아요 성공
-						$("#btnHeart")
-						.removeClass("btn")
-						.addClass("btn-warning")
-						.html('좋아요 취소하기');
-					} else { //좋아요 취소 성공
-						$("#btnHeart")
-						.revomeClass("btn-warning")
-						.addClass("btn")
-						.html('좋아요');
-					}
-					//좋아요 수 적용
-					$("#heartCnt").html(res.cnt);
-				}	
-				, error: function() {
-					console.log("좋아요 실패")
-				}
-				
+	$.ajax({
+		type: "get"
+		, url: "/extagram/heart"
+		, data: { exNo: ${viewExta.EX_NO} }
+		, dataType: "json"
+		, success: function(res) {
+			console.log("좋아요 성공")
 			
-			})
+			if(res.result) { //좋아요 성공
+				$("#btnHeart")
+				.removeClass("btn")
+				.addClass("btn-warning")
+				.html('좋아요 취소하기');
+			} else { //좋아요 취소 성공
+				$("#btnHeart")
+				.revomeClass("btn-warning")
+				.addClass("btn")
+				.html('좋아요');
+			}
+			//좋아요 수 적용
+			$("#btnHeart").html(res.cnt);
+		}	
+		, error: function() {
+			console.log("좋아요 실패")
 		}
-
-
-
+	})
+}
 
 </script>
 
 
 <div class="container">
-<h1>Extagram view ${cntHeart}</h1>
+<h1>Extagram view</h1>
 
 <hr>
 
@@ -174,18 +164,18 @@ function heartClick() {
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 
-<div id="viewContent" style="margin: 20px; height: 100px; width: 500px;">
+<div id="viewContent" style="margin: 20px; height: 130px; width: 500px;">
 ${viewExta.EX_CONTENT }
 </div>
 
 <div id="flex-container">
 	<div class="flex-items">
 		<div id="viewPicture">
-			<img style="width:auto; height:350px; display: block; margin: auto;" src="/resources/img/perf/${viewExta.PICTURE}">
+			<img style="width:80%; height:auto; display: block; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
 		</div>
 	</div>
 	<div class="flex-items">
-		<div id="viewComment" style="height: 321px; overflow-y: scroll; ">
+		<div id="viewComment" style="height: 250px; overflow-y: scroll; ">
 			<!-- AJAX 댓글 자리 -->
 		</div>
 		

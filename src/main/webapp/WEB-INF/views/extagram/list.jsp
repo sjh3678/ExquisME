@@ -34,6 +34,7 @@
 	margin: 0px;
 	height: 180px;
 	width: 258px;
+	overflow : hidden;
 }
 #d {
 	margin: 10px;
@@ -57,8 +58,8 @@ a:hover { color: black; text-decoration: none;}
 	<div id="flex-items" onclick="location.href='/extagram/view?exNo=${list.EX_NO}';" style="cursor: pointer;">
 		<div id="a"><img style="width: 30; height: 30px; border-radius: 70%;" src="/resources/img/perf/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }</div>
 		<div id="b">${list.EX_CONTENT }</div>
-		<div id="c"><img style="width:auto; height: 180px; display: block; margin: auto;"
-					src="/resources/img/perf/${list.PICTURE}"></div><!-- width: 258px -->
+		<div id="c"><img style="width:258px; height: auto; display: block; margin: auto;"
+					src="/upload/${list.PICTURE}"></div><!-- width: 258px -->
 		<div id="d">좋아요 ${list.HEART }&nbsp;&nbsp;&nbsp;댓글 ${list.COMM }</div>
 		<div id="e"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/> </div>
     </div>

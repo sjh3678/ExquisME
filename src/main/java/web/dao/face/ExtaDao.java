@@ -6,6 +6,7 @@ import java.util.List;
 import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.util.Paging;
 
 public interface ExtaDao {
@@ -93,16 +94,47 @@ public interface ExtaDao {
 	 * @return 전체 좋아요 수
 	 */
 	public int selectTotalCntHeart(ExLike heart);
+
 	
-	
-	
-	
-	//WRITE	
+//WRITE
+	/**
+	 * 첨부파일 정보를 삽입
+	 * @param fileUpload - 삽입할 첨부파일 DTO
+	 */
+	public void insertFile(FileUpload fileUpload);
+
 	/**
 	 * 작성한 Extagram DB에 삽입
 	 * @param extagram - 작성할 게시글의 DTO
 	 */
 	public void insertExtaWrite(Extagram extagram);
+
+//	/**
+//	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+//	 * @param viewExta - 조회할 파일 번호
+//	 * @return 조회된 첨부파일 정보
+//	 */
+//	public FileUpload selectFileUploadByExNo(Extagram viewExta);
+	
+	/**
+	 * 첨부파일 삭제
+	 * @param extagram - 첨부파일을 삭제할 게시글 DTO
+	 */
+	public void deleteFile(Extagram extagram);
+	
+	/**
+	 * DB에서 Extagram 삭제
+	 * @param extagram - 삭제할 게시글의 DTO
+	 */
+	public void deleteExta(Extagram extagram);
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 수정할 Extagram DB에서 조회
@@ -111,28 +143,12 @@ public interface ExtaDao {
 	public void updateExtaByExPostNo(Extagram extagram);
 	
 	/**
-	 * DB에서 Extagram 삭제
-	 * @param extagram - 삭제할 게시글의 DTO
-	 */
-	public void deleteExtaByExPostNo(Extagram extagram);
-	
-	/**
 	 * 신고하는 Extagram글을 신고DTO에 삽입
 	 * @param extagram - 신고할 게시글
 	 */
 	public void insertExtaReportByExPostNo(Extagram extagram);
-	
-	/**
-	 * 좋아요 정보 DB삽입
-	 * @param exLike
-	 */
-	public void insertExtaHeart(ExLike exLike);
-	
-	/**
-	 * 좋아요 정보 DB삭제
-	 * @param exLike
-	 */
-	public void deleteExtaHeart(ExLike exLike);
+
+
 
 	
 	
