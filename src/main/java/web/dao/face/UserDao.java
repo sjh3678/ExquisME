@@ -3,6 +3,8 @@ package web.dao.face;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.fileupload.FileUpload;
+
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.User;
@@ -75,6 +77,14 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<ExComm> selectCommentByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 회원의 프로필 사진 정보 조회
+	 * @param user - 조회할 회원 정보
+	 * @return - 조회된 파일 정보 반환
+	 */
+	public FileUpload selectFileByUserNo(User user);
+
 
 
 

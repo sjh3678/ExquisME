@@ -28,11 +28,11 @@ public interface ExtaService {
 	
 	/**
 	 * 게시글 상세보기
-	 * @param extagram - Extagram DTO의 ExPostNo값으로 상세하게 볼 게시글 선정
+	 * @param extagram - 각각의 DTO의 게시글 번호 값으로 상세하게 볼 게시글 선정
 	 * @return
 	 */
 	public HashMap<String, Object> getExtaView(Extagram viewExta);
-	
+
 	/**
 	 * 게시글 + 첨부파일 처리
 	 * @param extagram - 게시글 정보 DTO
@@ -54,6 +54,41 @@ public interface ExtaService {
 	 */
 	public List<HashMap<String, Object>> getCommentList(Extagram viewExta);
 
+	/**
+	 * exCommNo를 이용하여 나머지 ExComm의 DTO정보를 가져옴
+	 * @param comment - exCommNo
+	 * @return - DTO값
+	 */
+	public ExComm getInfoComment(ExComm comment);
+	
+	/**
+	 * 좋아요 상태확인
+	 * 
+	 * @param heart - 좋아요 상태를 확인할 게시글과 정보 
+	 * @return true - 좋아요 누른 상태, false - 좋아요 안누른 상태
+	 */
+	public boolean isHearted(ExLike heart);
+
+	/**
+	 * 좋아요 상태를 확인한 후 좋아요를 넣고 빼는 작업
+	 * @param heart - 좋아요 표시한 글
+	 * @return true - 추천, false -추천 취소
+	 */
+	public boolean getHeart(ExLike heart);
+	
+	/**
+	 * 총 좋아요 수를 구한다
+	 * @param heart - 좋아요수를 파악할 게시글 정보
+	 * @return 총 좋아요 수
+	 */
+	public int getTotalCntHeart(ExLike heart);
+
+	
+	
+	
+	
+	
+	
 	/**
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
@@ -83,6 +118,26 @@ public interface ExtaService {
 	 * @param exLike
 	 */
 	public void setHeartDelete(ExLike exLike);
+
+	/**
+	 * 댓글 삭제
+	 * @param comment
+	 */
+	public void deleteComment(ExComm comment);
+
+	/**
+	 * ExComm의 값을 exCommNo로 가져옴
+	 * @param comment
+	 * @return
+	 */
+	public Extagram getInfoViewExta(ExComm comment);
+
+	
+	
+	
+	
+
+
 
 
 

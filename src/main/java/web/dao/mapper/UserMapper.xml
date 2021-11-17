@@ -19,6 +19,14 @@
 		<result column="question_no" property="quesionNo"/>
 	</resultMap>
 	
+	<resultMap type="web.dto.FileUpload" id="File">
+		<id column="file_no" property="fileNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="stored_name" property="storedName"/>
+		<result column="file_size" property="fileSize"/>
+	</resultMap>
+	
 	<select id="selectUserCnt" parameterType="web.dto.User" resultType="int">
 		SELECT count(*) FROM tb_user
 		<choose>
@@ -48,5 +56,10 @@
 		INSERT INTO tb_user (user_no, file_no, id, pw, nick, phone, birth, gender, question_no, question_anwser)
 		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
 	</insert>
-	
+	<select id="selectFileByUserNo" parameterType="web.dto.User" resultMap="File">
+		SELECT 
+			file_no, origin_name, stored_name, file_size
+		FROM tb_file
+		WHERE file_no = #{fileNo}
+	</select>
 </mapper>

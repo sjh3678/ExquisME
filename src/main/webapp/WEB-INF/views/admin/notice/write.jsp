@@ -18,7 +18,7 @@ $(document).ready(function(){
 		submitContents($("#btnWrite"));
 		$("form").submit();
 	})
-	$("#bntCancel").click(function(){
+	$("#btnCancel").click(function(){
 		history.go(-1);
 	})
 })
