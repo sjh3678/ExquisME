@@ -84,13 +84,4 @@ public interface UserDao {
 	 * @return - 조회된 파일 정보 반환
 	 */
 	public FileUpload selectFileByUserNo(User user);
-
-	/**
-	 * 회원번호를 검색조건으로 회원정보 조회
-	 * @param param - 조회할 회원의 정보
-	 * @return - 조회된 회원의 세부정보 반환
-	 */
-	public User selectUserByUserNo(User user);
-
-
 }

@@ -239,13 +239,15 @@ public class UserController {
 	public String profile(User user, FileUpload file, HttpSession session, Model model) {
 		logger.info("프로필 정보 ajax 통신 접속");
 		user.setUserNo((Integer)session.getAttribute("userNo"));
-		user = userService.getUserInfo(user);
+		logger.info("유저 번호 : {}",user.getUserNo());
+		user = userService.getUserProfile(user);
 		file = userService.getFileInfo(user);
 		model.addAttribute("user", user);
 		model.addAttribute("file", file);
 		
 		return "profile";
 	}
+	
 	@Autowired private JavaMailSenderImpl mailSender;
 
 	@RequestMapping(value="/send/mail", method=RequestMethod.POST)

@@ -634,6 +634,7 @@ $(document).ready(function(){
 		}
 	})
 	
+	//날짜 선택기
 	$.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -667,12 +668,14 @@ $(document).ready(function(){
     })
     
     $("#email").blur(function(){
-    	checkEmailExist();
-    	$("#sendMail").css("display", "inline");
-		$("#emailCheckLabel").css("display", "none");
-		$("#emailCheck").css("display", "none");
-		$("#isVailEmail").css("display", "none");
-		$("#vail-email").css("display", "none");
+    	var isChecked = checkEmailExist();
+    	if(isChecked){
+    		$("#sendMail").css("display", "inline");
+			$("#emailCheckLabel").css("display", "none");
+			$("#emailCheck").css("display", "none");
+			$("#isVailEmail").css("display", "none");
+			$("#vail-email").css("display", "none");
+    	}
     }) 
     $("#pw").blur(function(){
     	checkPw();

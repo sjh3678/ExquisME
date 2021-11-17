@@ -65,7 +65,7 @@
 		WHERE file_no = #{fileNo}
 	</select>
 	
-	<select id="selectUserByUserNo" parameterType="web.dto.User" resultMap="User">
+	<select id="selectUserByUserNo" parameterType="int" resultMap="User">
 		SELECT 
 			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date,
 			is_admin, is_social

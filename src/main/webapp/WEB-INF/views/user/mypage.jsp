@@ -6,10 +6,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#profile").click(function(){
+		console.log("#profile clicked")
 		$.ajax({
 			type:"post"
+			, url: '/user/profile'
 			, data: {}
 			, dataType: "html"
+			, success:function(res){
+				if(res != null){
+					$('#rigthArea').html(res);
+				}
+			}
+			, error: function(e){
+				console.log(e)
+			}
 		});
 	})
 })
@@ -34,7 +44,7 @@ $(document).ready(function(){
 <div id="leftArea">
 <table class="table">
 <tr>
-	<td id="profile">프로필 수정</td>
+	<td><span id="profile">프로필 수정</span></td>
 </tr>
 <tr>
 	<td>개인 기록</td>

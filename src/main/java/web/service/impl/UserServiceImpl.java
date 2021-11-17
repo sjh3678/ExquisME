@@ -128,11 +128,8 @@ public class UserServiceImpl implements UserService{
 		logger.info("getUserInfo called");
 		
 		//회원의 세부정보 조회
-		if(!user.getId().equals("")) {
-			user = userDao.selectUserById(user);
-		}else if(user.getUserNo() !=0) {
-			user = userDao.selectUserByUserno(user.getUserNo());
-		}
+		user = userDao.selectUserById(user);
+		
 		return user;
 	}
 
@@ -199,5 +196,10 @@ public class UserServiceImpl implements UserService{
 	public FileUpload getFileInfo(User user) {
 		
 		return userDao.selectFileByUserNo(user);
+	}
+
+	@Override
+	public User getUserProfile(User user) {
+		return userDao.selectUserByUserno(user.getUserNo());
 	}
 }
