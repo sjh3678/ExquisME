@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <script type="text/javascript">
 $(document).ready(function() {
 
 	
-	
-	$("#perfLike").click(function() {
+	$(document.body).on("click", "#perfLike", function() {
 		console.log("좋아요");
 		$.ajax({
 			type: "get"
@@ -27,9 +29,9 @@ $(document).ready(function() {
 			}
 		}); //ajax end
 		
-	}); //$("#perfLike").click() end
+	}) //$(document.body).on("click", "#perfLike", function()  end
 	
-	$("#perfLikeCancel").click(function() {
+	$(document.body).on("click", "#perfLikeCancel", function() {
 		console.log("좋아요 취소");
 		$.ajax({
 			type: "get"
@@ -48,7 +50,7 @@ $(document).ready(function() {
 			}
 		}); //ajax end
 	})
-	$("#perfDislike").click(function() {
+	$(document.body).on("click", "#perfDislike", function() {
 		console.log("싫어요");
 		$.ajax({
 			type: "get"
@@ -68,7 +70,7 @@ $(document).ready(function() {
 		}); //ajax end
 	})
 	
-	$("#perfDislikeCancel").click(function() {
+	$(document.body).on("click", "#perfDislikeCancel", function() {
 		console.log("싫어요 취소");
 		$.ajax({
 			type: "get"
@@ -167,25 +169,27 @@ $(document).ready(function() {
    		</div>
    		<br>
    		<c:if test="${userLikeCnt eq 0 && not empty login }">	
-    	<button id="perfLike">좋아요</button>
+    	<i id="perfLike" class="far fa-thumbs-up" style="font-size: 30px; color: blue;"></i>
     	</c:if>
     	<c:if test="${userLikeCnt eq 1 && not empty login }">
-    	<button id="perfLikeCancel">좋아요 취소</button>
+    	<i id="perfLikeCancel" class="fas fa-thumbs-up" style="font-size: 30px; color: blue;"></i>
     	</c:if>
+    	<br>
     </th>
     <th class="tg-c3ow">
     <h4>Dislike</h4>
+    
     	<div>
     	${perfDislike.CNT }
     	</div>
     	<br>
     	<c:if test="${userDislikeCnt eq 0 && not empty login }">
-    	<button id="perfDislike">싫어요</button>
+    	<i id="perfDislike" class="far fa-thumbs-down" style="font-size: 30px; color: red;"></i>
     	</c:if>
     	<c:if test="${userDislikeCnt eq 1 && not empty login }">
-    	<button id="perfDislikeCancel">실어요 취소</button>
+    	<i id="perfDislikeCancel" class="fas fa-thumbs-down" style="font-size: 30px; color: red;"></i>
     	</c:if>
-    
+    	<br>
     </th>
   </tr>
 </thead>
@@ -256,6 +260,7 @@ $(document).ready(function() {
   </tr>
 </tbody>
 </table>
+<br>
 
 
 </div><!-- .container -->

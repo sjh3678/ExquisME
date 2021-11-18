@@ -126,19 +126,15 @@ public interface PerfService {
 	 */
 	public int getPerfDislikeCnt(int perfNo, int userNo);
 
+	
 	/**
-	 * 향수 좋아요 추가
+	 * 향수 좋아요/싫어요 처리
 	 * 
 	 * @param perfLike
 	 */
-	public void newPerfLike(PerfLike perfLike);
+	public void perfLikeProc(PerfLike perfLike);
 
-	/**
-	 * 향수 좋아요/싫어요 삭제
-	 * 
-	 * @param perfLike
-	 */
-	public void deletePerfLike(PerfLike perfLike);
+
 
 
 }

@@ -68,7 +68,7 @@ public class PerfController {
 		model.addAttribute("list", list);
 
 		
-		return "/perf/list_ok";
+		return "perf/list_ok";
 	}
 	
 	@RequestMapping(value = "/view")
@@ -128,7 +128,7 @@ public class PerfController {
 		model.addAttribute("middleNote", viewPerfMiddleNote);
 		model.addAttribute("baseNote", viewPerfBaseNote);
 		
-		return null;
+		return "perf/view";
 	}
 	
 	@RequestMapping(value = "/like")
@@ -138,31 +138,10 @@ public class PerfController {
 		logger.info("perfNo : {}", perfLike);
 		logger.info("likeType : {}", perfLike.getLikeType());
 		
+		//좋아요/싫어요 처리
+		perfService.perfLikeProc(perfLike);
 		
-		if("like".equals(perfLike.getLikeType()) ) {
-			//향수 좋아요/싫어요 튜플 삭제
-			perfService.deletePerfLike(perfLike);
-			
-			//향수 좋아요 튜플 삽입
-			perfService.newPerfLike(perfLike);
-			
-			model.addAttribute("perfLike", perfLike);
-			
-		}else if("likeCancel".equals(perfLike.getLikeType())) {
-			//향수 좋아요/싫어요 튜플 삭제
-			perfService.deletePerfLike(perfLike);
-			
-		}else if("dislike".equals(perfLike.getLikeType())) {
-			//향수 좋아요/싫어요 튜플 삭제
-			perfService.deletePerfLike(perfLike);
-			//향수 싫어요 튜플 삽입
-			
-		}else if("dislikeCancel".equals(perfLike.getLikeType())) {
-			//향수 좋아요/싫어요 튜플 삭제
-			perfService.deletePerfLike(perfLike);
-			
-		}
-		
+		model.addAttribute("perfLike", perfLike);
 		
 		//CNT(향수 좋아요 수)
 		HashMap<String, Object> viewPerfLike = perfService.getPerfLike(perfLike.getPerfumeNo());
@@ -185,6 +164,29 @@ public class PerfController {
 		model.addAttribute("userLikeCnt", userLikeCnt);
 		model.addAttribute("userDislikeCnt", userDislikeCnt);
 		
-		return "/perf/like";
+		return "perf/like";
 	}
+	
+	@RequestMapping(value = "/vote")
+	public String perfNoteVote(Perf perf, Model model, HttpSession session) {
+		
+		
+		//PERFUME_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER, ORIGIN_NAME, STORED_NAME, BRAND_NAME
+		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
+		logger.info("viewPerf : {}", viewPerf);
+				
+		//RANKING, NOTE_NO, CNT(노트 추천수), NOTE_NAME
+		List<HashMap<String, Object>> viewPerfMainAccord = perfService.getPerfMainAccord(perf);
+		logger.info("viewPerfMainAccord : {}", viewPerfMainAccord);
+				
+		
+		model.addAttribute("perf", viewPerf);		
+		model.addAttribute("mainAccord", viewPerfMainAccord);
+		
+		
+		return "perf/vote";
+	}
+	
+	
+	
 }

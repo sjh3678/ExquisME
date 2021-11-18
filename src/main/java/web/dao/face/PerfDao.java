@@ -166,9 +166,18 @@ public interface PerfDao {
 	public void insertPerfLike(PerfLike perfLike);
 
 	/**
+	 * 향수 싫어요 추가
+	 * 
+	 * @param perfLike
+	 */
+	public void insertPerfDislike(PerfLike perfLike);
+
+	/**
 	 * 향수 좋아요/싫어요 삭제
 	 * 
 	 * @param perfLike
 	 */
 	public void deletePerfLike(PerfLike perfLike);
+
+	
 }

@@ -207,24 +207,29 @@
 
 
 <select id="selectPerfLikeCntByPerNoUserNo" resultType="int" parameterType="hashmap">
-SELECT count(*) FROM tb_perf_like
-WHERE perfume_no = #{perfNo } AND user_no = #{userNo } AND perfume_islike = 1
+	SELECT count(*) FROM tb_perf_like
+	WHERE perfume_no = #{perfNo } AND user_no = #{userNo } AND perfume_islike = 1
 </select>
 
 
 <select id="selectPerfDislikeCntByPerNoUserNo" resultType="int" parameterType="hashmap">
-SELECT count(*) FROM tb_perf_like
-WHERE perfume_no = #{perfNo } AND user_no = #{userNo } AND perfume_islike = 0
+	SELECT count(*) FROM tb_perf_like
+	WHERE perfume_no = #{perfNo } AND user_no = #{userNo } AND perfume_islike = 0
 </select>
 
 <insert id="insertPerfLike" parameterType="web.dto.PerfLike">
-INSERT INTO tb_perf_like (PERFUME_LIKE_NO, PERFUME_NO, USER_NO, PERFUME_ISLIKE)
-	VALUES (TB_PERF_LIKE_SEQ.nextval, #{perfumeNo }, #{userNo }, 1)
+	INSERT INTO tb_perf_like (PERFUME_LIKE_NO, PERFUME_NO, USER_NO, PERFUME_ISLIKE)
+		VALUES (TB_PERF_LIKE_SEQ.nextval, #{perfumeNo }, #{userNo }, 1)
+</insert>
+
+<insert id="insertPerfDislike" parameterType="web.dto.PerfLike">
+	INSERT INTO tb_perf_like (PERFUME_LIKE_NO, PERFUME_NO, USER_NO, PERFUME_ISLIKE)
+		VALUES (TB_PERF_LIKE_SEQ.nextval, #{perfumeNo }, #{userNo }, 0)
 </insert>
 
 <delete id="deletePerfLike" parameterType="web.dto.PerfLike">
-DELETE FROM tb_perf_like
-	WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
+	DELETE FROM tb_perf_like
+		WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
 </delete>
 
 

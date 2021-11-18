@@ -115,16 +115,30 @@ public class PerfServiceImpl implements PerfService{
 		return perfDao.selectPerfDislikeCntByPerNoUserNo(hashmap);
 	}
 
-	
-	@Override
-	public void newPerfLike(PerfLike perfLike) {
-		perfDao.insertPerfLike(perfLike);
-	}
 
-	
 	@Override
-	public void deletePerfLike(PerfLike perfLike) {
-		perfDao.deletePerfLike(perfLike);
+	public void perfLikeProc(PerfLike perfLike) {
+		if("like".equals(perfLike.getLikeType()) ) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfDao.deletePerfLike(perfLike);
+			
+			//향수 좋아요 튜플 삽입
+			perfDao.insertPerfLike(perfLike);
+			
+		}else if("likeCancel".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfDao.deletePerfLike(perfLike);
+			
+		}else if("dislike".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfDao.deletePerfLike(perfLike);
+			//향수 싫어요 튜플 삽입
+			perfDao.insertPerfDislike(perfLike);
+			
+		}else if("dislikeCancel".equals(perfLike.getLikeType())) {
+			//향수 좋아요/싫어요 튜플 삭제
+			perfDao.deletePerfLike(perfLike);
+		}
 	}
 
 }
