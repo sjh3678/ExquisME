@@ -98,9 +98,57 @@ function loadList() {
 	$("#cur").html(curPage)
 };
 
+
+// function loadLike(e) {
+// 	var layeringNo = e;
+// 	console.log(layeringNo);
+// boolean login = (boolean) session.getAttribute("login");
+
+function loadLike( layeringNo ) {
+	
+		var $layeringBox = $("[data-layering_no=" + layeringNo + "]");
+	// 	console.log( layeringBox )
+	// 	console.log( $layeringBox.find("#heart img").attr("src") )
+		
+		$layeringBox.find("#heart img").toggleClass("heartRed")
+		
+		
+		$.ajax({
+			type: "get"
+			, url: "/layer/like"
+			, data: { 
+				layeringNo: layeringNo
+			}
+			, dataType: "json"
+			, success: function(res){
+				console.log("AJAX 성공")
+	// 			console.log(res.list.SCNT)
+				$layeringBox.find(".heart_scnt").html(res.list.SCNT)
+				
+	// 			result.innerHTML = res;
+	// 			$("#result").html( $("#result").html() + res );
+	
+			}
+			, error: function(){
+				console.log("AJAX 실패")
+				if (confirm("로그인이 필요한 서비스 입니다. \n로그인 화면으로 이동하시겠습니까?")) {
+					location.href="/user/login";
+				}else{
+					return false;
+				}// confirm end
+			}
+		})
+	
+};// loadLike end	
+
 </script>
 
 <style type="text/css">
+.heartRed {
+	content:url("/resources/img/heart/heartRed.png")
+}
+
+
 table {
 	table-layout: fixed;
 }
@@ -119,6 +167,7 @@ td:nth-child(2) {
 	flex-wrap: wrap;
 	width: 90%;
 	min-width: 1080px;
+	font-size: 11px;
 }
 #flex-items {
 	min-width: 260px;
@@ -141,19 +190,32 @@ td:nth-child(2) {
 	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
 	text-align: left;
+	font-size: 15px;
 }
+
 #perf_name1 {
 	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
-	text-align: center;
+	text-align: left;
 }
 #perf_name2 {
 	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
-	text-align: center;
+	text-align: left;
 }
+.perf_per {
+	border: 1px solid #ccc;
+	margin: 5px 10px 0px 10px;
+}
+.per1 {
+	float:left;
+}
+.per2 {
+	float:right;
+}
+
 #heart {
-	margin: 0px 10px 0px 10px;
+	margin: 15px 10px 0px 10px;
 	text-align: center;
 }
 #heart_cnt {

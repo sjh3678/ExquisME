@@ -2,6 +2,7 @@ package web.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,11 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import web.dao.face.LayerDao;
+import web.dto.LayerLike;
 import web.service.face.LayerService;
-import web.util.Paging;
 import web.util.PagingLayer;
 import web.util.PagingLayerWrite;
-import web.util.PagingPerf;
 
 @Service
 public class LayerServiceImpl implements LayerService {
@@ -26,13 +26,25 @@ public class LayerServiceImpl implements LayerService {
 	@Autowired LayerDao layerDao;
 	
 	@Override
-	public List<HashMap<String, Object>> getList(Model model, PagingLayer paging) {
+	public List<HashMap<String, Object>> getList(int userNo, PagingLayer paging) {
 
+		HashMap<String, Object> map = new HashMap<>();
 		
-		List<HashMap<String, Object>> list = layerDao.selectLayerListByTarget(paging);
+		map.put("userNo", userNo);
+		map.put("paging", paging);
+		logger.info("map {}", map);
+		System.out.println("map" + map);		
 		
+		List<HashMap<String, Object>> list = layerDao.selectLayerListByTarget(map);
+		
+//		for (int i = 0; i < list.size(); i++) {
+//			logger.info("list(i) : {}", list.get(i));
+//		}
+
+		logger.info("list {}", list);
 		return list;
 	}
+	
 	
 	@Override
 	public PagingLayer getLayerPaging(PagingLayer paramData) {
@@ -48,24 +60,29 @@ public class LayerServiceImpl implements LayerService {
 		return paging;
 	}
 	
-	@Override
-	public HashMap<String, Object> getView(Model model) {
-		
-		return layerDao.selectLayerViewByLayeringNo(model);
-	}
 
 	@Override
-	public int getCntLike(int userNo) {
+	public int getCntLike(LayerLike lLike) {
 		
-		int cnt = layerDao.selectLayerLikeCntByuserNo(userNo);
 		
-		if ( cnt != 1 ) {
-			layerDao.insertLayerLikeByuserNo(userNo);
-		} else if( cnt == 0) {
-			layerDao.deleteLayerLikeByuserNo(userNo);
+		int cnt = layerDao.selectLayerLikeCntByuserNo(lLike);
+		
+		logger.info("cnt : {}", cnt);
+		
+		return cnt;
+	}
+	
+	@Override
+	public HashMap<String, Object> setLayerLike(int cnt, LayerLike lLike ) {
+		logger.info("lLike : {}", lLike);
+		if (cnt == 1 ) {
+			layerDao.deleteLayerLike(lLike);
+			return layerDao.selectLayerLikeInfo(lLike);
+		}else if (cnt == 0 ) {
+			layerDao.insertLayerLike(lLike);
+			return layerDao.selectLayerLikeInfo(lLike);
 		}
-		
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -94,6 +111,9 @@ public class LayerServiceImpl implements LayerService {
 	public List<HashMap<String, Object>> getPerfList(PagingLayerWrite paging) {
 		return layerDao.selectPerfAll(paging);
 	}
+
+
+
 
 
 

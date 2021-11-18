@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import web.dto.LayerLike;
 import web.service.face.LayerService;
 import web.util.PagingLayer;
 import web.util.PagingLayerWrite;
@@ -35,17 +35,27 @@ public class LayerController {
 	public void layerList(PagingLayer paramData, Model model) {}
 	
 	@RequestMapping(value="/layer/list_ok", method = RequestMethod.GET)
-	public String layerListOk(Model model, PagingLayer paramData, String target) {	//리스트 조회
+	public String layerListOk(Model model, PagingLayer paramData, String target, HttpSession session) {	//리스트 조회
 		
 		System.out.println("target : " + paramData.getTarget());
 		System.out.println("paramData : " + paramData);
 		System.out.println("target : " + target);
+		logger.info("userNo : {}", session.getAttribute("userNo"));
+		
+		boolean userlogin = false;
+		if(session.getAttribute("login") != null) {
+			userlogin = (boolean) session.getAttribute("login");
+		}
+
+		int userNo = 0;
+		if ( session.getAttribute("login") != null ) {
+			userNo = (int) session.getAttribute("userNo");
+		}
 		
 		PagingLayer paging = layerService.getLayerPaging(paramData);
 		
 		//페이징 처리한 카테고리 별 리스트 조회
-		List<HashMap<String, Object>> list = layerService.getList(model, paging);
-		
+		List<HashMap<String, Object>> list = layerService.getList(userNo, paging);
 		
 		logger.info("paging {} ", paging);
 		
@@ -53,6 +63,7 @@ public class LayerController {
 			return null;
 		}
 		
+		model.addAttribute("login", userlogin);
 		model.addAttribute("paging",paging);
 		model.addAttribute("list",list);
 //		logger.debug("list {}", list);
@@ -66,29 +77,19 @@ public class LayerController {
 		return "/layer/list_ok";
 	}
 	
-	@RequestMapping(value="/layer/view", method = RequestMethod.GET)
-	public void layerView(HttpSession session,Model model) {	// 레이어드 상세보기
-		//세션에서 userNo 가져오기
-		logger.info("");
-		
-		
-		
-		HashMap<String, Object> view = layerService.getView(model);
-	}
 	
 	@RequestMapping(value="/layer/like")
-	public void layerLike(HttpSession session) {	//레이어드 좋아요 
-		int userNo = (int) session.getAttribute("userNo");
-		//레이어드 좋아요 조회
-		int like = layerService.getCntLike(userNo);
+	public String layerLike(HttpSession session, LayerLike lLike, Model model) {	//레이어드 좋아요
 		
-	}
-	@RequestMapping(value="/layer/delete")
-	public void layerLikeDelete(HttpSession session) {	//레이어드 좋아요 취소
-		int userNo = (int) session.getAttribute("userNo");
-		//레이어드 좋아요 조회
-		int like = layerService.getCntLike(userNo);
+		logger.info("layeringNo : {}", lLike.getLayeringNo() );
+		lLike.setUserNo((int) session.getAttribute("userNo"));
+		//로그인한 회원이 등록한 레이어드 좋아요 조회
+		int cnt = layerService.getCntLike(lLike);
 		
+		HashMap<String, Object> layerLike = layerService.setLayerLike(cnt,lLike);
+		
+		model.addAttribute("list", layerLike);
+		return "jsonView";
 	}
 	
 	@RequestMapping(value="/layer/write")

@@ -22,11 +22,13 @@
 		<interceptor>
 			<!-- 일반 사용자 로그인 인터셉터 -->
 			<!-- 인터셉터 적용 URL -->
-			<mapping path="/layer/**"/>
+			<mapping path="/layer/write"/>
 			<!-- 비적용 URL -->
-			<exclude-mapping path="/layer/list"/>
+<!-- 			<exclude-mapping path="/layer/list"/>
 			<exclude-mapping path="/layer/list_ok"/>
-			<exclude-mapping path="/layer/error"/>
+			<exclude-mapping path="/layer/like"/>
+			<exclude-mapping path="/layer/error"/> -->
+			
 			
 			<!-- 인터셉터 클래스 -->
 			<beans:bean class="web.controller.UserInterceptor" />

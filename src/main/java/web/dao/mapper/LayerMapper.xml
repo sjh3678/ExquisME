@@ -5,7 +5,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="web.dao.face.LayerDao">
-	<select id="selectLayerListByTarget" resultType="HashMap" parameterType="web.util.PagingLayer">
+
+	<select id="selectLayerListByTarget" resultType="HashMap" parameterType="HashMap">
     SELECT * FROM ( 
         SELECT rownum rnum, A.*FROM(
             SELECT
@@ -14,18 +15,22 @@
                 , P1.PERFUME_NAME Pname1, P2.perfume_name Pname2
                 , F1.file_no file1, F1.origin_name fileO1, F1.stored_name fileS1
                 , F2.file_no file2, F2.origin_name fileO2, F2.stored_name fileS2
-                , u.nick, (SELECT count(*) FROM tb_layer_like where layering_no = l.layering_no) SCnt
+                , u.nick
+                ,  F3.stored_name PROFILE
+                , (SELECT count(*) FROM tb_layer_like where layering_no = l.layering_no) SCnt
+                ,(SELECT count(*) FROM tb_layer_like WHERE layering_no = l.layering_no AND user_no = #{userNo }) SLike
             FROM tb_layer l 
             LEFT OUTER JOIN tb_user u ON  l.user_no = u.user_no  
             LEFT OUTER JOIN tb_perf P1 ON l.PERFUME_NO1 = P1.PERFUME_NO 
             LEFT OUTER JOIN tb_perf P2 ON l.PERFUME_NO2 = P2.PERFUME_NO 
             LEFT OUTER JOIN tb_file F1  ON P1.file_no = F1.file_no
             LEFT OUTER JOIN tb_file F2  ON P2.file_no = F2.file_no
+            LEFT OUTER JOIN tb_file F3 ON u.file_no = F3.file_no
             <choose>
-            <when test="target == 1">
+            <when test="paging.target == 1">
             	ORDER BY LAYERING_NO DESC
             </when>
-            <when test="target == 2">
+            <when test="paging.target == 2">
             	ORDER BY SCnt DESC
             </when>
             <otherwise>
@@ -34,9 +39,32 @@
             </choose>
         )A
     )layer_list
-     WHERE rnum BETWEEN #{startNo } AND #{endNo }
+     WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
 	</select>
 	
+	<!-- 좋아요 여부 조회 -->
+	<select id="selectLayerLikeCntByuserNo" resultType="int" parameterType="web.dto.LayerLike">
+		SELECT count(*) FROM tb_layer_like WHERE layering_no = #{layeringNo } AND user_no = #{userNo }
+	</select>
+	
+	<!-- 게시글 좋아요 등록 -->
+	<insert id="insertLayerLike" parameterType="web.dto.LayerLike">
+		INSERT INTO tb_layer_like (layering_like_no,user_no, layering_no)
+		VALUES (tb_layer_like_seq.nextval,#{userNo }, #{layeringNo })
+	</insert>
+	
+	<!-- 게시글 좋아요 취소 -->
+	<delete id="deleteLayerLike" parameterType="web.dto.LayerLike">
+		DELETE FROM tb_layer_like
+		WHERE user_no = #{userNo } AND layering_no = #{layeringNo }
+	</delete>
+	
+	<!-- 결과 조회 -->
+	<select id="selectLayerLikeInfo" resultType="HashMap" parameterType="web.dto.LayerLike">
+		SELECT  count(CASE WHEN layering_no = #{layeringNo } THEN 1 END) AS SCNT
+        		, count(CASE WHEN layering_no = #{layeringNo } AND user_no = #{userNo } THEN 1 END)  SLIKE
+		FROM tb_layer_like
+	</select>
 	<select id="selectLayerCntAll" resultType="int">
 		SELECT count(*) FROM tb_layer
 	</select>
@@ -68,5 +96,5 @@
 		) L
 	) PerfList
 	WHERE rnum BETWEEN #{startNo } AND #{endNo }
-</select>
+	</select>
 </mapper> 

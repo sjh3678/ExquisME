@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <style type="text/css">
 .container {
@@ -215,7 +214,7 @@ $(".layer-img").on("DOMNodeInserted", function() {
 				console.log("AJAX 성공")	
 				
 				result.innerHTML = res;
-				console.log( res )	
+				console.log( res )	;
 				console.log( curPage )	
 			}
 			, error: function(res){
@@ -249,6 +248,7 @@ function drop(ev) {
 	}
 }
 
+
 </script>
 
 
@@ -259,12 +259,22 @@ function drop(ev) {
 		<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
 		<div class="layer-item">
 			<div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-			<div class="graf-bar" id="graf1">그래프1</div>
+			
+			<div class="graf-bar" id="graf1">
+			    <input type="range" id="graf-in1" min="1" max="100"/>
+				<div id="graf-out1" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
+			</div>
+			
 		</div>
 		<div class="layer-operator" ><span class="child">+</span></div>
 		<div class="layer-item">
+		
 			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-			<div class="graf-bar" id="graf2">그래프2</div>
+			
+			<div class="graf-bar" id="graf2">
+				<input id="graf-in2" type="range" min="1" max="100"/>
+				<div id="graf-out2" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
+			</div>
 		</div>
 		<div class="layer-operator" ><span class="child">=</span></div>
 		<div class="layer-result">결과
@@ -304,6 +314,23 @@ function drop(ev) {
 
 </div>
 
+<script>
+document.querySelector('#graf-in1').addEventListener('input',e=>{
+    document.querySelector('#graf-out1').innerHTML= e.target.value;
+    var value2 = 100 - e.target.value;
+    document.querySelector('#graf-in2').value= value2;
+    document.querySelector('#graf-out2').innerHTML= value2;
+});
+document.querySelector('#graf-in2').addEventListener('input',i=>{
+    document.querySelector('#graf-out2').innerHTML= i.target.value;
+    
+    var value1 = 100 - i.target.value;
+    document.querySelector('#graf-in1').value= value1;
+    document.querySelector('#graf-out1').innerHTML= value1;
+});
+
+</script>
 
 </div><!-- .container -->
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
+
