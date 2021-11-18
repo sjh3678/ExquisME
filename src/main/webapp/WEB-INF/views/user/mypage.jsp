@@ -182,7 +182,9 @@ $(document).ready(function(){
 .pwCheck{
 	margin:0 auto;
 }
-
+.pageList{
+	font-size:20px;
+}
 </style>
 <div class="container">
 <div class="text-center">
@@ -191,16 +193,16 @@ $(document).ready(function(){
 <div id="leftArea">
 <table class="table">
 <tr>
-	<td><span id="profile">프로필 수정</span></td>
+	<td class="pageList"><span id="profile"><i class="fas fa-user-circle"></i>&nbsp;프로필 수정</span></td>
 </tr>
 <tr>
-	<td><span id="history">개인 기록</span></td>
+	<td class="pageList"><span id="history"><i class="fas fa-history"></i>&nbsp;개인 기록</span></td>
 </tr>
 <tr>
-	<td><span id="changePw">비밀번호 변경</span></td>
+	<td class="pageList"><span id="changePw"><i class="fas fa-lock"></i>&nbsp;비밀번호 변경</span></td>
 </tr>
 <tr>
-	<td><span id="deleteInfo">회원탈퇴</span></td>
+	<td class="pageList"><span id="deleteInfo"><i class="fas fa-lock"></i>&nbsp;회원탈퇴</span></td>
 </tr>
 </table>
 

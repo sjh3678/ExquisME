@@ -376,10 +376,9 @@ function telValidator() {
 }
 
 //생일 공백 검사
-function checkBirth() {
+function checkBirth(birth) {
 	console.log("생일 공백 검사")
-	
-	var birth = $("#birth");
+
 	var pattern = /\s/g;// 스페이스바 거르기
 	
 	if (birth.val() == "") {
@@ -433,7 +432,7 @@ function checkAnswer() {
 		return false;
 		
 	} else if(answer.val().match(pattern)){
-		console.log("답 공백문자");
+		console.log("공백문자");
 		answer.addClass("is-invalid");
 		answer.removeClass("is-valid");
 		
@@ -443,14 +442,17 @@ function checkAnswer() {
 		
 		return false;
 		
-	} else {
-		console.log("유효한 답변");
+	} else if('/^[0-9]{4}-[0-9]{2}-[0-9]{2}/'.test(birth.val())){
+		console.log("유효한 생일 형식");
 		answer.addClass("is-valid");
 		answer.removeClass("is-invalid");
 		
 		$("#answerError").css("display", "none");
 		$("#valid-answer").css("display", "inline");
 		
+		return true;
+	}else{
+		console.log("유효하지 않은 생일 형식");
 		return true;
 	}
 }
@@ -609,9 +611,9 @@ $(document).ready(function(){
 		checkEmailExist();
 	})
 	
-	$("#birth").blur(function(){
-		checkBirth();
-	})
+	function birthCheck(obj){
+		checkBirth(obj);
+	}
 	$("#phone").blur(function(){
 		telValidator();
 	})
@@ -653,7 +655,7 @@ $(document).ready(function(){
         closeText: '닫기'  // 닫기 버튼 패널
     });
 
-    $(function() {
+    $("#birth").focus(function() {
         $("#birth").datepicker();
     });
     
@@ -829,7 +831,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" name="birthDate" placeholder="birth">
+<input type="text" class="form-control" id="birth" name="birthDate" placeholder="birth" onchage=birthCheck(this)>
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>

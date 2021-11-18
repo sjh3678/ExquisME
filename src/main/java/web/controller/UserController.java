@@ -42,7 +42,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc( User user, HttpSession session){
+	public @ResponseBody boolean loginProc( User user, HttpSession session){
 		logger.info("/login [POST]");
 		
 		//비밀번호 암호화
@@ -62,11 +62,9 @@ public class UserController {
 			session.setMaxInactiveInterval(180*60); //3시간뒤 세션값 삭제
 			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
 			logger.info("{}",userNo);
-			return "redirect:/user/main";
-		}else {
-			return "redirect:/user/login";
-		}
 		
+		}
+		return isLogin;
 	}
 	
 	@RequestMapping(value="/logout")
