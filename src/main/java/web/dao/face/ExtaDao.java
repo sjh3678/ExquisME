@@ -48,11 +48,6 @@ public interface ExtaDao {
 	 */
 	public void insertComment(ExComm comm);
 
-	/**
-	 * 해당하는 댓글 데이터 삭제
-	 * @param comment - exCommNo
-	 */
-	public void deleteComment(ExComm comment);
 	
 	/**
 	 * comment의 exCommNo를 이용하여 나머지 DTO의 값을 불러옴
@@ -82,12 +77,8 @@ public interface ExtaDao {
 	 */
 	public void insertHeart(ExLike heart);
 
-	/**
-	 * 좋아요 상태 지우기
-	 * @param heart - 좋아요 정보 객체
-	 */
-	public void deleteHeart(ExLike heart);
 
+	
 	/**
 	 * 게시글 전체 추천 수 조회
 	 * @param heart - 좋아요 수를 조회할 게시글 정보
@@ -116,17 +107,8 @@ public interface ExtaDao {
 //	 */
 //	public FileUpload selectFileUploadByExNo(Extagram viewExta);
 	
-	/**
-	 * 첨부파일 삭제
-	 * @param extagram - 첨부파일을 삭제할 게시글 DTO
-	 */
-	public void deleteFile(Extagram extagram);
 	
-	/**
-	 * DB에서 Extagram 삭제
-	 * @param extagram - 삭제할 게시글의 DTO
-	 */
-	public void deleteExta(Extagram extagram);
+	
 	
 	
 	
@@ -147,6 +129,44 @@ public interface ExtaDao {
 	 * @param extagram - 신고할 게시글
 	 */
 	public void insertExtaReportByExPostNo(Extagram extagram);
+	
+	/**
+	 * commNo에 해당하는 댓글 데이터 삭제
+	 * @param comment - exCommNo
+	 */
+	public void deleteComment(ExComm comment);
+	
+	/**
+	 * exNo에 해당하는 댓글 데이터 삭제
+	 * @param extagram
+	 */
+	public void deleteCommentByExNo(Extagram extagram);
+	
+	/**
+	 * ExLikeNo 값을 이용하여 좋아요 상태 지우기
+	 * @param heart - 좋아요 정보 객체
+	 */
+	public void deleteHeart(ExLike heart);
+	
+	/**
+	 * ExNo를 이용하여 좋아요 상태 전부 지우기
+	 * @param extagram
+	 */
+	public void deleteHeartByExNo(Extagram extagram);
+	
+
+	/**
+	 * 첨부파일 삭제
+	 * @param extagram - 첨부파일을 삭제할 게시글 DTO
+	 */
+	public void deleteFile(Extagram extagram);
+	
+	/**
+	 * DB에서 Extagram 삭제
+	 * @param extagram - 삭제할 게시글의 DTO
+	 */
+	public void deleteExta(Extagram extagram);
+
 
 
 

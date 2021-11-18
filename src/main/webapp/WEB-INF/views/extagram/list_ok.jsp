@@ -12,7 +12,7 @@
 					src="/upload/${list.PICTURE}"></div><!-- width: 258px -->
 		<div id="d">
 			<img style="width: 20px; height: auto;" src="/resources/img/heart/heartRed.png"/> ${list.HEART }&nbsp;&nbsp;
-			<img style="width: 27px; height: auto;" src="/resources/img/heart/balloon.jpg"/> ${list.COMM }
+			<img style="width: 20px; height: auto;" src="/resources/img/heart/balloon.png"/> ${list.COMM }
 		</div>
 		<div id="e"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/> </div>
     </div>

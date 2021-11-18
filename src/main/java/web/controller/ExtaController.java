@@ -70,7 +70,7 @@ public class ExtaController {
 		}
 		
 		if( session.getAttribute("login") == null) {
-			model.addAttribute("msg", "로그인 후 상세보기가 가능합니다");
+			model.addAttribute("msg", "로그인 후 상세보기가 가능합니다.");
 			model.addAttribute("url", "/extagram/list");
 		}
 		
@@ -162,7 +162,7 @@ public class ExtaController {
 	public String extaWrite(Extagram extagram, HttpSession session, Model model) {
 
 		if( session.getAttribute("login") == null) {
-			model.addAttribute("msg", "로그인 후 상세보기가 가능합니다");
+			model.addAttribute("msg", "로그인 후 글 작성이 가능합니다.");
 			model.addAttribute("url", "/extagram/list");
 		}
 		
@@ -181,7 +181,7 @@ public class ExtaController {
 
 //DELETE
 	@RequestMapping(value="/extagram/delete")
-	public String extaDelete(Extagram extagram) {
+	public String extaDelete(Extagram extagram, Model model) {
 		
 		extaService.deleteExta(extagram);
 		

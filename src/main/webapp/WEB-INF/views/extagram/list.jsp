@@ -17,7 +17,7 @@
 	height: 385px;
 	border-radius: 3px; 
 	margin: 4px;
-	border: 1px solid #ddd;
+	border: 1px solid #eee;
 }
 #a {
 	margin: 10px;
@@ -46,8 +46,8 @@
 #go-top {
   display: none;
   position: fixed;
-  right: 20px;
-  bottom: 100px;
+  right: 50px;
+  bottom: 50px;
   outline: 0;
   border: 0;
   background: transparent;
@@ -139,10 +139,11 @@ jQuery(document).ready(function () {
 </div>
 </div><!-- .container -->
 
-<button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
-  class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd"
-    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
-</svg></button>
+<button id="go-top">
+	<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+  		class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+	</svg>
+</button>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

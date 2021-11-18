@@ -73,10 +73,6 @@
 		VALUES (tb_ex_comm_seq.nextval, #{userNo}, #{exPostNo}, #{exComm}, sysdate)
 	</insert>
 	
-	<delete id="deleteComment" parameterType="web.dto.ExComm">
-		DELETE tb_ex_comm
-		WHERE ex_comm_no = #{exCommNo}	
-	</delete>
 	
 	<select id="selectInfoComment" resultType="web.dto.ExComm" parameterType="web.dto.ExComm">
 		SELECT
@@ -102,11 +98,6 @@
 		VALUES ( tb_ex_like_seq.nextval, #{userNo}, #{exPostNo} )
 	</insert>
 	
-	<delete id="deleteHeart" parameterType="web.dto.ExLike">
-		DELETE tb_ex_like
-		WHERE user_no = #{userNo}
-			AND ex_post_no = #{exPostNo}
-	</delete>
 	
 	<select id="selectTotalCntHeart" parameterType="web.dto.ExLike" resultType="int">
 		SELECT COUNT(*) FROM tb_ex_like
@@ -136,7 +127,30 @@
 <!-- 		    LEFT OUTER JOIN tb_extagram x ON f.file_no = x.file_no -->
 <!-- 		WHERE x.ex_no = #{exNo} -->
 <!-- 	</select> -->
+
+
+<!-- DELETE -->
+	<delete id="deleteHeart" parameterType="web.dto.ExLike">
+		DELETE tb_ex_like
+		WHERE user_no = #{userNo}
+			AND ex_post_no = #{exPostNo}
+	</delete>
+
+	<delete id="deleteHeartByExNo" parameterType="web.dto.Extagram">
+		DELETE tb_ex_like
+		WHERE ex_post_no = #{exNo}
+	</delete>
 	
+	<delete id="deleteComment" parameterType="web.dto.ExComm">
+		DELETE tb_ex_comm
+		WHERE ex_comm_no = #{exCommNo}	
+	</delete>
+
+	<delete id="deleteCommentByExNo" parameterType="web.dto.Extagram">
+		DELETE tb_ex_comm
+		WHERE ex_post_no = #{exNo}	
+	</delete>
+
 	<delete id="deleteFile" parameterType="int">
 		DELETE tb_file
 		WHERE file_no = #{fileNo}
@@ -149,28 +163,11 @@
 	
 	
 	
-	
-	
-	
-	<update id="updateExtaByExPostNo">
-	</update>
-	
-	<delete id="deleteExtaByExPostNo">
-	</delete>
-	
-	<insert id="insertExtaReportByExPostNo">
-	</insert>
-	
-	<insert id="insertExtaHeart">
-	</insert>
-	
-	<delete id="deleteExtaHeart">
-	</delete>
-	
-	<insert id="insertExtaComm">
-	</insert>
-	
-	<delete id="deleteExtaComm">
-	</delete>
 
 </mapper>
+
+
+
+
+
+

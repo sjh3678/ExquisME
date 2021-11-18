@@ -99,7 +99,7 @@ public interface ExtaService {
 	
 	
 	/**
-	 * 게시글 + 첨부파일 삭제
+	 * 게시글 + 첨부파일 + 좋아요 + 댓글 삭제
 	 * @param extagram
 	 * @return
 	 */

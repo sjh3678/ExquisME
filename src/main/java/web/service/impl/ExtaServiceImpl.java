@@ -23,7 +23,7 @@ import web.util.PagingExtagram;
 
 @Service
 public class ExtaServiceImpl implements ExtaService {
-	
+//	private static final Logger logger = LoggerFactory.getLogger(ExtaService.class);	
 	@Autowired ExtaDao extaDao;
 	@Autowired ServletContext context;
 	
@@ -172,9 +172,12 @@ public class ExtaServiceImpl implements ExtaService {
 	
 	
 	@Override
+	@Transactional
 	public void deleteExta(Extagram extagram) {
-		extaDao.deleteExta(extagram);
-		extaDao.deleteFile(extagram);
+		extaDao.deleteHeartByExNo(extagram);//좋아요
+		extaDao.deleteCommentByExNo(extagram);//댓글
+		extaDao.deleteFile(extagram);//FILE
+		extaDao.deleteExta(extagram);//게시글
 	}
 	
 	
