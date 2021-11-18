@@ -1,12 +1,6 @@
 package web.dao.face;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.fileupload.FileUpload;
-
-import web.dto.ExComm;
-import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.dto.User;
 
 public interface UserDao {
@@ -51,37 +45,9 @@ public interface UserDao {
 	public void deleteUserByUserno(int userno);
 
 	/**
-	 * 회원의 Extagram 기록 조회
-	 * @param userNo - 조회할 회원 번호
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<Extagram> selectExtraByUserNo(int userNo);
-
-	/**
-	 * 회원의 Extagram 기록 검색
-	 * @param map - 검색할 조건
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<Extagram> selectSearchExtaByUserNo(HashMap<String, Object> map);
-
-	/**
-	 * 회원의 댓글 기록 조회
-	 * @param userNo - 조회할 회원 번호
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<ExComm> selectCommentByUserNo(int userNo);
-
-	/**
-	 * 회원의 댓글 기록 검색
-	 * @param map - 검색할 조건
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<ExComm> selectCommentByUserNo(HashMap<String, Object> map);
-
-	/**
 	 * 회원의 프로필 사진 정보 조회
-	 * @param user - 조회할 회원 정보
+	 * @param fileNo - 조회할 파일 정보
 	 * @return - 조회된 파일 정보 반환
 	 */
-	public FileUpload selectFileByUserNo(User user);
+	public FileUpload selectFileByFileNo(int fileNo);
 }

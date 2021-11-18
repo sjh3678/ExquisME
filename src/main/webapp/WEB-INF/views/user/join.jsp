@@ -622,7 +622,7 @@ $(document).ready(function(){
 	$("#cancleBtn").click(function(){
 		if(joinCnt == 0){
 			joinCnt--;
-			$(history).go(-1);
+			$(location).attr("href", "/user/main");
 			
 		}else if(joinCnt == 1){
 			

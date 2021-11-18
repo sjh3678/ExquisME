@@ -17,24 +17,27 @@ public class User {
 	private String gender;
 	private String phone;
 	private String isAdmin;
+	private String isSocial;
 	private Date createDate;
 	private String questionAnwser;
 	private int questionNo;
-	
 	
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", fileNo=" + fileNo + ", id=" + id + ", pw=" + pw + ", salt=" + salt
 				+ ", nick=" + nick + ", email=" + email + ", birth=" + birth + ", gender=" + gender + ", phone=" + phone
-				+ ", isAdmin=" + isAdmin + ", createDate=" + createDate + ", questionAnwser=" + questionAnwser
-				+ ", questionNo=" + questionNo + ", getPhone()=" + getPhone() + ", getUserNo()=" + getUserNo()
-				+ ", getFileNo()=" + getFileNo() + ", getId()=" + getId() + ", getPw()=" + getPw() + ", getSalt()="
-				+ getSalt() + ", getNick()=" + getNick() + ", getEmail()=" + getEmail() + ", getBirth()=" + getBirth()
-				+ ", getIsAdmin()=" + getIsAdmin() + ", getCreateDate()=" + getCreateDate() + ", getQuestionAnwser()="
-				+ getQuestionAnwser() + ", getQuestionNo()=" + getQuestionNo() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", isAdmin=" + isAdmin + ", isSocial=" + isSocial + ", createDate=" + createDate + ", questionAnwser="
+				+ questionAnwser + ", questionNo=" + questionNo + "]";
 	}
-	
+
+	public String getIsSocial() {
+		return isSocial;
+	}
+
+	public void setIsSocial(String isSocial) {
+		this.isSocial = isSocial;
+	}
+
 	public String getGender() {
 		return gender;
 	}

@@ -4,7 +4,6 @@ package web.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,10 @@ import org.springframework.stereotype.Service;
 import web.dao.face.UserDao;
 import web.dto.ExComm;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
-import web.util.UserSHA256;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -76,13 +76,13 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public boolean getCheckPassword(String salt, int userno) {
+	public boolean getCheckPassword(String pw, int userNo) {
 		
 		logger.info("getCheckPassword called");
 		
-		User user = userDao.selectUserByUserno(userno);
+		User user = userDao.selectUserByUserno(userNo);
 		
-		if(salt.equals(user.getSalt())) {
+		if(pw.equals(user.getPw())) {
 			//비밀번호 일치
 			return true;
 		}else {
@@ -92,13 +92,14 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public boolean setUpdatePw(String pw, String pwChk, int userno) {
+	public boolean setUpdatePw(User user, String pwChk) {
 		
 		logger.info("setChangePw called");
-		
+		logger.info("변경값 : {}", user.getPw());
+		logger.info("확인값 : {}",pwChk);
 		//변경값 확인
-		if(pw == pwChk) {
-			User user = userDao.selectUserByUserno(userno);
+		if(user.getPw().equals(pwChk)) {
+			
 			//비밀번호 변경
 			userDao.updatePw(user);
 			
@@ -116,11 +117,19 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void deleteUser(int userno) {
+	public boolean deleteUser(int userNo) {
 		logger.info("deleteUser called");
-		
 		//회원정보 삭제
-		userDao.deleteUserByUserno(userno);
+		userDao.deleteUserByUserno(userNo);
+		User user = new User();
+		user.setUserNo(userNo);
+		int cnt = userDao.selectUserCnt(user);
+		
+		if(cnt == 0) {
+			logger.info("삭제 성공");
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -131,30 +140,6 @@ public class UserServiceImpl implements UserService{
 		user = userDao.selectUserById(user);
 		
 		return user;
-	}
-
-	@Override
-	public List<Extagram> getExtaHistory(int userNo) {
-		
-		return userDao.selectExtraByUserNo(userNo);
-	}
-
-	@Override
-	public List<Extagram> searchExtaHistory(String search, int userNo) {
-		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
-		return userDao.selectSearchExtaByUserNo(map);
-	}
-
-	@Override
-	public List<ExComm> getHistory(int userNo) {
-		
-		return userDao.selectCommentByUserNo(userNo);
-	}
-
-	@Override
-	public List<ExComm> searchCommentHistory(String search, int userNo) {
-		HashMap<String, Object> map = null; // dto 2개값 입력해서 전달
-		return userDao.selectCommentByUserNo(map);
 	}
 
 	@Override
@@ -194,12 +179,16 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public FileUpload getFileInfo(User user) {
-		
-		return userDao.selectFileByUserNo(user);
+		logger.info("회원 프로필 파일정보 조회 {}", user.getFileNo());
+		int fileNo = user.getFileNo();
+		FileUpload file = userDao.selectFileByFileNo(fileNo);
+		return file;
 	}
 
 	@Override
 	public User getUserProfile(User user) {
-		return userDao.selectUserByUserno(user.getUserNo());
+		logger.info("getUserProfile called {}", user.getUserNo());
+		int userNo = user.getUserNo();
+		return userDao.selectUserByUserno(userNo);
 	}
 }

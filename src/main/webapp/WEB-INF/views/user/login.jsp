@@ -6,8 +6,31 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#loginBtn").click(function(){
+		var formData = $("form").serialize();
 		console.log("#loginBtn clicked");
-		$("form").submit();
+		$.ajax({
+			type: 'post',
+			url: '/user/login',
+			dataType: 'text',
+			data: formData,
+			success: function(result) {
+				console.log(result);
+				// 회원가입 성공
+				if (result) {
+					console.log("로그인 성공")
+					alert("로그인 성공");
+					$(location).attr("href", "/user/main");
+					return true;
+				} else {
+					alert("로그인 실패");
+					console.log("로그인 실패")
+					return false;
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr, status, error);
+			}
+		})
 	})
 })
 </script>

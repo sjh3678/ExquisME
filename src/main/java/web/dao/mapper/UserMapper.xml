@@ -16,14 +16,13 @@
 		<result column="gender" property="gender"/>
 		<result column="is_admin" property="isAdmin"/>
 		<result column="is_social" property="isSocial"/>
-		<result column="craete_date" property="createDate"/>
+		<result column="create_date" property="createDate"/>
 		<result column="question_anwser" property="questionAnwser"/>
 		<result column="question_no" property="quesionNo"/>
 	</resultMap>
 	
 	<resultMap type="web.dto.FileUpload" id="File">
 		<id column="file_no" property="fileNo"/>
-		<result column="user_no" property="userNo"/>
 		<result column="origin_name" property="originName"/>
 		<result column="stored_name" property="storedName"/>
 		<result column="file_size" property="fileSize"/>
@@ -58,18 +57,24 @@
 		INSERT INTO tb_user (user_no, file_no, id, pw, nick, email, phone, birth, gender, question_no, question_anwser)
 		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{email}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
 	</insert>
-	<select id="selectFileByUserNo" parameterType="web.dto.User" resultMap="File">
+	
+	<select id="selectFileByFileNo" parameterType="int" resultMap="File">
 		SELECT 
 			file_no, origin_name, stored_name, file_size
 		FROM tb_file
 		WHERE file_no = #{fileNo}
 	</select>
 	
-	<select id="selectUserByUserNo" parameterType="int" resultMap="User">
+	<select id="selectUserByUserno" parameterType="int" resultMap="User">
 		SELECT 
 			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date,
 			is_admin, is_social
 		FROM tb_user
 		WHERE user_no = #{userNo}
 	</select>
+	
+	<update id="updatePw" parameterType="web.dto.User">
+		UPDATE tb_user SET pw = #{pw}
+		WHERE user_no = #{userNo}
+	</update>
 </mapper>

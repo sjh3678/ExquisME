@@ -2,10 +2,9 @@ package web.service.face;
 
 import java.util.List;
 
-import org.apache.commons.fileupload.FileUpload;
-
 import web.dto.ExComm;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.dto.User;
 
 public interface UserService {
@@ -25,27 +24,19 @@ public interface UserService {
 	public boolean getJoinCheck(User user);
 
 	/**
-	 * 비밀번호 변경
-	 * @param pw - 변경할 암호화 솔트값
- 	 * @param pwChk - 암호 확인 솔트값
-	 * @param userno - 변경할 회원의 번호
-	 * @return - 변경 결과 반환
-	 */
-	public boolean setUpdatePw(String pw, String pwChk, int userno);
-
-	/**
 	 * 회원 탈퇴
 	 * @param userno - 탈퇴할 유저 번호
+	 * @return 
 	 */
-	public void deleteUser(int userno);
+	public boolean deleteUser(int userno);
 
 	/**
 	 * 비밀번호 인증
-	 * @param salt - 인증 비밀번호 솔트값
+	 * @param salt - 인증 비밀번호 해시값
 	 * @param userno - 인증할 회원 번호
 	 * @return - 인증 결과 반환
 	 */
-	public boolean getCheckPassword(String salt, int userno);
+	public boolean getCheckPassword(String pw, int userNo);
 
 	/**
 	 * 유저 세부정보 조회
@@ -53,36 +44,6 @@ public interface UserService {
 	 * @return - 조회결과 반환
 	 */
 	public User getUserInfo(User user);
-
-	/**
-	 * 회원의 Exragram 기록 조회
-	 * @param userNo - 조회할 회원 번호
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<Extagram> getExtaHistory(int userNo);
-
-	/**
-	 * 회원의 Exragram 기록 검색
-	 * @param userNo - 조회할 회원 번호
-	 * @param search - 입력된 검색어
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<Extagram> searchExtaHistory(String search, int userNo);
-
-	/**
-	 * 회원의 댓글 기록 조회
-	 * @param userNo - 조회할 회원 번호
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<ExComm> getHistory(int userNo);
-
-	/**
-	 * 회원의 Exragram 기록 검색
-	 * @param userNo - 조회할 회원 번호
-	 * @param search - 입력된 검색어
-	 * @return - 조회된 리스트 반환
-	 */
-	public List<ExComm> searchCommentHistory(String search, int userNo);
 
 	/**
 	 * 유저 번호를 사용하여 유저의 닉네임 반환
@@ -125,5 +86,13 @@ public interface UserService {
 	 * @return - 조회된 정보 반환
 	 */
 	public User getUserProfile(User user);
+	
+	/**
+	 * 비밀번호 변경
+ 	 * @param pwChk - 암호 확인
+	 * @param user - 변경할 회원의 정보
+	 * @return - 변경 결과 반환
+	 */
+	public boolean setUpdatePw(User user, String pwChk);
 
 }

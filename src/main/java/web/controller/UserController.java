@@ -3,7 +3,6 @@ package web.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import javax.mail.Message;
@@ -11,7 +10,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.dto.ExComm;
 import web.dto.Extagram;
-import web.dto.SocialAccount;
+import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.UserSHA256;
@@ -61,7 +59,7 @@ public class UserController {
 			session.setAttribute("login", isLogin);
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
-			session.setMaxInactiveInterval(60*60); //1시간뒤 세션값 삭제
+			session.setMaxInactiveInterval(180*60); //3시간뒤 세션값 삭제
 			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
 			logger.info("{}",userNo);
 			return "redirect:/user/main";
@@ -144,92 +142,63 @@ public class UserController {
 		logger.info("{}",isEmailExist);
 		return isEmailExist;
 	}
-	//이거도 아직...
-	@RequestMapping(value="/social/join", method=RequestMethod.GET)
-	public String socialJoin(SocialAccount social) {
-		logger.info("/social/join");
-		return null;
-	}
-	
-	//이거 모름....
-	@RequestMapping(value="/social/join", method=RequestMethod.POST)
-	public String socialLogin() {
-		logger.info("/social/login");
-		return null;
-	}
 	
 	@RequestMapping(value="/mypage")
 	public void myPage() {
 		logger.info("/mypage");
 	}
 	
-	@RequestMapping(value="/check/password", method=RequestMethod.GET)
-	public void checkPassword() {
-		logger.info("/check/password [GET]");
-	}
-	
 	@RequestMapping(value="/check/password", method=RequestMethod.POST)
-	public void checkPasswordProc(String pw, HttpSession session) {
+	public @ResponseBody boolean checkPassword(User user, HttpSession session) {
+		logger.info("/check/password [POST] {}", user);
 		
-		logger.info("/check/password [POST]");
-		
-		String pwSalt = pw;
-		
-		int userno = 0;
-		
-		boolean pwCheck = userService.getCheckPassword(pwSalt, userno);
+		int userNo = (Integer) session.getAttribute("userNo");
+		user.setPw(UserSHA256.encrypt(user)); // 암호화 값 적용
+		logger.info("{}", user.getPw());
+		boolean pwCheck = userService.getCheckPassword(user.getPw(), userNo);
+		if(pwCheck)
+			logger.info("비밀번호 인증됨");
+		else  
+			logger.info("비밀번호 인증 실패");
+		return pwCheck;
 	}
 	
 	@RequestMapping(value="/pw/update", method=RequestMethod.GET)
-	public void pwUpdate() {
+	public String pwUpdate() {
 		logger.info("/pw/update [GET]");
+		return "user/pwChange";
 	}
 	
 	@RequestMapping(value="/pw/update", method=RequestMethod.POST)
-	public String pwUpdateProc(String pw, String pwChk, HttpSession session) {
+	public @ResponseBody boolean pwUpdateProc(String pw, String pwChk, HttpSession session) {
 		logger.info("/pw/update [POST]");
-		int userno = 0;
+		User user = new User();
+		int userNo = (Integer) session.getAttribute("userNo");
+		user.setUserNo(userNo);
+		user.setPw(pwChk); // 암호화 전
+		pwChk = UserSHA256.encrypt(user); // 확인값 암호화
+		user.setPw(pw); // 암호화 전
+		user.setPw(UserSHA256.encrypt(user)); // 변경값 암호화 후 저장
 		
-		String pwSalt = pw;
-		String pwChkSalt = pwChk;
-		
-		boolean isUpdate = userService.setUpdatePw(pwSalt, pwChkSalt, userno);
-		
-		return null;
+		boolean isUpdate = userService.setUpdatePw(user, pwChk);
+		logger.info("결과 : {}",isUpdate);
+		return isUpdate;
 	}
 	
-	@RequestMapping(value="/delete")
-	public void userDelete(int userno) {
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String userDelete() {
 		logger.info("/delete [GET]");
-		userService.deleteUser(userno);
+		return "user/delete";
 	}
 	
-	@RequestMapping(value="/view/extagram/history", method=RequestMethod.GET)
-	public void viewExtraHistory(int userNo) {
-		logger.info("/search/history [GET]");
-		List<Extagram> extagram = userService.getExtaHistory(userNo);
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public boolean userDeleteProc(HttpSession session) {
+		logger.info("/delete [POST]");
+		int userNo = (Integer) session.getAttribute("userNo");
+		boolean isDelete = userService.deleteUser(userNo);
+		return true;
+	}
 		
-	}
-	
-	@RequestMapping(value="/search/extagram/history", method=RequestMethod.POST)
-	public void searchExtaHistory(int userNo, String search) {
-		logger.info("/search/history [POST]");
-		List<Extagram> extagram = userService.searchExtaHistory(search, userNo);
-	}
-	
-	@RequestMapping(value="/view/comment/history", method=RequestMethod.GET)
-	public void viewCommentHistory(int userNo) {
-		logger.info("/search/history [GET]");
-		List<ExComm> exComm = userService.getHistory(userNo);
-		
-	}
-
-	@RequestMapping(value="/search/comment/history", method=RequestMethod.POST)
-	public void searchCommentHistory(int userNo, String search) {
-		logger.info("/search/history [POST]");
-		List<ExComm> exComm = userService.searchCommentHistory(search, userNo);
-	}
-	
 	@RequestMapping(value="/main")
 	public void main() {
 		logger.info("임시 메인 페이지 접속");
@@ -240,12 +209,15 @@ public class UserController {
 		logger.info("프로필 정보 ajax 통신 접속");
 		user.setUserNo((Integer)session.getAttribute("userNo"));
 		logger.info("유저 번호 : {}",user.getUserNo());
+		logger.info("before 유저 정보 : {}", user);
 		user = userService.getUserProfile(user);
+		logger.info("after 유저 정보 : {}", user);
 		file = userService.getFileInfo(user);
+		logger.info("after 유저 정보 : {}", file);
 		model.addAttribute("user", user);
 		model.addAttribute("file", file);
 		
-		return "profile";
+		return "user/profile";
 	}
 	
 	@Autowired private JavaMailSenderImpl mailSender;
@@ -301,4 +273,10 @@ public class UserController {
 		
 		return false;
 	}
+	
+	@RequestMapping(value="/history")
+	public void userHistory(User user, FileUpload file, Extagram ex, ExComm exComm, Model model ) {
+		logger.info("유저 개인기록 조회");
+	}
+	
 }
