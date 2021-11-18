@@ -72,7 +72,7 @@
 }
 
 .container{
-	min-height: 400px;
+	min-height: 800px;
 }
 
 .unique a:link{

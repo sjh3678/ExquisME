@@ -1,6 +1,8 @@
 package web.controller;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@ServerEndpoint(value="/chat")
+@ServerEndpoint(value="/chat/server")
 public class ChatServerController {
 	
 	private static final List<Session> sessionList = new ArrayList<Session>();
@@ -27,10 +29,10 @@ public class ChatServerController {
 	
 	@OnOpen
 	public void onOpen(Session session) {
-		logger.info("OpenSessionId : {}", session.getId());
+		logger.info("session.getId() : {}", session.getId());
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText("@@@채팅방에 입장하셨습니다.");
+			basic.sendText("@@@ java 채팅방 입장");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -48,7 +50,11 @@ public class ChatServerController {
         try {
             for(Session session : ChatServerController.sessionList) {
                 if(!self.getId().equals(session.getId())) {
-                    session.getBasicRemote().sendText(sender+" : "+message);
+                    LocalTime now = LocalTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                    String time = now.format(formatter);
+                	String form = "<div class=\"item yourmsg on\"><div class=\"box\"><p class=\"msg\"> "+ message +" </p><span class=\"time\">" + time + "</span></div></div>";
+                    session.getBasicRemote().sendText(form);
                 }
             }
         }catch (Exception e) {
@@ -67,10 +73,14 @@ public class ChatServerController {
     	String sender = message.split(",")[1];
     	message = message.split(",")[0];
     	
-        logger.info("Message From " + sender + " : "+message);
+        logger.info("Message From [" + sender + "] : "+message);
         try {
             final Basic basic=session.getBasicRemote();
-            basic.sendText("<나> : "+message);
+            LocalTime now = LocalTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            String time = now.format(formatter);
+            String form = "<div class=\"item mymsg on\"><div class=\"box\"><p class=\"msg\"> " + message + " </p><span class=\"time\">" + time + "</span></div></div>";
+            basic.sendText(form);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
