@@ -19,7 +19,7 @@ import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.service.face.ExtaService;
-import web.util.Paging;
+import web.util.PagingExtagram;
 
 @Service
 public class ExtaServiceImpl implements ExtaService {
@@ -30,15 +30,15 @@ public class ExtaServiceImpl implements ExtaService {
 	
 //LIST	
 	@Override
-	public List<HashMap<String, Object>> getExtaList(Paging paging) {
+	public List<HashMap<String, Object>> getExtaList(PagingExtagram paging) {
 		return extaDao.selectExtaAll(paging);
 	}
 	@Override
-	public Paging getExtaPaging(Paging paramData) {
+	public PagingExtagram getExtaPaging(PagingExtagram paramData) {
 		
 		int totalCount = extaDao.selectExtaCntAll(paramData);
 		
-		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		PagingExtagram paging = new PagingExtagram(totalCount, paramData.getCurPage());
 		paging.setSearch(paramData.getSearch());
 		
 		return paging;

@@ -7,7 +7,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
-import web.util.Paging;
+import web.util.PagingExtagram;
 
 public interface ExtaDao {
 
@@ -18,13 +18,13 @@ public interface ExtaDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<HashMap<String, Object>> selectExtaAll(Paging paging);
+	public List<HashMap<String, Object>> selectExtaAll(PagingExtagram paging);
 	
 	/**
 	 * 전체 Extagram 수를 조회
 	 * @return 총 게시글 수
 	 */
-	public int selectExtaCntAll(Paging paramData);
+	public int selectExtaCntAll(PagingExtagram paramData);
 
 //VIEW
 	/**

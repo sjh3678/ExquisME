@@ -28,6 +28,15 @@ $(document).ready(function() {
 })
 </script>
 
+<script type="text/javascript">
+<c:if test="${not login}">
+	var message = "${msg}";
+	var url = "${url}";
+	alert(message);
+	document.location.href = url;
+</c:if>
+</script>
+
 <div class="container">
 
 <h1>Extagram Write</h1>

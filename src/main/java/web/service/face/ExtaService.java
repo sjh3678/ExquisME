@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
-import web.util.Paging;
+import web.util.PagingExtagram;
 
 public interface ExtaService {
 	
@@ -17,14 +17,14 @@ public interface ExtaService {
 	 * @param paramData - 페이징 정보 객체
 	 * @return 페이징이 적영된 게시글 목록
 	 */
-	public List<HashMap<String, Object>> getExtaList(Paging paging);
+	public List<HashMap<String, Object>> getExtaList(PagingExtagram paging);
 
 	/**
 	 * 페이징 처리
 	 * @param paramData
 	 * @return
 	 */
-	public Paging getExtaPaging(Paging paramData);
+	public PagingExtagram getExtaPaging(PagingExtagram paramData);
 	
 	/**
 	 * 게시글 상세보기
@@ -46,6 +46,13 @@ public interface ExtaService {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> getCommentList(Extagram viewExta);
+	
+	/**
+	 * ExComm의 값을 exCommNo로 가져옴
+	 * @param comment
+	 * @return
+	 */
+	public Extagram getInfoViewExta(ExComm comment);
 
 	/**
 	 * exCommNo를 이용하여 나머지 ExComm의 DTO정보를 가져옴
@@ -124,12 +131,6 @@ public interface ExtaService {
 	 */
 	public void deleteComment(ExComm comment);
 
-	/**
-	 * ExComm의 값을 exCommNo로 가져옴
-	 * @param comment
-	 * @return
-	 */
-	public Extagram getInfoViewExta(ExComm comment);
 
 
 

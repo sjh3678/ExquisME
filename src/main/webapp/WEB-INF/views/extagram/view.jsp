@@ -40,14 +40,31 @@
 	padding: 10px;
 }
 
-a:link { color: black; text-decoration: none;}
-a:visited { color: black; text-decoration: none;}
-a:hover { color: black; text-decoration: underline;}
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 10px;
+}
+
 </style>
+
+<script type="text/javascript">
+<c:if test="${not login}">
+	var message = "${msg}";
+	var url = "${url}";
+	alert(message);
+	document.location.href = url;
+</c:if>
+</script>
 
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
+// 	$(document.body).on("click", "#", function () {
+// 	})
 	loadList();
 	$("#btnCommInsert").click(function() {
 		$.ajax({
@@ -171,7 +188,7 @@ ${viewExta.EX_CONTENT }
 <div id="flex-container">
 	<div class="flex-items">
 		<div id="viewPicture">
-			<img style="width:80%; height:auto; display: block; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
+			<img style="width:auto; max-height:300px; display: block; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
 		</div>
 	</div>
 	<div class="flex-items">
@@ -185,7 +202,7 @@ ${viewExta.EX_CONTENT }
 		
 		<div style="border: 1px solid #ddd; height: 37px;">
 			<c:if test="${not login }">
-				<input type="text" placeholder="로그인이 필요합니다." readonly="readonly" style="width: 470px; height: 34px; border: none;"/>
+				<input type="text" placeholder="로그인 후 댓글 확인 및 작성이 가능합니다." readonly="readonly" style="width: 470px; height: 34px; border: none;"/>
 				<button onclick='location.href="/user/login";' class="btn pull-right">LOGIN</button>
 			</c:if>
 			<c:if test="${login }">

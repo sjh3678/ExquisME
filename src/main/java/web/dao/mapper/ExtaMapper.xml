@@ -7,7 +7,7 @@
 
 
 <!-- LIST -->
-	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.Paging">
+	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.PagingExtagram">
 		SELECT * FROM (
 			SELECT rownum rnum, E.* FROM (
  			SELECT DISTINCT

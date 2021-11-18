@@ -21,7 +21,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.service.face.ExtaService;
-import web.util.Paging;
+import web.util.PagingExtagram;
 
 @Controller
 public class ExtaController {
@@ -33,19 +33,32 @@ public class ExtaController {
 	
 //LIST	
 	@RequestMapping(value="/extagram/list")
-	public void extaList(Paging paramData, Model model) {
+	public void extaList(PagingExtagram paramData, Model model) {
 		logger.info("Extagram 리스트");
+	}
+	
+	@RequestMapping(value="/extagram/list_ok", method = RequestMethod.GET)
+	public String extaListOk(Model model, PagingExtagram paramData, String target) {
 		
-		Paging paging = extaService.getExtaPaging(paramData);
+		System.out.println("target : " + paramData.getTarget());
+		System.out.println("paramData : " + paramData);
+		System.out.println("target : " + target);
+		
+		PagingExtagram paging = extaService.getExtaPaging(paramData);
 		
 		//목록
 		List<HashMap<String, Object>> list = extaService.getExtaList(paging);
 		
+		if(paramData.getCurPage() > paging.getEndPage()) {
+			return null;
+		}
 		
-		model.addAttribute("paging", paging);
-		model.addAttribute("list", list);
+		model.addAttribute("paging",paging);
+		model.addAttribute("list",list);
+		model.addAttribute("linkurl", "/extagram/list");
 		
-	}
+		return "/extagram/list_ok";
+	} 
 	
 	
 //VIEW	
@@ -56,14 +69,23 @@ public class ExtaController {
 			return "redirect:/extagram/list";
 		}
 		
+		if( session.getAttribute("login") == null) {
+			model.addAttribute("msg", "로그인 후 상세보기가 가능합니다");
+			model.addAttribute("url", "/extagram/list");
+		}
+		
 //		//첨부파일 정보
 //		FileUpload fileUpload = extaService.getAttachFile(viewExta);
 //		model.addAttribute("fileUpload", fileUpload);
 		
+		
+		
 		//좋아요 상태 조회
 		ExLike heart = new ExLike();
 		heart.setExPostNo(viewExta.getExNo()); //게시글 번호
-		heart.setUserNo((Integer)session.getAttribute("userNo")); //로그인한 유저번호
+		if( session.getAttribute("login") != null) {
+			heart.setUserNo((Integer)session.getAttribute("userNo"));
+		}
 		
 		//좋아요 상태 전달
 		boolean isHearted = extaService.isHearted(heart);
@@ -79,10 +101,9 @@ public class ExtaController {
 //COMMENT(ajax)
 	@RequestMapping(value="/extagram/view_ok", method=RequestMethod.POST)
 	public String extaComment(ExComm comment, Extagram viewExta, HttpSession session, Model model) {
-		
+
 		comment.setUserNo((Integer) session.getAttribute("userNo"));
-		
-		if(comment.getExComm() != "") {
+		if( comment.getExComm() != "") {
 			extaService.setComment(comment);
 		}
 		
@@ -125,8 +146,6 @@ public class ExtaController {
 		heart.setExPostNo(exNo);
 		boolean result = extaService.getHeart(heart);
 		
-		
-		
 		//좋아요 수 조회
 		int cnt = extaService.getTotalCntHeart(heart);
 		
@@ -138,9 +157,14 @@ public class ExtaController {
 	}
 	
 	
-	
+//WRITE	
 	@RequestMapping(value="/extagram/write", method=RequestMethod.GET)
-	public String extaWrite(Extagram extagram, HttpSession session) {
+	public String extaWrite(Extagram extagram, HttpSession session, Model model) {
+
+		if( session.getAttribute("login") == null) {
+			model.addAttribute("msg", "로그인 후 상세보기가 가능합니다");
+			model.addAttribute("url", "/extagram/list");
+		}
 		
 		return "/extagram/write";
 	}
@@ -149,14 +173,13 @@ public class ExtaController {
 	public String extaWriteProc(Extagram extagram, HttpSession session, MultipartFile file) {
 		
 		extagram.setUserNo((Integer) session.getAttribute("userNo"));
-		logger.info("## 1 extagram : {}", extagram);//37
-		logger.info("## 2 file : {}", file);
 		
 		extaService.setExtaWrite(extagram, file);
 		
 		return "redirect:/extagram/list";
 	}
-	
+
+//DELETE
 	@RequestMapping(value="/extagram/delete")
 	public String extaDelete(Extagram extagram) {
 		
