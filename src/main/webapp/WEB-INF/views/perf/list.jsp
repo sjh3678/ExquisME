@@ -116,6 +116,19 @@ $(document).ready(function(){
             }
     })
     
+    $("#slideleft").click(function(){
+     	$(this).css("display", "none");
+    	$("#slideright").css("display", "block");
+    	$("form").fadeOut(200);
+		$(".search").delay(300).animate({width:"0"},300);
+	})
+	$("#slideright").click(function(){
+		$(this).css("display", "none");
+    	$("#slideleft").css("display", "block");
+		$(".search").animate({width:"250"},300);
+		$("form").delay(300).fadeIn(200);
+	})
+    
     
 // 	$(window).scroll
 
@@ -231,6 +244,8 @@ function keyword(){
 }
 
 
+	
+
 
 </script>
 
@@ -277,6 +292,7 @@ function keyword(){
 .search{
 	background-color: #EEE;
 	width: 250px;
+	height: 1050px;
 	margin: 0 auto;
 	text-align: center;
 	position: fixed;
@@ -295,7 +311,6 @@ function keyword(){
 <div style="witdh: 300px;">
 </div>
 <div class="search">
-
 <form action="/perf/list" method="get" style="text-align: center;"> 
 	<div class="search_div">
 		<input type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." /><br><br>
@@ -463,6 +478,8 @@ EXQUISME<br>
 </div>
 </header>
 <!-- 헤더 -->
+<button id="slideleft">검색창 닫기</button>
+<button id="slideright" style="display: none;">검색창 열기</button>
 <div class="container">
 <div id="result">
 

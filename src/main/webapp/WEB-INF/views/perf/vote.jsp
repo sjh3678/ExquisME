@@ -9,7 +9,11 @@
 $(document).ready(function() {
 	$("#btnVote").click(function() {
 		console.log("투표클릭");
-		$("form").submit();
+		if (confirm("투표 하시겠습니까?")) {
+			$("form").submit();
+		}else{
+			return false;
+		}
 	})
 	
 	$("#cancel").click(function() {
