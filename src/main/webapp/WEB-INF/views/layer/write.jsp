@@ -229,6 +229,7 @@ function dragEnter(ev) {
 
 function drag(ev) {
 	ev.dataTransfer.setData("text", ev.target.id);
+	console.log("drag : " + ev.target.id)
 }
 
 function drop(ev) {
@@ -254,10 +255,10 @@ function drop(ev) {
 
 <div class="container">
 
-<form action="/layer/write" method="post">	
 	<div class="layer-container">
 		<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
 		<div class="layer-item">
+		
 			<div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 			
 			<div class="graf-bar" id="graf1">
@@ -265,8 +266,10 @@ function drop(ev) {
 				<div id="graf-out1" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
 			</div>
 			
-		</div>
+		</div><!-- layer-item -->
+		
 		<div class="layer-operator" ><span class="child">+</span></div>
+		
 		<div class="layer-item">
 		
 			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
@@ -274,17 +277,23 @@ function drop(ev) {
 			<div class="graf-bar" id="graf2">
 				<input id="graf-in2" type="range" min="1" max="100"/>
 				<div id="graf-out2" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
-			</div>
-		</div>
+			</div><!-- graf-bar -->
+			
+		</div><!-- layer-item -->
+		
 		<div class="layer-operator" ><span class="child">=</span></div>
+		
 		<div class="layer-result">결과
-			<div class="imgbox1"></div>
-			<div class="imgbox2"></div>
-		</div>
-	</div>
-	<input type="button" id="submit" value="전송" />
-</form>
-
+			<div id="imgbox">
+				<div class="imgresult1"style="background-image: url('')"></div>
+				<div class="imgresult2" style="background-image: url('')"></div>
+				<div id="perbox1"></div>
+				<div id="perbox2"></div>
+			</div><!-- imgbox -->
+		</div><!-- layer-result -->
+		
+		<input type="button" id="submit" value="전송" />
+	</div><!-- layer-container -->
 
 
 <div class="search">
@@ -316,17 +325,24 @@ function drop(ev) {
 
 <script>
 document.querySelector('#graf-in1').addEventListener('input',e=>{
-    document.querySelector('#graf-out1').innerHTML= e.target.value;
-    var value2 = 100 - e.target.value;
-    document.querySelector('#graf-in2').value= value2;
+    var value1 = e.target.value + "%";
+    var value2 = 100 - e.target.value +"%";
+    var value3 = 100 - e.target.value;
+    document.querySelector('#graf-out1').innerHTML= value1;
+    document.querySelector('#graf-in2').value= value3;
     document.querySelector('#graf-out2').innerHTML= value2;
+    document.querySelector('#perbox2').innerHTML= value2;
+    document.querySelector('#perbox1').innerHTML= value1;
 });
 document.querySelector('#graf-in2').addEventListener('input',i=>{
-    document.querySelector('#graf-out2').innerHTML= i.target.value;
-    
-    var value1 = 100 - i.target.value;
-    document.querySelector('#graf-in1').value= value1;
+    var value1 = 100 - i.target.value + "%";
+    var value2 = i.target.value + "%";
+    var value3 = 100 - i.target.value;
+    document.querySelector('#graf-out2').innerHTML= value2;
+    document.querySelector('#graf-in1').value= value3;
     document.querySelector('#graf-out1').innerHTML= value1;
+    document.querySelector('#perbox1').innerHTML= value1;
+    document.querySelector('#perbox2').innerHTML= value2;
 });
 
 </script>

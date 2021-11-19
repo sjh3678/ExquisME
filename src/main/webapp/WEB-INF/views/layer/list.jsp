@@ -103,8 +103,12 @@ function loadList() {
 // 	var layeringNo = e;
 // 	console.log(layeringNo);
 // boolean login = (boolean) session.getAttribute("login");
-
+var login = false;
+	if (${login eq true }) {
+		login = true;
+	}
 function loadLike( layeringNo ) {
+	if (login == true) {
 	
 		var $layeringBox = $("[data-layering_no=" + layeringNo + "]");
 	// 	console.log( layeringBox )
@@ -131,14 +135,16 @@ function loadLike( layeringNo ) {
 			}
 			, error: function(){
 				console.log("AJAX 실패")
-				if (confirm("로그인이 필요한 서비스 입니다. \n로그인 화면으로 이동하시겠습니까?")) {
-					location.href="/user/login";
-				}else{
-					return false;
-				}// confirm end
 			}
 		})
-	
+	} else {
+		if (confirm("로그인이 필요한 서비스 입니다. \n로그인 화면으로 이동하시겠습니까?")) {
+			location.href="/user/login";
+			return false;
+		}else{
+			return false;
+		}//confirm end
+	}
 };// loadLike end	
 
 </script>

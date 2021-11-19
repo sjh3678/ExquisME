@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	setTimeout(function() {
-		alert('확인을 누르시면 메인 페이지로 이동합니다')
+		alert('확인을 누르시면 로그인 페이지로 이동합니다')
 		location.href = "/user/login"
 	}, 3100)
 	
