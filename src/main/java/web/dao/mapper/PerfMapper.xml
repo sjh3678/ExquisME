@@ -232,6 +232,15 @@
 		WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
 </delete>
 
+<delete id="deleteNoteLike" parameterType="web.dto.NoteLike">
+	DELETE FROM tb_note_like
+		WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
+</delete>
+
+<insert id="insertNoteLike" parameterType="hashmap">
+	INSERT INTO tb_note_like (NOTE_LIKE_NO, USER_NO, PERFUME_NO, NOTE_NO)
+		VALUES (TB_NOTE_LIKE_SEQ.nextval, #{userNo }, #{perfumeNo }, #{noteNo } )
+</insert>
 
 <update id="updatePerfLike">
 

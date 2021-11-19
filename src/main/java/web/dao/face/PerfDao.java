@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
 import web.util.PagingPerf;
@@ -178,6 +179,23 @@ public interface PerfDao {
 	 * @param perfLike
 	 */
 	public void deletePerfLike(PerfLike perfLike);
+
+	
+	/**
+	 * 노트 좋아요 삭제
+	 * 
+	 * @param noteLike
+	 */
+	public void deleteNoteLike(NoteLike noteLike);
+
+	/**
+	 * 노트 좋아요 추가삽입
+	 * 
+	 * @param userNo
+	 * @param perfumeNo
+	 * @param i
+	 */
+	public void insertNoteLike(HashMap<String, Object> hashmap);
 
 	
 }

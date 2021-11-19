@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import web.controller.PerfController;
 import web.dao.face.PerfDao;
+import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
 import web.service.face.PerfService;
@@ -139,6 +141,29 @@ public class PerfServiceImpl implements PerfService{
 			//향수 좋아요/싫어요 튜플 삭제
 			perfDao.deletePerfLike(perfLike);
 		}
+	}
+
+	@Override
+	public void noteLikeProc(NoteLike noteLike) {
+
+		//노트 좋아요 튜플 삭제
+		perfDao.deleteNoteLike(noteLike);
+		
+
+		
+		
+		if(noteLike.getNoteNo() != null) {
+		for (int i = 0; i < noteLike.getNoteNo().length; i++) {
+			HashMap<String, Object> hashmap = new HashMap<String, Object>();
+			
+			hashmap.put("userNo", noteLike.getUserNo());
+			hashmap.put("perfumeNo", noteLike.getPerfumeNo());
+			hashmap.put("noteNo", noteLike.getNoteNo()[i]);
+			
+			perfDao.insertNoteLike(hashmap);
+		}
+		}
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
 import web.util.Paging;
@@ -133,6 +134,14 @@ public interface PerfService {
 	 * @param perfLike
 	 */
 	public void perfLikeProc(PerfLike perfLike);
+
+	
+	/**
+	 * 노트 좋아요 처리
+	 * 
+	 * @param noteLike
+	 */
+	public void noteLikeProc(NoteLike noteLike);
 
 
 

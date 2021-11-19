@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
 import web.service.face.PerfService;
@@ -179,12 +180,40 @@ public class PerfController {
 		List<HashMap<String, Object>> viewPerfMainAccord = perfService.getPerfMainAccord(perf);
 		logger.info("viewPerfMainAccord : {}", viewPerfMainAccord);
 				
+		// 탑노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
+		List<HashMap<String, Object>> viewPerfTopNote = perfService.getPerfTopNote(perf);
+		logger.info("viewPerfTopNote : {}", viewPerfTopNote);
+		
+		// 미들노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
+		List<HashMap<String, Object>> viewPerfMiddleNote = perfService.getPerfMiddleNote(perf);
+		logger.info("viewPerfMiddleNote : {}", viewPerfMiddleNote);
+		
+		// 베이스노트 NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE, CNT(노트 추천수)
+		List<HashMap<String, Object>> viewPerfBaseNote = perfService.getPerfBaseNote(perf);
+		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
+		
+		
 		
 		model.addAttribute("perf", viewPerf);		
 		model.addAttribute("mainAccord", viewPerfMainAccord);
-		
+		model.addAttribute("topNote", viewPerfTopNote);
+		model.addAttribute("middleNote", viewPerfMiddleNote);
+		model.addAttribute("baseNote", viewPerfBaseNote);
 		
 		return "perf/vote";
+	}
+	
+	@RequestMapping(value = "/voteProc")
+	public String noteVote(NoteLike noteLike, HttpSession session) {
+		noteLike.setUserNo( (int) session.getAttribute("userNo"));
+		logger.info("noteNo ; {}", noteLike);
+		
+		logger.info("noteNo ; {}", noteLike.getClass());
+		
+		//노트 투표 처리
+		perfService.noteLikeProc(noteLike);
+		
+		return "redirect:/perf/view?perfumeNo="+noteLike.getPerfumeNo();
 	}
 	
 	

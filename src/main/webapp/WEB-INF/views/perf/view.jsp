@@ -152,6 +152,10 @@ $(document).ready(function() {
 			</div>
 		</c:forEach>
 		</div>
+			<br>
+			<c:if test="${not empty login }">	
+			<a href="/perf/vote?perfumeNo=${perf.PERFUME_NO}"><button>투표하러가기</button></a>
+	    	</c:if>
 		<br>
 	</th>
   </tr>
