@@ -30,10 +30,9 @@ input[type="text"]::placeholder{color:#999}
 
 <div class="fadeOutArea">
 <br>
-안녕하세요, ${nick }님! [${title }]에 대한 답변을 준비하고 있습니다.<br>
-현재 페이지로부터 이동할 경우 상담이 종료됩니다. <button type="button" onclick="openSocket()" id="btnFadeOut">확인</button>
+안녕하세요, ${chatNick }님! 현재 페이지로부터 이동할 경우 채팅이 종료됩니다. <button type="button" onclick="openSocket()" id="btnFadeOut" class="btn">확인</button>
 </div>
-<input type="text" id="sender" value="${nick }" style="display: none;">
+<input type="text" id="sender" value="${chatNick }" style="display: none;">
 <div>
  <br>
  <br>
@@ -94,7 +93,7 @@ function openSocket(){
     };
     
     ws.onclose = function(event){
-        writeResponse("@@@ jsp 대화 종료");
+        writeResponse("대화 종료");
     }
 }
 
@@ -144,14 +143,14 @@ $(function(){
     });
 });
 
-var currentTime = function(){
-    var date = new Date();
-    var hh = date.getHours();
-    var mm = date.getMinutes();
-    var apm = hh >12 ? "오후":"오전";
-    var ct = apm + " "+hh+":"+mm+"";
-    return ct;
-}
+// var currentTime = function(){
+//     var date = new Date();
+//     var hh = date.getHours();
+//     var mm = date.getMinutes();
+//     var apm = hh >12 ? "오후":"오전";
+//     var ct = apm + " "+hh+":"+mm+"";
+//     return ct;
+// }
 </script>
 
 </div><%-- .container --%>

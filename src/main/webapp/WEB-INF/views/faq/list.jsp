@@ -81,22 +81,23 @@ $(document).ready(function(){
 <h1>faq list</h1>
 <hr>
 
+<c:if test="${login }">
+궁금한 것이 해결되지 않았다면 <button class="btn btn-open-popup">채팅 문의</button>를 통해 문의해 보세요!<br><br>
+</c:if>
 <%-- 모달 채팅방 입장 영역 --%>
 <div class="modal">
 	<div class="modal_body">
-		<div class="panel-title">${nick }님, 문의를 입력하시</div>
+		<div class="panel-title">${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?</div>
 		<form id="login-form" method="post" action="/faq/chat">
 		    <div>
-		        <input type="text" name="title" class="form-control" placeholder="문의 내용을 입력하세요." autofocus>
+		        <input type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
 		    </div>
 		    <div>
-		        <button type="submit" class="form-control btn btn-primary">채팅 페이지로 이동하기</button>
+		        <button type="submit" class="form-control btn" style="background-color:pink;">채팅방으로 이동</button>
 		    </div>
 		</form>
 	</div>
 </div><%-- .modal --%>
-
-<button class="btn-open-popup">채팅 시작하기</button>
 
 <c:forEach items="${faqList }" var="i">
 <div class="row">
@@ -108,12 +109,13 @@ $(document).ready(function(){
 	<div class="content">
 		<div class="contentChild" style="display: none;">
 			<div class="contentText">
-			${i.faqContent}
+			${i.faqContent}<br><br>
 			</div>
 		</div>
 	</div>
 </div>
 </c:forEach>
+
 
 <script>
 const body = document.querySelector('body');

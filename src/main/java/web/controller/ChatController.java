@@ -22,12 +22,12 @@ public class ChatController {
 	private final static Logger logger = LoggerFactory.getLogger(ChatController.class);
 	
 	@RequestMapping(value="/faq/chat")
-	public void chatJoin(HttpSession session, @RequestParam String title, HttpServletRequest request, User user) {
+	public void chatJoin(HttpSession session, @RequestParam String chatNick, HttpServletRequest request, User user) {
 		logger.info("nick {}",session.getAttribute("nick"));
 		session.setAttribute("id", session.getAttribute("nick"));
 		logger.info("userNo {}",session.getAttribute("userNo"));
 		user.setUserNo((Integer)session.getAttribute("userNo"));
-		session.setAttribute("title", title);
+		session.setAttribute("chatNick", chatNick);
 //		chatService.setRoom(user);
 	}
 

@@ -32,7 +32,7 @@ public class ChatServerController {
 		logger.info("session.getId() : {}", session.getId());
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText("@@@ java 채팅방 입장");
+			basic.sendText("채팅방에 입장하였습니다.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +53,7 @@ public class ChatServerController {
                     LocalTime now = LocalTime.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
                     String time = now.format(formatter);
-                	String form = "<div class=\"item yourmsg on\"><div class=\"box\"><p class=\"msg\"> "+ message +" </p><span class=\"time\">" + time + "</span></div></div>";
+                	String form = "<div class=\"item yourmsg on\"><div class=\"box\"><p class=\"msg\"> "+ sender + " : " + message +" </p><span class=\"time\">" + time + "</span></div></div>";
                     session.getBasicRemote().sendText(form);
                 }
             }
