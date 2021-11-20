@@ -8,6 +8,8 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,7 @@ import web.util.PagingExtagram;
 
 @Service
 public class ExtaServiceImpl implements ExtaService {
-//	private static final Logger logger = LoggerFactory.getLogger(ExtaService.class);	
+	private static final Logger logger = LoggerFactory.getLogger(ExtaService.class);	
 	@Autowired ExtaDao extaDao;
 	@Autowired ServletContext context;
 	
@@ -186,51 +188,50 @@ public class ExtaServiceImpl implements ExtaService {
 
 //UPDATE
 	@Override
-	@Transactional//트랜젝션
 	public void setExtaUpdate(Extagram viewExta, MultipartFile file) {
 		
 	//------파일처리------
 		if(file.getSize() <= 0) {
-			return;
+			logger.info("첨부파일 수정 없음.");
+		} else {
+			//저장될 경로
+			String storedPath = context.getRealPath("upload");
+			
+			//폴더생성
+			File stored = new File(storedPath);
+			if( !stored.exists() ) {
+				stored.mkdir();
+			}
+			
+			//원본파일이름 알아내기
+			String originName = file.getOriginalFilename();
+			
+			//UUID 설정
+			String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+			
+			int fileSize = (int)file.getSize();
+			
+			//저장될 파일정보 객체
+			File dest = new File(stored, storedName);
+			
+			try {
+				//업로드된 파일 저장
+				file.transferTo(dest);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			FileUpload fileUpload = new FileUpload();
+			fileUpload.setFileNo(viewExta.getFileNo());
+			fileUpload.setOriginName(originName);
+			fileUpload.setStoredName(storedName);
+			fileUpload.setFileSize(fileSize);
+			extaDao.updateExtaFile(fileUpload);
 		}
-
-		//저장될 경로
-		String storedPath = context.getRealPath("upload");
-		
-		//폴더생성
-		File stored = new File(storedPath);
-		if( !stored.exists() ) {
-			stored.mkdir();
-		}
-		
-		//원본파일이름 알아내기
-		String originName = file.getOriginalFilename();
-		
-		//UUID 설정
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
-		
-		int fileSize = (int)file.getSize();
-		
-		//저장될 파일정보 객체
-		File dest = new File(stored, storedName);
-		
-		try {
-			//업로드된 파일 저장
-			file.transferTo(dest);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		FileUpload fileUpload = new FileUpload();
-		fileUpload.setFileNo(viewExta.getFileNo());
-		fileUpload.setOriginName(originName);
-		fileUpload.setStoredName(storedName);
-		fileUpload.setFileSize(fileSize);
-		
+			
 		//업데이트
-		extaDao.updateExtaFile(fileUpload);
 		extaDao.updateExta(viewExta);
 	}
 	

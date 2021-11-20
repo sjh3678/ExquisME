@@ -52,12 +52,13 @@ $(document).ready(function() {
 <div class="form-group">
 	<label for="content">본문</label>
 	<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
+	<input type="hidden" name="fileNo" value="${fileUpload.fileNo }" />
 	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent">${viewExta.EX_CONTENT }</textarea>
 </div>
 
 <div class="form-group">
 	기존 사진 : <a href="/upload/${viewExta.PICTURE}">${viewExta.PIC}</a><br><br>
-	<input type="file" id="file" name="file" value="/upload/${viewExta.PIC}"/>
+	<input type="file" id="file" name="file"/>
 	<small>** 새로운 사진을 업로드하면 기존 사진이 삭제됩니다 **</small>
 </div>
 

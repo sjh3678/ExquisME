@@ -187,7 +187,6 @@ public class ExtaController {
 		model.addAttribute("fileUpload", fileUpload);
 
 		viewExta.setFileNo(fileUpload.getFileNo());
-		logger.info("##viewExta 1: {}", viewExta);
 		
 		model.addAttribute("viewExta",extaService.getExtaView(viewExta));
 		
@@ -196,8 +195,6 @@ public class ExtaController {
 	@RequestMapping(value="/extagram/update", method=RequestMethod.POST)
 	public String extaUpdateProc(Extagram viewExta, MultipartFile file) {
 		
-		logger.info("##viewExta 2: {}", viewExta);
-		logger.info("##file 2: {}", file);
 		extaService.setExtaUpdate(viewExta, file);
 		
 		return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
