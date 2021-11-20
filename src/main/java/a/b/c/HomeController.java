@@ -34,4 +34,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/admin")
+	public String homeAdmin() {
+		return "/admin/home";
+	}
 }

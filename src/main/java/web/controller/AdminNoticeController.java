@@ -70,8 +70,6 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String noticeUpdateProc(Notice notice, MultipartFile file) {
-		logger.info("@@@@@@@@@@@ notice 안에 뭐가 들어가 있을까? {}", notice);
-		logger.info("@@@@@@@@@@@ file 안에 뭐가 들어가 있을까? {}", file);
 		noticeService.setNoticeUpdate(notice, file);
 		return "redirect:/admin/notice/list";
 	}

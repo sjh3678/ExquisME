@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <div class="container">
-<h1>메인</h1>
+<h1>어드민 메인</h1>
 
 
 

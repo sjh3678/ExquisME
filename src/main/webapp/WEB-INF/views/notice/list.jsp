@@ -5,29 +5,45 @@
 
 <style type="text/css">
 .row{
-	width: 1100px;
+	width: 900px;
+	margin: 0 auto;
 }
 .title{
 	background: #8A7E6B;
-	color: #ECE6CC;
+	color: #35312B;
 	font-size: 21px;
 	font-weight: 700;
  	margin-bottom: 5px;
+ 	border-radius: 10px;
 }
 .titleText{
 	margin: 20px;
 }
 .contentChild{
-	min-height: 300px;
 	background: #ECE6CC;
 	margin-bottom: 5px;
+	padding: 30px;
+ 	border-radius: 10px;
 /* 	overflow-y: scroll; */
 }
+.title button{
+	color: pink;
+}
+.title a:link{
+	vertical-align: middle;
+	color: #ECE6CC;
+}
+.titleChild:hover{
+	background-color: #35312B;
+	color: #ECE6CC;
+	border-radius: 10px;
+}
+.titleChild{
+	padding-right: 15px;
+	padding-left: 15px;
+}
 .contentFile{
-	wdith: 300px;
-	height: 300px;
-	float: left;
-	margin: 5px;
+	text-align: center;
 }
 .contentDate{
 	text-align: right;
@@ -46,7 +62,7 @@ $(document).ready(function(){
 
 <div class="container">
 
-<h1>notice list</h1>
+<h1>notice</h1>
 <hr>
 
 <c:forEach items="${noticeList }" var="i">
@@ -56,16 +72,11 @@ $(document).ready(function(){
 	</div>
 	<div class="content">
 		<div class="contentChild" style="display: none;">
-			<img class="contentFile" src="/upload/${i.STORED_NAME}"/>
+			<div class="contentFile"><img src="/upload/${i.STORED_NAME}"/></div>
 			<div class="contentText">${i.NOTICE_CONTENT}</div>
 			<div class="contentDate">
-				<br>
-				<br>
-				<br>
-				<fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
-				<br>
-				<br>
-				${i.NICK } 올림
+				<br><br><br><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
+				<br><br>${i.NICK } 올림
 			</div>
 		</div>
 	</div>

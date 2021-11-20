@@ -10,7 +10,7 @@
 function submitContents(elClickedObj) {
 	oEditors.getById["contentWrite"].exec("UPDATE_CONTENTS_FIELD", []);
 	try {
-		elClickedObj.formWrite.submit();
+// 		elClickedObj.formWrite.submit();
 	} catch(e) {}
 }
 
@@ -120,14 +120,16 @@ $(document).ready(function(){
 }
 
 .row{
-	width: 1100px;
+	width: 900px;
+	margin: 0 auto;
 }
 .title{
 	background: #8A7E6B;
-	color: #ECE6CC;
+	color: #35312B;
 	font-size: 21px;
 	font-weight: 700;
  	margin-bottom: 5px;
+ 	border-radius: 10px;
 }
 .titleText{
 	margin: 20px;
@@ -135,22 +137,46 @@ $(document).ready(function(){
 .contentChild{
 	background: #ECE6CC;
 	margin-bottom: 5px;
+	padding: 30px;
+ 	border-radius: 10px;
 /* 	overflow-y: scroll; */
 }
 .title button{
 	color: pink;
 }
 .title a:link{
+	vertical-align: middle;
 	color: #ECE6CC;
 }
 .title a:hover{
-	color: #35312B;
+	color: #8A7E6B;
+	text-decoration: none;
+}
+.titleChild:hover{
+	background-color: #35312B;
+	color: #ECE6CC;
+	border-radius: 10px;
+}
+.titleChild{
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.contentFile{
+	text-align: center;
+}
+.btnWrite{
+	background-color: #8A7E6B;
+	color: #ECE6CC;
+}
+.btnWrite:hover{
+	background-color: #35312B;
+	color: #ECE6CC;
 }
 </style>
 
 <div class="container">
 
-<h1>admin notice list&nbsp;&nbsp;&nbsp;
+<h1>admin notice &nbsp;&nbsp;&nbsp;
 <!-- <span style="font-size: 18px; font-weight: 400;"><a href="/admin/notice/write">작성</a>&nbsp;&nbsp;&nbsp;</span> 일반 글쓰기 링크 타입 -->
 <!-- <a href="/admin/notice/write"><button id="btnWrite" class="btn">WRITE</button></a> 일반 글쓰기 버튼 타입 -->
 <button id="modalWrite" class="btn btn-open-popup-write">글쓰기</button>
@@ -159,7 +185,7 @@ $(document).ready(function(){
 
 <%-- 모달 글쓰기 영역 --%>
 <div class="modalWrite">
-	<div class="modalWrite_body">새로운 글 등록하기
+	<div class="modalWrite_body">새로운 공지사항 등록하기
 		<form id="formWrite" action="/admin/notice/write" method="post" enctype="multipart/form-data">
 			<label for="title">제목</label>
 			<input type="text" id="title" name="noticeTitle" class="form-control"/>
@@ -170,7 +196,7 @@ $(document).ready(function(){
 			<label for="file">첨부파일</label>
 			<input type="file" id="file" name="file" />		
 		</form>
-		<button class="btn" id="btnWriteProc">작성</button>
+		<button class="btn btnWrite" id="btnWriteProc">작성</button>
 	</div>
 </div>
 
@@ -180,13 +206,13 @@ $(document).ready(function(){
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
 			<span class="titleText">${i.NOTICE_TITLE}</span>
-			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}">삭제</a>&nbsp;&nbsp;&nbsp;</span>
-			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
+			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}">삭제</a>&nbsp;&nbsp;&nbsp;</span>
+			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>
 	</div>
 	<div class="content">
 		<div class="contentChild" style="display: none;">
-			<div><img class="contentFile" src="/upload/${i.STORED_NAME}"/></div>
+			<div class="contentFile"><img src="/upload/${i.STORED_NAME}"/></div>
 			<div class="contentText">${i.NOTICE_CONTENT}</div>
 			<div class="contentDate">
 				<br><br><br><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
@@ -199,7 +225,7 @@ $(document).ready(function(){
 
 <%-- 모달 수정 영역 --%>
 <div id="modalUpdate">
-	<div class="modal_body">모달 수정 영역
+	<div class="modal_body">공지사항 수정하기
 		<form id="formUpdate" action="/admin/notice/update" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="fileNo" id="fileNo" />
 		
@@ -220,14 +246,14 @@ $(document).ready(function(){
 			<label for="contentUpdtae">본문</label>
 			<textarea rows="10" style="width: 100%;" id="contentUpdate" name="noticeContent"></textarea>
 		</form>
-		<button class="btn" id="btnUpdateProc">작성</button>
+		<button class="btn btnWrite" id="btnUpdateProc">작성</button>
 	</div>
 </div>
 
-<span class="pull-left">total : ${paging.totalCount }</span>
-<div class="clearfix"></div>
+<%-- <span class="pull-left">total : ${paging.totalCount }</span> --%>
+<!-- <div class="clearfix"></div> -->
 
-<c:import url="/WEB-INF/views/layout/paging.jsp" />
+<c:import url="/WEB-INF/views/layout/pagingNotice.jsp" />
 
 <script type="text/javascript">
 var oEditors = [];
