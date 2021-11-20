@@ -40,13 +40,13 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h1>Extagram Update</h1>
+<h1><strong>Extagram Edit</strong></h1>
 <hr>
 
 <form action="/extagram/update" method="post" enctype="multipart/form-data">
 <div class="form-group">
-	<label for="write">작성자</label>
-	<input type="text" id="nick" name="nick" value="${nick }" class="form-control" readonly="readonly"/>
+	<span><strong>작성자</strong><br>${nick }</span><br><br>
+	<input type="hidden" id="nick" name="nick" value="${nick }" />
 	<input type="hidden" id="userNo" name="userNo" value="${userNo }" />
 </div>
 <div class="form-group">

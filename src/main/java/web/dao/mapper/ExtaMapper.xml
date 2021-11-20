@@ -98,6 +98,11 @@
 		VALUES ( tb_ex_like_seq.nextval, #{userNo}, #{exPostNo} )
 	</insert>
 	
+	<delete id="deleteHeart" parameterType="web.dto.ExLike">
+		DELETE tb_ex_like
+		WHERE user_no = #{userNo}
+			AND ex_post_no = #{exPostNo}
+	</delete>
 	
 	<select id="selectTotalCntHeart" parameterType="web.dto.ExLike" resultType="int">
 		SELECT COUNT(*) FROM tb_ex_like
@@ -143,11 +148,6 @@
 
 
 <!-- DELETE -->
-	<delete id="deleteHeart" parameterType="web.dto.ExLike">
-		DELETE tb_ex_like
-		WHERE user_no = #{userNo}
-			AND ex_post_no = #{exPostNo}
-	</delete>
 
 	<delete id="deleteHeartByExNo" parameterType="web.dto.Extagram">
 		DELETE tb_ex_like

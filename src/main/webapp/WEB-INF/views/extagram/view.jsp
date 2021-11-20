@@ -100,10 +100,8 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-// 	$(document.body).on("click", "#", function () {
-// 	})
 	loadList();
-	$("#btnCommInsert").click(function() {
+	$(document.body).click(function() {
 		$.ajax({
 			type: "post"
 			, url: "/extagram/view_ok"
@@ -179,19 +177,15 @@ function heartClick() {
 		type: "get"
 		, url: "/extagram/heart"
 		, data: { exNo: ${viewExta.EX_NO} }
-		, dataType: "json"
+		, dataType: "html"
 		, success: function(res) {
 			console.log("좋아요 성공")
 			
 			if(res.result) { //좋아요 성공
 				$("#btnHeart")
-				.removeClass("btn")
-				.addClass("btn-warning")
 				.html('좋아요 취소하기');
 			} else { //좋아요 취소 성공
 				$("#btnHeart")
-				.revomeClass("btn-warning")
-				.addClass("btn")
 				.html('좋아요');
 			}
 			//좋아요 수 적용
@@ -207,7 +201,7 @@ function heartClick() {
 
 
 <div class="container">
-<h1>Extagram view</h1>
+<h1><Strong>Extagram view</Strong></h1>
 
 <hr>
 

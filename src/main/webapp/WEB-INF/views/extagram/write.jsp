@@ -61,13 +61,19 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h1>Extagram Write</h1>
+<h1><Strong>Extagram Write</Strong></h1>
 <hr>
 
 <form action="/extagram/write" method="post" enctype="multipart/form-data">
+<div class="form-group" style="text-align: center;">
+	<strong style="font-size: 17px;">게시글 작성 시 유의사항</strong><br><br>
+	<span style="font-size: 13px;">게시글에는 향수와 관련된 이미지 사진을 필수적으로 업로드 해야합니다.<br>
+	향수와 무관한 이미지 또는 미풍양속을 현저히 해치는 이미지를 업로드 할 시<br>
+	별도의 통보 없이 게시글이 삭제될 수 있습니다.</span><br><br>
+</div>
 <div class="form-group">
-	<label for="write">작성자</label>
-	<input type="text" id="nick" name="nick" value="${nick }" class="form-control" readonly="readonly"/>
+	<span><strong>작성자</strong><br>${nick }</span><br><br>
+	<input type="hidden" id="nick" name="nick" value="${nick }" />
 	<input type="hidden" id="userNo" name="userNo" value="${userNo }" />
 </div>
 <div class="form-group">
@@ -76,7 +82,7 @@ $(document).ready(function() {
 </div>
 
 <div class="form-group">
-	<label for="file">첨부파일</label>
+	<label for="file">사진 첨부</label>
 	<input type="file" id="fileCheck" name="file" />
 </div>
 

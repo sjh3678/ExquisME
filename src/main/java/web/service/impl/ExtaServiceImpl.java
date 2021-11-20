@@ -93,10 +93,10 @@ public class ExtaServiceImpl implements ExtaService {
 	@Override
 	public boolean getHeart(ExLike heart) {
 		
-		if( isHearted(heart) ) { //좋아요 상태
+		if( isHearted(heart) ) { //좋아요 눌린 상태
 			extaDao.deleteHeart(heart);
 			return false;
-		} else { //좋아요 안한 상태
+		} else { //좋아요 안 눌린 상태
 			extaDao.insertHeart(heart);
 		}
 		

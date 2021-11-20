@@ -127,7 +127,7 @@ jQuery(document).ready(function () {
 });
 </script>
 
-<h1>Extagram</h1>
+<h1><Strong>Extagram</Strong></h1>
 <hr>
 
 <div class="container">
