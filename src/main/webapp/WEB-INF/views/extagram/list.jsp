@@ -17,7 +17,7 @@
 	height: 385px;
 	border-radius: 3px; 
 	margin: 4px;
-	border: 1px solid #eee;
+	border: 1px solid #ddd;
 }
 #a {
 	margin: 10px;

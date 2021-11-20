@@ -20,6 +20,7 @@ import web.dao.face.ExtaDao;
 import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.service.face.ExtaService;
 import web.util.PagingExtagram;
 
@@ -74,9 +75,9 @@ public class ExtaController {
 			model.addAttribute("url", "/extagram/list");
 		}
 		
-//		//첨부파일 정보
-//		FileUpload fileUpload = extaService.getAttachFile(viewExta);
-//		model.addAttribute("fileUpload", fileUpload);
+		//첨부파일 정보
+		FileUpload fileUpload = extaService.getAttachFile(viewExta);
+		model.addAttribute("fileUpload", fileUpload);
 		
 		
 		
@@ -133,7 +134,7 @@ public class ExtaController {
 		
 		extaService.deleteComment(comm);
 		
-		return "redirect:/extagram/view?exNo="+comm.getExPostNo();
+		return "redirect:/extagram/view?exNo=" + comm.getExPostNo();
 	}
 	
 //HEART(ajax)
@@ -165,20 +166,45 @@ public class ExtaController {
 			model.addAttribute("msg", "로그인 후 글 작성이 가능합니다.");
 			model.addAttribute("url", "/extagram/list");
 		}
-		
 		return "/extagram/write";
 	}
-	
 	@RequestMapping(value="/extagram/write", method=RequestMethod.POST)
 	public String extaWriteProc(Extagram extagram, HttpSession session, MultipartFile file) {
 		
 		extagram.setUserNo((Integer) session.getAttribute("userNo"));
 		
 		extaService.setExtaWrite(extagram, file);
-		
+
 		return "redirect:/extagram/list";
 	}
+	
+//UPDATE
+	@RequestMapping(value="/extagram/update", method=RequestMethod.GET)
+	public String extaUpdate(Extagram viewExta, HttpSession session, Model model) {
+		
+		//첨부파일 정보
+		FileUpload fileUpload = extaService.getAttachFile(viewExta);
+		model.addAttribute("fileUpload", fileUpload);
 
+		viewExta.setFileNo(fileUpload.getFileNo());
+		logger.info("##viewExta 1: {}", viewExta);
+		
+		model.addAttribute("viewExta",extaService.getExtaView(viewExta));
+		
+		return "/extagram/update";
+	}
+	@RequestMapping(value="/extagram/update", method=RequestMethod.POST)
+	public String extaUpdateProc(Extagram viewExta, MultipartFile file) {
+		
+		logger.info("##viewExta 2: {}", viewExta);
+		logger.info("##file 2: {}", file);
+		extaService.setExtaUpdate(viewExta, file);
+		
+		return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
+	}
+	
+	
+	
 //DELETE
 	@RequestMapping(value="/extagram/delete")
 	public String extaDelete(Extagram extagram, Model model) {

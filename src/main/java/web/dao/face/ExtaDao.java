@@ -100,29 +100,37 @@ public interface ExtaDao {
 	 */
 	public void insertExtaWrite(Extagram extagram);
 
-//	/**
-//	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
-//	 * @param viewExta - 조회할 파일 번호
-//	 * @return 조회된 첨부파일 정보
-//	 */
-//	public FileUpload selectFileUploadByExNo(Extagram viewExta);
+	/**
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * @param viewExta - 조회할 파일 번호
+	 * @return 조회된 첨부파일 정보
+	 */
+	public FileUpload selectFileUploadByExNo(Extagram viewExta);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+//UPDATE
 	
 	/**
-	 * 수정할 Extagram DB에서 조회
-	 * @param extagram - 수정할 게시글의 DTO
+	 * Extagram 수정시에 파일 수정
+	 * @param fileUpload
 	 */
-	public void updateExtaByExPostNo(Extagram extagram);
+	public void updateExtaFile(FileUpload fileUpload);
+	
+	/**
+	 * Extagram 수정
+	 * @param viewExta
+	 */
+	public void updateExta(Extagram viewExta);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 신고하는 Extagram글을 신고DTO에 삽입
@@ -166,6 +174,8 @@ public interface ExtaDao {
 	 * @param extagram - 삭제할 게시글의 DTO
 	 */
 	public void deleteExta(Extagram extagram);
+
+
 
 
 

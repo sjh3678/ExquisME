@@ -18,7 +18,7 @@
 .flex-items {
 	min-width: 260px;
 	width: 540px;
-	height: 375px;
+	height: 330px;
 	border-radius: 3px; 
 	margin: 0px;
 }
@@ -47,7 +47,6 @@
   background-color: #ddd;
   border-radius: 10px;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -59,6 +58,44 @@
 </c:if>
 </script>
 
+<script>
+//특수문자(<, >, \) 입력 방지 네이버SE2에는 적용 안 되므로 글 내용 작성에는 영향 없음
+function characterCheck(obj){
+ 	var regExp = /[<>\\]/gi; 
+	if( regExp.test(obj.value) ){
+		alert("일부 특수문자는 입력하실수 없습니다.");
+		obj.value = obj.value.substring( 0 , obj.value.length - 1 );
+		}
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btnList").click(function() {
+		location.href="/extagram/list";
+	})
+	
+	$("#btnUpdate").click(function() {
+		var answer = confirm("게시글을 수정하시겠습니까?")
+		if(answer == true) {
+			location.href="/extagram/update?exNo=${viewExta.EX_NO}";
+		} else {
+			return false;
+		}
+	})
+	
+	$("#btnDelete").click(function() {
+		var answer = confirm("게시글을 삭제하시겠습니까?")
+		
+		if( answer == true ) {
+			location.href= "/extagram/delete?exNo=${viewExta.EX_NO}";
+		} else {
+			return false;
+		}
+	})
+});
+
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -102,7 +139,7 @@ $(document).ready(function() {
 			, error: function() {
 				console.log("댓글 실패");
 			}
-		})
+		});
 	}
 
 	//좋아요, 댓글 수
@@ -119,7 +156,7 @@ $(document).ready(function() {
 			, error: function() {
 				console.log("카운트 실패");
 			}
-		})
+		});
 	}
 	
 	
@@ -133,7 +170,8 @@ $(document).ready(function() {
 			.addClass("btn")
 			.html('좋아요');
 	}	
-})
+	
+});
 
 //ajax 좋아요
 function heartClick() {
@@ -181,14 +219,14 @@ function heartClick() {
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 
-<div id="viewContent" style="margin: 20px; height: 130px; width: 500px;">
+<div id="viewContent" style="margin: 20px; height: 130px; width: 500px; overflow-y: scroll;">
 ${viewExta.EX_CONTENT }
 </div>
 
 <div id="flex-container">
-	<div class="flex-items">
-		<div id="viewPicture">
-			<img style="width:auto; max-height:300px; display: block; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
+	<div class="flex-items" style="margin: auto 0;">
+		<div id="viewPicture" style="text-align: center; height: 300px; padding: auto 0;">
+			<img style="max-width:500px; height: auto; max-height: 300px; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
 		</div>
 	</div>
 	<div class="flex-items">
@@ -210,7 +248,7 @@ ${viewExta.EX_CONTENT }
 					<form id="inputForm" onsubmit="return false">
 						<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 						<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
-						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" style="width: 475px; height: 34px; border: none;"/>
+						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" style="width: 475px; height: 34px; border: none;"/>
 						<button type="button" id="btnCommInsert" class="btn pull-right">POST</button>
 					</form>
 				</div>
@@ -221,15 +259,16 @@ ${viewExta.EX_CONTENT }
 </div><br>
 
 <div class="text-center">
-	<a href="/extagram/report?exNo=${viewExta.EX_NO }"><button class="btn">신고</button></a>
-	<a href="/extagram/list"><button class="btn">목록</button></a>
-<%-- 	<c:if test="${sessionScope.nick eq viewExta.NICK }"> --%>
-		<a href="/extagram/update?exNo=${viewExta.EX_NO }"><button class="btn">수정</button></a>
-		<a href="/extagram/delete?exNo=${viewExta.EX_NO }"><button class="btn">삭제</button></a>
-<%-- 	</c:if> --%>
+		<a href="/extagram/report?exNo=${viewExta.EX_NO }"><button class="btn">신고</button></a>
+		<button class="btn" id="btnList">목록</button>
+	<c:if test="${sessionScope.nick eq viewExta.NICK }">
+		<button class="btn" id="btnUpdate">수정</button>
+		<button class="btn" id="btnDelete">삭제</button>
+	</c:if>
 </div>
 
 
 </div><!-- .container -->
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
 

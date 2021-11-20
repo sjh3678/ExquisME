@@ -120,13 +120,26 @@
 		VALUES ( tb_extagram_seq.nextval, #{userNo}, #{exContent}, #{fileNo}, sysdate, 0 )
 	</insert>
 	
-<!-- 	<select id="selectFileUploadByExNo" resultType="web.dto.FileUpload" parameterType="web.dto.Extagram"> -->
-<!-- 		SELECT -->
-<!-- 		    f.file_no, f.origin_name, f.stored_name, f.file_size, x.ex_no -->
-<!-- 		FROM tb_file f -->
-<!-- 		    LEFT OUTER JOIN tb_extagram x ON f.file_no = x.file_no -->
-<!-- 		WHERE x.ex_no = #{exNo} -->
-<!-- 	</select> -->
+	<select id="selectFileUploadByExNo" resultType="web.dto.FileUpload" parameterType="web.dto.Extagram">
+		SELECT
+		    f.file_no, f.origin_name, f.stored_name, f.file_size, x.ex_no
+		FROM tb_file f
+		    LEFT OUTER JOIN tb_extagram x ON f.file_no = x.file_no
+		WHERE x.ex_no = #{exNo}
+	</select>
+	
+<!-- UPDATE -->
+	<update id="updateExtaFile" parameterType="web.dto.FileUpload">
+		UPDATE tb_file
+		SET	origin_name = #{originName}, stored_name = #{storedName}, file_size = #{fileSize}
+		WHERE file_no = #{fileNo}
+	</update>
+
+	<update id="updateExta" parameterType="web.dto.Extagram">
+		UPDATE tb_extagram
+		SET	ex_content = #{exContent}
+		WHERE ex_no = #{exNo}
+	</update>
 
 
 <!-- DELETE -->

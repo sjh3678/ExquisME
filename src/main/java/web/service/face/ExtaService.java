@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.util.PagingExtagram;
 
 public interface ExtaService {
@@ -90,12 +91,12 @@ public interface ExtaService {
 	 */
 	public void setExtaWrite(Extagram extagram, MultipartFile file);
 
-//	/**
-//	 * 게시글 번호를 이용하여 업로드된 파일의 정보를 조회
-//	 * @param viewExta - 조회할 게시글 번호를 가진 객체
-//	 * @return 첨부파일 정보
-//	 */
-//	public FileUpload getAttachFile(Extagram viewExta);
+	/**
+	 * 게시글 번호를 이용하여 업로드된 파일의 정보를 조회
+	 * @param viewExta - 조회할 게시글 번호를 가진 객체
+	 * @return 첨부파일 정보
+	 */
+	public FileUpload getAttachFile(Extagram viewExta);
 	
 	
 	/**
@@ -114,7 +115,7 @@ public interface ExtaService {
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
 	 */
-	public void setExtaUpdate(Extagram extagram);
+	public void setExtaUpdate(Extagram viewExta, MultipartFile file);
 
 
 	/**

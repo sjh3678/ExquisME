@@ -14,57 +14,36 @@ function submitContents(elClickedObj) {
 		elClickedObj.form.submit();
 	} catch(e) {}
 }
-</script>
 
-<script type="text/javascript">
 $(document).ready(function() {
-	//작성버튼
-	$("#btnWrite").click(function() {
-		var answer = confirm("Extagram을 등록하시겠습니까?");
-		if(answer == true) {
-			var fileCheck = document.getElementById("fileCheck").value;
-			
-			if( !fileCheck ) {
-				alert("Extagram 작성 시 사진을 업로드해야 합니다.");
-				return false;
-			} else {
-				submitContents( $("#btnWrite") )
-				$("form").submit();
-			}	
-	    } else {
-    		return false;
-	    }
-	});
-	
-	//취소버튼
-	
-	$("#btnCancel").click(function() {
-		var answer = confirm("Extagram 작성을 취소하시겠습니까?")
-		if(answer == true) {
-				history.go(-1);
+	//작성버튼 동작
+	$("#btnUpdate").click(function() {
+		var answer = confirm("게시글을 수정하시겠습니까?")
+		if( answer == true ){
+			submitContents( $("#btnUpdate") )
+			$("form").submit();
 		} else {
 			return false;
 		}
-	
 	});
-});
-</script>
-
-<script type="text/javascript">
-<c:if test="${not login}">
-	var message = "${msg}";
-	var url = "${url}";
-	alert(message);
-	document.location.href = url;
-</c:if>
+	
+	$("#btnCancel").click(function() {
+		var answer = confirm("게시글 수정을 취소하시겠습니까?")		
+		if(answer == true) {
+			history.go(-1);
+		} else {
+			return false;
+		}
+	})
+})
 </script>
 
 <div class="container">
 
-<h1>Extagram Write</h1>
+<h1>Extagram Update</h1>
 <hr>
 
-<form action="/extagram/write" method="post" enctype="multipart/form-data">
+<form action="/extagram/update" method="post" enctype="multipart/form-data">
 <div class="form-group">
 	<label for="write">작성자</label>
 	<input type="text" id="nick" name="nick" value="${nick }" class="form-control" readonly="readonly"/>
@@ -72,17 +51,19 @@ $(document).ready(function() {
 </div>
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent"></textarea>
+	<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
+	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent">${viewExta.EX_CONTENT }</textarea>
 </div>
 
 <div class="form-group">
-	<label for="file">첨부파일</label>
-	<input type="file" id="fileCheck" name="file" />
+	기존 사진 : <a href="/upload/${viewExta.PICTURE}">${viewExta.PIC}</a><br><br>
+	<input type="file" id="file" name="file" value="/upload/${viewExta.PIC}"/>
+	<small>** 새로운 사진을 업로드하면 기존 사진이 삭제됩니다 **</small>
 </div>
 
 <div class="text-center">
-	<button class="btn" id="btnWrite">작성</button>
-	<input type="reset" id="btnCancel" class="btn" value="취소"/>
+	<button class="btn" id="btnUpdate">작성</button>
+	<button class="btn" id="btnCancel">취소</button>
 </div>
 </form>
 
