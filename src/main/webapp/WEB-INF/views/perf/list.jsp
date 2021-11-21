@@ -116,17 +116,17 @@ $(document).ready(function(){
             }
     })
     
-    $("#slideleft").click(function(){
+    $("#slideLeft").click(function(){
      	$(this).css("display", "none");
-    	$("#slideright").css("display", "block");
     	$("form").fadeOut(200);
-		$(".search").delay(300).animate({width:"0"},300);
+		$(".search").delay(200).animate({width:"0"},300);
+		setTimeout(function(){$("#slideRight").css("display", "block")}, 500);
 	})
-	$("#slideright").click(function(){
+	$("#slideRight").click(function(){
 		$(this).css("display", "none");
-    	$("#slideleft").css("display", "block");
 		$(".search").animate({width:"250"},300);
 		$("form").delay(300).fadeIn(200);
+    	setTimeout(function(){$("#slideLeft").css("display", "block")}, 500);
 	})
     
     
@@ -299,6 +299,16 @@ function keyword(){
 	top: 50px;
 	left: 100px;
 }
+#slideLeft{
+	position: fixed;
+	top: 50px;
+	left: 350px;
+}
+#slideRight{
+	position: fixed;
+	top: 50px;
+	left: 100px;
+}
 .search_div{
 	padding: 20px 0px 0px 0px;
 }
@@ -308,8 +318,7 @@ function keyword(){
 <body>
 
 
-<div style="witdh: 300px;">
-</div>
+
 <div class="search">
 <form action="/perf/list" method="get" style="text-align: center;"> 
 	<div class="search_div">
@@ -478,8 +487,8 @@ EXQUISME<br>
 </div>
 </header>
 <!-- 헤더 -->
-<button id="slideleft">검색창 닫기</button>
-<button id="slideright" style="display: none;">검색창 열기</button>
+<button id="slideLeft">검색창 닫기</button>
+<button id="slideRight" style="display: none;">검색창 열기</button>
 <div class="container">
 <div id="result">
 
