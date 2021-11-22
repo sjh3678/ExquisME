@@ -55,10 +55,6 @@ public class PerfServiceImpl implements PerfService{
 		return perfDao.selectPerfByPerfNo(perf);
 	}
 
-	@Override
-	public void setPerfUpdate(Perf perf, HttpServletRequest req) {
-		
-	}
 
 	@Override
 	public void setPerfDelete(Perf perf) {
@@ -248,6 +244,71 @@ public class PerfServiceImpl implements PerfService{
 		
 		//향수사진 파일 삭제
 		perfDao.deletePerfFile(perf);
+	}
+
+	@Override
+	public void setPerfFileUpdate(MultipartFile file, int fileNo) {
+		
+		//-----파일업로드-----
+		
+		//빈 파일일 경우
+		if(file.getSize() <= 0) {
+			logger.info("첨부된 파일이 없습니다.");
+			}
+						
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+						
+		File storedFolder = new File(storedPath);
+		if( !storedFolder.exists() ) {
+				storedFolder.mkdir();
+		}
+						
+		//저장될 파일의 정보 생성하기
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		int fileSize = (int)file.getSize();
+		File dest = new File(storedPath, storedName);
+						
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+						
+		//DB에 파일 정보 넣기
+		
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		hashmap.put("fileNo", fileNo);
+		hashmap.put("originName", originName);
+		hashmap.put("storedName", storedName);
+		hashmap.put("fileSize", fileSize);
+		
+		perfDao.updatePerfFile(hashmap);
+	}
+
+	@Override
+	public void setPerfUpdate(Perf perf) {
+
+		//향수테이블 업데이트
+		perfDao.updatePerf(perf);
+		
+		
+		//향수-노트테이블 삭제
+		perfDao.deletePerfNote(perf);
+		
+		//향수-노트테이블 삽입
+		if(perf.getNoteNo() != null) {
+			for (int i = 0; i < perf.getNoteNo().length; i++) {
+				HashMap<String, Object> hashmap = new HashMap<String, Object>();
+				
+				hashmap.put("perfumeNo", perf.getPerfumeNo());
+				hashmap.put("noteNo", perf.getNoteNo()[i]);
+				
+				perfDao.insertPerfNote(hashmap);
+			}
+		}
+		
 	}
 
 }

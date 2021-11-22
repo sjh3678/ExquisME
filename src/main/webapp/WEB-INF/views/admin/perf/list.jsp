@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
+
+
 <div class="container">
 <h1>관리자 향수 리스트</h1>
 <hr>
@@ -32,7 +34,7 @@
 		</td>
 		<td style="text-align: center;"><a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">${perf.PERFUME_NAME }</a></td>
 		<td style="text-align: center;"><a href="/admin/perf/update?perfumeNo=${perf.PERFUME_NO }"><button>수정</button></a></td>
-		<td style="text-align: center;"><a href="/admin/perf/delete?perfumeNo=${perf.PERFUME_NO }"><button>삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/perf/delete?perfumeNo=${perf.PERFUME_NO }" onclick="return confirm('향수를 삭제하시겠습니까? 삭제된 향수는 원상복구 할 수 없습니다.');"><button id="btnDelete">삭제</button></a></td>
 	</tr>
 </c:forEach>
 </tbody>

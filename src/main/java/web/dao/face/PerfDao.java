@@ -74,9 +74,8 @@ public interface PerfDao {
 	 * 향수 정보 수정(업데이트)하기
 	 * 
 	 * @param perf
-	 * @param req
 	 */
-	public void updatePerf(Perf perf, HttpServletRequest req);
+	public void updatePerf(Perf perf);
 	
 	
 	/**
@@ -235,6 +234,13 @@ public interface PerfDao {
 	 * @param perf
 	 */
 	public void deletePerfFile(Perf perf);
+
+	/**
+	 * 향수 사진 파일 업데이트
+	 * 
+	 * @param hashmap
+	 */
+	public void updatePerfFile(HashMap<String, Object> hashmap);
 	
 	
 }

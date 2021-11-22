@@ -42,9 +42,9 @@ public class AdminPerfController {
 	
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String perfUpdate(Perf perf) {
+	public String perfUpdate(Perf perf, Model model) {
 		
-		//PERFUME_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER, ORIGIN_NAME, STORED_NAME, BRAND_NAME
+		//PERFUME_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER, FILE_NO, ORIGIN_NAME, STORED_NAME, BRAND_NAME
 		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
 		logger.info("viewPerf : {}", viewPerf);
 		
@@ -60,12 +60,26 @@ public class AdminPerfController {
 		List<HashMap<String, Object>> viewPerfBaseNote = perfService.getPerfBaseNote(perf);
 		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
 		
+		model.addAttribute("perf", viewPerf);
+		model.addAttribute("topNote", viewPerfTopNote);
+		model.addAttribute("middleNote", viewPerfMiddleNote);
+		model.addAttribute("baseNote", viewPerfBaseNote);
+		
 		return null;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String perfUpdateProc(Perf perf, HttpServletRequest req) {
-		return null;
+	public String perfUpdateProc(MultipartFile file, Perf perf, Model model) {
+		logger.info("@@@file : {}", file);
+		logger.info("@@@perf : {}", perf);
+		
+		//향수 사진파일 수정
+		perfService.setPerfFileUpdate(file, perf.getFileNo());
+		
+		//향수 정보 수정
+		perfService.setPerfUpdate(perf);
+		
+		return "redirect:/admin/perf/list";
 	}
 	
 	
@@ -75,7 +89,7 @@ public class AdminPerfController {
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String perfWriteProc(MultipartFile file, Perf perf, Model model ) {
+	public String perfWriteProc(MultipartFile file, Perf perf, Model model) {
 		logger.info("file : {}", file);
 		logger.info("perf : {}", perf);
 		

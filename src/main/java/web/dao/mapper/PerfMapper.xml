@@ -124,7 +124,7 @@
 </select>
 
 <select id="selectPerfByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
-	SELECT P.PERFUME_NO, P.PERFUME_NAME, P.PERFUME_VITALITY, P.PERFUME_GENDER
+	SELECT P.PERFUME_NO, P.PERFUME_NAME, P.PERFUME_VITALITY, P.PERFUME_GENDER, P.FILE_NO
         , F.ORIGIN_NAME, F.STORED_NAME
         , B.BRAND_NAME 
         FROM tb_perf P
@@ -236,14 +236,24 @@
 </insert>
 
 
-<update id="updatePerfLike">
-
+<update id="updatePerfFile" parameterType="hashmap">
+	UPDATE tb_file SET
+	    ORIGIN_NAME = #{originName }
+	    , STORED_NAME = #{storedName }
+	    , FILE_SIZE = #{fileSize }
+    WHERE FILE_NO = #{fileNo }
 </update>
 
 <update id="updatePerfDislike">
 </update>
 
-<update id="updatePerf">
+<update id="updatePerf" parameterType="web.dto.Perf">
+	UPDATE tb_perf SET
+	    BRAND_NO = #{brandNo }
+	    , PERFUME_NAME = #{perfumeName }
+	    , PERFUME_VITALITY = #{perfumeVitality }
+	    , PERFUME_GENDER = #{perfumeGender }
+    WHERE PERFUME_NO = #{perfumeNo }
 </update>
 
 

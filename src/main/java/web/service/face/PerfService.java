@@ -43,9 +43,8 @@ public interface PerfService {
 	 * 향수정보 수정하기
 	 * 
 	 * @param perf
-	 * @param req
 	 */
-	public void setPerfUpdate(Perf perf, HttpServletRequest req);
+	public void setPerfUpdate(Perf perf);
 	
 	/**
 	 * 향수정보 삭제하기
@@ -173,6 +172,14 @@ public interface PerfService {
 	 * @param perf
 	 */
 	public void deletePerf(Perf perf);
+
+	/**
+	 * 향수 사진파일 업데이트
+	 * 
+	 * @param file
+	 * @param fileNo
+	 */
+	public void setPerfFileUpdate(MultipartFile file, int fileNo);
 
 
 
