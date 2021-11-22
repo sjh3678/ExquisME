@@ -280,14 +280,20 @@ public class UserServiceImpl implements UserService{
 			
 			if(cnt == 0) {
 				logger.info("이전 기록 삭제 완료");
-				
 			}else {
-				logger.info("파일이 없거나 삭제 실패");
-				
+				logger.info("파일이 없거나 삭제 실패");		
 			}
 		}
-		
 		return true;
+	}
+
+	@Override
+	public User getUserInfoByEmail(User user) {
+		int cnt = userDao.selectCntByEmail(user);
+		if(cnt == 1) {
+			user = userDao.selectUserByEmail(user);
+		}
+		return user;
 	}
 	
 }

@@ -18,7 +18,7 @@
 		<result column="is_social" property="isSocial"/>
 		<result column="create_date" property="createDate"/>
 		<result column="question_anwser" property="questionAnwser"/>
-		<result column="question_no" property="quesionNo"/>
+		<result column="question_no" property="questionNo"/>
 	</resultMap>
 	
 	<resultMap type="web.dto.FileUpload" id="File">
@@ -110,4 +110,15 @@
 			email = #{email}, nick = #{nick}, phone = #{phone}, birth = #{birth}
 		WHERE user_no = #{userNo}
 	</update>
+	<select id="selectCntByEmail" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_user
+		WHERE email = #{email}
+	</select>
+	
+	<select id="selectUserByEmail" parameterType="web.dto.User" resultMap="User">
+		SELECT
+			user_no, id, nick, email, question_no, question_anwser 
+		FROM tb_user
+		WHERE email = #{email}
+	</select>
 </mapper>

@@ -292,9 +292,128 @@ public class UserController {
 		return false;
 	}
 	
-	@RequestMapping(value="/history")
-	public void userHistory(User user, FileUpload file, Extagram ex, ExComm exComm, Model model ) {
-		logger.info("유저 개인기록 조회");
+	@RequestMapping(value="/search/id")
+	public @ResponseBody boolean searchId(User user) {
+		logger.info("전달값 : {}", user);
+		
+		int questionNo = user.getQuestionNo();
+		String questionAnswer = user.getQuestionAnwser();
+		
+		user = userService.getUserInfoByEmail(user);
+		
+		logger.info("아이디 : {}" + user.getId());
+		if(questionNo != user.getQuestionNo()) {
+			logger.info("질문 틀림");
+			return false;
+		}
+		
+		if(!questionAnswer.equals(user.getQuestionAnwser())) {
+			logger.info("답 틀림");
+			return false;
+		}
+		
+		if(user.getId() != null) {
+        	MimeMessage mailSend = mailSender.createMimeMessage();
+        	String mailContent = "<h1>[아이디 찾기]</h1><br><p>하단에 적힌 아이디가 본 사이트에 접속가능한 회원님의 아이디입니다.</p>" 
+                    +"<p> 회원의 아이디 : " + user.getId() + "</p>";
+        	try {
+                mailSend.setSubject("아이디 찾기 ", "utf-8");
+                mailSend.setText(mailContent, "utf-8", "html");
+                mailSend.setRecipients(Message.RecipientType.TO, user.getEmail());
+                mailSender.send(mailSend);
+                logger.info("아이디 : {}" + user.getId());
+     
+                return true;   
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        logger.info("조회된 결과 없음 [ERROR]");
+		return false;
 	}
 	
+	@RequestMapping(value="/search/pw")
+	public @ResponseBody boolean searchPw(User user) {
+		logger.info("전달값 : {}", user);
+		String id = user.getId();
+		
+		int questionNo = user.getQuestionNo();
+		String questionAnswer = user.getQuestionAnwser();
+		
+		user = userService.getUserInfoByEmail(user);
+		
+		logger.info("아이디 :" + user.getId());
+		String pw = "";
+		
+		if(questionNo != user.getQuestionNo()) {
+			logger.info("질문 틀림");
+			return false;
+		}
+		
+		if(!questionAnswer.equals(user.getQuestionAnwser())) {
+			logger.info("답 틀림");
+			return false;
+		}
+		
+		if(!id.equals(user.getId())) {
+			logger.info("회원 아이디 불일치");
+			return false;
+		}else {
+			
+			//문자열 6자리 랜덤 생성
+			int leftLimit = 97; // letter 'a'
+			int rightLimit = 122; // letter 'z' -> a~z까지의 문자열 조합
+			int targetStringLength = 6; // 문자열 길이 설정
+			Random random = new Random();
+			StringBuilder buffer = new StringBuilder(targetStringLength); // 버퍼를 통해 문자열 생성
+			for (int i = 0; i < targetStringLength; i++) {
+			    int randomLimitedInt = leftLimit + (int)
+			            (random.nextFloat() * (rightLimit - leftLimit + 1));
+			    buffer.append((char) randomLimitedInt);
+			}//버퍼에 append를 통해 랜덤으로 생성한 문자열을 조합
+			String generatedString = buffer.toString();
+			pw += generatedString;
+			
+			//숫자 6자리 랜덤 생성
+	        int size = 6;
+	        int num = 0;
+	        
+	        for(int i = 0; i< size; i++) {
+	        	num = (int) (Math.random()*10);
+	        	pw += num; 
+	        	user.setPw(pw);
+	        }
+	        
+	        //비밀번호 암호화
+	        user.setPw(UserSHA256.encrypt(user));
+	        
+	        //비밀번호 변경 서비스 호출
+	        boolean isUpdate = userService.setUpdatePw(user, user.getPw());
+	        
+	        if(!isUpdate) {
+	        	logger.info("임시 비밀번호 변경 실패");
+	        	return false;
+	        }
+		}
+		
+		if(user.getId() != null) {
+        	MimeMessage mailSend = mailSender.createMimeMessage();
+        	String mailContent = "<h1>[비밀번호 찾기]</h1><br><p>하단에 적힌 비밀번호로 접속하여 안전한 비밀번호로 변경해주세요.</p>" 
+                    +"<p> 회원의 임시 비밀번호 : " + pw + "</p>";
+        	try {
+                mailSend.setSubject("임시 비밀번호 발송 ", "utf-8");
+                mailSend.setText(mailContent, "utf-8", "html");
+                mailSend.setRecipients(Message.RecipientType.TO, user.getEmail());
+                mailSender.send(mailSend);
+                
+                return true;   
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        logger.info("조회된 결과 없음 [ERROR]");
+		return false;
+	}
 }

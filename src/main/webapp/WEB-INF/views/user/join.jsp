@@ -258,7 +258,7 @@ async function checkNickExist() {
 			$("#nickChk").css("display", "none");
 			$("#valid-nick").css("display", "none");
 			
-			//이메일 체크 패스못함
+			//닉네임 체크 패스못함
 			return false;
 		}
 	} catch (e) {

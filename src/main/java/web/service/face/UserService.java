@@ -113,4 +113,11 @@ public interface UserService {
 	 */
 	public boolean updateUserInfo(User user);
 
+	/**
+	 * 이메일을 통한 아이디 유무 요청
+	 * @param user - 요청할 유저 정보
+	 * @return - 조회된 유저 정보 반환
+	 */
+	public User getUserInfoByEmail(User user);
+
 }

@@ -79,9 +79,16 @@ public interface UserDao {
 	public void updateUserInfo(User user);
 
 	/**
-	 * 
-	 * @param user
-	 * @return
+	 * 이메일을 통해 유저의 유무를 조회
+	 * @param user - 조회할 유저의 정보
+	 * @return - 조회된 숫자 반환
 	 */
-	public int selectCntByUser(User user);
+	public int selectCntByEmail(User user);
+
+	/**
+	 * 이메일을 통해 유저의 정보를 조회
+	 * @param user - 조회할 유저의 정보
+	 * @return - 조회할 숫자 반환
+	 */
+	public User selectUserByEmail(User user);
 }
