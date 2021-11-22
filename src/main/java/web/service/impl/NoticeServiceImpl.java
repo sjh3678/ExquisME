@@ -33,18 +33,32 @@ public class NoticeServiceImpl implements NoticeService {
 	public PagingNotice getPaging(HttpServletRequest req) {
 		
 		String param = req.getParameter("curPage");
-		
 		int curPage = 0;
-		
 		if(param != null && !"".equals(param)) {
 			curPage = Integer.parseInt(param);
-		} else {
-			logger.info("curPage 값이 null입니다.");
 		}
 		
-		int totalCount = noticeDao.selectCntAll();
+		param = req.getParameter("search");
+		String search = null;
+		if(param !=null && !"".equals(param)) {
+			search = param;
+		}
+
+		param = req.getParameter("searchType");
+		String searchType = null;
+		if(param !=null && !"".equals(param)) {
+			searchType = param;
+		}
 		
-		PagingNotice paging = new PagingNotice(totalCount, curPage);
+		PagingNotice paging = new PagingNotice();
+		paging.setSearch(search);
+		paging.setSearchType(searchType);
+		
+		int totalCount = noticeDao.selectCntAll(paging);
+		
+		paging = new PagingNotice(totalCount, curPage);
+		paging.setSearch(search);
+		paging.setSearchType(searchType);
 		
 		return paging;
 	}

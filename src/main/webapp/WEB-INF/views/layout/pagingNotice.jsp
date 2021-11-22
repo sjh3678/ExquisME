@@ -21,7 +21,7 @@
 
 	<!-- 첫 페이지로 -->
 	<c:if test="${paging.curPage ne 1 }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }">첫 페이지로 &laquo;</a></li>
+		<li><a href="<%=request.getContextPath() %>${linkUrl }">&laquo; 첫 페이지로 </a></li>
 	</c:if>
 	
 	<!-- 이전 페이징 리스트로 이동 -->
@@ -35,9 +35,9 @@
 	</c:choose>
 	
 	<!-- 이전 페이지로 가기 -->
-	<c:if test="${paging.curPage > 1 }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage - 1 }">&larr;</a></li>
-	</c:if>
+<%-- 	<c:if test="${paging.curPage > 1 }"> --%>
+<%-- 		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage - 1 }">&larr;</a></li> --%>
+<%-- 	</c:if> --%>
 	
 	<!-- 페이징 리스트 -->
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
@@ -50,9 +50,9 @@
 	</c:forEach>
 	
 	<!-- 다음 페이지로 가기 -->
-	<c:if test="${paging.curPage < paging.totalPage }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage + 1 }">&rarr;</a></li>
-	</c:if>
+<%-- 	<c:if test="${paging.curPage < paging.totalPage }"> --%>
+<%-- 		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage + 1 }">&rarr;</a></li> --%>
+<%-- 	</c:if> --%>
 	
 	<!-- 다음 페이징 리스트로 이동 -->
 	<c:choose>
@@ -66,7 +66,7 @@
 	
 	<!-- 마지막 페이지로 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.totalPage }">마지막 페이지로 &raquo;</a></li>
+		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.totalPage }">끝 페이지로 &raquo;</a></li>
 	</c:if>
 
 </ul>

@@ -3,6 +3,8 @@ package web.dao.face;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import web.dto.FileUpload;
 import web.dto.Notice;
 import web.util.PagingNotice;
@@ -11,9 +13,10 @@ public interface NoticeDao {
 
 	/**
 	 * 공지사항 전체 행 수 조회
+	 * @param paging 
 	 * @return
 	 */
-	public int selectCntAll();
+	public int selectCntAll(PagingNotice paging);
 
 	/**
 	 * 공지사항 전체 목록 조회

@@ -13,8 +13,8 @@ import web.util.PagingNotice;
 public interface NoticeService {
 
 	/**
-	 * 
-	 * @param req
+	 * 현재 페이지를 기준으로 페이지네이션을 만든다. 
+	 * @param req - 현재 페이지인 curPage가 담겨 있는 HSR 객체
 	 * @return
 	 */
 	public PagingNotice getPaging(HttpServletRequest req);
@@ -33,7 +33,7 @@ public interface NoticeService {
 	public void setNoticeWrite(Notice notice, MultipartFile file);
 
 	/**
-	 * Notice를 조회한다.
+	 * Notice를 단일 조회하여 Notice로 반환한다.
 	 * @param notice
 	 * @return
 	 */

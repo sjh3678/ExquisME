@@ -5,8 +5,15 @@
 
 <mapper namespace="web.dao.face.NoticeDao">
 
-	<select id="selectCntAll" resultType="int">
+	<select id="selectCntAll" parameterType="web.util.PagingNotice" resultType="int">
 		SELECT COUNT(*) FROM tb_notice
+		WHERE 1 = 1
+		<if test="searchType == 'titleType'">
+			AND notice_title LIKE '%' || #{search } || '%'
+		</if>
+		<if test="searchType == 'contentType'">
+			AND notice_content LIKE '%' || #{search } || '%'
+		</if>
 	</select>
 
 	<select id="selectNoticeAll" parameterType="web.util.PagingNotice" resultType="hashmap">
@@ -15,6 +22,15 @@
 				SELECT n.notice_no, n.user_no, n.file_no, n.notice_title, n.notice_content, n.notice_date, u.nick, f.origin_name, f.stored_name FROM tb_notice n
 				LEFT OUTER JOIN tb_user u ON n.user_no = u.user_no
 				LEFT OUTER JOIN tb_file f ON n.file_no = f.file_no
+				<if test="search != null and search != ''">
+				WHERE 1 = 1
+					<if test="searchType == 'titleType'">
+						AND notice_title LIKE '%' || #{search } || '%'
+					</if>
+					<if test="searchType == 'contentType'">
+						AND notice_content LIKE '%' || #{search } || '%'
+					</if>
+				</if>
 				ORDER BY n.notice_no DESC
 			) A
 		) tb_notice

@@ -83,8 +83,17 @@ $(document).ready(function(){
 </div>
 </c:forEach>
 
-<div class="clearfix"></div>
-<c:import url="/WEB-INF/views/layout/paging.jsp" />
+<div class="form-group form-inline" style="text-align: center; margin-top: 10px;">
+	<form action="/notice/list" method="get">
+		<select name="searchType" class="form-control" style="width: 80px; font-size: 12px;">
+			<option value="titleType">제목
+			<option value="contentType">내용
+		</select>
+		<input type="text" id="search" name="search" class="form-control" style="width: 240px;"/>
+		<button class="btn form-control" style="width: 60px; text-align: center;">검색</button>
+	</form>
+</div>
+<c:import url="/WEB-INF/views/layout/pagingNotice.jsp" />
 
 </div><%-- .container --%>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
