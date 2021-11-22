@@ -136,7 +136,7 @@
 
 .hrMenu {
 	margin: 0 auto;
-	border-top: 1px solid black;
+	border-top: 1px solid #35312B;
 }
 .menu{
 	font-weight:300;
@@ -150,7 +150,7 @@
 }
 .btn{
 	background: #ECE6CC;
-	color: #35312B
+	color: #35312B;
 }
 .btn:hover{
 	background: #8A7E6B;

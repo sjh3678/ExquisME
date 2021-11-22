@@ -25,14 +25,22 @@ function submitContents2(elClickedObj) {
 $(document).ready(function(){
 	//버튼 클릭에 따른 동작
 	$("#btnWriteProc").click(function(){
-		submitContents($("#btnWriteProc"));
-		$("#formWrite").submit();
+		if(confirm("새로운 게시글을 등록하시겠습니까?")){
+			submitContents($("#btnWriteProc"));
+			$("#formWrite").submit();
+		}else{
+			return false;
+		}
 	})
 	
 	//버튼 클릭에 따른 동작
 	$("#btnUpdateProc").click(function(){
-		submitContents2($("#btnUpdateProc"));
-		$("#formUpdate").submit();
+		if(confirm("게시글을 수정하시겠습니까? 수정된 게시물은 원상복구 할 수 없습니다.")){
+			submitContents2($("#btnUpdateProc"));
+			$("#formUpdate").submit();			
+		}else{
+			return false;
+		}
 	})
 	
 
@@ -187,7 +195,7 @@ $(document).ready(function(){
 
 <%-- 모달 글쓰기 영역 --%>
 <div class="modalWrite">
-	<div class="modalWrite_body">새로운 공지사항 등록하기
+	<div class="modalWrite_body">
 		<form id="formWrite" action="/admin/notice/write" method="post" enctype="multipart/form-data">
 			<label for="title">제목</label>
 			<input type="text" id="title" name="noticeTitle" class="form-control"/>
@@ -208,7 +216,7 @@ $(document).ready(function(){
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
 			<span class="titleText">${i.NOTICE_TITLE}</span>
-			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}">삭제</a>&nbsp;&nbsp;&nbsp;</span>
+			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시물은 원상복구 할 수 없습니다.');">삭제</a>&nbsp;&nbsp;&nbsp;</span>
 			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>
 	</div>
@@ -227,7 +235,7 @@ $(document).ready(function(){
 
 <%-- 모달 수정 영역 --%>
 <div id="modalUpdate">
-	<div class="modal_body">공지사항 수정하기
+	<div class="modal_body">
 		<form id="formUpdate" action="/admin/notice/update" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="fileNo" id="fileNo" />
 		
