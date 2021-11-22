@@ -223,4 +223,31 @@ public class PerfServiceImpl implements PerfService{
 		return perf.getPerfumeNo();
 	}
 
+	@Override
+	public void setNewPerfNote(Perf perf) {
+
+		if(perf.getNoteNo() != null) {
+			for (int i = 0; i < perf.getNoteNo().length; i++) {
+				HashMap<String, Object> hashmap = new HashMap<String, Object>();
+				
+				hashmap.put("perfumeNo", perf.getPerfumeNo());
+				hashmap.put("noteNo", perf.getNoteNo()[i]);
+				
+				perfDao.insertPerfNote(hashmap);
+			}
+		}
+	}
+
+	@Override
+	public void deletePerf(Perf perf) {
+		//향수-노트tb 삭제
+		perfDao.deletePerfNote(perf);
+		
+		//향수tb 삭제
+		perfDao.deletePerf(perf);
+		
+		//향수사진 파일 삭제
+		perfDao.deletePerfFile(perf);
+	}
+
 }

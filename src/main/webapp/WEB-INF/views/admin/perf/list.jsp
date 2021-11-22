@@ -23,7 +23,7 @@
 		<td>
 			<a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">
 				<img class="perf_img" style="width:50px; height:50px; display: block; margin: auto;"
-					src="/resources/img/perf/${perf.STORED_NAME }">
+					src="/upload/${perf.STORED_NAME }">
 			</a>
 		</td>
 		<td>

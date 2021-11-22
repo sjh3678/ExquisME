@@ -16,9 +16,9 @@ $(document).ready(function(){
 			var p3 = document.getElementById('brandNo').value;
 			var p4 = document.getElementById('perfumeGender').value;
 			var p5 = document.getElementById('perfumeVitality').value;
-			var p6 = document.getElementsByName('noteNo').value;
-			
-			if (p1 == "" || p2 == ""|| p3 == 0 || p4 == 0 || p5 == 0) {
+			//var p6 = document.getElementsByName('noteNo').value;           //?????
+			var p6 = $("input:checkbox[name=noteNo]").is(":checked");
+			if (p1 == "" || p2 == ""|| p3 == 0 || p4 == 0 || p5 == 0 || p6 == false) {
 		         alert('필수항목 누락')
 		         return false;
 			}else{
@@ -29,7 +29,7 @@ $(document).ready(function(){
 		}
 	})
 	$("#btnCancel").click(function(){
-		history.go(-1);
+		location.href="/admin/perf/list";
 	})
 })
 
@@ -59,11 +59,11 @@ $(document).ready(function(){
 
 <form action="/admin/perf/write" method="post" enctype="multipart/form-data">
 	
-	<div>
-		<label for="file">이미지 등록</label>
+	<div style="width:100px; margin: 0 auto;">
+		<label for="file">이미지 파일 등록</label>
 		<input type="file" id="file" name="file" />
 	</div>
-	
+	<br>
 	<div>
 		<span>향수 이름 : </span></label>
 		<input type="text" id="perfName" name="perfumeName" placeholder="향수명을 입력해주세요"/>

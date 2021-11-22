@@ -68,10 +68,6 @@ public class AdminPerfController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/delete")
-	public String perfDelete(Perf perf) {
-		return null;
-	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String perfWrite() {
@@ -89,9 +85,15 @@ public class AdminPerfController {
 		int perfumeNo = perfService.setNewPerf(perf, fileNo);
 		logger.info("perfumeNo : {}", perfumeNo);
 		
-//		perfService.setNewPerfNote(perf);
+		perfService.setNewPerfNote(perf);
 		
-		return null;
+		return "redirect:/admin/perf/list";
+	}
+	
+	@RequestMapping(value = "/delete")
+	public String perfDelete(Perf perf) {
+		perfService.deletePerf(perf);
+		return "redirect:/admin/perf/list";
 	}
 	
 }

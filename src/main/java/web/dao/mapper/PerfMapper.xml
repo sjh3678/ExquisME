@@ -246,15 +246,33 @@
 <update id="updatePerf">
 </update>
 
-<delete id="deletePerf">
-</delete>
+
 
 <insert id="insertNewPerf" parameterType="web.dto.Perf">
 	<selectKey order="BEFORE" resultType="int" keyProperty="perfumeNo">
 		SELECT TB_PERF_SEQ.nextval FROM dual
 	</selectKey>
 	INSERT INTO tb_perf (PERFUME_NO, BRAND_NO, FILE_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER)
-	VALUES (TB_PERF_SEQ.nextval, #{brandNo}, #{fileNo }, #{perfumeName }, #{perfumeVitality }, #{perfumeGender })
+	VALUES (#{perfumeNo }, #{brandNo}, #{fileNo }, #{perfumeName }, #{perfumeVitality }, #{perfumeGender })
 </insert>
+
+<insert id="insertPerfNote" parameterType="hashmap">
+	INSERT INTO tb_perf_note (PERFUME_NO, NOTE_NO)
+		VALUES ( #{perfumeNo }, #{noteNo } )
+</insert>
+
+
+<delete id="deletePerfNote" parameterType="web.dto.Perf">
+	DELETE FROM tb_perf_note WHERE PERFUME_NO = #{perfumeNo }
+</delete>
+
+<delete id="deletePerf" parameterType="web.dto.Perf">
+	DELETE FROM tb_perf WHERE PERFUME_NO = #{perfumeNo }
+</delete>
+
+<delete id="deletePerfFile" parameterType="web.dto.Perf">
+	DELETE FROM tb_file WHERE FILE_NO = #{fileNo }
+</delete>
+
 
 </mapper>

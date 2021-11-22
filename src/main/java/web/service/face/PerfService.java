@@ -160,6 +160,20 @@ public interface PerfService {
 	 */
 	public int setNewPerf(Perf perf, int fileNo);
 
+	/**
+	 * 신규 향수 노트 등록
+	 * 
+	 * @param perf
+	 */
+	public void setNewPerfNote(Perf perf);
+
+	/**
+	 * 향수 삭제
+	 * 
+	 * @param perf
+	 */
+	public void deletePerf(Perf perf);
+
 
 
 

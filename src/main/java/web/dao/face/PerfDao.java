@@ -78,12 +78,6 @@ public interface PerfDao {
 	 */
 	public void updatePerf(Perf perf, HttpServletRequest req);
 	
-	/**
-	 * 향수 정보 삭제하기
-	 * 
-	 * @param perf
-	 */
-	public void deletePerf(Perf perf);
 	
 	/**
 	 * 향수 정보 삽입(추가등록)하기
@@ -213,5 +207,34 @@ public interface PerfDao {
 	 */
 	public int insertNewPerf(Perf perf);
 
+	
+	/**
+	 * 신규 향수 노트정보 삽입
+	 * @param hashmap
+	 */
+	public void insertPerfNote(HashMap<String, Object> hashmap);
+
+	
+	/**
+	 * 향수-노트 삭제
+	 * 
+	 * @param perf
+	 */
+	public void deletePerfNote(Perf perf);
+
+	/**
+	 * 향수 정보 삭제하기
+	 * 
+	 * @param perf
+	 */
+	public void deletePerf(Perf perf);
+
+	/**
+	 * 향수 사진 파일 삭제
+	 * 
+	 * @param perf
+	 */
+	public void deletePerfFile(Perf perf);
+	
 	
 }
