@@ -29,13 +29,16 @@
 			<exclude-mapping path="/layer/like"/>
 			<exclude-mapping path="/layer/error"/> -->
 			
-			
 			<!-- 인터셉터 클래스 -->
 			<beans:bean class="web.controller.UserInterceptor" />
 		</interceptor>
 		<interceptor>
 			<mapping path="/admin/**"/>
 			<beans:bean class="web.controller.AdminInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/user/mypage"/>
+			<beans:bean class="web.controller.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
 

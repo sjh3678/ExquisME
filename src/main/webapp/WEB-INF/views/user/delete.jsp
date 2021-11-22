@@ -3,6 +3,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#yes").click(function(){
+		console.log("#yes clicked")
 		$.ajax({
 			type: "post"
 			, url: "/user/delete"
@@ -12,12 +13,16 @@ $(document).ready(function(){
 				console.log("AJAX 성공");
 				$(location).attr('href', '/user/mypage')
 
-			}, error: function(){
+			}, error: function(error){
 				console.log("AJAX 실패");
+				console.log(error)
 			}
 		})
 	})
-	
+	$("#no").click(function(){
+		console.log("#no clicked")
+		$(location).attr('href', '/user/mypage')
+	})
 })
 </script>
 <style type="text/css">

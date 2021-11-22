@@ -1,17 +1,18 @@
 package web.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.ServletContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.dao.face.UserDao;
-import web.dto.ExComm;
-import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
@@ -21,6 +22,8 @@ import web.service.face.UserService;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired UserDao userDao;
+	
+	@Autowired ServletContext context;
 	
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	
@@ -35,8 +38,8 @@ public class UserServiceImpl implements UserService{
 			logger.info("아이디 매칭 성공");
 			
 			User user = userDao.selectUserById(param);// 유저 정보 조회
-			logger.info("db : {}", user.getPw());
-			logger.info("input : {}", param.getPw());
+			logger.info("비밀번호 매칭 여부 : {}", param.getPw().equals(user.getPw()));
+			
 			//해시값 비교
 			if(param.getPw().equals(user.getPw())) {
 				//로그인 성공
@@ -118,13 +121,13 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public boolean deleteUser(int userNo) {
-		logger.info("deleteUser called");
+		logger.info("deleteUser called {}", userNo);
 		//회원정보 삭제
 		userDao.deleteUserByUserno(userNo);
 		User user = new User();
 		user.setUserNo(userNo);
 		int cnt = userDao.selectUserCnt(user);
-		
+		logger.info("cnt : {}", cnt);
 		if(cnt == 0) {
 			logger.info("삭제 성공");
 			return true;
@@ -191,4 +194,100 @@ public class UserServiceImpl implements UserService{
 		int userNo = user.getUserNo();
 		return userDao.selectUserByUserno(userNo);
 	}
+
+	@Override
+	public FileUpload updateProfileFile(User user, MultipartFile fileUpload) {
+		logger.info("유저 프로필 정보 수정");
+		//유저 이전 정보 조회
+		user = userDao.selectUserByUserno(user.getUserNo());
+		logger.info("파일 크기 : {}", fileUpload.getSize() );
+		
+		if(fileUpload.getSize() <= 0) {
+			logger.info("파일의 크기가 0, 처리 중단");
+			logger.info("파일 없음");
+			
+			//기본 프로필 사진 파일 번호
+			int fileNo = 91;
+			
+			//회원의 기존 프로필로 변경
+			if(user.getFileNo() != 91) {
+				fileNo = user.getFileNo();
+			}
+			
+			return userDao.selectFileByFileNo(fileNo);
+		}
+		
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+		logger.info("upload realPath : {}", storedPath);
+		
+		//upload폴더가 없으면 생성
+		File storedFolder = new File(storedPath);
+		if(!storedFolder.exists()) {
+			storedFolder.mkdir();
+		}
+		
+		//저장될 파일의 이름 생성
+		String filename = fileUpload.getOriginalFilename();
+		filename += UUID.randomUUID().toString().split("-")[4];
+		logger.info("filename: {}", filename);
+				
+		//저장될 파일의 정보 객체 - java.util.File
+		File dest = new File(storedFolder, filename);
+				
+		try {
+			//업로드된 파일을 저장
+			fileUpload.transferTo(dest);
+					
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+			
+				
+		//DB에 기록할 정보 객체 - DTO
+		FileUpload file = new FileUpload();
+		file.setOriginName(fileUpload.getOriginalFilename());
+		file.setStoredName(filename);
+		int size = (int) fileUpload.getSize();
+		file.setFileSize(size);
+
+		userDao.insertFile(file);
+		
+		file = userDao.selectFileByFileNo(file.getFileNo());
+		
+		return file;
+	}
+
+	@Override
+	public boolean updateUserInfo(User param) {
+		logger.info("updateUserInfo called");
+		
+		//정보 수정전 기록 조회
+		User user = userDao.selectUserByUserno(param.getUserNo());
+		
+		logger.info("이전 기록 : {}", user);
+		//정보 수정
+		userDao.updateUserInfo(param);
+		
+		//이전 프로필 사진이 기본 프로필이 아닐때
+		if(user.getFileNo() != 91) {
+					
+			//기존 프로필 사진 삭제
+			userDao.deleteFileByFileNo(user);
+			
+			//파일정보 삭제 확인
+			int cnt = userDao.selectFileCntByFileNo(user);
+			
+			if(cnt == 0) {
+				logger.info("이전 기록 삭제 완료");
+				
+			}else {
+				logger.info("파일이 없거나 삭제 실패");
+				
+			}
+		}
+		
+		return true;
+	}
+	
 }

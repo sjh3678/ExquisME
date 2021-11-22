@@ -190,7 +190,7 @@ function checkNick() {
 		nick.addClass("is-invalid");
 		nick.removeClass("is-valid");
 		
-		$("#valid-email").css("display", "none");
+		$("#valid-nick").css("display", "none");
 		$("#nickError").css("display", "none");
 		$("#nickChk").css("display", "inline");
 		
@@ -245,7 +245,7 @@ async function checkNickExist() {
 			$("#nickError").css("display", "none");
 			$("#nickChk").css("display", "none");
 			$("#valid-nick").css("display", "inline");
-			
+			$("#sendMail").css("display", "inline");
 			//닉네임 체크 패스
 			return true;
 		} else {
@@ -376,10 +376,11 @@ function telValidator() {
 }
 
 //생일 공백 검사
-function checkBirth(birth) {
+function checkBirth() {
 	console.log("생일 공백 검사")
 
 	var pattern = /\s/g;// 스페이스바 거르기
+	var birth = $("#birth");
 	
 	if (birth.val() == "") {
 		console.log("생일 공백");
@@ -426,7 +427,7 @@ function checkAnswer() {
 		answer.addClass("is-invalid");
 		answer.removeClass("is-valid");
 		
-		$("#answerError").css("display", "inline");
+		$("#answerChk").css("display", "inline");
 		$("#valid-answer").css("display", "none");
 		
 		return false;
@@ -437,22 +438,15 @@ function checkAnswer() {
 		answer.removeClass("is-valid");
 		
 		$("#valid-answer").css("display", "none");
-		$("#answerError").css("display", "none");
 		$("#answerChk").css("display", "inline");
 		
 		return false;
 		
-	} else if('/^[0-9]{4}-[0-9]{2}-[0-9]{2}/'.test(birth.val())){
-		console.log("유효한 생일 형식");
-		answer.addClass("is-valid");
-		answer.removeClass("is-invalid");
-		
-		$("#answerError").css("display", "none");
-		$("#valid-answer").css("display", "inline");
-		
-		return true;
 	}else{
-		console.log("유효하지 않은 생일 형식");
+		console.log("유효한 질문 답");
+		$("#valid-answer").css("display", "inline");
+		$("#answerChk").css("display", "none");
+		
 		return true;
 	}
 }
@@ -488,6 +482,8 @@ async function checked() {
 	
 	if (checkAnswer() == false) isvalid = false;
 	console.log(isvalid);
+	
+	if(authKeyCheck() == false) isvalid = false;
 	
 	return isvalid;
 }
@@ -584,18 +580,26 @@ $(document).ready(function(){
 			}
 		}else if(joinCnt == 1){
 			console.log("회원 입력 페이지에서 이동")
- 			// 모든 항목 검사 및 회원가입 실행
-			submit();
+			var isCheck = checked();
+			if(isCheck){
+				// 모든 항목 검사 및 회원가입 실행
+				submit();
+				
+				$("#join-form").css("display", "none");
+				$("#info").css("color", "#877b9e");
+				$("#agree").css("color", "#877b9e");
+				$("#joinComplete").css("color", "black");
+				
+				$("#complete-join").css("display", "inline");
+				$("#pageBtn").css("display","none");
+ 			}else{
+ 				console.log("요소 중 에러사항 있음")
+ 				alert("체크되지 않은 항목이 존재합니다.");
+ 			}
 			
-			$("#join-form").css("display", "none");
-			$("#info").css("color", "#877b9e");
-			$("#agree").css("color", "#877b9e");
-			$("#joinComplete").css("color", "black");
-			
-			$("#complete-join").css("display", "inline");
-			$("#pageBtn").css("display","none");
 		}
 	});
+	
 	//아이디 중복체크
 	$("#id").blur(function() {
 		checkIdExist();
@@ -655,10 +659,13 @@ $(document).ready(function(){
         closeText: '닫기'  // 닫기 버튼 패널
     });
 
-    $("#birth").focus(function() {
+    $("#birth").click(function() {
         $("#birth").datepicker();
     });
     
+    $("#birth").change(function(){
+    	checkBirth()
+    })
     //입력이 안료되었을 때 호출
     //유효성 검사 / 공백 체크 / 중복 체크
     $("#id").blur(function(){
@@ -697,7 +704,11 @@ $(document).ready(function(){
     });
     
 	$("#isVailEmail").click(function(){
-		authKeyCheck();
+		if(checkEmailExist() == false){
+			console.log("중복된 이메일")
+		}else{
+			authKeyCheck();
+		}
 	})
    
 	$("#into-login").click(function(){
@@ -814,7 +825,7 @@ $(document).ready(function(){
 <span id="emailError" class="error col-xs-offset-3 feedback">이미 존재하는 이메일입니다.</span>
 <span id="valid-email" class="valid col-xs-offset-3 feedback">사용가능한 이메일입니다.</span>
 <br>
-<button id="sendMail" class="btn btn-primary col-xs-offset-3" type="button">인증번호 받기</button>
+<button id="sendMail" class="btn btn-primary col-xs-offset-3 feedback" type="button">인증번호 받기</button>
 
 <br>
 <label for="emailCheck" id="emailCheckLabel"class="col-xs-3 control-label feedback">인증번호 </label>
@@ -831,7 +842,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" name="birthDate" placeholder="birth" onchage=birthCheck(this)>
+<input type="text" class="form-control" id="birth" readonly name="birth" placeholder="birth" onchage=birthCheck(this)>
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>

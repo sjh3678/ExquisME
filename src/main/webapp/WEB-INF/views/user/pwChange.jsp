@@ -138,6 +138,7 @@ $(document).ready(function(){
 
 </script>
 <div class="changeArea">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <table class="pw">
 <tr>
 	<td><label for="changePw1">변경할 비밀번호</label></td>

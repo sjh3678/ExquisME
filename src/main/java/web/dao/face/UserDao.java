@@ -36,13 +36,13 @@ public interface UserDao {
 	 * @param user - 조회할 회원 번호
 	 * @return - 조회된 세부정보 반환
 	 */
-	public User selectUserByUserno(int userno);
+	public User selectUserByUserno(int userNo);
 
 	/**
 	 * 회원 탈퇴 요청
 	 * @param userno - 탈퇴할 회원 번호 
 	 */
-	public void deleteUserByUserno(int userno);
+	public void deleteUserByUserno(int userNo);
 
 	/**
 	 * 회원의 프로필 사진 정보 조회
@@ -50,4 +50,38 @@ public interface UserDao {
 	 * @return - 조회된 파일 정보 반환
 	 */
 	public FileUpload selectFileByFileNo(int fileNo);
+
+	/**
+	 * 새 프로필 사진 업로드
+	 * @param file - 파일 정보 객체
+	 */
+	public void insertFile(FileUpload file);
+	
+	/**
+	 * 이전 프로필 사진 삭제
+	 * @param user - 삭제할 유저의 정보
+	 */
+	public void deleteFileByFileNo(User user);
+
+	/**
+	 * 파일이 존재하는지 여부를 숫자로 반환
+	 * @param user - 삭제 성공 여부
+	 * 1 - 삭제 안됨
+	 * 0 - 삭제 완료
+	 * @return - 1 or 0 반환
+	 */
+	public int selectFileCntByFileNo(User user);
+
+	/**
+	 * 회원 정보 업데이트
+	 * @param user - 수정할 회원 정보
+	 */
+	public void updateUserInfo(User user);
+
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByUser(User user);
 }

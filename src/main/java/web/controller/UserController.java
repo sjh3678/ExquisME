@@ -1,8 +1,5 @@
 package web.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 import javax.mail.Message;
@@ -18,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.dto.ExComm;
 import web.dto.Extagram;
@@ -51,20 +50,22 @@ public class UserController {
 		user.setPw(encPw);
 		
 		boolean isLogin = userService.getLoginCheck(user);
-		
+		logger.info("로그인 성공 여부 : {}", isLogin);
 		if(isLogin) {
 			
 			user = userService.getUserInfo(user);
 			
 			session.setAttribute("login", isLogin);
+			session.setAttribute("admin", user.getIsAdmin());
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
 			session.setMaxInactiveInterval(180*60); //3시간뒤 세션값 삭제
 			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
 			logger.info("{}",userNo);
-		
+			return true;
+		}else {
+			return false;
 		}
-		return isLogin;
 	}
 	
 	@RequestMapping(value="/logout")
@@ -81,22 +82,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public @ResponseBody boolean joinProc(User user, String pwCheck, String birthDate, Date date) {
+	public @ResponseBody boolean joinProc(User user, String pwCheck
+			,HttpSession session) {
 		logger.info("/join [POST] {}", user);
-		logger.info("형변환 전 생일 날짜 : {}", birthDate);
 		logger.info("생일 날짜 : {}", user.getBirth());
-		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date birth;
-		try {
-			birth = sDate.parse(birthDate);
-			System.out.println(birthDate);
-			user.setBirth(birth);
-			logger.info("전달된 날짜 : {}",birth);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		if(user.getPw().equals(pwCheck)) {
 			String encPw = UserSHA256.encrypt(user);
@@ -104,6 +94,9 @@ public class UserController {
 			logger.info("암호화 값 : {}", encPw);
 			boolean isJoin = userService.getJoinCheck(user);
 			if(isJoin) {
+				session.invalidate();
+				//인증키 값 삭제
+				session.removeAttribute("authKey");
 				return true;	
 			}else {
 				return false;
@@ -190,11 +183,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public boolean userDeleteProc(HttpSession session) {
+	public @ResponseBody boolean userDeleteProc(HttpSession session) {
 		logger.info("/delete [POST]");
 		int userNo = (Integer) session.getAttribute("userNo");
 		boolean isDelete = userService.deleteUser(userNo);
-		return true;
+		if(isDelete) {
+			session.invalidate();
+			return true;
+		}else {
+			return false;
+		}
 	}
 		
 	@RequestMapping(value="/main")
@@ -202,7 +200,7 @@ public class UserController {
 		logger.info("임시 메인 페이지 접속");
 	}
 	
-	@RequestMapping(value="/profile")
+	@RequestMapping(value="/profile", method=RequestMethod.GET)
 	public String profile(User user, FileUpload file, HttpSession session, Model model) {
 		logger.info("프로필 정보 ajax 통신 접속");
 		user.setUserNo((Integer)session.getAttribute("userNo"));
@@ -211,11 +209,33 @@ public class UserController {
 		user = userService.getUserProfile(user);
 		logger.info("after 유저 정보 : {}", user);
 		file = userService.getFileInfo(user);
-		logger.info("after 유저 정보 : {}", file);
+		logger.info("after 파일 정보 : {}", file);
 		model.addAttribute("user", user);
 		model.addAttribute("file", file);
 		
 		return "user/profile";
+	}
+	
+	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	public String profileUpdate(User user, 
+			MultipartFile file, 
+			FileUpload fileUpload, HttpSession session, Model model) {
+		
+		logger.info("profileUpdate called");
+		user.setUserNo((Integer)session.getAttribute("userNo"));
+		logger.info("전달된 생일 : {}", user.getBirth());
+		boolean isUpdate = true;
+		logger.info("file : {}", file);
+		if(file != null) {
+			fileUpload = userService.updateProfileFile(user, file);
+			user.setFileNo(fileUpload.getFileNo());
+		}
+		isUpdate = userService.updateUserInfo(user);
+		if(isUpdate) {
+			//인증키 값 삭제
+			session.removeAttribute("authKey");
+		}
+		return "redirect:/user/mypage";
 	}
 	
 	@Autowired private JavaMailSenderImpl mailSender;
@@ -236,7 +256,7 @@ public class UserController {
         
         //인증메일 보내기
         MimeMessage mailSend = mailSender.createMimeMessage();
-        String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>" 
+        String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 인증키를 입력창에 입력하시면 이메일 인증이 완료됩니다.</p>" 
                             +"<p> 인증 번호 : " + authKey + "</p>";
 
         try {
@@ -265,10 +285,10 @@ public class UserController {
 		logger.info("{} , {}", authKey, authKey2);
 		if(authKey.equals(authKey2)) {
 			logger.info("인증키 일치");
-			session.invalidate();
+			
 			return true;
 		}
-		
+
 		return false;
 	}
 	

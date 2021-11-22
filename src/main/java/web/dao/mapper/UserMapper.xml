@@ -48,7 +48,7 @@
 	
 	<select id="selectUserById" parameterType="web.dto.User" resultMap="User">
 		SELECT 
-			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date
+			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date, is_admin
 		FROM tb_user
 		WHERE id = #{id}
 	</select>
@@ -75,6 +75,39 @@
 	
 	<update id="updatePw" parameterType="web.dto.User">
 		UPDATE tb_user SET pw = #{pw}
+		WHERE user_no = #{userNo}
+	</update>
+	
+	<delete id="deleteUserByUserno" parameterType="int">
+		DELETE tb_user
+		WHERE user_no = #{userNo}
+	</delete>	
+
+	<insert id="insertFile" parameterType="web.dto.FileUpload">
+		<selectKey order="BEFORE" resultType="int" keyProperty="fileNo">
+		SELECT tb_file_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO tb_file (file_no, origin_name, stored_name, file_size)
+		VALUES (#{fileNo}, #{originName}, #{storedName}, #{fileSize})
+	</insert>
+  	
+	<delete id="deleteFileByFileNo" parameterType="web.dto.User">
+		DELETE tb_file
+		WHERE file_no = #{fileNo}
+	</delete>
+	
+	<select id="selectFileCntByFileNo" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_file
+		WHERE file_no = #{fileNo}
+	</select>
+
+	<update id="updateUserInfo" parameterType="web.dto.User">
+		UPDATE tb_user SET
+			<if test="fileNo != null"> 
+			file_no = #{fileNo},
+			</if>
+			email = #{email}, nick = #{nick}, phone = #{phone}, birth = #{birth}
 		WHERE user_no = #{userNo}
 	</update>
 </mapper>

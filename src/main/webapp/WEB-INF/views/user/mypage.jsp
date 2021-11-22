@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 async function ajaxPost(url, data) {
 	return new Promise((resolve, reject) => {
@@ -48,7 +52,7 @@ $(document).ready(function(){
 			, dataType: "html"
 			, success: function(res){
 				console.log("AJAX 성공");
-				$("#rightArea").html(res)
+				$("#rightArea").html(res);
 			}, error: function(){
 				console.log("AJAX 실패");
 			}
@@ -75,7 +79,7 @@ $(document).ready(function(){
 	$("#changePw").click(function(){
 		console.log("cheangePw clicked");
 		if(authkey == 0){
-			$("#modal").css("display", "inline")
+			$("#modal").css("display", "inline");
 		}else{
 			$.ajax({
 				type: "get"
@@ -83,13 +87,13 @@ $(document).ready(function(){
 				, data: {}
 				, dataType: "html"
 				, success: function(res){
-					console.log("AJAX 성공")
+					console.log("AJAX 성공");
 					$("#rightArea").html(res);
-				}, error(error){
+				}, error: function(error){
 					console.log("AJAX 실패")
 					console.log(error);
 				}
-			})
+			});
 		}
 	})
 		
@@ -105,9 +109,9 @@ $(document).ready(function(){
 				, data: {}
 				, dataType: "html"
 				, success: function(res){
-					console.log("AJAX 성공")
+					console.log("AJAX 성공");
 					$("#rightArea").html(res);
-				}, error(error){
+				}, error: function(error){
 					console.log("AJAX 실패")
 					console.log(error);
 				}
@@ -124,8 +128,11 @@ $(document).ready(function(){
 		if(isCheck){
 			console.log("인증 성공");
 			authkey = 1;
+			alert("인증 성공");
+			$('#modal').css("display", "none");
 		}else{
 			console.log("인증 실패");
+			alert("인증 실패");
 			authkey = 0;
 		}
 	})
@@ -141,11 +148,15 @@ $(document).ready(function(){
 	float: left;
 	width: 30%;
 	height: 100%;
+	background-color:#8A7E6B;
+	border-radius: 15px;
 }
 #rightArea {
 	float: right;
 	width: 68%;
 	height: 100%;
+	background-color:#d9cba0;
+	border-radius: 15px;
 }
 .modal {
   position: absolute;
@@ -185,13 +196,18 @@ $(document).ready(function(){
 .pageList{
 	font-size:20px;
 }
+.container{
+	margin: 0 auto;
+	padding-right: 0;
+	padding-bottom:20px;
+}
 </style>
 <div class="container">
 <div class="text-center">
 <h1>마이페이지</h1>
 <hr>
 <div id="leftArea">
-<table class="table">
+<table class="table" style="color:white">
 <tr>
 	<td class="pageList"><span id="profile"><i class="fas fa-user-circle"></i>&nbsp;프로필 수정</span></td>
 </tr>

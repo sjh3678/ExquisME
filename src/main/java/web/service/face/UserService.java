@@ -2,6 +2,8 @@ package web.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.FileUpload;
@@ -94,5 +96,21 @@ public interface UserService {
 	 * @return - 변경 결과 반환
 	 */
 	public boolean setUpdatePw(User user, String pwChk);
+
+	/**
+	 * 프로필 파일 업데이트
+	 * @param user - 회원 정보
+	 * @param fileUpload - 파일 정보
+	 * @return - 파일 정보 반환
+	 */
+	public FileUpload updateProfileFile(User user, MultipartFile fileUpload);
+
+	/**
+	 * 회원 정보 모두 수정(프로필 X)
+	 * @param user - 수정할 회원정보
+	 * @param file
+	 * @return
+	 */
+	public boolean updateUserInfo(User user);
 
 }
