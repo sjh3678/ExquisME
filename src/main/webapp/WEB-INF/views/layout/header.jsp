@@ -141,7 +141,6 @@
 .menu{
 	font-weight:300;
 	font-size:21px;
-	color:#ECE6CC;
 	margin: 10px;
 }
 .menuLog{
@@ -175,7 +174,17 @@
 .btnModal:hover {
 	background-color: #35312B;
 }
-
+@keyframes blink-effect{
+	50%{
+		opacity: 0;
+	}
+}
+.blink{
+	animation-name: blink-effect;
+	animation-duration: 1s; 
+	animation-iteration-count:infinite; 
+	animation-timing-function:step-end;
+}
 </style>
 
 </head>
@@ -191,6 +200,9 @@
 	<c:if test="${login }">
 		<span class="pull-right"><a href="/user/logout"><button class="btn btnHeader btnLog">LOGOUT</button></a></span>
 		<span class="pull-right"><button class="btn btn-open-popup btnHeader">CHAT</button></span>
+	</c:if>
+	<c:if test="${admin eq 'S' || admin eq 'M' }"><%-- 관리자 로그인 상태일 때 --%>
+		<span class="pull-left blink" style="background: red; color: white; font-size: 12px; font-weight: 400; vertical-align: middle; border-radius: 2px; margin: 10px;">&nbsp;&nbsp;관리자 로그인&nbsp;&nbsp;</span> 	
 	</c:if>
 </div>
 <div class="logo"><span style="vertical-align: middle; cursor: pointer;" onclick="location.href='/';">EXQUIS ME</span></div>
