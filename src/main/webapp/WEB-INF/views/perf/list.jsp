@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>exquis me</title>
 
 <%-- JQUERY --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -20,47 +20,85 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-					<%-- ################################################## --%>
-					/* noto-sans-kr-300 - korean */
-					@font-face {
-					  font-family: 'Noto Sans KR';
-					  font-style: normal;
-					  font-weight: 300;
-					  src: url('../fonts/noto-sans-kr-v21-korean-300.eot'); /* IE9 Compat Modes */
-					  src: local(''),
-					       url('../fonts/noto-sans-kr-v21-korean-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-					/*        url('../fonts/noto-sans-kr-v21-korean-300.woff2') format('woff2'), /* Super Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-300.woff') format('woff'), /* Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-300.ttf') format('truetype'), /* Safari, Android, iOS */ */
-					       url('../fonts/noto-sans-kr-v21-korean-300.svg#NotoSansKR') format('svg'); /* Legacy iOS */
-					}
-					/* noto-sans-kr-regular - korean */
-					@font-face {
-					  font-family: 'Noto Sans KR';
-					  font-style: normal;
-					  font-weight: 400;
-					  src: url('../fonts/noto-sans-kr-v21-korean-regular.eot'); /* IE9 Compat Modes */
-					  src: local(''),
-					       url('../fonts/noto-sans-kr-v21-korean-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-					/*        url('../fonts/noto-sans-kr-v21-korean-regular.woff2') format('woff2'), /* Super Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-regular.woff') format('woff'), /* Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-regular.ttf') format('truetype'), /* Safari, Android, iOS */ */
-					       url('../fonts/noto-sans-kr-v21-korean-regular.svg#NotoSansKR') format('svg'); /* Legacy iOS */
-					}
-					/* noto-sans-kr-700 - korean */
-					@font-face {
-					  font-family: 'Noto Sans KR';
-					  font-style: normal;
-					  font-weight: 700;
-					  src: url('../fonts/noto-sans-kr-v21-korean-700.eot'); /* IE9 Compat Modes */
-					  src: local(''),
-					       url('../fonts/noto-sans-kr-v21-korean-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-					/*        url('../fonts/noto-sans-kr-v21-korean-700.woff2') format('woff2'), /* Super Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-700.woff') format('woff'), /* Modern Browsers */ */
-					/*        url('../fonts/noto-sans-kr-v21-korean-700.ttf') format('truetype'), /* Safari, Android, iOS */ */
-					       url('../fonts/noto-sans-kr-v21-korean-700.svg#NotoSansKR') format('svg'); /* Legacy iOS */
-					}
-					<%-- ################################################## --%>
+		<%-- ################################################## --%>
+		/* noto-sans-kr-300 - korean */
+		@font-face {
+		  font-family: 'Noto Sans KR';
+		  font-style: normal;
+		  font-weight: 300;
+		  src: url('../fonts/noto-sans-kr-v21-korean-300.eot'); /* IE9 Compat Modes */
+		  src: local(''),
+		       url('../fonts/noto-sans-kr-v21-korean-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		/*        url('../fonts/noto-sans-kr-v21-korean-300.woff2') format('woff2'), /* Super Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-300.woff') format('woff'), /* Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-300.ttf') format('truetype'), /* Safari, Android, iOS */ */
+		       url('../fonts/noto-sans-kr-v21-korean-300.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+		}
+		/* noto-sans-kr-regular - korean */
+		@font-face {
+		  font-family: 'Noto Sans KR';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: url('../fonts/noto-sans-kr-v21-korean-regular.eot'); /* IE9 Compat Modes */
+		  src: local(''),
+		       url('../fonts/noto-sans-kr-v21-korean-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		/*        url('../fonts/noto-sans-kr-v21-korean-regular.woff2') format('woff2'), /* Super Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-regular.woff') format('woff'), /* Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-regular.ttf') format('truetype'), /* Safari, Android, iOS */ */
+		       url('../fonts/noto-sans-kr-v21-korean-regular.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+		}
+		/* noto-sans-kr-700 - korean */
+		@font-face {
+		  font-family: 'Noto Sans KR';
+		  font-style: normal;
+		  font-weight: 700;
+		  src: url('../fonts/noto-sans-kr-v21-korean-700.eot'); /* IE9 Compat Modes */
+		  src: local(''),
+		       url('../fonts/noto-sans-kr-v21-korean-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		/*        url('../fonts/noto-sans-kr-v21-korean-700.woff2') format('woff2'), /* Super Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-700.woff') format('woff'), /* Modern Browsers */ */
+		/*        url('../fonts/noto-sans-kr-v21-korean-700.ttf') format('truetype'), /* Safari, Android, iOS */ */
+		       url('../fonts/noto-sans-kr-v21-korean-700.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+		}
+		<%-- ################################################## --%>
+
+
+/* 모달 */
+.modal_header {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_header.show {
+  display: block;
+}
+
+.modal_body_header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  height: 200px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  background-color: #ECE6CC;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+}
 
 .wrap {
  	font-family: 'Noto Sans KR';
@@ -70,23 +108,80 @@
 }
 
 .header, .footer{
-	font-size: 21px;
- 	font-weight: 700;
-	color: #ECE6CC;
+	font-size: 27px;
+ 	font-weight: 300;
+	color: #35312B;
 	text-align: center;
-	background: #35312B;
+/* 	background: #8A7E6B; */
 }
 
 .container{
-	min-height: 400px;
+	min-height: 800px;
+	width: 1100px;
 }
 
-.unique a:link{
-	color: #8A7E6B;
+.header{
+/* 	position: fixed; */
+	height: 150px;
+	top: 0;
+ 	width: 100%;
+	left: 0;
+	right: 0;
+}
+
+
+.btnLog {
+	display: compact;
+}
+
+.logo {
+	height: 40px;
+	margin: 10px;
+}
+
+.hrMenu {
+	margin: 0 auto;
+	border-top: 1px solid #35312B;
+}
+.menu{
+	font-weight:300;
+	font-size:21px;
+	color:#ECE6CC;
+	margin: 10px;
+}
+.menuLog{
+	display: flow-root;
+	height: 0;
+}
+.btn{
+	background: #ECE6CC;
+	color: #35312B;
+}
+.btn:hover{
+	background: #8A7E6B;
+	color: #ECE6CC;
+}
+.btnHeader {
+	background-color: white;
+	color: #35312B;
+	margin: 10px;
+}
+
+.btnHeader:hover {
+	background-color: #ECE6CC;
+ 	color: #35312B; 
+}
+
+.btnModal{
+	background-color: #8A7E6B;
+	color: #ECE6CC;
+	margin: 10px;
+}
+.btnModal:hover {
+	background-color: #35312B;
 }
 
 </style>
-
 </head>
 <!-- 헤더 -->
 
@@ -375,7 +470,7 @@ function keyword(){
 	
 	<hr>
 		
-	<lable for="noteCode" style="padding: 10px;"> middle notes </lable>
+	<h4> Middle Notes </h4>
 	<hr style="margin: 5px;">
 	<div class="filter-container">
 		<div>
@@ -409,7 +504,7 @@ function keyword(){
 	
 	<hr>
 	
-	<lable for="noteCode" style="padding: 0px;"> base notes </lable>
+	<h4> Base Notes </h4>
 	<hr style="margin: 5px;">
 	<div class="filter-container">
 		<div>
@@ -443,7 +538,7 @@ function keyword(){
 
 	<hr>
 	
-	<lable for="vitalityCode" style="padding: 10px;"> vitality </lable>
+	<h4> vitality </h4>
 	<div id="vitality" class="filter-container">
 		<div style="padding: 10px;">
 			<input type="checkbox" id = "parfum" value= "parfum" class="filter-item"
@@ -473,18 +568,64 @@ function keyword(){
 
 <!-- 헤더 -->
 <div class="wrap">
-<div id="top"></div>
+
 <header class="header">
-EXQUISME<br>
-<div class="unique">
-	<a href="/notice/list">/notice/list</a> |
-	<a href="/admin/notice/list">/admin/notice/list</a> |
-	<a href="/faq">/faq</a> |
-	<a href="/admin/faq">/admin/faq</a> |
-	<a href="/user/login">/user/login</a> |
-	<a href="/user/logout">/user/logout</a> |
-	<a href="/extagram/list">/extagram/logout</a> |
+<div class="menuLog">
+	<c:if test="${login eq null }">
+		<span class="pull-right"><a href="/user/login"><button class="btn btnHeader btnLog">LOGIN</button></a></span>
+	</c:if>	
+	<c:if test="${login }">
+		<span class="pull-right"><a href="/user/logout"><button class="btn btnHeader btnLog">LOGOUT</button></a></span>
+		<span class="pull-right"><button class="btn btn-open-popup btnHeader">CHAT</button></span>
+	</c:if>
 </div>
+<div class="logo"><span style="vertical-align: middle; cursor: pointer;" onclick="location.href='/';">EXQUIS ME</span></div>
+<div class="menu">
+	<a href="/notice/list"><button class="btn btnHeader">NOTICE</button></a>
+	<a href="/faq/list"><button class="btn btnHeader">FAQ</button></a>
+	<a href="/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
+	<a href="/perf/list"><button class="btn btnHeader">PERFUME</button></a>
+	<a href="/layer/list"><button class="btn btnHeader">LAYER</button></a>
+	<hr class="hrMenu">
+</div>
+<%-- 모달 채팅방 입장 영역 --%>
+<div class="modal_header">
+	<div class="modal_body_header">
+		<div class="panel-title">${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?<br></div>
+		<form id="login-form" method="post" action="/chat">
+		    <div>
+		        <input type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
+		    </div>
+		    <div>
+		        <button type="submit" class="form-control btn btnModal">채팅 페이지로 이동</button>
+		    </div>
+		</form>
+	</div>
+</div><%-- .modal --%>
+<script>
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal_header');
+const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+btnOpenPopup.addEventListener('click', () => {
+	modal.classList.toggle('show');
+
+    if (modal.classList.contains('show')) {
+    	body.style.overflow = 'hidden';
+    }
+});
+
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+    	modal.classList.toggle('show');
+
+    	if (!modal.classList.contains('show')) {
+			body.style.overflow = 'auto';
+		}
+    }
+});
+</script>
+
 </header>
 <!-- 헤더 -->
 <button id="slideLeft">검색창 닫기</button>

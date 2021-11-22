@@ -227,6 +227,15 @@
 		VALUES (TB_NOTE_LIKE_SEQ.nextval, #{userNo }, #{perfumeNo }, #{noteNo } )
 </insert>
 
+<insert id="insertPerfFile" parameterType="web.dto.FileUpload">
+	<selectKey order="BEFORE" resultType="int" keyProperty="fileNo">
+		SELECT tb_file_seq.nextval FROM dual
+	</selectKey>
+	INSERT INTO tb_file ( file_no, origin_name, stored_name, file_size )
+	VALUES ( #{fileNo }, #{originName }, #{storedName }, #{fileSize } )
+</insert>
+
+
 <update id="updatePerfLike">
 
 </update>
@@ -240,7 +249,12 @@
 <delete id="deletePerf">
 </delete>
 
-<insert id="insertPerf">
+<insert id="insertNewPerf" parameterType="web.dto.Perf">
+	<selectKey order="BEFORE" resultType="int" keyProperty="perfumeNo">
+		SELECT TB_PERF_SEQ.nextval FROM dual
+	</selectKey>
+	INSERT INTO tb_perf (PERFUME_NO, BRAND_NO, FILE_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER)
+	VALUES (TB_PERF_SEQ.nextval, #{brandNo}, #{fileNo }, #{perfumeName }, #{perfumeVitality }, #{perfumeGender })
 </insert>
 
 </mapper>

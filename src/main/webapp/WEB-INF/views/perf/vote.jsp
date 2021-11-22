@@ -10,6 +10,7 @@ $(document).ready(function() {
 	$("#btnVote").click(function() {
 		console.log("투표클릭");
 		if (confirm("투표 하시겠습니까?")) {
+			if
 			$("form").submit();
 		}else{
 			return false;

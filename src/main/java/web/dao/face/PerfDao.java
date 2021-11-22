@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.FileUpload;
 import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
@@ -196,6 +197,21 @@ public interface PerfDao {
 	 * @param i
 	 */
 	public void insertNoteLike(HashMap<String, Object> hashmap);
+
+	
+	/**
+	 * 향수 사진 파일 업로드
+	 * 
+	 * @param perfFile
+	 */
+	public void insertPerfFile(FileUpload perfFile);
+
+	/**
+	 * 신규 향수 정보 삽입
+	 * 
+	 * @param perf
+	 */
+	public int insertNewPerf(Perf perf);
 
 	
 }

@@ -1,5 +1,7 @@
 package web.dto;
 
+import java.util.Arrays;
+
 public class Perf {
 	private int perfumeNo;
 	private int brandNo;
@@ -7,10 +9,12 @@ public class Perf {
 	private String perfumeName;
 	private String perfumeVitality;
 	private int perfumeGender;
+	private int[] noteNo;
 	@Override
 	public String toString() {
 		return "Perf [perfumeNo=" + perfumeNo + ", brandNo=" + brandNo + ", fileNo=" + fileNo + ", perfumeName="
-				+ perfumeName + ", perfumeVitality=" + perfumeVitality + ", perfumeGender=" + perfumeGender + "]";
+				+ perfumeName + ", perfumeVitality=" + perfumeVitality + ", perfumeGender=" + perfumeGender
+				+ ", noteNo=" + Arrays.toString(noteNo) + "]";
 	}
 	public int getPerfumeNo() {
 		return perfumeNo;
@@ -48,6 +52,14 @@ public class Perf {
 	public void setPerfumeGender(int perfumeGender) {
 		this.perfumeGender = perfumeGender;
 	}
+	public int[] getNoteNo() {
+		return noteNo;
+	}
+	public void setNoteNo(int[] noteNo) {
+		this.noteNo = noteNo;
+	}
+	
+	
 	
 
 	

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import web.dto.NoteLike;
 import web.dto.Perf;
 import web.dto.PerfLike;
@@ -142,6 +144,21 @@ public interface PerfService {
 	 * @param noteLike
 	 */
 	public void noteLikeProc(NoteLike noteLike);
+
+	/**
+	 * 파일 업로드
+	 * 
+	 * @param file
+	 */
+	public int setPerfFile(MultipartFile file);
+
+	/**
+	 * 신규 향수 등록
+	 * 
+	 * @param perf
+	 * @param fileNo
+	 */
+	public int setNewPerf(Perf perf, int fileNo);
 
 
 

@@ -44,7 +44,7 @@ public class PerfController {
 		logger.info("note: {}", paramData.getNote());
 		logger.info("Vitality: {}", paramData.getVitality());
 		logger.info("CurPage: {}", paramData.getCurPage());
-		logger.info("paramDate {} : ", paramData);
+		logger.info("paramData {} : ", paramData);
 		
 		
 		//페이징 가져오기
