@@ -79,6 +79,7 @@ $(document).ready(function(){
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
   transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
   }
 
 .modalWrite {
@@ -92,6 +93,7 @@ $(document).ready(function(){
   display: none;
 
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9998;
 }
 
 .modalWrite.show {
@@ -116,7 +118,7 @@ $(document).ready(function(){
 
   transform: translateX(-50%) translateY(-50%);
   
-  z-index: 1;
+  z-index: 9999;
 }
 
 .row{
