@@ -67,7 +67,7 @@ $(document).ready(function() {
 <form action="/extagram/write" method="post" enctype="multipart/form-data">
 <div class="form-group" style="text-align: center;">
 	<strong style="font-size: 17px;">게시글 작성 시 유의사항</strong><br><br>
-	<span style="font-size: 13px;">게시글에는 향수와 관련된 이미지 사진을 필수적으로 업로드 해야합니다.<br>
+	<span style="font-size: 13px;">게시글에는 향수와 관련된 <strong>이미지 사진</strong>을 <strong>필수</strong>적으로 첨부 해야합니다.<br>
 	향수와 무관한 이미지 또는 미풍양속을 현저히 해치는 이미지를 업로드 할 시<br>
 	별도의 통보 없이 게시글이 삭제될 수 있습니다.</span><br><br>
 </div>

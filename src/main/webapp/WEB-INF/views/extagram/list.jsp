@@ -19,6 +19,12 @@
 	margin: 4px;
 	border: 1px solid #ddd;
 }
+#flex-items img {
+	 transition: all 0.1s linear;
+}
+#flex-items:hover img {
+	 transform: scale(1.05);
+}
 #a {
 	margin: 10px;
 	
@@ -79,7 +85,7 @@ $(document).ready(function(){
 	    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 	    	//실행할 로직 (콘텐츠 추가)
 		    	loadList();
-	        //$('#result').append(addContent);
+// 	        $('#result').append(addContent);
 	    }
 	};
 	
@@ -97,18 +103,17 @@ $(document).ready(function(){
 			}
 			, dataType: "html"
 			, success: function(res){
-				console.log("AJAX 성공")
+				console.log("무한스크롤 성공")
 				result.innerHTML += res;
 			}
 			, error: function(){
-				console.log("AJAX 실패")
+				console.log("무한스크롤 실패")
 			}
 		})
 		$("#cur").html(curPage)
 };
 
 </script>
-
 
 <script type="text/javascript">
 /* 맨 위로 */
@@ -127,8 +132,7 @@ jQuery(document).ready(function () {
 });
 </script>
 
-<h1><Strong>Extagram</Strong></h1>
-<hr>
+<h1><Strong>Extagram</Strong></h1><br>
 
 <div class="container">
 

@@ -19,8 +19,23 @@
 	min-width: 260px;
 	width: 540px;
 	height: 330px;
-	border-radius: 3px; 
 	margin: 0px;
+}
+.flex-userResent-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 55%;
+	margin: 0px auto;
+}
+.flex-userResent {
+	margin: 0 auto;
+}
+.otherEx img {
+	 transition: all 0.1s linear;
+}
+.otherEx:hover img {
+	 transform: scale(1.3);
 }
 .commentBox {
 	display: flex;
@@ -199,11 +214,9 @@ function heartClick() {
 
 </script>
 
-
 <div class="container">
-<h1><Strong>Extagram view</Strong></h1>
+<h1><Strong>Extagram view</Strong></h1><br>
 
-<hr>
 
 
 <div class="topper">
@@ -213,7 +226,7 @@ function heartClick() {
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 
-<div id="viewContent" style="margin: 20px; height: 130px; width: 500px; overflow-y: scroll;">
+<div id="viewContent" style="margin: 20px; height: 100px; width: 500px; overflow-y: scroll;">
 ${viewExta.EX_CONTENT }
 </div>
 
@@ -243,7 +256,7 @@ ${viewExta.EX_CONTENT }
 						<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 						<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
 						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" style="width: 475px; height: 34px; border: none;"/>
-						<button type="button" id="btnCommInsert" class="btn pull-right">POST</button>
+						<button id="btnCommInsert" class="btn pull-right">POST</button>
 					</form>
 				</div>
 			</c:if>
@@ -259,8 +272,19 @@ ${viewExta.EX_CONTENT }
 		<button class="btn" id="btnUpdate">수정</button>
 		<button class="btn" id="btnDelete">삭제</button>
 	</c:if>
-</div>
+</div><br><br><br><br>
 
+<div class="text-center" style="font-size: 20px; margin: 10px;"><strong>${viewExta.NICK}<small>'s</small> Extagram</strong></div>
+<div class="flex-userResent-container text-center">
+<c:forEach items="${resent }" var="resent">
+	<div class="flex-userResent">
+		<div class="otherEx" onclick="location.href='/extagram/view?exNo=${resent.EX_NO}';" style="cursor: pointer;">
+			<img style="vertical-align: middle; max-width:100px; max-height:70px; overflow: hidden;" 
+				 src="/upload/${resent.STORED_NAME}">
+		</div>
+	</div>
+</c:forEach>
+</div><br><br><br><br>
 
 </div><!-- .container -->
 

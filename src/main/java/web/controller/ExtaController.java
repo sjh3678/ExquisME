@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import web.dao.face.ExtaDao;
 import web.dto.ExComm;
@@ -75,11 +74,18 @@ public class ExtaController {
 			model.addAttribute("url", "/extagram/list");
 		}
 		
+		//게시글 상세보기
+		HashMap<String, Object> view = extaService.getExtaView(viewExta);
+		logger.info("##view : {}", view);
+		model.addAttribute("viewExta",view);
+		//최근 작성 썸네일 조회
+		List <HashMap<String, Object>> resent = extaService.getUserResent(view);
+		logger.info("##resent : {}", resent);
+		model.addAttribute("resent", resent);
+		
 		//첨부파일 정보
 		FileUpload fileUpload = extaService.getAttachFile(viewExta);
 		model.addAttribute("fileUpload", fileUpload);
-		
-		
 		
 		//좋아요 상태 조회
 		ExLike heart = new ExLike();
@@ -94,7 +100,6 @@ public class ExtaController {
 		model.addAttribute("cntHeart", extaService.getTotalCntHeart(heart));
 
 		
-		model.addAttribute("viewExta",extaService.getExtaView(viewExta));
 		
 		return "/extagram/view";
 	}
@@ -140,7 +145,7 @@ public class ExtaController {
 //HEART(ajax)
 	@RequestMapping(value="/extagram/heart", method=RequestMethod.GET)
 	@ResponseBody
-	public String extaHeart(int exNo, ExLike heart, Extagram viewExta, Model model, HttpSession session ) {
+	public void extaHeart(int exNo, ExLike heart, Extagram viewExta, Model model, HttpSession session ) {
 		
 		//좋아요 정보
 		heart.setUserNo((Integer) session.getAttribute("userNo"));
@@ -152,9 +157,6 @@ public class ExtaController {
 		
 		model.addAttribute("result", result);
 		model.addAttribute("cnt", cnt);
-		
-		return "/extagram/view?exNo=";
-		
 	}
 	
 	

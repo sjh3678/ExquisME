@@ -48,6 +48,13 @@ public class ExtaServiceImpl implements ExtaService {
 	
 
 //VIEW
+	
+	@Override
+	public List<HashMap<String, Object>> getUserResent(HashMap<String, Object> view) {
+		return extaDao.selectUserResentWrite(view);
+	}
+	
+	
 	@Override
 	public HashMap<String, Object> getExtaView(Extagram viewExta) {
 		return extaDao.selectExtaView(viewExta);

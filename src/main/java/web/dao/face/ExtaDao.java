@@ -175,14 +175,11 @@ public interface ExtaDao {
 	 */
 	public void deleteExta(Extagram extagram);
 
-
-
-
-
-
 	
-	
-	
+
+	public List<HashMap<String, Object>> selectUserResentWrite(HashMap<String, Object> view);
+
+
 
 
 	

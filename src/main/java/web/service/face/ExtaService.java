@@ -107,10 +107,6 @@ public interface ExtaService {
 	public void deleteExta(Extagram extagram);
 	
 	
-	
-	
-	
-	
 	/**
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
@@ -132,8 +128,10 @@ public interface ExtaService {
 	 */
 	public void deleteComment(ExComm comment);
 
+	
+	public List<HashMap<String, Object>> getUserResent(HashMap<String, Object> view);
 
-
+	
 
 	
 	

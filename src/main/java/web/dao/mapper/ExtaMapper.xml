@@ -10,20 +10,20 @@
 	<select id="selectExtaAll" resultType="hashmap" parameterType="web.util.PagingExtagram">
 		SELECT * FROM (
 			SELECT rownum rnum, E.* FROM (
- 			SELECT DISTINCT
-                x.ex_no, u.nick, x.ex_content,x.ex_date,
-                x.file_no XX , u.file_no UU, FX.file_no FFXX, FU.file_no FFUU,
-                FX.origin_name AS PIC, FX.stored_name AS PICTURE,
-                FU.origin_name AS PRO, FU.stored_name AS PROFILE,
-                (SELECT count(*) FROM tb_ex_comm WHERE ex_post_no = x.ex_no) AS comm ,
-                (SELECT count(*) FROM tb_ex_like WHERE ex_post_no = x.ex_no) AS heart
-            FROM tb_extagram x
-                LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
-    			LEFT OUTER JOIN tb_file FX ON x.file_no = FX.file_no
-                LEFT OUTER JOIN tb_file FU ON u.file_no = FU.file_no
-        		LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
-        		LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
-			ORDER BY x.ex_no DESC
+	 			SELECT DISTINCT
+	                x.ex_no, u.nick, x.ex_content,x.ex_date,
+	                x.file_no XX , u.file_no UU, FX.file_no FFXX, FU.file_no FFUU,
+	                FX.origin_name AS PIC, FX.stored_name AS PICTURE,
+	                FU.origin_name AS PRO, FU.stored_name AS PROFILE,
+	                (SELECT count(*) FROM tb_ex_comm WHERE ex_post_no = x.ex_no) AS comm ,
+	                (SELECT count(*) FROM tb_ex_like WHERE ex_post_no = x.ex_no) AS heart
+	            FROM tb_extagram x
+	                LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
+	    			LEFT OUTER JOIN tb_file FX ON x.file_no = FX.file_no
+	                LEFT OUTER JOIN tb_file FU ON u.file_no = FU.file_no
+	        		LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
+	        		LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
+				ORDER BY x.ex_no DESC
 			) E
 		) tb_extagram
 		WHERE rnum BETWEEN #{startNo} AND #{endNo}
@@ -34,7 +34,21 @@
 	</select>
 
 
-<!-- VIEW -->	
+<!-- VIEW -->
+	<select id="selectUserResentWrite" resultType="hashmap"	parameterType="hashmap">
+		SELECT * FROM (    
+		    SELECT ROWNUM rnum, E.* FROM (
+		        SELECT
+		            x.user_no, x.ex_no, f.stored_name, f.origin_name
+		        FROM tb_extagram x
+		        LEFT OUTER JOIN tb_file f ON x.file_no = f.file_no
+		        WHERE user_no = #{USER_NO}
+		        ORDER BY ex_no DESC
+		    ) E
+		)tb_extagram
+		WHERE rnum BETWEEN 1 AND 5
+	</select>
+	
 	<select id="selectExtaView" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT DISTINCT
 		    u.user_no, u.nick, x.ex_no, x.ex_date, x.ex_content, x.ex_date,
