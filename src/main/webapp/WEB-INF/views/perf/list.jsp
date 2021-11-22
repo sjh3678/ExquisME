@@ -356,26 +356,44 @@ function keyword(){
 .flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 400px;
-	border: 1px solid;
-	border-radius: 3px; 
+	height: 370px;
+/* 	border: 1px solid; */
+	border-radius: 10px; 
 	margin:4px;
+	background: #ECE6CC;
+	color: #35312B;
+	font-weight: 400;
+}
+.flex-items:hover{
+	filter: brightness(0.85);
 }
 .perf_pic {
-	border: 1px solid #ccc;
+/* 	border: 1px solid #ccc; */
+	border-radius: 10px; 
 	margin: 10px;
 	height: 250px;
+	background: white;
 }
-
+.perf_img{
+	border-radius: 10px; 
+}
 .perf_name {
-	border: 1px solid #ccc;
+/* 	border: 1px solid #ccc; */
+	height: 40px;
 	margin: 10px;
 	text-align: center;
+	border-radius: 5px;
+	font-size: 15px;
+	padding: 0px 5px;
+/* 	background: white;	 */
 }
 .brand_name {
-	border: 1px solid #ccc;
+/* 	border: 1px solid #ccc; */
 	margin: 10px;
 	text-align: center;
+	border-radius: 5px; 
+	font-size: 18px;
+/* 	background: white;	 */
 }
 
 .filter-container{
