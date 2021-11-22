@@ -59,7 +59,7 @@
 
 
 /* 모달 */
-.modal {
+.modal_header {
   position: absolute;
   top: 0;
   left: 0;
@@ -72,11 +72,11 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal.show {
+.modal_header.show {
   display: block;
 }
 
-.modal_body {
+.modal_body_header {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -88,7 +88,7 @@
 
   text-align: center;
 
-  background-color: rgb(255, 255, 255);
+  background-color: #ECE6CC;
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
@@ -166,6 +166,16 @@
 	background-color: #ECE6CC;
  	color: #35312B; 
 }
+
+.btnModal{
+	background-color: #8A7E6B;
+	color: #ECE6CC;
+	margin: 10px;
+}
+.btnModal:hover {
+	background-color: #35312B;
+}
+
 </style>
 
 </head>
@@ -193,22 +203,22 @@
 	<hr class="hrMenu">
 </div>
 <%-- 모달 채팅방 입장 영역 --%>
-<div class="modal">
-	<div class="modal_body">
-		<div class="panel-title">${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?</div>
+<div class="modal_header">
+	<div class="modal_body_header">
+		<div class="panel-title">${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?<br></div>
 		<form id="login-form" method="post" action="/chat">
 		    <div>
 		        <input type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
 		    </div>
 		    <div>
-		        <button type="submit" class="form-control btn btnHeader">채팅 페이지로 이동</button>
+		        <button type="submit" class="form-control btn btnModal">채팅 페이지로 이동</button>
 		    </div>
 		</form>
 	</div>
 </div><%-- .modal --%>
 <script>
 const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.modal_header');
 const btnOpenPopup = document.querySelector('.btn-open-popup');
 
 btnOpenPopup.addEventListener('click', () => {
