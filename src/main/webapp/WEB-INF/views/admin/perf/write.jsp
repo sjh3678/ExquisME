@@ -48,6 +48,14 @@ $(document).ready(function(){
 	text-align: center;
 }
 
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+
 </style>
 
 
@@ -57,56 +65,72 @@ $(document).ready(function(){
 
 <hr>
 
-<form action="/admin/perf/write" method="post" enctype="multipart/form-data">
+<form action="/admin/perf/write" method="post" enctype="multipart/form-data" class="form-horizontal">
 	
-	<div style="width:100px; margin: 0 auto;">
-		<label for="file">이미지 파일 등록</label>
-		<input type="file" id="file" name="file" />
-	</div>
-	<br>
-	<div>
-		<span>향수 이름 : </span></label>
-		<input type="text" id="perfName" name="perfumeName" placeholder="향수명을 입력해주세요"/>
-	</div>
-	<br>
-	<div>
-		<span>브랜드 : </span>	
-		<select id="brandNo" name="brandNo">      
-			<option value=0 >선택없음</option>>
-			<option value=1 >CHANEL</option>
-			<option value=2 >JOMALONE</option>
-			<option value=3 >GUCCI</option>
-			<option value=4 >diptyque</option>
-			<option value=5 >KENZO</option>
-			<option value=6 >MONTBLANC</option>
-			<option value=7 >BURBERRY</option>
-			<option value=8 >DIOR</option>
-			<option value=9 >BVLGARI</option>
-		</select>
-	</div>
-	<br>
-	<div>
-		<span>대상 성별 : </span>	
-		<select id="perfumeGender" name="perfumeGender">      
-			<option value=0 >선택없음</option>>
-			<option value=1 >female</option>
-			<option value=2 >male</option>
-			<option value=3 >unisex</option>
-		</select>
-	</div>
-	<br>
-	<div>
-		<span>지속력 : </span>	
-		<select id="perfumeVitality" name="perfumeVitality">      
-			<option value=0 >선택없음</option>>
-			<option value="parfum" >parfum</option>
-			<option value="eau de parfum" >eau de parfum</option>
-			<option value="eau de toilette" >eau de toilette</option>
-			<option value="eau de cologne" >eau de cologne</option>
-			<option value="shower cologne" >shower cologne</option>
-		</select>
-	</div>
-	<br>
+	
+	<table class="tg" style="undefined;table-layout: fixed; width: 400px; margin: 0 auto;">
+		<colgroup>
+		<col style="width: 100px">
+		<col style="width: 300px">
+		</colgroup>
+		<thead>
+		  <tr>
+		    <th class="tg-baqh">사진 등록</th>
+		    <th class="tg-baqh"><input type="file" id="file" name="file"/></th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td class="tg-baqh">향수 이름</td>
+		    <td class="tg-baqh"><input type="text" id="perfName" name="perfumeName" placeholder="향수이름을 입력해주세요" style="width:280px;"/></td>
+		  </tr>
+		  <tr>
+		    <td class="tg-baqh">브랜드</td>
+		    <td class="tg-baqh">
+			    <select id="brandNo" name="brandNo">      
+					<option value=0 >선택없음</option>>
+					<option value=1 >CHANEL</option>
+					<option value=2 >JOMALONE</option>
+					<option value=3 >GUCCI</option>
+					<option value=4 >diptyque</option>
+					<option value=5 >KENZO</option>
+					<option value=6 >MONTBLANC</option>
+					<option value=7 >BURBERRY</option>
+					<option value=8 >DIOR</option>
+					<option value=9 >BVLGARI</option>
+				</select>
+			</td>
+		  </tr>
+		  <tr>
+		    <td class="tg-baqh">대상 성별</td>
+		    <td class="tg-baqh">
+			    <select id="perfumeGender" name="perfumeGender">      
+					<option value=0 >선택없음</option>>
+					<option value=1 >female</option>
+					<option value=2 >male</option>
+					<option value=3 >unisex</option>
+				</select>
+			</td>
+		  </tr>
+		  <tr>
+		    <td class="tg-baqh">지속력</td>
+		    <td class="tg-baqh">
+			    <select id="perfumeVitality" name="perfumeVitality" style="text-align:left;">      
+					<option value=0 >선택없음</option>>
+					<option value="parfum" >parfum</option>
+					<option value="eau de parfum" >eau de parfum</option>
+					<option value="eau de toilette" >eau de toilette</option>
+					<option value="eau de cologne" >eau de cologne</option>
+					<option value="shower cologne" >shower cologne</option>
+				</select></td>
+		  </tr>
+		</tbody>
+</table>
+	
+	
+	
+	
+	
 	<hr>
 		<h4> Top Notes </h4>
 	<hr style="margin: 5px;">

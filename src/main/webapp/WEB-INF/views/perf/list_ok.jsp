@@ -11,7 +11,7 @@
 		<div class="perf_pic">
 			<a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">
 				<img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
-					src="/resources/img/perf/${perf.STORED_NAME }">
+					src="/upload/${perf.STORED_NAME }">
 			</a>
 		</div>
 		<div class="perf_name">${perf.PERFUME_NAME }</div>
