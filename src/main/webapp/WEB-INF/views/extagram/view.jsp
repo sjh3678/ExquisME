@@ -185,13 +185,50 @@ function heartClick() {
 			console.log("좋아요 성공")
 			
 			//좋아요 수 적용
-			$("#btnHeartComm").html(res.cnt);
+			//$("#btnHeartComm").html(res.cnt);
+			loadList();
 		}	
 		, error: function() {
 			console.log("좋아요 실패")
 		}
 	})
 }
+
+function loadList() {
+	$.ajax({
+		type: "post"
+		, url: "/extagram/view_ok"
+		, data: $("#inputForm").serialize()
+		, dataType: "html"
+		, success: function(res) {
+			console.log("댓글 성공")
+			$("#viewComment").html(res);
+			loadHeartComm();/* 숫자 카운트 */
+		}
+		, error: function() {
+			console.log("댓글 실패");
+		}
+	});
+}
+
+//좋아요, 댓글 수
+function loadHeartComm() {
+	$.ajax ({
+		type: "get"
+		, url: "/extagram/view_ok2"
+		, data: {exPostNo: ${viewExta.EX_NO}}
+		, dataType: "html"
+		, success: function(res) {
+			console.log("카운트 성공")
+			$("#countCount").html(res);
+		}
+		, error: function() {
+			console.log("카운트 실패");
+		}
+	});
+}
+
+
 </script>
 
 <div class="container">

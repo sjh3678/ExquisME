@@ -3,11 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${result}">	 
-	<img id="btnHeart" src="/resources/img/heart/heartRed.png" style="width: 20px; cursor: pointer; height: auto;" />
+	<img id="btnHeart" onclick=heartClick() src="/resources/img/heart/heartRed.png" style="width: 20px; cursor: pointer; height: auto;" />
 </c:if>
 <c:if test="${not result}">	 
-	<img id="btnHeart" src="/resources/img/heart/heartEmpty2.png" style="width: 20px; cursor: pointer; height: auto;" />
+	<img id="btnHeart" onclick=heartClick() src="/resources/img/heart/heartEmpty2.png" style="width: 20px; cursor: pointer; height: auto;" />
 </c:if>
 
-																				 ${viewExta.HEART}&nbsp;&nbsp;&nbsp;
+${viewExta.HEART}&nbsp;&nbsp;&nbsp;
+
 <img style="width: 20px; height: auto;" src="/resources/img/heart/balloon.png"/> ${viewExta.COMM }

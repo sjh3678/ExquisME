@@ -128,7 +128,7 @@ public class ExtaController {
 		//좋아요 눌린 상태 전달
 		heart.setUserNo((Integer) session.getAttribute("userNo"));
 		heart.setExPostNo(viewExtagram.getExNo());
-		boolean result = extaService.getHeart(heart);
+		boolean result = extaService.isHearted(heart);
 		model.addAttribute("result", result);
 		
 		model.addAttribute("viewExta",extaService.getExtaView(viewExtagram));
@@ -151,6 +151,15 @@ public class ExtaController {
 	@RequestMapping(value="/extagram/heart", method=RequestMethod.GET)
 	@ResponseBody
 	public void extaHeart(int exNo, ExLike heart, Extagram viewExta, Model model, HttpSession session ) {
+		
+		logger.info("exNo : {}", exNo);
+		logger.info("heart : {}", heart);
+		logger.info("viewExta : {}", viewExta);
+		
+		heart.setExPostNo(exNo);
+		heart.setUserNo((Integer)session.getAttribute("userNo"));
+		
+		extaService.getHeart(heart);
 		
 		//좋아요 수 조회
 		int cnt = extaService.getTotalCntHeart(heart);
