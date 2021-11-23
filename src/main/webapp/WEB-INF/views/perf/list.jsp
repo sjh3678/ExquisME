@@ -94,7 +94,7 @@ $(document).ready(function(){
 window.onscroll = function(e) {
   //추가되는 임시 콘텐츠
   //window height + window scrollY 값이 document height보다 클 경우,
-  if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  if((window.innerHeight + window.scrollY + 1) >= document.body.offsetHeight) {
   	//실행할 로직 (콘텐츠 추가)
   	loadList();
   }
