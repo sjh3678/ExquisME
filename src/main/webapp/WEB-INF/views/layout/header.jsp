@@ -197,6 +197,7 @@
 <div class="menuLog">
 	<c:if test="${login eq null }">
 		<span class="pull-right"><a href="/user/login"><button class="btn btnHeader btnLog">LOGIN</button></a></span>
+		<span class="pull-right"><a href="/user/join"><button class="btn btnHeader btnLog">JOIN</button></a></span>
 	</c:if>	
 	<c:if test="${login }">
 		<span class="pull-right"><a href="/user/logout"><button class="btn btnHeader btnLog">LOGOUT</button></a></span>
@@ -213,6 +214,9 @@
 	<a href="/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
 	<a href="/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/layer/list"><button class="btn btnHeader">LAYER</button></a>
+	<c:if test="${not empty login }">
+		<a href="/user/mypage"><button class="btn btnHeader">MYPAGE</button></a>
+	</c:if>
 	<hr class="hrMenu">
 </div>
 <%-- 모달 채팅방 입장 영역 --%>
