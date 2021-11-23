@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <th class="tg-c3ow">
-    <h4>Like</h4>
+    <div style="font-size: 21px; font-weight: 300;">Like</div>
     	<div id="perfLikeCnt">
     	${perfLike.CNT }
    		</div>
@@ -17,7 +17,7 @@
     	<br>
     </th>
     <th class="tg-c3ow">
-    <h4>Dislike</h4>
+    <div style="font-size: 21px; font-weight: 300;">Dislike</div>
     
     	<div>
     	${perfDislike.CNT }

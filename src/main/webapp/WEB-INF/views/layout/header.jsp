@@ -75,6 +75,7 @@
 
 .modal_header.show {
   display: block;
+  z-index: 9998;
 }
 
 .modal_body_header {
@@ -94,6 +95,7 @@
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
   transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
 }
 
 .wrap {

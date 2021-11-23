@@ -93,18 +93,32 @@ $(document).ready(function() {
 </script>
 
 
-
-<div class="container">
-<h1>${perf.PERFUME_NAME }</h1>
-<hr>
-
 <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg  {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.tg td{
+	/* border-color:black; */
+	/* border-style:solid; */
+	/* border-width:1px; */
+	font-size:14px;
+	overflow:hidden;
+	padding:10px 5px;
+}
+.tg th{
+	/* border-color:black; */
+	/* border-style:solid; */
+	/* border-width:1px; */
+	font-size:14px;
+	font-weight:normal;
+	overflow:hidden;
+	padding:10px 5px;
+}
+.tg .tg-c3ow{
+	text-align:center;
+	vertical-align: middle;
+}
 
 .noteImg{
 	display: flex;
@@ -119,24 +133,41 @@ $(document).ready(function() {
 	margin: 0 auto;
 	text-align: center;
 }
+.divNote{
+	font-size: 21px;
+	font-weight: 300;
+	margin-bottom: 10px;
+}
+.hrPerfView{
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
 </style>
 
-<table class="tg" style="undefined;table-layout: fixed; width: 846px">
+
+
+<div class="container" style="min-height: 1050px;">
+<div style="text-align: center;">
+	<div style="font-size: 24px;">${perf.PERFUME_NAME }</div>
+	<hr style="">
+</div>
+
+<table class="tg" style="table-layout: fixed; width: 800px; left: 130px; position: relative;">
 <colgroup>
-<col style="width: 570px">
-<col style="width: 250px">
-<col style="width: 250px">
+<col style="width: 500px">
+<col style="width: 150px">
+<col style="width: 150px">
 </colgroup>
 <thead>
   <tr>
     <th class="tg-c3ow" rowspan="4"><img class="perf_img" style="width:500px; height:500px; display: block; margin: auto;"
 					src="/upload/${perf.STORED_NAME }"></th>
-    <th class="tg-c3ow" colspan="2"><img class="perf_img" style="width: 250px; display: block; margin: auto;"
-					src="/resources/img/brand/${perf.BRAND_NAME }.png"></th>
+    <th class="tg-c3ow" colspan="2"><img class="perf_img" style="width: 150px; display: block; margin: auto;"
+					src="/resources/img/brand/${perf.BRAND_NAME }.png"><hr class="hrPerfView"></th>
   </tr>
   <tr>
     <th class="tg-c3ow" colspan="2">
-	<h4>Main Accord</h4><br>
+	<div style="font-size: 21px; font-weight: 300;">Main Accord</div><br>
 	    <div class="noteImg" style="width: 300px;">
 		<c:forEach items="${mainAccord }" var="mainAccord">
 			<div style="margin: 0 auto;">
@@ -152,22 +183,22 @@ $(document).ready(function() {
 			</div>
 		</c:forEach>
 		</div>
-			<br>
 			<c:if test="${not empty login }">	
-			<a href="/perf/vote?perfumeNo=${perf.PERFUME_NO}"><button>투표하러가기</button></a>
+			<a href="/perf/vote?perfumeNo=${perf.PERFUME_NO}"><button class="btn" style="margin-top: 10px;">투표 페이지로 이동</button></a>
 	    	</c:if>
-		<br>
+	    <hr class="hrPerfView">
 	</th>
   </tr>
   <tr>
     <th class="tg-c3ow" colspan="2">
-    <h4>Vitality</h4>
+    <div style="font-size: 21px; font-weight: 300;">Vitality</div>
     ${perf.PERFUME_VITALITY }
+    <hr class="hrPerfView">
     </th>
   </tr>
   <tr id="likeResult">
     <th class="tg-c3ow">
-    <h4>Like</h4>
+    <div style="font-size: 21px; font-weight: 300;">Like</div>
     	<div id="perfLikeCnt">
     	${perfLike.CNT }
    		</div>
@@ -181,7 +212,7 @@ $(document).ready(function() {
     	<br>
     </th>
     <th class="tg-c3ow">
-    <h4>Dislike</h4>
+    <div style="font-size: 21px; font-weight: 300;">Dislike</div>
     
     	<div>
     	${perfDislike.CNT }
@@ -200,7 +231,7 @@ $(document).ready(function() {
 <tbody>
   <tr>
     <td class="tg-c3ow" colspan="3">
-    	<h3>Top Notes</h3><br>
+    	<div class="divNote">Top Notes</div>
     	
 		<div class="noteImg" style="width: 500px;">
 		<c:forEach items="${topNote }" var="topNote">
@@ -222,7 +253,7 @@ $(document).ready(function() {
   </tr>
   <tr>
     <td class="tg-c3ow" colspan="3">
-    	<h3>Middle Notes</h3><br>
+    	<div class="divNote">Middle Notes</div>
 	    <div class="noteImg" style="width: 500px;">
 		<c:forEach items="${middleNote }" var="middleNote">
 			<div style="margin: 0 auto;">
@@ -243,7 +274,7 @@ $(document).ready(function() {
   </tr>
   <tr>
     <td class="tg-c3ow" colspan="3">
-    	<h3>Base Notes</h3><br>
+    	<div class="divNote">Base Notes</div>
 		<div class="noteImg" style="width: 500px;">
 		<c:forEach items="${baseNote }" var="baseNote">
 			<div style="margin: 0 auto;">
