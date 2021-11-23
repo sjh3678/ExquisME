@@ -8,6 +8,7 @@
 
 <%-- JQUERY --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-ui.min.js"></script>
 
 <%-- BOOTSTRAP --%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

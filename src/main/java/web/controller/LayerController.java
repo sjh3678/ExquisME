@@ -135,5 +135,9 @@ public class LayerController {
 		return "/layer/write_ok";
 	}
 
+	@RequestMapping(value="/layer/drop")
+	public void drop() {
+		
+	}
 
 }

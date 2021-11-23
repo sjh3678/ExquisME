@@ -67,6 +67,7 @@
 	padding: 10px;
 	border: solid 5px #8B4513;
 	float: left;
+
 }
 .layer-img {
 	border: 5px solid #ccc;
@@ -122,6 +123,9 @@ li span {
 
 
 <script type="text/javascript">
+var counts = [0]; 
+
+
 $(document).ready(function(){
 	loadList()	
 	
@@ -138,6 +142,13 @@ $(document).ready(function(){
 				console.log("AJAX 성공")
 				result.innerHTML = res;
 // 				$("#result").html( $("#result").html() + res );
+
+				$(".perf_pic").draggable({
+					helper: "clone",
+					//Create counter
+					start: function() { counts[0]++; }
+				});
+
 			}
 			, error: function(){
 				console.log("AJAX 실패")
@@ -154,7 +165,7 @@ $(document).ready(function(){
 		$("[data-div='" + idx + "']").append( layerResult ); */
 
 	
-$(".layer-img").on("DOMNodeInserted", function() {
+/* $(".layer-img").on("DOMNodeInserted", function() {
 // 	console.log("event")
 // 	console.log( $(this).children().length )
 
@@ -171,7 +182,7 @@ $(".layer-img").on("DOMNodeInserted", function() {
 	}
 	
 		
-})
+}) */
 	
 
 });
@@ -223,7 +234,7 @@ $(".layer-img").on("DOMNodeInserted", function() {
 		})
 	}
 
-function dragEnter(ev) {
+/* function dragEnter(ev) {
 	ev.preventDefault();
 }
 
@@ -247,11 +258,91 @@ function drop(ev) {
 	} else {
 		ev.target.appendChild(document.getElementById(data));
 	}
-}
-
+} */
 
 </script>
+<script>
+$(function(){  
+	//Make every clone image unique.  
+// 	var counts = [0];
+	var resizeOpts = {
+		handles: "all" ,autoHide:true
+	};    
+	
+// 	$(".perf_pic").draggable({
+// 		helper: "clone",
+// 		//Create counter
+	
+// 		start: function() { counts[0]++; }
+// 	});
 
+	$("#img1").droppable({
+		drop: function(e, ui){
+			console.log("#img1 dropped")
+			
+			if(ui.draggable.hasClass("perf_pic")) {
+				$(this).append($(ui.helper).clone());
+	   
+				//Pointing to the dragImg class in dropHere and add new class.
+				$("#img1 .perf_pic").addClass("item-"+counts[0]);
+				$("#img1 .perf_img").addClass("perf_imgSize-"+counts[0]);
+				
+				//Remove the current class (ui-draggable and dragImg)
+				$("#img1 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
+				
+				$(".item-"+counts[0]).dblclick(function() {
+					$(this).remove();
+				});     
+				make_draggable($(".item-"+counts[0])); 
+				
+				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);     
+				
+			}
+		}
+	});
+	
+	$("#img2").droppable({
+			
+			drop: function(e, ui){
+			console.log("#img2 dropped")
+
+			if(ui.draggable.hasClass("perf_pic")) {
+				$(this).append($(ui.helper).clone());
+				//Pointing to the dragImg class in dropHere and add new class.
+				$("#img2 .perf_pic").addClass("item-"+counts[0]);
+				
+				//Remove the current class (ui-draggable and dragImg)
+				$("#img2 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
+				
+				$(".item-"+counts[0]).dblclick(function() {
+					$(this).remove();
+				});
+				$("#img2 .perf_img").addClass("perf_imgSize-"+counts[0]);
+				
+				make_draggable($(".item-"+counts[0]));
+				
+				
+				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);
+			}
+		}
+	});
+
+
+	var zIndex = 0;
+	function make_draggable(elements)
+	{	
+		elements.draggable({
+			containment:'parent',
+			start:function(e,ui){ ui.helper.css('z-index',++zIndex); },
+			stop:function(e,ui){
+			}
+		});
+	}    
+
+
+	    
+	   });
+</script>
 
 <div class="container">
 
@@ -259,7 +350,8 @@ function drop(ev) {
 		<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
 		<div class="layer-item">
 		
-			<div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+			<div class="layer-img" id="img1" ></div>
+ 			<!-- <div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 			
 			<div class="graf-bar" id="graf1">
 			    <input type="range" id="graf-in1" min="1" max="100"/>
@@ -272,7 +364,8 @@ function drop(ev) {
 		
 		<div class="layer-item">
 		
-			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+			<div class="layer-img" id="img2"></div>
+<!-- 			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 			
 			<div class="graf-bar" id="graf2">
 				<input id="graf-in2" type="range" min="1" max="100"/>
