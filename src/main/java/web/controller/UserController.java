@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.Message;
@@ -15,15 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import web.dto.ExComm;
-import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
+import web.util.PagingExtagram;
 import web.util.UserSHA256;
 
 @Controller
@@ -32,7 +32,7 @@ public class UserController {
 		
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	@Autowired UserService userService;
+	@Autowired private UserService userService;
 	
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
@@ -415,5 +415,26 @@ public class UserController {
         }
         logger.info("조회된 결과 없음 [ERROR]");
 		return false;
+	}
+	
+	@RequestMapping(value="/recode")
+	public String callRecode() {
+		return "user/recode";
+	}
+	
+	@RequestMapping(value="/recode/extagram")
+	public String extagramRecode(User user, 
+			HttpSession session, 
+			Model model,
+			PagingExtagram paramData) {
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		logger.info("user : {}", user);
+		PagingExtagram paging = userService.getExtaPaging(paramData, user);
+		logger.info("페이징 : {}", paging);
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		List<Map<String, Object>> list = userService.getUserExtagramHistory(user, paging); 
+		model.addAttribute("paging", paging);
+		model.addAttribute("extaList", list);
+		return "/user/history/extagram";
 	}
 }

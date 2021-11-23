@@ -212,7 +212,7 @@ $(document).ready(function(){
 	<td class="pageList"><span id="profile"><i class="fas fa-user-circle"></i>&nbsp;프로필 수정</span></td>
 </tr>
 <tr>
-	<td class="pageList"><span id="history"><i class="fas fa-history"></i>&nbsp;개인 기록</span></td>
+	<td class="pageList"><span id="recode"><i class="fas fa-history"></i>&nbsp;개인 기록</span></td>
 </tr>
 <tr>
 	<td class="pageList"><span id="changePw"><i class="fas fa-lock"></i>&nbsp;비밀번호 변경</span></td>

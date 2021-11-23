@@ -1,6 +1,8 @@
 package web.service.face;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,6 +10,7 @@ import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
+import web.util.PagingExtagram;
 
 public interface UserService {
 
@@ -119,5 +122,22 @@ public interface UserService {
 	 * @return - 조회된 유저 정보 반환
 	 */
 	public User getUserInfoByEmail(User user);
+
+	/**
+	 * 회원의 extagram 기록을 조회
+	 * @param user - 조회할 유저 정보 객체
+	 * @param paramData - 페이징 정보 객체
+	 * @return - 조회된 회원의 기록 리스트 반환
+	 */
+	public List<Map<String, Object>> getUserExtagramHistory(User user, PagingExtagram paramData);
+
+	/**
+	 * 회원 개인의 기록의 총 수 및 페이징
+	 * @param paramData - 페이징 객체
+	 * @param user - 조회할 회원 정보
+	 * @return - 조회된 페이징 객체 반환
+	 */
+	public PagingExtagram getExtaPaging(PagingExtagram paramData, User user);
+
 
 }

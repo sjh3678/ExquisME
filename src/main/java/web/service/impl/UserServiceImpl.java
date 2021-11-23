@@ -2,6 +2,10 @@ package web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -16,6 +20,7 @@ import web.dao.face.UserDao;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
+import web.util.PagingExtagram;
 
 
 @Service
@@ -295,5 +300,36 @@ public class UserServiceImpl implements UserService{
 		}
 		return user;
 	}
+
+	@Override
+	public PagingExtagram getExtaPaging(PagingExtagram paramData, User user) {
+		logger.info("getExtaPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectExtaCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingExtagram paging = new PagingExtagram(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
+	
+	@Override
+	public List<Map<String, Object>> getUserExtagramHistory(User user, PagingExtagram paramData) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paramData);
+		
+		List<Map<String, Object>> list = userDao.selectExtaHistoryByUserNo(map);
+
+		return list;
+	}
+
+	
+
+	
 	
 }

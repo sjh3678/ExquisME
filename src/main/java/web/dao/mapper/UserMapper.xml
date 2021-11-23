@@ -121,4 +121,24 @@
 		FROM tb_user
 		WHERE email = #{email}
 	</select>
+	<select id="selectExtaCntByUserNo" resultType="int" parameterType="hashmap">
+		SELECT 
+   			count(*) 
+		FROM tb_extagram e, tb_user u
+		WHERE e.user_no = u.user_no
+		AND e.user_no = #{user.userNo}
+	</select>
+	<select id="selectExtaHistoryByUserNo" resultType="hashmap" parameterType="hashmap">
+		SELECT * FROM(
+			SELECT rownum rnum, R.* FROM(
+				SELECT
+    				 e.ex_no, fx.stored_name upFile, e.user_no, u.nick,
+   					 e.ex_content, e.ex_date, e.ex_views, fu.stored_name Profile
+				FROM tb_extagram e, tb_user u, tb_file fx, tb_file fu
+				WHERE e.user_no = u.user_no AND fx.file_no = e.file_no
+				AND u.file_no = fu.file_no AND e.user_no = #{user.userNo}
+			) R
+		)T
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
 </mapper>

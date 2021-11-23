@@ -499,7 +499,7 @@ input[name=file] {
 		
 		<!-- 업로드시 보이는 파일 업로드 창 -->
 		<div id="profile-file" class="info-write invisible">
-			<input class="info-write" type="file" name="file" id="file" />
+			<input class="info-write" type="file" name="file" id="file" value="${file.storedName }" />
 			<div class="imgBox" id="profile-show">
 				<img id="img" class="pre-show profile" width="200px" height="200px;" />
 			</div>

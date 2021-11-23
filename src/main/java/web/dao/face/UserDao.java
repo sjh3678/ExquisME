@@ -1,7 +1,13 @@
 package web.dao.face;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
+import web.util.PagingExtagram;
 
 public interface UserDao {
 
@@ -91,4 +97,18 @@ public interface UserDao {
 	 * @return - 조회할 숫자 반환
 	 */
 	public User selectUserByEmail(User user);
+
+	/**
+	 * 유저가 쓴 게시글의 모든 수를 조회
+	 * @param map - 페이징 정보 객체 + 유저 정보 객체
+	 * @return - 조회된 게시글 수 반환
+	 */
+	public int selectExtaCntByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 유저의 extagram 기록 조회
+	 * @param map - 조회할 유저 정보 및 페이징 정보
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Map<String, Object>> selectExtaHistoryByUserNo(HashMap<String, Object> map);
 }
