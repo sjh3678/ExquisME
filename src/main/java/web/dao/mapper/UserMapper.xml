@@ -121,6 +121,7 @@
 		FROM tb_user
 		WHERE email = #{email}
 	</select>
+	
 	<select id="selectExtaCntByUserNo" resultType="int" parameterType="hashmap">
 		SELECT 
    			count(*) 
@@ -128,6 +129,7 @@
 		WHERE e.user_no = u.user_no
 		AND e.user_no = #{user.userNo}
 	</select>
+	
 	<select id="selectExtaHistoryByUserNo" resultType="hashmap" parameterType="hashmap">
 		SELECT * FROM(
 			SELECT rownum rnum, R.* FROM(
@@ -137,6 +139,30 @@
 				FROM tb_extagram e, tb_user u, tb_file fx, tb_file fu
 				WHERE e.user_no = u.user_no AND fx.file_no = e.file_no
 				AND u.file_no = fu.file_no AND e.user_no = #{user.userNo}
+				ORDER BY e.ex_no DESC
+			) R
+		)T
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
+	
+	<select id="selectCommCntByUserNo" resultType="int" parameterType="hashmap">
+		SELECT 
+   			count(*) 
+		FROM tb_ex_comm c, tb_user u
+		WHERE c.user_no = u.user_no
+		AND c.user_no = #{user.userNo}
+	</select>
+	
+	<select id="selectCommHistoryByUserNo" resultType="hashmap" parameterType="hashmap">
+		SELECT * FROM(
+			SELECT rownum rnum, R.* FROM(
+				SELECT
+    				c.ex_comm_no, c.user_no, c.ex_post_no, c.ex_comm,
+    				 c.ex_comm_date, u.nick, fu.stored_name profile
+				FROM tb_ex_comm c, tb_extagram e, tb_user u,  tb_file fu
+				WHERE e.ex_no = c.ex_post_no AND u.file_no = fu.file_no 
+				AND u.user_no = #{user.userNo} AND c.user_no = #{user.userNo}
+                ORDER BY ex_comm DESC
 			) R
 		)T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}

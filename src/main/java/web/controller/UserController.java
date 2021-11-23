@@ -437,4 +437,20 @@ public class UserController {
 		model.addAttribute("extaList", list);
 		return "/user/history/extagram";
 	}
+	
+	@RequestMapping(value="/recode/comment")
+	public String commentRecode(User user, 
+			HttpSession session, 
+			Model model,
+			PagingExtagram paramData) {
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		logger.info("user : {}", user);
+		PagingExtagram paging = userService.getCommPaging(paramData, user);
+		logger.info("페이징 : {}", paging);
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		List<Map<String, Object>> list = userService.getUsercommentHistory(user, paging); 
+		model.addAttribute("paging", paging);
+		model.addAttribute("commList", list);
+		return "/user/history/comment";
+	}
 }

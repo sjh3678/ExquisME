@@ -16,23 +16,25 @@ ul{
 li{
 	display: inline-block;
 }
-table tr td{
+.hitoryList{
 	text-align: center;
 }
 </style>
-<table>
+<table class="hitoryList">
 <tr>
-	<td>번호</td>
+	<td>구분</td>
+	<td>댓글 번호</td>
 	<td>작성자</td>
 	<td>내용</td>
 	<td>작성일</td>
 </tr>
-<c:forEach items="${extaList}" var="list">
+<c:forEach items="${commList}" var="list">
 <tr>
-	<td style="width:10%" onclick="location.href='/extagram/view?exNo=${list.EX_NO}';">${list.EX_NO}</td>
+	<td style="width:5%" onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';">${list.EX_POST_NO}</td>
+	<td style="width:5%">${list.EX_COMM_NO}</td>
 	<td style="width:20%"><img width="20px" height="20px" src="/upload/${list.PROFILE }"/>${list.NICK }</td>
-	<td style="width:50%">${list.EX_CONTENT }</td>
-	<td style="width:20%"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+	<td style="width:50%">${list.EX_COMM }</td>
+	<td style="width:20%"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 </tr>
 </c:forEach>
 </table>

@@ -132,12 +132,28 @@ public interface UserService {
 	public List<Map<String, Object>> getUserExtagramHistory(User user, PagingExtagram paramData);
 
 	/**
-	 * 회원 개인의 기록의 총 수 및 페이징
+	 * 회원 개인의 extagram 기록의 총 수 및 페이징
 	 * @param paramData - 페이징 객체
 	 * @param user - 조회할 회원 정보
 	 * @return - 조회된 페이징 객체 반환
 	 */
 	public PagingExtagram getExtaPaging(PagingExtagram paramData, User user);
+
+	/**
+	 * 회원 개인의 댓글 기록의 총 수 및 페이징
+	 * @param paramData - 페이징 객체
+	 * @param user - 조회할 회원 정보
+	 * @return - 조회된 페이징 객체 반환
+	 */
+	public PagingExtagram getCommPaging(PagingExtagram paramData, User user);
+
+	/**
+	 * 회원의 댓글 기록을 조회
+	 * @param user - 조회할 회원정보
+	 * @param paging - 조회된 페이징 객체 반환
+	 * @return - 조회된 페이징 객체 반환
+	 */
+	public List<Map<String, Object>> getUsercommentHistory(User user, PagingExtagram paging);
 
 
 }
