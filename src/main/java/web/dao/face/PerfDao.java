@@ -172,7 +172,7 @@ public interface PerfDao {
 	 * 
 	 * @param perfLike
 	 */
-	public void deletePerfLike(PerfLike perfLike);
+	public void deleteUserPerfLike(PerfLike perfLike);
 
 	
 	/**
@@ -180,7 +180,7 @@ public interface PerfDao {
 	 * 
 	 * @param noteLike
 	 */
-	public void deleteNoteLike(NoteLike noteLike);
+	public void deleteUserNoteLike(NoteLike noteLike);
 
 	/**
 	 * 노트 좋아요 추가삽입
@@ -250,6 +250,21 @@ public interface PerfDao {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> selectUserNoteVote(HashMap<String, Object> hashmap);
+
+	
+	/**
+	 * 향수 노트-좋아요tb 삭제
+	 * 
+	 * @param perf
+	 */
+	public void deleteNoteLike(Perf perf);
+
+	/**
+	 * 향수 향수-좋아요tb 삭제
+	 * 
+	 * @param perf
+	 */
+	public void deletePerfLike(Perf perf);
 	
 	
 }

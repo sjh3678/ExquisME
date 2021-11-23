@@ -125,24 +125,24 @@ public class PerfServiceImpl implements PerfService{
 	public void perfLikeProc(PerfLike perfLike) {
 		if("like".equals(perfLike.getLikeType()) ) {
 			//향수 좋아요/싫어요 튜플 삭제
-			perfDao.deletePerfLike(perfLike);
+			perfDao.deleteUserPerfLike(perfLike);
 			
 			//향수 좋아요 튜플 삽입
 			perfDao.insertPerfLike(perfLike);
 			
 		}else if("likeCancel".equals(perfLike.getLikeType())) {
 			//향수 좋아요/싫어요 튜플 삭제
-			perfDao.deletePerfLike(perfLike);
+			perfDao.deleteUserPerfLike(perfLike);
 			
 		}else if("dislike".equals(perfLike.getLikeType())) {
 			//향수 좋아요/싫어요 튜플 삭제
-			perfDao.deletePerfLike(perfLike);
+			perfDao.deleteUserPerfLike(perfLike);
 			//향수 싫어요 튜플 삽입
 			perfDao.insertPerfDislike(perfLike);
 			
 		}else if("dislikeCancel".equals(perfLike.getLikeType())) {
 			//향수 좋아요/싫어요 튜플 삭제
-			perfDao.deletePerfLike(perfLike);
+			perfDao.deleteUserPerfLike(perfLike);
 		}
 	}
 
@@ -150,7 +150,7 @@ public class PerfServiceImpl implements PerfService{
 	public void noteLikeProc(NoteLike noteLike) {
 
 		//노트 좋아요 튜플 삭제
-		perfDao.deleteNoteLike(noteLike);
+		perfDao.deleteUserNoteLike(noteLike);
 		
 
 		
@@ -238,6 +238,12 @@ public class PerfServiceImpl implements PerfService{
 	public void deletePerf(Perf perf) {
 		//향수-노트tb 삭제
 		perfDao.deletePerfNote(perf);
+		
+		//노트-좋아요tb 삭제
+		perfDao.deleteNoteLike(perf);
+
+		//향수-좋아요tb 삭제
+		perfDao.deletePerfLike(perf);
 		
 		//향수tb 삭제
 		perfDao.deletePerf(perf);

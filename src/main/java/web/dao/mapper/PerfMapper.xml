@@ -210,15 +210,16 @@
 		VALUES (TB_PERF_LIKE_SEQ.nextval, #{perfumeNo }, #{userNo }, 0)
 </insert>
 
-<delete id="deletePerfLike" parameterType="web.dto.PerfLike">
+<delete id="deleteUserPerfLike" parameterType="web.dto.PerfLike">
 	DELETE FROM tb_perf_like
 		WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
 </delete>
 
-<delete id="deleteNoteLike" parameterType="web.dto.NoteLike">
+<delete id="deleteUserNoteLike" parameterType="web.dto.NoteLike">
 	DELETE FROM tb_note_like
 		WHERE PERFUME_NO = #{perfumeNo } AND USER_NO = #{userNo }
 </delete>
+
 
 <insert id="insertNoteLike" parameterType="hashmap">
 	INSERT INTO tb_note_like (NOTE_LIKE_NO, USER_NO, PERFUME_NO, NOTE_NO)
@@ -272,6 +273,14 @@
 
 <delete id="deletePerfNote" parameterType="web.dto.Perf">
 	DELETE FROM tb_perf_note WHERE PERFUME_NO = #{perfumeNo }
+</delete>
+
+<delete id="deletePerfLike" parameterType="web.dto.Perf">
+	DELETE FROM tb_perf_like WHERE PERFUME_NO = #{perfumeNo }
+</delete>
+
+<delete id="deleteNoteLike" parameterType="web.dto.Perf">
+	DELETE FROM tb_note_like WHERE PERFUME_NO = #{perfumeNo }
 </delete>
 
 <delete id="deletePerf" parameterType="web.dto.Perf">

@@ -354,5 +354,5 @@ $(document).ready(function(){
 </form>
 
 </div>
-
+<br>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
