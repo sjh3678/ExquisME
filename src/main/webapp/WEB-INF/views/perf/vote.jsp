@@ -73,7 +73,7 @@ $(document).ready(function() {
   <tr>
     <th class="tg-baqh">
     	<img class="perf_img" style="width:230px; height:230px; display: block; margin: auto;"
-					src="/resources/img/perf/${perf.STORED_NAME }">
+					src="/upload/${perf.STORED_NAME }">
 	</th>
     <th class="tg-baqh">
 		<h2>Main Accord</h2><br>
