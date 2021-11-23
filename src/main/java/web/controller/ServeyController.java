@@ -28,7 +28,7 @@ public class ServeyController {
 		logger.info("A1 : {}", A1);
 		
 		model.addAttribute("useName", useName);
-		model.addAttribute("q1", A1);
+		model.addAttribute("A1", A1);
 	}
 	
 }

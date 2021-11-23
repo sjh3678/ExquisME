@@ -8,7 +8,7 @@
 		<div id="writer">
 			<div id="profile">
 				<img style="width:20px; height:20px; display: block; margin: auto; border-radius: 150px;" 
-				src="/resources/img/profile/${layer.PROFILE }" >
+				src="/upload/${layer.PROFILE }" >
 			</div>
 			<div id="writer_nick" >
 				작성자 :  ${layer.NICK }
@@ -17,10 +17,10 @@
 		<div id="content">내용 : ${layer.CONTENT }</div>
 		
 		<div id="perf_pic">
-			<div class="imgcontainer1" style="background-image: url('/resources/img/perf/${layer.FILES1 }')">
+			<div class="imgcontainer1" style="background-image: url('/upload/${layer.FILES1 }')">
 				<%-- <img style="width:230px; height:240px; display: block; margin: auto;" class="img1" src="/resources/img/perf/${layer.FILES1 }"> --%>
 			</div>
-			<div class="imgcontainer2" style="background-image: url('/resources/img/perf/${layer.FILES2 }')">
+			<div class="imgcontainer2" style="background-image: url('/upload/${layer.FILES2 }')">
 				<%-- <img style="width:230px; height:240px; display: block; margin: auto;" class="img2" src="/resources/img/perf/${layer.FILES2 }"> --%>
 			</div>
 		</div>
