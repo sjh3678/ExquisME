@@ -321,16 +321,22 @@ $(function(){
 				//dropHere의 dragImg 클래스를 가리키고 새 클래스를 추가합니다.
 				$("#img1 .perf_pic").addClass("item-"+counts[0]);
 				$("#img1 .perf_img").addClass("perf_imgSize-"+counts[0]);
+				$("#img3 .perf_pic").addClass("item-"+counts[0]);
+				$("#img3 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
 				
 				//Remove the current class (ui-draggable and dragImg)
 				//현재 클래스 제거(ui-dragable 및 dragImg)
 				$("#img1 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
+				$("#img3 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
 				//드롭된 div내 자식요소div 스타일 제거
 				$(this).children("div").removeAttr("style");
+				$("#img3").children("div").removeAttr("style");
+				
 				//드롭된 div내 자식요소div 스타일 등록
 				$(this).children("div").css("margin", "40px 50px");
+				$("#img3").children("div").css("margin", "40px 50px");
 				/* $("#img1 div").css({"width":"200px", "height":"200px", "display":"block", "margin":"auto"}) */
 				
 				//등록된 요소 더블 클릭 시 삭제
@@ -436,7 +442,7 @@ $(function(){
 		<div class="layer-result">결과
 			<div id="imgbox">
 				<div class="imgR">
-					<div class="img_result1"><img alt="이미지를 등록해 주세요"  style="width:70px; height: 80px; margin:auto; display:block;"></div>
+					<div id="img3" class="img_result1"><img alt="이미지를 등록해 주세요"  style="width:70px; height: 80px; margin:auto; display:block;"></div>
 					<div style="width:70px; height: 80px; float:left; font-size: 50px; text-align: center;">/</div>
 					<div class="img_result2" ><img alt="이미지를 등록해 주세요"  style="width:70px; height: 80px; margin:auto; display:block;"></div>
 				</div>

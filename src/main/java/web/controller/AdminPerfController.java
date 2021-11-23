@@ -72,8 +72,10 @@ public class AdminPerfController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String perfUpdateProc(MultipartFile file, Perf perf, Model model) {
 		
+		logger.info("@@@@@@file : {}", file);
+		
 		//향수 사진파일 수정
-		if(file != null) {
+		if(file.getSize() != 0) {
 			perfService.setPerfFileUpdate(file, perf.getFileNo());
 		}
 		
