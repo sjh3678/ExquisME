@@ -10,7 +10,6 @@ $(document).ready(function() {
 	$("#btnVote").click(function() {
 		console.log("투표클릭");
 		if (confirm("투표 하시겠습니까?")) {
-			if
 			$("form").submit();
 		}else{
 			return false;
@@ -157,7 +156,7 @@ $(document).ready(function() {
 			<div style="width: 60px;">
 			<c:forEach items="${topNote }" var="topNote">
 				<div style="margin: 0 auto; height: 50px; line-height: 40px;">
-				<input type="checkbox" id ="${topNote.NOTE_NAME }" value= ${topNote.NOTE_NO } name="noteNo" />
+				<input type="checkbox" id ="${topNote.NOTE_NAME }" value= ${topNote.NOTE_NO } name="noteNo" <c:forEach items="${voteNote }" var="voteNote"> <c:if test="${voteNote.NOTE_NO eq topNote.NOTE_NO}"> checked </c:if> </c:forEach> />
 				</div>
 			</c:forEach>
 			</div>
@@ -210,7 +209,7 @@ $(document).ready(function() {
 			<div style="width: 60px;">
 			<c:forEach items="${middleNote }" var="middleNote">
 				<div style="margin: 0 auto; height: 50px; line-height: 40px;">
-				<input type="checkbox" id ="${middleNote.NOTE_NAME }" value= ${middleNote.NOTE_NO } name="noteNo" />
+				<input type="checkbox" id ="${middleNote.NOTE_NAME }" value= ${middleNote.NOTE_NO } name="noteNo" <c:forEach items="${voteNote }" var="voteNote"> <c:if test="${voteNote.NOTE_NO eq middleNote.NOTE_NO}"> checked </c:if> </c:forEach>/>
 				</div>
 			</c:forEach>
 			</div>
@@ -263,7 +262,7 @@ $(document).ready(function() {
 			<div style="width: 60px;">
 			<c:forEach items="${baseNote }" var="baseNote">
 				<div style="margin: 0 auto; height: 50px; line-height: 40px;">
-				<input type="checkbox" id ="${baseNote.NOTE_NAME }" value= ${baseNote.NOTE_NO } name="noteNo" />
+				<input type="checkbox" id ="${baseNote.NOTE_NAME }" value= ${baseNote.NOTE_NO } name="noteNo" <c:forEach items="${voteNote }" var="voteNote"> <c:if test="${voteNote.NOTE_NO eq baseNote.NOTE_NO}"> checked </c:if> </c:forEach>/>
 				</div>
 			</c:forEach>
 			</div>

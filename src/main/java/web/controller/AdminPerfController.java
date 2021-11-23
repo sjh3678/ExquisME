@@ -34,6 +34,7 @@ public class AdminPerfController {
 		
 		//페이징 가져오기
 		PagingPerf pagingPerf = perfService.getPaging( paramData );
+		pagingPerf.setSearch(paramData.getSearch());
 		
 		List<HashMap<String, Object>> list = perfService.getPerfList( pagingPerf );
 		model.addAttribute("paging", pagingPerf);
@@ -70,11 +71,11 @@ public class AdminPerfController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String perfUpdateProc(MultipartFile file, Perf perf, Model model) {
-		logger.info("@@@file : {}", file);
-		logger.info("@@@perf : {}", perf);
 		
 		//향수 사진파일 수정
-		perfService.setPerfFileUpdate(file, perf.getFileNo());
+		if(file != null) {
+			perfService.setPerfFileUpdate(file, perf.getFileNo());
+		}
 		
 		//향수 정보 수정
 		perfService.setPerfUpdate(perf);
@@ -90,8 +91,6 @@ public class AdminPerfController {
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String perfWriteProc(MultipartFile file, Perf perf, Model model) {
-		logger.info("file : {}", file);
-		logger.info("perf : {}", perf);
 		
 		int fileNo = perfService.setPerfFile(file);
 		logger.info("fileNo : {}", fileNo);

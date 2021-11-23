@@ -241,6 +241,15 @@ public interface PerfDao {
 	 * @param hashmap
 	 */
 	public void updatePerfFile(HashMap<String, Object> hashmap);
+
+	
+	/**
+	 * 유저가 투표한 향수-노트 조회
+	 * 
+	 * @param hashmap
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectUserNoteVote(HashMap<String, Object> hashmap);
 	
 	
 }

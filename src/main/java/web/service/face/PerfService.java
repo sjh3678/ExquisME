@@ -181,6 +181,15 @@ public interface PerfService {
 	 */
 	public void setPerfFileUpdate(MultipartFile file, int fileNo);
 
+	/**
+	 * 사용자가 좋아요 누른 향수-노트 가져오기
+	 * 
+	 * @param perf
+	 * @param userNo
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getUserNoteVote(Perf perf, int userNo);
+
 
 
 

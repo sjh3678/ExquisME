@@ -11,13 +11,12 @@ $(document).ready(function(){
 		console.log("등록 클릭");
 			
 		if (confirm("수정 하시겠습니까?")) {
-			var p1 = document.getElementById('file').value;
 			var p2 = document.getElementById('perfName').value;
 			var p3 = document.getElementById('brandNo').value;
 			var p4 = document.getElementById('perfumeGender').value;
 			var p5 = document.getElementById('perfumeVitality').value;
 			var p6 = $("input:checkbox[name=noteNo]").is(":checked");
-			if (p1 == "" || p2 == ""|| p3 == 0 || p4 == 0 || p5 == 0 || p6 == false) {
+			if (p2 == ""|| p3 == 0 || p4 == 0 || p5 == 0 || p6 == false) {
 		         alert('필수항목 누락')
 		         return false;
 			}else{
@@ -61,7 +60,7 @@ $(document).ready(function(){
 
 
 <div class="container" style="text-align: center;">
-<h1>신규 향수 등록</h1>
+<h1>향수 정보 수정</h1>
 
 <hr>
 
@@ -76,7 +75,8 @@ $(document).ready(function(){
 		<thead>
 		  <tr>
 		    <th class="tg-baqh">사진 등록</th>
-		    <th class="tg-baqh"><input type="file" id="file" name="file"/></th>
+		    <th class="tg-baqh"><input type="file" id="file" name="file"/><span>기존 파일 : ${perf.ORIGIN_NAME }</span>
+		    </th>
 		  </tr>
 		</thead>
 		<tbody>

@@ -8,7 +8,14 @@
 <div class="container">
 <h1>관리자 향수 리스트</h1>
 <hr>
+<div style="text-align: center;">
 <a href="/admin/perf/write"><button>신규 향수 등록</button></a>
+<br><br>
+<form action="/admin/perf/list" method="get">
+<input type="text" name="search"><button>검색</button>
+</form>
+</div>
+<br>
 <table class="table table-striped table-hover">
 <thead>
 	<tr>

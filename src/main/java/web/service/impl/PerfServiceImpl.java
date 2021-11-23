@@ -311,4 +311,15 @@ public class PerfServiceImpl implements PerfService{
 		
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getUserNoteVote(Perf perf, int userNo) {
+		
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		hashmap.put("perfumeNo", perf.getPerfumeNo());
+		hashmap.put("userNo", userNo);
+		
+		return perfDao.selectUserNoteVote(hashmap);
+	}
+
 }

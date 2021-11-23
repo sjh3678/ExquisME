@@ -170,7 +170,7 @@ public class PerfController {
 	
 	@RequestMapping(value = "/vote")
 	public String perfNoteVote(Perf perf, Model model, HttpSession session) {
-		
+		logger.info("perf : {}", perf);
 		
 		//PERFUME_NO, PERFUME_NAME, PERFUME_VITALITY, PERFUME_GENDER, ORIGIN_NAME, STORED_NAME, BRAND_NAME
 		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
@@ -192,13 +192,17 @@ public class PerfController {
 		List<HashMap<String, Object>> viewPerfBaseNote = perfService.getPerfBaseNote(perf);
 		logger.info("viewPerfBaseNote : {}", viewPerfBaseNote);
 		
-		
+		//회원이 추천한 노트 정보 가져오기
+		int userNo = (int) session.getAttribute("userNo");
+		List<HashMap<String, Object>> viewUserNoteVote = perfService.getUserNoteVote(perf, userNo);
 		
 		model.addAttribute("perf", viewPerf);		
 		model.addAttribute("mainAccord", viewPerfMainAccord);
 		model.addAttribute("topNote", viewPerfTopNote);
 		model.addAttribute("middleNote", viewPerfMiddleNote);
 		model.addAttribute("baseNote", viewPerfBaseNote);
+		model.addAttribute("voteNote", viewUserNoteVote);
+		
 		
 		return "perf/vote";
 	}
