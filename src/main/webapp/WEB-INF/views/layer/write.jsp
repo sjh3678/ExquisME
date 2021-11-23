@@ -5,6 +5,96 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <style type="text/css">
+input[type=range] {
+  height: 28px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  background: #ECE6CC;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #8A7E6B;
+  border-radius: 50px;
+  border: 1px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 2px #000031;
+  border: 1px solid #00001E;
+  height: 20px;
+  width: 40px;
+  border-radius: 15px;
+  background: #ECE6CC;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #8A7E6B;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #8A7E6B;
+  border-radius: 50px;
+  border: 1px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 2px #000031;
+  border: 1px solid #00001E;
+  height: 20px;
+  width: 40px;
+  border-radius: 15px;
+  background: #ECE6CC;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #8A7E6B;
+  border: 1px solid #010101;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #8A7E6B;
+  border: 1px solid #010101;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 2px #000031;
+  border: 1px solid #00001E;
+  height: 20px;
+  width: 40px;
+  border-radius: 15px;
+  background: #ECE6CC;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #8A7E6B;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #8A7E6B;
+}
 .container {
 	width: 100%;
 }
@@ -29,6 +119,7 @@
 	border: 1px solid #ccc;
 	margin: 10px;
 	height: 90px;
+	text-align:center;
 }
 
 .perf_name {
@@ -58,39 +149,40 @@
 	width: 100%;
 	height: 350px;
 	margin: 10px auto;
-	border: solid 5px #8B4513;
+	background-color: #ECE6CC;
+	border-radius: 15px;
+}
+.layer-container h5 {
+	margin-top: 10px 5px 0 0 ;
 }
 .layer-item {
 	width: 20%;
-	height: 87%;
+	height: 320.5px;
 	margin: 10px auto;
-	padding: 10px;
-	border: solid 5px #8B4513;
+	padding-left: 10px;
 	float: left;
-
 }
 .layer-img {
-	border: 5px solid #ccc;
 	border-radius: 50px;
+	background-color: #fff;
 }
 .layer-img div{
-	display: none;
+/* 	display: none; */
 }
 .layer-result {
-	width: 20%;
+	width: 40%;
 	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
-	border: solid 5px #8B4513;
 	float: left;
+	padding:0px;
 }
 
 .layer-operator {
-	width: 20%;
+	width: 10%;
 	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
-	border: solid 5px #8B4513;
 	float: left;
 	font-size: 20px;
 }
@@ -103,21 +195,58 @@
 }
 .layer-img {
 	width:100%;
-	height: 70%;
+	height: 210px;
 	margin: 0 auto;
-	border:solid 5px #ccc;
 }
 .graf-bar {
 	width:100%;
 	height: 30%;
-	margin: 0 auto;
-	border:solid 5px #ccc;
+	margin-top: 15px;
 }
 
 li span {
 	cursor: pointer;
 }
+.imgR {
+	width: 100%;
+	height: 150px;
+}
 
+.img_result1{
+	width:80px;
+	height:90px;
+	border: 1px solid #ccc;
+	margin-left: 25px;
+	float:left;
+	background-color: #fff;
+}
+.slash{
+	width:80px; 
+	height: 90px; 
+	float:left; 
+	font-size: 50px; 
+	text-align: center;
+	margin:0 auto;
+}
+.img_result2{
+	width:80px;
+	height:90px;
+	border: 1px solid #ccc;
+	margin:0 auto;
+	float:left;
+	background-color: #fff;
+}
+.perB{
+	margin-top:30px;
+	width:90%;
+	height:30%;
+}
+.per-1 div {
+	float:left;
+}
+.per-2 div {
+	float: right;
+}
 </style>
 
 
@@ -201,6 +330,12 @@ $(document).ready(function(){
 					console.log(data)
 					result.innerHTML = data;
 	// 				$("#result").html( $("#result").html() + res );
+	
+					$(".perf_pic").draggable({
+						helper: "clone",
+						//Create counter
+						start: function() { counts[0]++; }
+					});
 				}
 				, error: function(){
 					console.log("AJAX 실패")
@@ -279,22 +414,49 @@ $(function(){
 	$("#img1").droppable({
 		drop: function(e, ui){
 			console.log("#img1 dropped")
-			
+				
 			if(ui.draggable.hasClass("perf_pic")) {
-				$(this).append($(ui.helper).clone());
-	   
+					
+				if ($("#img1").children().length > 0) {// img1의 자식요소가 1개 이상일 때
+					$("#img1").children().remove();	// 기존에 등록된 자식요소 삭제
+					$(".img_result1").children().remove(); // 기존에 등록된 결과이미지 삭제
+				}
+					
+				$(this).append($(ui.helper).clone()); // 드롭된 div에 클론 입력하기
+				
+				
+				$(".img_result1").append($(ui.helper).clone()); // 결과창에 클론 입력하기
+				
+				
+				//드롭된 이미지 가져오기
+				var dropImg = $(ui).innerHTML;
+				console.log("dorpImg : " + dropImg)
+				console.log("src : ", jQuery(this).children().attr("src"));
 				//Pointing to the dragImg class in dropHere and add new class.
+				//dropHere의 dragImg 클래스를 가리키고 새 클래스를 추가합니다.
 				$("#img1 .perf_pic").addClass("item-"+counts[0]);
 				$("#img1 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
-				//Remove the current class (ui-draggable and dragImg)
-				$("#img1 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
+				//Remove the current class (ui-draggable and dragImg)
+				//현재 클래스 제거(ui-dragable 및 dragImg)
+				$("#img1 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
+				//드롭된 div내 자식요소div 스타일 제거
+				$(this).children("div").removeAttr("style");
+				//드롭된 div내 자식요소div 스타일 등록
+				$(this).children("div").css("margin", "40px 50px");
+				//결과창 div내 자식요소div 스타일 제거
+				$(".img_result1").children("div").removeAttr("style");
+				//결과창 div내 자식요소div 스타일 등록
+				$(".img_result1").children("div").css("margin", "0 auto");
+				
+				//등록된 요소 더블 클릭 시 삭제
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
-				});     
-				make_draggable($(".item-"+counts[0])); 
+				});   
 				
+//				make_draggable($(".item-"+counts[0])); 
+					
 				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);     
 				
 			}
@@ -302,24 +464,38 @@ $(function(){
 	});
 	
 	$("#img2").droppable({
-			
-			drop: function(e, ui){
-			console.log("#img2 dropped")
-
+		drop: function(e, ui){
+		console.log("#img2 dropped")
+		
 			if(ui.draggable.hasClass("perf_pic")) {
+				
+				if ($("#img2").children().length > 0) {
+					$("#img2").children().remove();
+					$(".img_result2").children().remove(); // 기존에 등록된 결과이미지 삭제
+				}
+				
 				$(this).append($(ui.helper).clone());
+				
+				$(".img_result2").append($(ui.helper).clone()); // 결과창에 클론 입력하기
+				
 				//Pointing to the dragImg class in dropHere and add new class.
 				$("#img2 .perf_pic").addClass("item-"+counts[0]);
 				
 				//Remove the current class (ui-draggable and dragImg)
 				$("#img2 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
+				$(this).children("div").removeAttr("style");
+				$(this).children("div").css("text-align", "center");
+				//결과창 div내 자식요소div 스타일 제거
+				$(".img_result2").children("div").removeAttr("style");
+				//결과창 div내 자식요소div 스타일 등록
+				$(".img_result2").children("div").css("margin", "0 auto");
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
 				});
 				$("#img2 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
-				make_draggable($(".item-"+counts[0]));
+//				make_draggable($(".item-"+counts[0]));
 				
 				
 				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);
@@ -368,24 +544,39 @@ $(function(){
 <!-- 			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 			
 			<div class="graf-bar" id="graf2">
-				<input id="graf-in2" type="range" min="1" max="100"/>
+				<input id="graf-in2" type="range" min="1" max="100" />
 				<div id="graf-out2" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
 			</div><!-- graf-bar -->
 			
 		</div><!-- layer-item -->
 		
 		<div class="layer-operator" ><span class="child">=</span></div>
-		
-		<div class="layer-result">결과
-			<div id="imgbox">
-				<div class="imgresult1"style="background-image: url('')"></div>
-				<div class="imgresult2" style="background-image: url('')"></div>
-				<div id="perbox1"></div>
-				<div id="perbox2"></div>
-			</div><!-- imgbox -->
-		</div><!-- layer-result -->
-		
-		<input type="button" id="submit" value="전송" />
+		<form action="/layer/write" method="post">
+			<div class="layer-result">결과
+				<div id="imgbox">
+					<div class="imgR">
+						<div class="img_result1"></div>
+						<input type="hidden" name="perfumeNo1" value="$(img_result1).children('img').Attr('data-img')" />
+						<div class="slash">/</div>
+						<div class="img_result2" ></div>
+						<input type="hidden" name="perfumeNo2" value="$(img_result2).img.Attr('data-img')" />
+					</div>
+					<div class="perB">
+						<div class="per-1">
+							<div id="per1" style="margin-right:5px;">향수 1 : </div>
+							<div id="perbox1"></div>
+							<input type="hidden" name="perfume1Per" value="">
+						</div>
+						<div class="per-2">
+							<div id="perbox2"style="margin-left:5px;"></div>
+							<div id="per2">향수 2 : </div>
+						</div>
+					</div>
+				</div><!-- imgbox -->
+			</div><!-- layer-result -->
+		<textarea rows="2" cols="30" maxlength="60" style="resize:none; width:300px;" id="layeringContent" name="layeringContent" placeholder="간단한 소개, 설명을 적어주세요"></textarea>
+		<input type="submit" id="submit" value="작성하기" />
+		</form>
 	</div><!-- layer-container -->
 
 
@@ -426,6 +617,7 @@ document.querySelector('#graf-in1').addEventListener('input',e=>{
     document.querySelector('#graf-out2').innerHTML= value2;
     document.querySelector('#perbox2').innerHTML= value2;
     document.querySelector('#perbox1').innerHTML= value1;
+    document.querySelector('input[name="perfume1Per"]').innerHTML= e.target.value;
 });
 document.querySelector('#graf-in2').addEventListener('input',i=>{
     var value1 = 100 - i.target.value + "%";
@@ -436,6 +628,7 @@ document.querySelector('#graf-in2').addEventListener('input',i=>{
     document.querySelector('#graf-out1').innerHTML= value1;
     document.querySelector('#perbox1').innerHTML= value1;
     document.querySelector('#perbox2').innerHTML= value2;
+    document.querySelector('input[name="perfume1Per"]').innerHTML= 100 - i.target.value;
 });
 
 </script>

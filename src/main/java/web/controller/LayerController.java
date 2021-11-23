@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import web.dto.Layer;
 import web.dto.LayerLike;
 import web.service.face.LayerService;
 import web.util.PagingLayer;
@@ -112,9 +113,9 @@ public class LayerController {
 	}
 	
 	@RequestMapping(value="/layer/write", method = RequestMethod.POST)
-	public String layerInsertProc(HttpSession session, Model model) { //레이어드 등록
+	public String layerInsertProc(HttpSession session, Model model, Layer layer) { //레이어드 등록
 		int userNo = (int) session.getAttribute("userNo");
-		
+		logger.info("per1 : {}", layer.getPerfumeNo1());
 		return "redirect: /layer/list";
 	}
 

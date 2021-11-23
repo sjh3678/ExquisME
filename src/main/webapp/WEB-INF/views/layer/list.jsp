@@ -210,6 +210,7 @@ td:nth-child(2) {
 	text-align: left;
 }
 .perf_per {
+	height: 20px;
 	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
 }
