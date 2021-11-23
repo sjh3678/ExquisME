@@ -10,26 +10,29 @@ $(document).ready(function(){
 	
 	loadList(); //init list
 	
-	$("input[name=genderCode]:checkbox").change(
-         function() {// 체크박스들이 변경됬을때
-            var cnt_gender = 1;
-            if (cnt_gender == $("input[name=genderCode]:checkbox:checked").length) {
-                  $("input[name=genderCode]:checkbox:not(:checked)").attr("disabled", "disabled");
-            } else {
-                  $("input[name=genderCode]:checkbox").removeAttr("disabled");
-            }
-    })
-    
-    $("input[name=vitalityCode]:checkbox").change(
-         function() {// 체크박스들이 변경됬을때
-            var cnt_vitality = 1;
-            if (cnt_vitality == $("input[name=vitalityCode]:checkbox:checked").length) {
-                  $("input[name=vitalityCode]:checkbox:not(:checked)").attr("disabled", "disabled");
-            } else {
-                  $("input[name=vitalityCode]:checkbox").removeAttr("disabled");
-            }
-    })
-    
+    $('input[type="checkbox"][name="genderCode"]').click(function(){
+        
+        if($(this).prop('checked')){
+       
+           $('input[type="checkbox"][name="genderCode"]').prop('checked',false);
+       
+           $(this).prop('checked',true);
+       
+          }
+        
+  })
+  $('input[type="checkbox"][name="vitalityCode"]').click(function(){
+       
+        if($(this).prop('checked')){
+       
+           $('input[type="checkbox"][name="vitalityCode"]').prop('checked',false);
+       
+           $(this).prop('checked',true);
+       
+          }
+        
+  })
+  
     $("#slideLeft").click(function(){
      	$(this).fadeOut(300);
     	$("#divForm").fadeOut(300);
@@ -87,7 +90,7 @@ $(document).ready(function(){
 window.onscroll = function(e) {
   //추가되는 임시 콘텐츠
   //window height + window scrollY 값이 document height보다 클 경우,
-  if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  if((window.innerHeight + window.scrollY + 1)>= document.body.offsetHeight) {
   	//실행할 로직 (콘텐츠 추가)
   	loadList();
   }
