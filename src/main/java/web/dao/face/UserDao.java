@@ -111,4 +111,18 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<Map<String, Object>> selectExtaHistoryByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 유저가 쓴 댓글의 모든 수를 조회
+	 * @param map - 페이징 정보 객체 + 유저 정보 객체
+	 * @return - 조회된 댓글 수 반환
+	 */
+	public int selectCommCntByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 유저의 댓글 기록 조회
+	 * @param map - 조회할 유저 정보 및 페이징 정보
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Map<String, Object>> selectCommHistoryByUserNo(HashMap<String, Object> map);
 }

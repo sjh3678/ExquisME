@@ -3,23 +3,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
+function getExtaList(curPage){
+	console.log("받은 값 : ",curPage);
+	$.ajax({
+		type: "get",
+		data: {curPage:curPage},
+		dataType: "html",
+		url: "/user/recode/extagram",
+		success: function(res){
+			console.log("AJAX 성공");
+			$("#historyArea").html(res);
+		}, error: function(e){
+			console.log(e)
+		}
+	});
+}
+
+function getCommList(curPage){
+	console.log("받은 값 : ",curPage);
+	$.ajax({
+		type: "get",
+		data: {curPage:curPage},
+		dataType: "html",
+		url: "/user/recode/comment",
+		success: function(res){
+			console.log("AJAX 성공");
+			$("#historyArea").html(res);
+		}, error: function(e){
+			console.log(e);
+		}
+	});
+}
+
 $(document).ready(function(){
 	$("#into-extagram").click(function(){
-		var curPage
-		$.ajax({
-			type: "get",
-			data: {},
-			dataType: "html",
-			url: "/user/recode/extagram",
-			success: function(res){
-				console.log("AJAX 성공");
-				$("#historyArea").html(res);
-			}, error: function(e){
-				console.log(e)
-			}
-		});
+		 getExtaList(1);
+	})
+	
+	$("#into-comment").click(function(){
+		getCommList(1);
 	})
 })
+
 </script>
 <style type="text/css">
 ul{

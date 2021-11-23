@@ -328,8 +328,30 @@ public class UserServiceImpl implements UserService{
 		return list;
 	}
 
-	
+	@Override
+	public PagingExtagram getCommPaging(PagingExtagram paramData, User user) {
+		logger.info("getCommPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectCommCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingExtagram paging = new PagingExtagram(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
 
-	
-	
+	@Override
+	public List<Map<String, Object>> getUsercommentHistory(User user, PagingExtagram paging) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paging);
+		
+		List<Map<String, Object>> list = userDao.selectCommHistoryByUserNo(map);
+		
+		return list;
+	}
 }
