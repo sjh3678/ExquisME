@@ -77,7 +77,12 @@ public interface ExtaDao {
 	 */
 	public void insertHeart(ExLike heart);
 
-
+	/**
+	 * 사용자의 최근 작성 5개 글 rownum 기준으로 조회
+	 * @param view - userNo
+	 * @return 리스트 반환
+	 */
+	public List<HashMap<String, Object>> selectUserResentWrite(HashMap<String, Object> view);
 	
 	/**
 	 * 게시글 전체 추천 수 조회
@@ -133,12 +138,6 @@ public interface ExtaDao {
 	
 	
 	/**
-	 * 신고하는 Extagram글을 신고DTO에 삽입
-	 * @param extagram - 신고할 게시글
-	 */
-	public void insertExtaReportByExPostNo(Extagram extagram);
-	
-	/**
 	 * commNo에 해당하는 댓글 데이터 삭제
 	 * @param comment - exCommNo
 	 */
@@ -176,8 +175,10 @@ public interface ExtaDao {
 	public void deleteExta(Extagram extagram);
 
 	
+	
+	public HashMap<String, Object> selectCommentListForReport(Extagram viewExta);
 
-	public List<HashMap<String, Object>> selectUserResentWrite(HashMap<String, Object> view);
+	
 
 
 

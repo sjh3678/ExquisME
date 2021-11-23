@@ -76,11 +76,9 @@ public class ExtaController {
 		
 		//게시글 상세보기
 		HashMap<String, Object> view = extaService.getExtaView(viewExta);
-		logger.info("##view : {}", view);
 		model.addAttribute("viewExta",view);
 		//최근 작성 썸네일 조회
 		List <HashMap<String, Object>> resent = extaService.getUserResent(view);
-		logger.info("##resent : {}", resent);
 		model.addAttribute("resent", resent);
 		
 		//첨부파일 정보
@@ -116,15 +114,22 @@ public class ExtaController {
 		//댓글
 		List<HashMap<String, Object>> commentList = extaService.getCommentList(viewExta);
 		model.addAttribute("viewComm", commentList);
+
 		
 		return "/extagram/view_ok";
 	}
 
 //좋아요, 댓글 숫자 count
 	@RequestMapping(value="/extagram/view_ok2", method=RequestMethod.GET)
-	public String extaCommentCount(ExComm comment, Extagram viewExta, Model model) {
+	public String extaCommentCount(HttpSession session, ExLike heart, ExComm comment, Extagram viewExta, Model model) {
 		
 		Extagram viewExtagram = extaService.getInfoViewExta(comment);
+		
+		//좋아요 눌린 상태 전달
+		heart.setUserNo((Integer) session.getAttribute("userNo"));
+		heart.setExPostNo(viewExtagram.getExNo());
+		boolean result = extaService.getHeart(heart);
+		model.addAttribute("result", result);
 		
 		model.addAttribute("viewExta",extaService.getExtaView(viewExtagram));
 		
@@ -147,15 +152,9 @@ public class ExtaController {
 	@ResponseBody
 	public void extaHeart(int exNo, ExLike heart, Extagram viewExta, Model model, HttpSession session ) {
 		
-		//좋아요 정보
-		heart.setUserNo((Integer) session.getAttribute("userNo"));
-		heart.setExPostNo(exNo);
-		boolean result = extaService.getHeart(heart);
-		
 		//좋아요 수 조회
 		int cnt = extaService.getTotalCntHeart(heart);
 		
-		model.addAttribute("result", result);
 		model.addAttribute("cnt", cnt);
 	}
 	
@@ -202,8 +201,6 @@ public class ExtaController {
 		return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
 	}
 	
-	
-	
 //DELETE
 	@RequestMapping(value="/extagram/delete")
 	public String extaDelete(Extagram extagram, Model model) {
@@ -213,6 +210,36 @@ public class ExtaController {
 		return"redirect:/extagram/list";
 	}
 	
+//REPORT
+	@RequestMapping(value="/extagram/report", method=RequestMethod.GET)
+	public String extaReport(Extagram viewExta, Model model, HttpSession session) {
+		
+		if( session.getAttribute("login") == null) {
+			model.addAttribute("msg", "로그인 상태에서 신고가 가능합니다.");
+			model.addAttribute("url", "/extagram/list");
+			return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
+		}
+		logger.info("##Extagram : {}", viewExta);
+		
+		//게시글에 대한 정보
+		HashMap<String, Object> view = extaService.getExtaView(viewExta);
+		logger.info("##viewExta : {}", view);
+
+		//댓글에 대한 정보
+		List<HashMap<String, Object>> commentList = extaService.getCommentList(viewExta);
+		logger.info("##viewComm : {}", commentList);
+		
+		model.addAttribute("viewExta",view);
+		model.addAttribute("viewComm", commentList);		
+		
+		return "/extagram/report";
+	}
+
+	@RequestMapping(value="/extagram/report", method=RequestMethod.POST)
+	public String extaReportProc(Extagram viewExta, Model model, HttpSession session) {
+		
+		return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
+	}
 	
 	
 	
@@ -220,26 +247,7 @@ public class ExtaController {
 	
 	
 	
-//	
-//	@RequestMapping(value="/extagram/update", method=RequestMethod.GET)
-//	public void extaUpdate(Extagram extagram) {
-//		
-//	}
-//	
-//	@RequestMapping(value="/extagram/update", method=RequestMethod.POST)
-//	public void extaUpdateProc(Extagram extagram) {
-//		
-//	}
-//	
-//	@RequestMapping(value="/extagram/report")
-//	public void extaReport(Extagram extagram, Model model) {
-//		
-//	}
-//	
-//	@RequestMapping(value="/extagram")
-//	public void commWrite(ExComm exComm) {
-//		
-//	}
+
 
 
 	

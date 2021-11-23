@@ -25,7 +25,7 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 55%;
+	width: 50%;
 	margin: 0px auto;
 }
 .flex-userResent {
@@ -85,6 +85,7 @@ function characterCheck(obj){
 </script>
 
 <script type="text/javascript">
+/* 버튼 */
 $(document).ready(function() {
 	$("#btnList").click(function() {
 		location.href="/extagram/list";
@@ -109,14 +110,15 @@ $(document).ready(function() {
 		}
 	})
 });
-
 </script>
 
 <script type="text/javascript">
+/* AJAX */
 $(document).ready(function() {
 	
 	loadList();
-	$(document.body).click(function() {
+// 	$(document.body).click(function() {
+	$("#btnCommInsert").click(function() {
 		$.ajax({
 			type: "post"
 			, url: "/extagram/view_ok"
@@ -126,7 +128,6 @@ $(document).ready(function() {
 				$("#viewComment").html(res);
 				
 				$("#exCommWrite").val("");/* 입력창 비우기 */
-				
 				loadHeartComm();/* 숫자 카운트 */
 				
 			}
@@ -146,7 +147,6 @@ $(document).ready(function() {
 			, success: function(res) {
 				console.log("댓글 성공")
 				$("#viewComment").html(res);
-				
 				loadHeartComm();/* 숫자 카운트 */
 			}
 			, error: function() {
@@ -172,18 +172,6 @@ $(document).ready(function() {
 		});
 	}
 	
-	
-	//좋아요
-	if( ${isHearted} ) { //좋아요 상태
-		$("#btnHeart")
-			.addClass("btn-warning")
-			.html('좋아요 취소하기');
-	} else { // 좋아요 아닌 상태
-		$("#btnHeart")
-			.addClass("btn")
-			.html('좋아요');
-	}	
-	
 });
 
 //ajax 좋아요
@@ -196,33 +184,23 @@ function heartClick() {
 		, success: function(res) {
 			console.log("좋아요 성공")
 			
-			if(res.result) { //좋아요 성공
-				$("#btnHeart")
-				.html('좋아요 취소하기');
-			} else { //좋아요 취소 성공
-				$("#btnHeart")
-				.html('좋아요');
-			}
 			//좋아요 수 적용
-			$("#btnHeart").html(res.cnt);
+			$("#btnHeartComm").html(res.cnt);
 		}	
 		, error: function() {
 			console.log("좋아요 실패")
 		}
 	})
 }
-
 </script>
 
 <div class="container">
 <h1><Strong>Extagram view</Strong></h1><br>
 
-
-
 <div class="topper">
 <div><img style="width: 30px; height: 30px; border-radius: 70%;" 
 		   src="/resources/img/perf/${viewExta.PROFILE}"></div>
-		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;">${viewExta.NICK }</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;"  onclick="location.href='/extagram/report?exNo=${viewExta.EX_NO}';">${viewExta.NICK }</div>
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 
@@ -274,7 +252,7 @@ ${viewExta.EX_CONTENT }
 	</c:if>
 </div><br><br><br><br>
 
-<div class="text-center" style="font-size: 20px; margin: 10px;"><strong>${viewExta.NICK}<small>'s</small> Extagram</strong></div>
+<div class="text-center" style="font-size: 20px; margin: 10px;"><strong>More ${viewExta.NICK}<small>'s</small> Extagram</strong></div>
 <div class="flex-userResent-container text-center">
 <c:forEach items="${resent }" var="resent">
 	<div class="flex-userResent">

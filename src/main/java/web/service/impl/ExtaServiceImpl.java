@@ -244,9 +244,11 @@ public class ExtaServiceImpl implements ExtaService {
 	
 
 	@Override
-	public void setExtaReport(Extagram extagram) {
-		
+	public HashMap<String, Object> getCommentListForReport(Extagram viewExta) {
+		return extaDao.selectCommentListForReport(viewExta);
 	}
+	
+	
 	
 
 }

@@ -63,6 +63,13 @@ public interface ExtaService {
 	public ExComm getInfoComment(ExComm comment);
 	
 	/**
+	 * 사용자의 최근 작성 5개 글 rownum 기준으로 조회
+	 * @param view - userNo
+	 * @return 리스트 반환
+	 */
+	public List<HashMap<String, Object>> getUserResent(HashMap<String, Object> view);
+
+	/**
 	 * 좋아요 상태확인
 	 * 
 	 * @param heart - 좋아요 상태를 확인할 게시글과 정보 
@@ -106,21 +113,11 @@ public interface ExtaService {
 	 */
 	public void deleteExta(Extagram extagram);
 	
-	
 	/**
 	 * 게시글 수정
 	 * @param extagram - Extagram DTO의 ExPostNo값으로 업데이트할 게시글 선정
 	 */
 	public void setExtaUpdate(Extagram viewExta, MultipartFile file);
-
-
-	/**
-	 * 게시글 신고
-	 * @param extagram - Extagram DTO의 ExPostNo값으로 신고할 게시글 선정
-	 */
-	public void setExtaReport(Extagram extagram);
-	
-
 
 	/**
 	 * 댓글 삭제
@@ -129,7 +126,8 @@ public interface ExtaService {
 	public void deleteComment(ExComm comment);
 
 	
-	public List<HashMap<String, Object>> getUserResent(HashMap<String, Object> view);
+	public HashMap<String, Object> getCommentListForReport(Extagram viewExta);
+
 
 	
 
