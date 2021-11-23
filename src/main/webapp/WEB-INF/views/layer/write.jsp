@@ -74,10 +74,10 @@
 	border-radius: 50px;
 }
 .layer-img div{
-	display: none;
+/* 	display: none; */
 }
 .layer-result {
-	width: 20%;
+	width: 30%;
 	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
@@ -86,7 +86,7 @@
 }
 
 .layer-operator {
-	width: 20%;
+	width: 15%;
 	height: 87%;
 	margin: 10px auto;
 	padding: 10px;
@@ -117,7 +117,27 @@
 li span {
 	cursor: pointer;
 }
-
+.imgR {
+	width: 90%;
+	height: 70%;
+}
+.imgR img {
+	float: left;
+}
+.img_result1{
+	margin-left: 40px;
+}
+.perB{
+	margin-top:30px;
+	width:90%;
+	height:30%;
+}
+.per-1 div {
+	float:left;
+}
+.per-2 div {
+	float: right;
+}
 </style>
 
 
@@ -201,6 +221,12 @@ $(document).ready(function(){
 					console.log(data)
 					result.innerHTML = data;
 	// 				$("#result").html( $("#result").html() + res );
+	
+					$(".perf_pic").draggable({
+						helper: "clone",
+						//Create counter
+						start: function() { counts[0]++; }
+					});
 				}
 				, error: function(){
 					console.log("AJAX 실패")
@@ -279,22 +305,41 @@ $(function(){
 	$("#img1").droppable({
 		drop: function(e, ui){
 			console.log("#img1 dropped")
-			
+				
 			if(ui.draggable.hasClass("perf_pic")) {
-				$(this).append($(ui.helper).clone());
-	   
+					
+				if ($("#img1").children().length > 0) {// img1의 자식요소가 1개 이상일 때
+					$("#img1").children().remove()	// 기존에 등록된 자식요소 삭제
+				}
+					
+				$(this).append($(ui.helper).clone()); // 드롭된 div에 클론 입력하기
+				
+				//드롭된 이미지 src 가져오기
+				var src = jQuery(this).children().attr("src");
+				console.log("src : ", jQuery(this).children().attr("src"));
 				//Pointing to the dragImg class in dropHere and add new class.
+				//dropHere의 dragImg 클래스를 가리키고 새 클래스를 추가합니다.
 				$("#img1 .perf_pic").addClass("item-"+counts[0]);
 				$("#img1 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
+				
 				//Remove the current class (ui-draggable and dragImg)
+				//현재 클래스 제거(ui-dragable 및 dragImg)
 				$("#img1 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
+				//드롭된 div내 자식요소div 스타일 제거
+				$(this).children("div").removeAttr("style");
+				//드롭된 div내 자식요소div 스타일 등록
+				$(this).children("div").css("margin", "40px 50px");
+				/* $("#img1 div").css({"width":"200px", "height":"200px", "display":"block", "margin":"auto"}) */
+				
+				//등록된 요소 더블 클릭 시 삭제
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
-				});     
-				make_draggable($(".item-"+counts[0])); 
+				});   
 				
+//				make_draggable($(".item-"+counts[0])); 
+					
 				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);     
 				
 			}
@@ -302,24 +347,36 @@ $(function(){
 	});
 	
 	$("#img2").droppable({
-			
-			drop: function(e, ui){
-			console.log("#img2 dropped")
-
+		drop: function(e, ui){
+		console.log("#img2 dropped")
+		console.log("결과2"+ $(this).children("img").css("src"))
+		
 			if(ui.draggable.hasClass("perf_pic")) {
+				
+				if ($("#img2").children().length > 0) {
+					$("#img2").children().remove()
+				}
+				
+				var src = $(this).children("img").css("src");
+				
 				$(this).append($(ui.helper).clone());
+				$(".img_result").find('img').css("src", src);
+				
 				//Pointing to the dragImg class in dropHere and add new class.
 				$("#img2 .perf_pic").addClass("item-"+counts[0]);
 				
 				//Remove the current class (ui-draggable and dragImg)
 				$("#img2 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
+				$(this).children("div").removeAttr("style");
+				$(this).children("div").css("margin", "40px 50px");
+				
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
 				});
 				$("#img2 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
-				make_draggable($(".item-"+counts[0]));
+//				make_draggable($(".item-"+counts[0]));
 				
 				
 				$(".perf_imgSize-"+counts[0]).resizable(resizeOpts);
@@ -378,10 +435,21 @@ $(function(){
 		
 		<div class="layer-result">결과
 			<div id="imgbox">
-				<div class="imgresult1"style="background-image: url('')"></div>
-				<div class="imgresult2" style="background-image: url('')"></div>
-				<div id="perbox1"></div>
-				<div id="perbox2"></div>
+				<div class="imgR">
+					<div class="img_result1"><img alt="이미지를 등록해 주세요"  style="width:70px; height: 80px; margin:auto; display:block;"></div>
+					<div style="width:70px; height: 80px; float:left; font-size: 50px; text-align: center;">/</div>
+					<div class="img_result2" ><img alt="이미지를 등록해 주세요"  style="width:70px; height: 80px; margin:auto; display:block;"></div>
+				</div>
+				<div class="perB">
+					<div class="per-1">
+						<div id="per1" style="margin-right:5px;">향수 1 : </div>
+						<div id="perbox1"></div>
+					</div>
+					<div class="per-2">
+						<div id="perbox2"style="margin-left:5px;"></div>
+						<div id="per2">향수 2 : </div>
+					</div>
+				</div>
 			</div><!-- imgbox -->
 		</div><!-- layer-result -->
 		

@@ -28,8 +28,12 @@
 		$("#img1").droppable({
 			drop: function(e, ui){
 				console.log("#img1 dropped")
-				
+				var length = counts.length
+				console.log($("#img1").children().length)
 				if(ui.draggable.hasClass("perf_pic")) {
+					if ($("#img1").children().length > 0) {
+						$("#img1").children().remove()
+					}
 					$(this).append($(ui.helper).clone());
 		   
 					//Pointing to the dragImg class in dropHere and add new class.

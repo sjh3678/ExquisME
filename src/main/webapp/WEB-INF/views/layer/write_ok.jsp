@@ -9,7 +9,7 @@
 <%-- 		<div class="perf_pic" data-div="${i.index }" ondrop="drop(event)" ondragover="dragEnter(event)"> --%>
 		<div class="perf_pic">
 			<img class="perf_img" style="width:70px; height:80px; display: block; margin: auto;"
-			src="/resources/img/perf/${perf.STORED_NAME }">
+			src="/resources/img/perf/${perf.STORED_NAME }" img-data="${FILE_NO }">
 		</div>
 		<div class="perf_name">${perf.PERFUME_NAME }</div>
 		<div class="brand_name">${perf.BRAND_NAME }</div>
