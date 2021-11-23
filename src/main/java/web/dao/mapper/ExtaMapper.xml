@@ -68,7 +68,7 @@
 	
 	<select id="selectExtaComment" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT
-		    u.file_no, u.nick, c.ex_comm, c.ex_comm_no, c.ex_comm_date, f.stored_name, f.origin_name, c.ex_post_no
+		    u.file_no, u.nick, u.user_no, c.ex_comm, c.ex_comm_no, c.ex_comm_date, f.stored_name, f.origin_name, c.ex_post_no
 		FROM tb_user u
 		    LEFT OUTER JOIN tb_file f ON f.file_no = u.file_no
 		    LEFT OUTER JOIN tb_ex_comm c ON u.user_no = c.user_no
@@ -188,11 +188,9 @@
 		WHERE ex_no = #{exNo}
 	</delete>
 	
-	
-	
 	<select id="selectCommentListForReport" resultType="hashmap" parameterType="web.dto.Extagram">
 		SELECT
-		    u.file_no, u.nick, c.ex_comm, c.ex_comm_no, c.ex_comm_date, f.stored_name, f.origin_name, c.ex_post_no
+		    u.file_no, u.nick, u.user_no, c.ex_comm, c.ex_comm_no, c.ex_comm_date, f.stored_name, f.origin_name, c.ex_post_no
 		FROM tb_user u
 		    LEFT OUTER JOIN tb_file f ON f.file_no = u.file_no
 		    LEFT OUTER JOIN tb_ex_comm c ON u.user_no = c.user_no
@@ -201,11 +199,18 @@
 		ORDER BY ex_comm_date DESC
 	</select>
 	
+	<insert id="insertExtaReport" parameterType="web.dto.Report">
+		INSERT INTO tb_report
+			(report_no, ex_post_no, reporter, defendant, report_content, report_date, is_execute)
+		VALUES
+			(tb_report_seq.nextval, #{exPostNo}, #{reporter}, #{defendant}, #{reportContent}, sysdate, 'N')
+	</insert>
 	
+	<select id="selectUserNoByNick" resultType="int" parameterType="string">
+		SELECT user_no FROM tb_user
+		WHERE nick = #{NICK}
+	</select>
 	
-	
-	
-
 </mapper>
 
 

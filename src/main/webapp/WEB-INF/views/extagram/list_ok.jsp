@@ -6,7 +6,7 @@
 <div class="flex-container">
 <c:forEach items="${list}" var="list">
 	<div id="flex-items" onclick="location.href='/extagram/view?exNo=${list.EX_NO}';" style="cursor: pointer;">
-		<div id="a"><img style="width: 30px; height: 30px; border-radius: 70%;" src="/resources/img/perf/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }</div>
+		<div id="a"><img style="width: 30px; height: 30px; border-radius: 70%;" src="/upload/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }</div>
 		<div id="b">${list.EX_CONTENT }</div>
 		<div id="c"><img style="max-width: 100%; height: auto; max-height: 180px; display: block; margin: auto;"
 					src="/upload/${list.PICTURE}"></div><!-- width: 258px -->

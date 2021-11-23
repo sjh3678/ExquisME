@@ -20,6 +20,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.service.face.ExtaService;
 import web.util.PagingExtagram;
 
@@ -242,13 +243,23 @@ public class ExtaServiceImpl implements ExtaService {
 		extaDao.updateExta(viewExta);
 	}
 	
-
+//REPORT - 게시글 번호에 해당하는 댓글목록 가져오기
 	@Override
 	public HashMap<String, Object> getCommentListForReport(Extagram viewExta) {
 		return extaDao.selectCommentListForReport(viewExta);
 	}
 	
+//REPORT - 피신고자 userNo 구하기	
+	@Override
+	public int getUserNoByNick(String defendantNick) {
+		return extaDao.selectUserNoByNick(defendantNick);
+	}
 	
+//REPORT - 삽입
+	@Override
+	public void setExtaReport(Report report) {
+		extaDao.insertExtaReport(report);
+	}
 	
 
 }

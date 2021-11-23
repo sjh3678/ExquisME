@@ -236,8 +236,8 @@ function loadHeartComm() {
 
 <div class="topper">
 <div><img style="width: 30px; height: 30px; border-radius: 70%;" 
-		   src="/resources/img/perf/${viewExta.PROFILE}"></div>
-		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;"  onclick="location.href='/extagram/report?exNo=${viewExta.EX_NO}';">${viewExta.NICK }</div>
+		   src="/upload/${viewExta.PROFILE}"></div>
+		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;">${viewExta.NICK }</div>
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 

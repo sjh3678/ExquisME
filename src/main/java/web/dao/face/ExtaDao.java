@@ -7,6 +7,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.util.PagingExtagram;
 
 public interface ExtaDao {
@@ -128,15 +129,7 @@ public interface ExtaDao {
 	public void updateExta(Extagram viewExta);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+//DELETE 영역
 	/**
 	 * commNo에 해당하는 댓글 데이터 삭제
 	 * @param comment - exCommNo
@@ -173,10 +166,28 @@ public interface ExtaDao {
 	 * @param extagram - 삭제할 게시글의 DTO
 	 */
 	public void deleteExta(Extagram extagram);
-
 	
 	
+//REPORT 영역
+	/**
+	 * 리포트 페이지의 select option에 불러올 댓글 목록
+	 * @param viewExta - exNo 게시글 번호
+	 * @return - exNo에 해당하는 댓글 목록
+	 */
 	public HashMap<String, Object> selectCommentListForReport(Extagram viewExta);
+
+	/**
+	 * 리포트 내용 전송
+	 * @param report - 리포트 내용
+	 */
+	public void insertExtaReport(Report report);
+
+	/**
+	 * 피신고자 닉네임으로 userNo 구함
+	 * @param defendantNick - 닉네임
+	 * @return userNo
+	 */
+	public int selectUserNoByNick(String defendantNick);
 
 	
 

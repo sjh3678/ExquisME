@@ -4,8 +4,8 @@
 
 <c:forEach items="${viewComm }" var="viewComm">
 <div class="commentBox">
-	<div><img style="width:30px; height:30px; border-radius: 70%;" src="/resources/img/perf/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
-	<div style="padding: 5px;" onclick="location.href='/extagram/report?exNo=${viewComm.EX_POST_NO}';">${viewComm.NICK}&nbsp;&nbsp;&nbsp;</div>
+	<div><img style="width:30px; height:30px; border-radius: 70%;" src="/upload/${viewComm.STORED_NAME}">&nbsp;&nbsp;&nbsp;</div>
+	<div style="padding: 5px;" >${viewComm.NICK}&nbsp;&nbsp;&nbsp;</div>
 	<div style="padding: 5px;">${viewComm.EX_COMM }</div>
 	<div style="font-size: 10px; padding: 5px; margin: 5px;"><fmt:formatDate value="${viewComm.EX_COMM_DATE}" pattern="yyyy-MM-dd HH:mm"/></div>
 	<c:if test="${sessionScope.nick eq viewComm.NICK}">
@@ -13,3 +13,5 @@
 	</c:if>
 </div>
 </c:forEach>
+
+<%-- onclick="location.href='/extagram/report?exNo=${viewComm.EX_POST_NO}';" --%>

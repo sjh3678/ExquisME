@@ -71,16 +71,16 @@ $(document).ready(function() {
 <form action="/extagram/report" method="post">
 <div class="form-group">
 	<span><strong>신고자</strong><br>${nick }</span><br>
-	<input type="hidden" id="reporter" name="reporter" value="${nick }" />
-	<input type="hidden" id="userNo" name="userNo" value="${userNo }" />
+	<input type="hidden" id="reporter" name="reporter" value="${userNo }" />
+	<input type="hidden" id="exPostNo" name="exPostNo" value="${viewExta.EX_NO}" />
 </div>
 <div class="form-group">
 	<span><strong>신고 대상</strong></span><br>
-	<input type="text" id="defendant" name="defendant" list="comment" style="height: 35px; width: 100%;" />
+	<input type="text" id="defendant" name="defendantNick" list="comment" style="height: 35px; width: 100%;" />
 	<datalist id="comment">
-		<option value="${viewExta.NICK }" label="<fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/>     게시글 : ${viewExta.EX_CONTENT }"></option>
+		<option value="${viewExta.NICK }" label="<fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/>     [게시글]   ${viewExta.EX_CONTENT }"></option>
 		<c:forEach items="${viewComm }" var="viewComm">
-			<option value="${viewComm.NICK }" label="<fmt:formatDate value="${viewComm.EX_COMM_DATE }" pattern="yyyy-MM-dd HH:mm"/>     ${viewComm.EX_COMM }"></option>
+			<option value="${viewComm.NICK }" label="<fmt:formatDate value="${viewComm.EX_COMM_DATE }" pattern="yyyy-MM-dd HH:mm"/>     [댓글]   ${viewComm.EX_COMM }"></option>
 		</c:forEach>
 	</datalist>
 </div>

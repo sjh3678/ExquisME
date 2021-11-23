@@ -20,6 +20,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.service.face.ExtaService;
 import web.util.PagingExtagram;
 
@@ -221,7 +222,7 @@ public class ExtaController {
 	
 //REPORT
 	@RequestMapping(value="/extagram/report", method=RequestMethod.GET)
-	public String extaReport(Extagram viewExta, Model model, HttpSession session) {
+	public String extaReport(Report report, Extagram viewExta, Model model, HttpSession session) {
 		
 		if( session.getAttribute("login") == null) {
 			model.addAttribute("msg", "로그인 상태에서 신고가 가능합니다.");
@@ -245,10 +246,19 @@ public class ExtaController {
 	}
 
 	@RequestMapping(value="/extagram/report", method=RequestMethod.POST)
-	public String extaReportProc(Extagram viewExta, Model model, HttpSession session) {
+	public String extaReportProc(String defendantNick, Report report, Model model, HttpSession session) {
 		
-		return "redirect:/extagram/view?exNo=" + viewExta.getExNo();
+		report.setDefendant(extaService.getUserNoByNick(defendantNick));
+		
+
+		logger.info("##defendantNick : {}", defendantNick);
+		logger.info("##report : {}", report);
+		
+		extaService.setExtaReport(report);
+		
+		return "redirect:/extagram/view?exNo=" + report.getExPostNo();
 	}
+		
 	
 	
 	

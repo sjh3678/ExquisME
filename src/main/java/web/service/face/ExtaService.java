@@ -9,6 +9,7 @@ import web.dto.ExComm;
 import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.util.PagingExtagram;
 
 public interface ExtaService {
@@ -125,8 +126,26 @@ public interface ExtaService {
 	 */
 	public void deleteComment(ExComm comment);
 
-	
+	/**
+	 * 리포트 페이지의 select option에 불러올 댓글 목록
+	 * @param viewExta - exNo 게시글 번호
+	 * @return - exNo에 해당하는 댓글 목록
+	 */
 	public HashMap<String, Object> getCommentListForReport(Extagram viewExta);
+
+	/**
+	 * 리포트 내용 전송
+	 * @param report - 리포트 내용
+	 */
+	public void setExtaReport(Report report);
+
+	/**
+	 * 피신고자 닉네임으로 userNo 구함
+	 * @param defendantNick - 닉네임
+	 * @return userNo
+	 */
+	public int getUserNoByNick(String defendantNick);
+
 
 
 	
