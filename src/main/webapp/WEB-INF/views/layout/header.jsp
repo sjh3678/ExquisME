@@ -188,6 +188,9 @@
 	animation-iteration-count:infinite; 
 	animation-timing-function:step-end;
 }
+h1{
+	margin-top: 0px;
+}
 </style>
 
 </head>

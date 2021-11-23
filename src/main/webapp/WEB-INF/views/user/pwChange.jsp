@@ -137,12 +137,28 @@ $(document).ready(function(){
 })
 
 </script>
+<style>
+label{
+	font-weight: 300;
+}
+span{
+	font-size: 12px;
+}
+.btnProfile{
+	background: #8A7E6B;
+	color: #ECE6CC;
+	vertical-align: middle;
+}
+.btnProfile:hover{
+	background: #35312B;
+}
+</style>
 <div class="changeArea">
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <table class="pw">
 <tr>
 	<td><label for="changePw1">변경할 비밀번호</label></td>
-	<td><input type="password" id="changePw1" name="changePw1" placeholder="8~12자리의 대/소문자+숫자 조합"></td>
+	<td><input class="form-control" type="password" id="changePw1" name="changePw1" placeholder="8~12자리의 대/소문자+숫자 조합"></td>
 </tr>
 <tr>
 	<td> </td>
@@ -152,8 +168,8 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td><label for="changePw2">비밀번호 확인</label></td>
-	<td><input type="password" id="changePw2" name="changePw2" placeholder="8~12자리의 대/소문자+숫자 조합"></td>
-	<td><button id="sendBtn" style="width:100%;">변경</button></td>
+	<td><input class="form-control" type="password" id="changePw2" name="changePw2" placeholder="8~12자리의 대/소문자+숫자 조합"></td>
+	<td><button class="btn btnProfile" id="sendBtn" style="width:100%;">변경</button></td>
 </tr>
 <tr>
 	<td> </td>

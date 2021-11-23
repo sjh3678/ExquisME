@@ -147,31 +147,14 @@ $(document).ready(function(){
 #leftArea {
 	float: left;
 	width: 30%;
-	height: 800px;
-	background-color: #8A7E6B;
+	height: 100%;
+	background-color:#8A7E6B;
 	border-radius: 10px;
-	text-align: center;
-}
-#leftArea div{
-	color: #35312B;
-	width: 90%;
-	margin: 0 auto;
-	margin-top: 15px;
-	font-size: 18px;
-	font-weight: 400;
-	background-color: #ECE6CC;
-	border-radius: 10px;
-	text-align: left;
-	cursor: pointer;
-}
-#leftArea div:hover{
-	background-color: #35312B;
-	color: #ECE6CC;
 }
 #rightArea {
 	float: right;
 	width: 69%;
-	height: 800px;
+	height: 100%;
 	background-color: #ECE6CC;
 	border-radius: 10px;
 }
@@ -218,13 +201,8 @@ $(document).ready(function(){
 	padding-right: 0;
 	padding-bottom:20px;
 }
-.btnProfile{
-	background: #8A7E6B;
-	color: #ECE6CC;
-	vertical-align: middle;
-}
-.btnProfile:hover{
-	background: #35312B;
+.table{
+	border-collapse: collapse;
 }
 </style>
 <div class="container">
@@ -232,16 +210,26 @@ $(document).ready(function(){
 <hr>
 <div class="text-center">
 <div id="leftArea">
-	<div id="profile">&nbsp;&nbsp;<i class="fas fa-user-circle"></i>&nbsp;프로필 수정</div>
-	<div id="recode">&nbsp;&nbsp;<i class="fas fa-history"></i>&nbsp;개인 기록</div>
-	<div id="changePw">&nbsp;&nbsp;<i class="fas fa-lock"></i>&nbsp;비밀번호 변경</div>
-	<div id="deleteInfo">&nbsp;&nbsp;<i class="fas fa-lock"></i>&nbsp;회원탈퇴</div>
+	<table class="table">
+		<tr>
+			<td class="pageList"><span id="profile"><i class="fas fa-user-circle"></i>&nbsp;프로필 수정</span></td>
+		</tr>
+		<tr>
+			<td class="pageList"><span id="recode"><i class="fas fa-history"></i>&nbsp;개인 기록</span></td>
+		</tr>
+		<tr>
+			<td class="pageList"><span id="changePw"><i class="fas fa-lock"></i>&nbsp;비밀번호 변경</span></td>
+		</tr>
+		<tr>
+			<td class="pageList"><span id="deleteInfo"><i class="fas fa-lock"></i>&nbsp;회원탈퇴</span></td>
+		</tr>
+	</table>
 </div>
 
 <div class="modal" id="modal">
 <div class="modal_body" id="modal-body">
 <div class="text-right">
-<input style="margin: 5px;" type="button" class="btn" id="close-modal" value="닫기">
+<input type="button" class="btn btn-danger" id="close-modal" value="X">
 </div>
 <table class="pwCheck">
 <tr>
@@ -249,8 +237,8 @@ $(document).ready(function(){
 </tr>
 
 <tr>
-	<td><input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요."></td>
-	<td><button style="margin-left: 10px;"type="button" class="btn" id="checkBtn">인증</button><br></td>
+	<td><input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요"></td>
+	<td><button type="button" class="btn btn-primary" id="checkBtn">인증</button><br></td>
 </tr>
 </table>
 

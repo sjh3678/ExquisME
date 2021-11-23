@@ -28,7 +28,7 @@ $(document).ready(function(){
 <style type="text/css">
 
 </style>
-<div>
-<span>회원 탈퇴를 진행하시겠습니까?</span><br>
-<button type="button" id="yes">예</button>&nbsp;&nbsp;<button type="button" id="no">아니오</button>
+<div style="margin-top:300px;">
+<div style="margin: 50px;">탈퇴하셔도 활동하셨던 내역은 유지되며 이후 삭제나 수정하실 수 없습니다.<br>정말 탈퇴하시겠습니까?<br></div>
+<button class="btn btnProfile" type="button" id="yes">예</button>&nbsp;&nbsp;<button class="btn btnProfile" type="button" id="no">아니오</button>
 </div>
