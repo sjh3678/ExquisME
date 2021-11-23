@@ -10,25 +10,31 @@ $(document).ready(function(){
 	
 	loadList(); //init list
 	
-	$("input[name=genderCode]:checkbox").change(
-         function() {// 체크박스들이 변경됬을때
-            var cnt_gender = 1;
-            if (cnt_gender == $("input[name=genderCode]:checkbox:checked").length) {
-                  $("input[name=genderCode]:checkbox:not(:checked)").attr("disabled", "disabled");
-            } else {
-                  $("input[name=genderCode]:checkbox").removeAttr("disabled");
-            }
-    })
+
+   
+    $('input[type="checkbox"][name="genderCode"]').click(function(){
+    	 
+    	  if($(this).prop('checked')){
+    	 
+    	     $('input[type="checkbox"][name="genderCode"]').prop('checked',false);
+    	 
+    	     $(this).prop('checked',true);
+    	 
+    	    }
+    	  
+	})
+    $('input[type="checkbox"][name="vitalityCode"]').click(function(){
+    	 
+    	  if($(this).prop('checked')){
+    	 
+    	     $('input[type="checkbox"][name="vitalityCode"]').prop('checked',false);
+    	 
+    	     $(this).prop('checked',true);
+    	 
+    	    }
+    	  
+	})
     
-    $("input[name=vitalityCode]:checkbox").change(
-         function() {// 체크박스들이 변경됬을때
-            var cnt_vitality = 1;
-            if (cnt_vitality == $("input[name=vitalityCode]:checkbox:checked").length) {
-                  $("input[name=vitalityCode]:checkbox:not(:checked)").attr("disabled", "disabled");
-            } else {
-                  $("input[name=vitalityCode]:checkbox").removeAttr("disabled");
-            }
-    })
     
     $("#slideLeft").click(function(){
      	$(this).fadeOut(300);
@@ -38,6 +44,7 @@ $(document).ready(function(){
 // 		setTimeout(function(){$(".search").animate({width:"0"},300)}, 300);
 // 		setTimeout(function(){$("#slideRight").css("display", "block")}, 600);
 	})
+	
 	$("#slideRight").click(function(){
 		$(this).css("display", "none");
 		$(".search").animate({width:"250"},300);
