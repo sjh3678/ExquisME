@@ -204,6 +204,7 @@
 	<c:if test="${login }">
 		<span class="pull-right"><a href="/user/logout"><button class="btn btnHeader btnLog">LOGOUT</button></a></span>
 		<span class="pull-right"><button class="btn btn-open-popup btnHeader">CHAT</button></span>
+		<span class="pull-right"><a href="/user/mypage"><button class="btn btnHeader btnLog">MYPAGE</button></a></span>
 	</c:if>
 	<c:if test="${admin eq 'S' || admin eq 'M' }"><%-- 관리자 로그인 상태일 때 --%>
 		<span class="pull-left blink" style="background: red; color: white; font-size: 12px; font-weight: 400; vertical-align: middle; border-radius: 2px; margin: 10px;">&nbsp;&nbsp;관리자 로그인&nbsp;&nbsp;</span> 	
@@ -216,9 +217,6 @@
 	<a href="/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
 	<a href="/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/layer/list"><button class="btn btnHeader">LAYER</button></a>
-	<c:if test="${not empty login }">
-		<a href="/user/mypage"><button class="btn btnHeader">MYPAGE</button></a>
-	</c:if>
 	<hr class="hrMenu">
 </div>
 <%-- 모달 채팅방 입장 영역 --%>
