@@ -152,8 +152,6 @@ input[type=range]:focus::-ms-fill-upper {
 .perf_pic {
 	margin: 10px;
 	height: 90px;
-	text-align:center;
-	padding-top: 5px;
 }
 
 .perf_name {
@@ -235,39 +233,38 @@ input[type=range]:focus::-ms-fill-upper {
 li span {
 	cursor: pointer;
 }
-.imgR {
-	width: 50%;
-	height: 110px;
+.imgbox {
+	width: 100%;
+	height: 140px;
 	float:left;
 	margin:0 auto;
+}
+.imgR {
+	width: 50%;
+	height: 150px;
+	margin:0 auto;
+	border-radius: 20px;
+	overflow: hidden;
 }
 
 .img_result1{
-	width:90px;
-	height:100px;
+	width:50%;
+	height:150px;
 	margin: 0 auto;
 	float:left;
 	background-color: #fff;
-	border-radius: 15px;
-}
-.slash{
-	width:90px; 
-	height: 100px; 
-	float:left; 
-	font-size: 70px; 
-	text-align: center;
-	margin:0 auto;
+	overflow: hidden;
 }
 .img_result2{
-	width:90px;
-	height:100px;
+	width:50%;
+	height:150px;
 	margin:0 auto;
 	float:left;
 	background-color: #fff;
-	border-radius: 15px;
+	overflow: hidden;
 }
 .perB{
-	margin-top:30px;
+	margin: 0 auto;
 	width:90%;
 	height:30px;
 }
@@ -362,8 +359,12 @@ $(document).ready(function(){
 			alert("향수를 2가지 선택해 주세요");
 				
 			return false;
-		}else if (("#layeringContent").)
-//		$("#layer-form").submit();
+		}else if ($("#layeringContent").val() == ""){
+			alert("내용을 입력해 주세요")
+			
+			return false;
+		}
+		$("#layer-form").submit();
 	});
 });
 	function loadCurPage(i){
@@ -502,6 +503,10 @@ $(function(){
 				//결과창 div내 자식요소div 스타일 등록
 				$(".img_result1").children("div").css("margin", "0 auto");
 				
+				//결과창 이미지 스타일 제거
+				$(".img_result1").children().children().removeAttr("style");
+				//결과창 이미지 스타일 추가
+				$(".img_result1").children().children().css({"width":"100%","height":"130px", "float":"left", "position":"relative","top":"10px","left":"50px"});
 				//등록된 요소 더블 클릭 시 삭제
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
@@ -543,6 +548,10 @@ $(function(){
 				$(".img_result2").children("div").removeAttr("style");
 				//결과창 div내 자식요소div 스타일 등록
 				$(".img_result2").children("div").css("margin", "0 auto");
+				//결과창 이미지 스타일 제거
+				$(".img_result2").children().children().removeAttr("style");
+				//결과창 이미지 스타일 추가
+				$(".img_result2").children().children().css({"width":"100%","height":"130px", "float":"left", "position":"relative","top":"10px","right":"50px"});
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
 				});
@@ -613,8 +622,6 @@ $(function(){
 					<div class="imgR">
 						<div class="img_result1"></div>
 						<input type="hidden" id="perfumeNo1" name="perfumeNo1" value=""/>
-					</div>
-					<div class="imgR">
 						<div class="img_result2" ></div>
 						<input type="hidden" id="perfumeNo2" name="perfumeNo2" value=""/>
 					</div>
