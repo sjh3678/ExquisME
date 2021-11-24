@@ -20,6 +20,9 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #4d3534;
 	font-weight: bold;
+	position: relative;
+    top: -18px;
+    left: 10px;
 }
 #btnSub:hover {
 	background:linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
@@ -167,12 +170,17 @@ input[type=range]:focus::-ms-fill-upper {
 
 .search{
 	width: 250px;
+	height:25px;
 	margin: 0px;
 	padding: 0px;
 	float:left;
 }
 .search_div{
 	padding: 20px 0px 0px 0px;
+    position: relative;
+    top: -30px;
+    left: 8px;
+}
 }
 #paging{
 	margin:0 auto;
@@ -186,7 +194,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .layer-item {
 	width: 20%;
-	height: 320.5px;
+	height: 285px;
 	margin: 10px auto;
 	padding-left: 10px;
 	float: left;
@@ -204,7 +212,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .layer-operator {
 	width: 10%;
-	height: 87%;
+	height: 285px;
 	margin: 10px auto;
 	padding: 10px;
 	float: left;
@@ -265,7 +273,7 @@ li span {
 }
 .perB{
 	margin: 0 auto;
-	width:90%;
+	width:50%;
 	height:30px;
 }
 .per-1 div {
@@ -276,6 +284,11 @@ li span {
 }
 .perf_img{
 	margin: 0 auto;
+}
+.result-bottom {
+	width: 38%;
+    height: 130px;
+    float: left;
 }
 
 </style>
@@ -554,6 +567,7 @@ $(function(){
 				$(".img_result2").children().children().css({"width":"100%","height":"130px", "float":"left", "position":"relative","top":"10px","right":"50px"});
 				$(".item-"+counts[0]).dblclick(function() {
 					$(this).remove();
+					/* $(".img_result2").children().children(".item-"+counts[0]).remove(); */
 				});
 				$("#img2 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
@@ -631,8 +645,6 @@ $(function(){
 							<div id="perbox1">50%</div>
 							<input type="hidden" id="perfume1Per" name="perfume1Per" value="50">
 						</div>
-					</div>
-					<div class="perB">
 						<div class="per-2">
 							<div id="perbox2"style="margin-left:5px;">50%</div>
 							<div id="per2">향수 2 : </div>
@@ -640,20 +652,20 @@ $(function(){
 					</div>
 				</div><!-- imgbox -->
 			</div><!-- layer-result -->
-		<textarea rows="2" cols="30" maxlength="60" 
-		style="resize:none; width:300px; border:0px; border-radius: 15px; font-weight: bold;" 
-		id="layeringContent" name="layeringContent" placeholder="    간단한 소개, 설명을 적어주세요"></textarea>
-		<input type="button" id="btnSub" value="작성하기"/>
+			<div class="result-bottom">
+				<textarea rows="2" cols="30" maxlength="60" 
+				style="resize:none; width:300px; border:0px; border-radius: 15px; font-weight: bold;" 
+				id="layeringContent" name="layeringContent" placeholder="    간단한 소개, 설명을 적어주세요"></textarea>
+				<input type="button" id="btnSub" value="작성하기"/>
+			</div>
 		</form>
 	</div><!-- layer-container -->
 
 
 <div class="search">
-	<form action="/layer/write" method="get" style="text-align: center;"> 
 		<div class="search_div">
 			<input type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." />
 		</div>
-	</form>
 </div>
 
 

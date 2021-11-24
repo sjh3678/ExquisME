@@ -178,14 +178,13 @@ td:nth-child(2) {
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 440px;
-	border: 1px solid;
-	border-radius: 3px; 
+	height: 480px;
+	border-radius: 10px; 
 	margin:4px;
+	background: #ECE6CC;
 }
 #perf_pic {
 	position: relative;
-	border: 1px solid #ccc;
 	margin: 10px;
 	height: 250px;
 	overflow: hidden;
@@ -193,32 +192,43 @@ td:nth-child(2) {
 }
 
 #writer {
-	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
 	text-align: left;
 	font-size: 15px;
+	background: #fff;
+	border-radius: 5px;
 }
 
 #perf_name1 {
-	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
 	text-align: left;
+	background: #fff;
+	border-radius: 5px;
+	padding-left: 10px;
 }
 #perf_name2 {
-	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
 	text-align: left;
+	background: #fff;
+	border-radius: 5px;
+	padding-left: 10px;	
 }
 .perf_per {
 	height: 20px;
-	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
+	background: #fff;
+	border-radius: 5px;	
 }
 .per1 {
-	float:left;
+	width: 50%;
+    float: left;
+    text-align: center;
 }
+
 .per2 {
+	width: 50%;
 	float:right;
+	text-align: center;
 }
 
 #heart {
@@ -230,9 +240,9 @@ td:nth-child(2) {
 	text-align: center;
 }
 #content {
-	border: 1px solid #ccc;
 	margin: 5px 10px 0px 10px;
-	text-align: left;
+	background: #fff;
+	border-radius: 5px;	
 }
 .imgcontainer1{
 	overflow: hidden;
@@ -240,8 +250,8 @@ td:nth-child(2) {
 	float:left;
 
 
-	height: 240px;
-	
+	height: 250px;
+	background-color:#fff;
 	background-size: 230px 240px;
 	background-position-x: left;
 }
@@ -252,12 +262,16 @@ td:nth-child(2) {
 
 	float:right;
 	
-	height: 240px;
-	
+	height: 250px;
+	background-color:#fff;
 	background-size: 230px 240px;
 	background-position-x: right;
 }
-#profile {float: left;}
+#profile {
+	float: left; 
+	width: 30px;
+	height: 20px;
+}
 /* .imgcontainer1 img{
 	max-width: 230px;
 	height:240px;

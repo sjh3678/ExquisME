@@ -10,7 +10,7 @@
 				<img style="width:20px; height:20px; display: block; margin: auto; border-radius: 150px;" 
 				src="/upload/${layer.PROFILE }" >
 			</div>
-			<div id="writer_nick" >
+			<div id="writer_nick">
 				작성자 :  ${layer.NICK }
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 		<div id="perf_name2">2 :${layer.PNAME2 }</div>
 		
 		<div class="perf_per">
-			<div class="per1">향수1 :${layer.PERFUME1_PER }%</div>
+			<div class="per1">향수1 : ${layer.PERFUME1_PER } %</div>
 			<div class="per2">향수2 : ${100 - layer.PERFUME1_PER } % </div>
 		</div>
 		<div id="heart">
