@@ -93,6 +93,7 @@ $(document).ready(function() {
 			<option value="7">7일 정지</option>
 			<option value="30">30일 정지</option>
 			<option value="365">365일 정지</option>
+			<option value="9999">영구정지</option>
 		</select>
     </td>
     <td class="tg-fjr1">처리 상태</td>
