@@ -40,6 +40,16 @@
 			<mapping path="/user/mypage"/>
 			<beans:bean class="web.controller.LoginInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/user/login"/>
+
+			<beans:bean class="web.controller.LoginInterceptor2"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/user/join"/>
+
+			<beans:bean class="web.controller.JoinIntercepter"/>
+		</interceptor>
 	</interceptors>
 
 

@@ -568,6 +568,7 @@ $(document).ready(function(){
     })
     $("#nextBtn").click(function(){
     	submit(); 	
+    	$(location).attr("href", "/");
     })
     $("#cancleBtn").click(function(){
     	$(location).attr("href", "/");

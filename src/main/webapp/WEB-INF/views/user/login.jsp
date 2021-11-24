@@ -114,6 +114,10 @@ $(document).ready(function(){
 		kakaoLogin();
 		console.log("로그인 이후")
 	})
+	$("#google").click(function(){
+		console.log("구글 로그인")
+		init();
+	})
 })
 </script>
 <style type="text/css">
@@ -262,20 +266,59 @@ label {
 </form>
 
 <!-- 소셜 로그인 / 가입 폼 반환 -->
-<form action="/user/social/join" method="post" id="kakaoLogin">
-<input type="hidden" name="email" id="kakao-email">
-<input type="hidden" name="nick" id="kakao-nick">
+<form action="/user/social/join" method="post" id="socialLogin">
+<input type="hidden" name="email" id="social-email">
+<input type="hidden" name="nick" id="social-nick">
 </form>
 </div>
 </div>
 
 <button id="into-login" >로그인으로</button>
-</div>
-</div>
 
+</div>
+</div>
+<!-- google signin api -->
+<script src="https://apis.google.com/js/platform.js"></script>
+<!-- 카카오 소셜 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <script type="text/javascript">
+//google signin API
+var googleUser = {};
+function init() {
+	 gapi.load('auth2', function() {
+	  console.log("init()시작");
+	  auth2 = gapi.auth2.init({
+	        client_id: '952798466308-b2tnbjt5svuv39qgd38tbiqp9asv1u1t.apps.googleusercontent.com',
+	        cookiepolicy: 'single_host_origin',
+	      });
+	      attachSignin(document.getElementById('google'));
+	 });
+}
+
+//google signin API2
+function attachSignin(element) {
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+    		var profile = googleUser.getBasicProfile();
+    		var id_token = googleUser.getAuthResponse().id_token;
+	  	  	const name = profile.getName();
+			const email = profile.getEmail();
+			console.log(email);
+			console.log(name);
+			
+			$("#social-email").val(email);
+			$("#social-nick").val(name);
+			$("#socialLogin").submit();
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+    console.log("구글API 끝");
+  }
+</script>
+
+<script type="text/javascript">
+
 
 Kakao.init('00f8f4b7d54645c5187733d7b8196c4f'); //발급받은 키 중 javascript키를 사용해준다.
 
@@ -298,9 +341,9 @@ function kakaoLogin() {
 					console.log(email);
 					console.log(name);
 					
-					$("#kakao-email").val(email);
-					$("#kakao-nick").val(name);
-					$("#kakaoLogin").submit();
+					$("#social-email").val(email);
+					$("#social-nick").val(name);
+					$("#socialLogin").submit();
 				}, fail: error=>{
 					console.log(error)
 				}
