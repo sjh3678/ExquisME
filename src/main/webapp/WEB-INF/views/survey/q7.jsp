@@ -76,30 +76,30 @@
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>회원님의 성별과 연령대를 알려주세요</h3></div>
+	<div class="pageQ"><h3>회원님의 연령대를 알려주세요</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>Q7-A1</div>
+				<div>10대</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
-				<div>Q7-A2</div>
+				<div>20-30대</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
-				<div>Q7-A3</div>
+				<div>40-50대</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=4">
 					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
 				</a>
-				<div>Q7-A4</div>
+				<div>60대 이상</div>
 			</div>
 	</div><!-- flavorContainer end -->
 	

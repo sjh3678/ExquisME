@@ -30,7 +30,7 @@
     border-radius: 150px;
 }
 .flavorContainer {
-	width: 50%;
+	width: 70%;
 	text-align:center;
 	margin: auto;
 }
@@ -41,7 +41,7 @@
 }
 
 .item {
-	width: 50%;
+	width: 30%;
 	margin:0 auto;
 	float: left;
 }
@@ -80,12 +80,18 @@
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>낮</div>
+					<img alt="아침" src="/resources/img/survey/1-morning.jpg"></a><br>
+				<div>아침</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="낮" src="/resources/img/survey/1-afternoon.jpg"><br>
+				</a>
+				<div>낮</div>
+			</div>
+			<div class="item">
+				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=3">
+					<img alt="밤" src="/resources/img/survey/1-night.jpg"><br>
 				</a>
 				<div>밤</div>
 			</div>

@@ -76,28 +76,28 @@
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>향수를 사용하실 계절은 언제인가요?</h3></div>
+	<div class="pageQ"><h3>어떤 계절에 사용하실 건가요?</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q6?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
+					<img alt="봄" src="/resources/img/survey/1-spring.jpg"></a><br>
 				<div>봄</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q6?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="여름" src="/resources/img/survey/1-summer.jpg"><br>
 				</a>
 				<div>여름</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q6?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+					<img alt="가을" src="/resources/img/survey/1-fall.jpg"><br>
 				</a>
 				<div>가을</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q6?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+					<img alt="겨울" src="/resources/img/survey/1-winter.jpg"><br>
 				</a>
 				<div>겨울</div>
 			</div>

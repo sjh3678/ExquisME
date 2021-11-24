@@ -76,30 +76,18 @@
 			<li><span>8</span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>8번 질문</h3></div>
+	<div class="pageQ"><h3>회원님의 성별을 알려주세요</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
-				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7 }&A8=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>Q8-A1</div>
+				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7}&A8=1">
+					<img alt="여자" src="/resources/img/survey/1-flower.jpg"></a><br>
+				<div>여자</div>
 			</div>
 			<div class="item">
-				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7 }&A8=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7}&A8=2">
+					<img alt="남자" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
-				<div>Q8-A2</div>
-			</div>
-			<div class="item">
-				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7 }&A8=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
-				</a>
-				<div>Q8-A3</div>
-			</div>
-			<div class="item">
-				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7 }&A8=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
-				</a>
-				<div>Q8-A4</div>
+				<div>남자</div>
 			</div>
 	</div><!-- flavorContainer end -->
 	
