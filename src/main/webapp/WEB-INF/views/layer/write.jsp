@@ -351,20 +351,18 @@ $(document).ready(function(){
 		$("#perfumeNo1").val($(".img_result1").children().children().attr("data-img"));
 		$("#perfumeNo2").val($(".img_result2").children().children().attr("data-img"));
 		console.log("perNo1 : "+$("#perfumeNo1").val());
- 		var perfumeNo1 = $("#perfumeNo1").val();
- 		console.log("perfumeNo1 : " + perfumeNo1);
-		var perfumeNo2 = $("#perfumeNo2").val();
+		console.log("perNo2 : "+$("#perfumeNo2").val());
 
 		if ($("#perfumeNo2").val() == "" ) {
 			alert("향수를 2가지 선택해 주세요");
 			
 			return false;
 			
-		}else if (perfumeNo2 == "") {
+		}else if ($("#perfumeNo2").val() == "") {
 			alert("향수를 2가지 선택해 주세요");
 				
 			return false;
-		}
+		}else if (("#layeringContent").)
 //		$("#layer-form").submit();
 	});
 });
