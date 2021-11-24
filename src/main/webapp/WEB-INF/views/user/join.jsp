@@ -568,7 +568,7 @@ $(document).ready(function(){
 		console.log("#joinBtn clicked");
 		
 		if(joinCnt == 0 ){
-			if($("input:checkbox[name=chkBox]").is(":checked") == true){
+			if($(".chkSub1").is(":checked") == true && $(".chkSub2").is(":checked") == true && $(".chkSub3").is(":checked") == true){
 				console.log("약관 동의 완료");
 				joinCnt++;
 				$("#info").css("color", "black");
@@ -721,7 +721,7 @@ $(document).ready(function(){
 })
 
 </script>
-<style>
+<style type="text/css">
 .error{
 	color:red;
 }
@@ -766,15 +766,15 @@ $(document).ready(function(){
 </div>
 <div class="text-center">
 <label for="agree">
-  <input type="checkbox" class="chkSub" name="chkBox" value="1">
+  <input type="checkbox" class="chkSub1" name="chkBox" value="1">
   <span>이용약관 동의<strong>(필수)</strong><br></span>
 </label>
 <label for="agree">
-  <input type="checkbox" class="chkSub" name="chkBox" value="2">
+  <input type="checkbox" class="chkSub2" name="chkBox" value="2">
   <span>개인정보 수집, 이용 동의<strong>(필수)<br></strong></span>
 </label>
 <label for="agree">
-  <input type="checkbox" class="chkSub" name="chkBox" value="3">
+  <input type="checkbox" class="chkSub3" name="chkBox" value="3">
   <span>개인정보 이용 동의<strong>(필수)</strong><br></span>
 </label>
 <label for="agree">
