@@ -62,11 +62,11 @@ $(document).ready(function() {
   </tr>
   <tr>
     <td class="tg-fjr1">신고일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.REPORT_DATE }" pattern="yy-MM-dd HH:mm"/></td>
+    <td class="tg-c3ow"><fmt:formatDate value="${reportList.REPORT_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
     <td class="tg-fjr1">제재 시작일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.BAN_DATE }" pattern="yy-MM-dd HH:mm"/></td>
+    <td class="tg-c3ow"><fmt:formatDate value="${reportList.BAN_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
     <td class="tg-fjr1">제재 종료일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.EXPIRE_DATE }" pattern="yy-MM-dd HH:mm"/></td>
+    <td class="tg-c3ow"><fmt:formatDate value="${reportList.EXPIRE_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
   </tr>
   <tr>
     <td class="tg-fjr1">제제 사유</td>
@@ -74,33 +74,50 @@ $(document).ready(function() {
     	<select id="reason" name="reason">
 			<option value="${reportList.REASON }">${reportList.REASON }</option>
 			<option value="무혐의">무혐의</option>
-			<option value="기만">기만</option>
+			<option value="선동">선동</option>
 			<option value="도배">도배</option>
 			<option value="광고">광고</option>
 			<option value="비방">비방</option>
 			<option value="욕설">욕설</option>
+			<option value="음란물">음란물</option>
 		</select>
     </td>
     <td class="tg-fjr1">제재 처분</td>
     <td class="tg-c3ow">
     	<select id="banType" name="banType">
-			<option value="${reportList.BAN_TYPE }">${reportList.BAN_TYPE }</option>
-			<option value="0">무혐의</option>
-			<option value="0">사면</option>
+			<option value="${reportList.BAN_TYPE }">
+				<c:if test="${reportList.BAN_TYPE == 0}">
+					<span>무혐의/사면 처분</span>
+				</c:if>
+				<c:if test="${reportList.BAN_TYPE == 1}">
+					<span>1일 정지 중</span>
+				</c:if>
+				<c:if test="${reportList.BAN_TYPE == 7}">
+					<span>7일 정지 중</span>
+				</c:if>
+				<c:if test="${reportList.BAN_TYPE == 30}">
+					<span>한 달 정지 중</span>
+				</c:if>
+				<c:if test="${reportList.BAN_TYPE == 365}">
+					<span>1년 정지 중</span>
+				</c:if>
+				<c:if test="${reportList.BAN_TYPE == 99999}">
+					<span>영구 정지 중</span>
+				</c:if>
+			</option>
+			<option value="0">무혐의 / 사면</option>
 			<option value="1">1일 정지</option>
-			<option value="3">3일 정지</option>
-			<option value="5">5일 정지</option>
 			<option value="7">7일 정지</option>
-			<option value="30">30일 정지</option>
-			<option value="365">365일 정지</option>
-			<option value="9999">영구정지</option>
+			<option value="30">한 달 정지</option>
+			<option value="365">1년 정지</option>
+			<option value="99999">영구 정지</option>
 		</select>
     </td>
     <td class="tg-fjr1">처리 상태</td>
     <td class="tg-c3ow">${reportList.IS_EXECUTE}</td>
   </tr>
   <tr>
-    <td class="tg-fjr1" colspan="6">신고 사유</td>
+    <td class="tg-fjr1" colspan="6">신고 사유<br>(클릭 시 해당 게시글 이동)</td>
   </tr>
   <tr>
     <td class="tg-0pky" colspan="6"><div style="height: 500px;"><a href="/extagram/view?exNo=${reportList.EX_POST_NO }">${reportList.REPORT_CONTENT}</a></div></td>
@@ -108,7 +125,7 @@ $(document).ready(function() {
 </tbody>
 </table>
 </c:forEach><br>
-<div class="text-center"><button id="complete" class="btn" style="background-color: #eee;" onclick="/admin/report/list">완료</button></div>
+<div class="text-center"><button id="complete" class="btn" style="background-color: #eee;">완료</button></div>
 </form>
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
