@@ -41,7 +41,7 @@
 }
 
 .item {
-	width: 50%;
+	width: 100%;
 	margin:0 auto;
 	float: left;
 }
@@ -53,10 +53,12 @@
 }
 
 .item div {
-	width: 130px; 
+	width: 400px;
+	height: 50px;
 	text-align: center;
 	font-weight: bold;
 	margin: auto;
+	border-radius: 10px;
 }
 
 </style>
@@ -80,20 +82,15 @@
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>Top-Notes</div>
+				<div style="background-color: gray;">Top-Notes <br> ~~~~한노트</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
-				</a>
-				<div>Middle-Notes</div>
+					<div style="background-color: gray;">Middle-Notes <br> ~~~~한노트</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
-				</a>
-				<div>Base-Notes</div>
+					<div style="background-color: gray;">Base-Notes <br> ~~~~한노트</div></a><br>
 			</div>
 	</div><!-- flavorContainer end -->
 	

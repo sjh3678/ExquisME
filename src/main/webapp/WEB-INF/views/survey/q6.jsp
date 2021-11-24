@@ -41,7 +41,7 @@
 }
 
 .item {
-	width: 30%;
+	width: 33%;
 	margin:0 auto;
 	float: left;
 }
