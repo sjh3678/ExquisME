@@ -17,6 +17,31 @@
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 </style>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#complete").click(function() {
+		var answer = confirm("제재 완료 하시겠습니까?");
+		if(answer == true) {
+			var reason = document.getElementById("reason").value;
+			var banType = document.getElementById("banType").value;
+			
+			if( !reason ) {
+				alert("제제 사유를 선택해주세요.");
+				return false;
+			} else if ( !banType ) {
+				alert("제제 처분을 선택해주세요.")
+				return false;
+			} else {
+				submitContents( $("#complete") )
+				$("form").submit();
+			}	
+	    } else {
+    		return false;
+	    }
+	});
+});
+</script>
+
 <div class="container">
 
 <h1><Strong>Admin Report</Strong></h1><br>
@@ -82,76 +107,8 @@
 </tbody>
 </table>
 </c:forEach><br>
-<div class="text-center"><button style="background-color: #eee;" onclick="/admin/report/list?curPage=1" class="btn">완료</button></div>
+<div class="text-center"><button id="complete" class="btn" style="background-color: #eee;" onclick="/admin/report/list">완료</button></div>
 </form>
-
-
-
-
-
-
-
-
-<!-- <div class="container"> -->
-
-<!-- <h1><Strong>Admin Report</Strong></h1><br> -->
-
-<!-- <form action="/admin/report/list" method="post"> -->
-<!-- <table class="table table-hover"> -->
-<!-- <thead> -->
-<!-- 	<tr> -->
-<!-- 		<th style="width: 5%;">No</th> -->
-<!-- 		<th style="width: 15%;">신고 사유</th> -->
-<!-- 		<th style="width: 10%;">신고인</th> -->
-<!-- 		<th style="width: 10%;">피 신고인</th> -->
-<!-- 		<th style="width: 10%;">신고일</th> -->
-<!-- 		<th style="width: 10%;">제재 사유</th> -->
-<!-- 		<th style="width: 10%;">정지 일수</th> -->
-<!-- 		<th style="width: 10%;">제재 시작일</th> -->
-<!-- 		<th style="width: 10%;">제재 종료일</th> -->
-<!-- 		<th style="width: 5%;">처리</th> -->
-<!-- 		<th style="width: 5%;">확인</th> -->
-		
-<!-- 	</tr> -->
-<!-- </thead> -->
-<!-- <tbody> -->
-<%-- <c:forEach items="${reportList }" var="reportList"> --%>
-<!-- <tr> -->
-<%-- 	<td>${reportList.REPORT_NO }<input type="hidden" name="reportNo" value="${reportList.REPORT_NO }"/></td> --%>
-<%-- 	<td><div><a href="/extagram/view?exNo=${reportList.EX_POST_NO }">${reportList.REPORT_CONTENT}</a></div></td> --%>
-<%-- 	<td>${reportList.REPORTERNICK }<input type="hidden" name="reportNo" value="${reportList.REPORTER }"/></td> --%>
-<%-- 	<td>${reportList.DEFENDANTNICK }<input type="hidden" name="reportNo" value="${reportList.DEFENDANT }"/></td> --%>
-<%-- 	<td><fmt:formatDate value="${reportList.REPORT_DATE }" pattern="yy-MM-dd HH:mm"/></td> --%>
-<!-- 	<td> -->
-<!-- 		<select id="reason" name="reason" style="text-align: center;"> -->
-<%-- 			<option value="${reportList.REASON }">${reportList.REASON }</option> --%>
-<!-- 			<option value="도배">도배</option> -->
-<!-- 			<option value="광고">광고</option> -->
-<!-- 			<option value="비방">비방</option> -->
-<!-- 			<option value="욕설">욕설</option> -->
-<!-- 		</select> -->
-<!-- 	</td> -->
-<!-- 	<td> -->
-<!-- 		<select id="banType" name="banType" style="text-align: center;"> -->
-<%-- 			<option value="${reportList.BAN_TYPE }">${reportList.BAN_TYPE }</option> --%>
-<!-- 			<option value="0">사면</option> -->
-<!-- 			<option value="1">1일 정지</option> -->
-<!-- 			<option value="3">3일 정지</option> -->
-<!-- 			<option value="5">5일 정지</option> -->
-<!-- 			<option value="7">7일 정지</option> -->
-<!-- 		</select> -->
-<!-- 	</td> -->
-<%-- 	<td><fmt:formatDate value="${reportList.BAN_DATE }" pattern="yyMMdd HH:mm"/></td> --%>
-<%-- 	<td><fmt:formatDate value="${reportList.EXPIRE_DATE }" pattern="yyMMdd HH:mm"/></td> --%>
-<%-- 	<td>${reportList.IS_EXECUTE}</td> --%>
-<!-- 	<td><button onclick="/admin/report/list?curPage=1" class="btn btn-xs">!</button></td> -->
-<!-- </tr> -->
-<%-- </c:forEach> --%>
-<!-- </tbody> -->
-<!-- </table> -->
-<!-- </form> -->
-
-<!-- <div class="clearfix"></div> -->
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 
