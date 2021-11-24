@@ -397,6 +397,7 @@ $(document).ready(function(){
 		$(".info-write").removeClass("invisible");
 		$("input[name=file]").css("display", "inline");
 		$(".info-show").addClass("invisible");
+		$("#profile-show").addClass("invisible");
 	})
 	
 	$("#cancleBtn").click(function(){
@@ -405,6 +406,7 @@ $(document).ready(function(){
 		$(".info-show").removeClass("invisible");
 		$(".keyCheck").addClass("invisible");
 		$("#sendMail").addClass("invisible");
+		$("#profile-show").removeClass("invisible");
 	})
 	
 	$("#updateBtn").click(function(){
@@ -444,7 +446,7 @@ $(document).ready(function(){
 .profile {
 	width: 100%;
 	height: 100%;
-	oject-fit: cover;
+	object-fit: cover;
 }
 
 .info {
@@ -457,6 +459,8 @@ $(document).ready(function(){
 
 .info-write {
 	font-size: 15px;
+	height: 30px;
+	vertical-align: middle;
 }
 
 .button {
@@ -474,26 +478,42 @@ input[name=file] {
 }
 
 .infoTable {
-	border-collapse: separate;
-	border-spacing: 0 10px;
-	table-layout: fixed;
-	margin-left: auto;
-	margin-right: auto;
-	text-overflow: ellipsis;
+	top: 0px;
+	border-collapse: collapse;
+ 	border-spacing: 5px 0px;
+	table-layout: relative;
+/* 	text-overflow: ellipsis; */
 	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+	top: 160px;
+}
+.btnProfile{
+	background: #8A7E6B;
+	color: #ECE6CC;
+	vertical-align: middle;
+}
+.btnProfile:hover{
+	background: #35312B;
+}
+span{
+	font-size: 12px;
+}
+.classInput{
+	height: 27px;
+}
+#modifyBtn{
+	position: relative;
+	top: -40px;
 }
 </style>
 <div id="title">
-	<h3>${user.nick }님의프로필</h3>
-	<hr>
-	<br>
-	<br>
-	<hr>
+	<div style="font-size: 21px; margin: 20px; margin-bottom: 40px;">${user.nick }님의 프로필</div>
 </div>
 <div id="infoArea">
 	<form action="/user/profile" method="post" enctype="multipart/form-data" id="update-form">
 		<!-- 보여지는 프로필 사진 -->
-		<div class="imgBox" id="profile-show">
+		<div class="imgBox" id="profile-show" style="margin-bottom: 40px;">
 			<img class="info-show profile" src="/upload/${file.storedName}">
 		</div>
 		
@@ -514,35 +534,31 @@ input[name=file] {
 							<td class="info-show" id="email-show">&nbsp;&nbsp;${user.email }</td>
 						</c:when>
 						<c:when test="${user.email eq null }">
-							<td class="info-show" id="email-show">&nbsp;&nbsp;설정된 이메일이
-								없습니다.</td>
+							<td class="info-show" id="email-show" style="color: #777;">&nbsp;&nbsp;이메일을 입력해 주세요.</td>
 						</c:when>
 					</c:choose>
-					<td class="info-write invisible" id="email-write">&nbsp;&nbsp;<input
-						type="text" id="email" name="email"></td>
-					<td class="info-write">
-						<span id="emailChk" class="error invisible">asd123@gmail.com의 형식이여야 합니다.</span> 
+					<td class="info-write invisible" id="email-write">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="email" name="email">
+						<span id="emailChk" class="error invisible">올바른 이메일 형식이 아닙니다.</span> 
 						<span id="emailError" class="error invisible">이미 존재하는 이메일입니다.</span> 
-						<span id="valid-email" class="valid invisible">사용가능한 이메일입니다.</span>
+						<span id="valid-email" class="valid invisible">사용 가능한 이메일입니다.</span>
 					</td>
+
 					
 					<td class="sendMail">
-						<button id="sendMail" class="button invisible" type="button">인증번호 받기</button>
+						<button id="sendMail" class="btnProfile btn button invisible" type="button">인증번호 받기</button>
 					</td>
 				</tr>
 
-				<tr class="keyCheck invisible">
-					<td><label for="emailCheck" id="emailCheckLabel"
-						class="info-write ">인증번호 </label></td>
-					<td>&nbsp;&nbsp;<input id="emailCheck" type="text"
-						class="info-write" name="emailCheck"
-						placeholder="메일을 확인하여 인증번호를 입력하세요"></td>
-					<td><button id="isVailEmail" class="button invisible"
-							type="button">인증</button></td>
-					<td class="info-write">
+				<tr class="info keyCheck invisible">
+					<td><label for="emailCheck" id="emailCheckLabel" class="info-write" style="font-weight: 400;">인증번호 </label></td>
+					<td>
+						&nbsp;&nbsp;<input id="emailCheck" type="text" class="info-write form-control" name="emailCheck" placeholder="메일을 확인해 주세요.">
 						<span id="sendSucess" class="valid invisible">인증되었습니다.</span>
 						<span id="sendFail" class="error invisible">인증번호가 일치하지않습니다.</span>
 					</td>
+					<td><button id="isVailEmail" class="btnProfile btn button invisible" type="button">인증</button></td>
+
 				</tr>
 				<tr>
 					<td class="info">닉네임</td>
@@ -551,54 +567,53 @@ input[name=file] {
 							<td class="info-show">&nbsp;&nbsp;${user.nick }</td>
 						</c:when>
 						<c:when test="${user.nick eq null }">
-							<td class="info-show">&nbsp;&nbsp;설정된 닉네임이 없습니다.</td>
+							<td class="info-show" style="color: #777;">&nbsp;&nbsp;닉네임을 입력해 주세요.</td>
 						</c:when>
 					</c:choose>
-					<td class="info-write invisible">&nbsp;&nbsp;<input
-						type="text" name="nick" id="nick"></td>
-					<td class="info-write">
-						<span id="nickChk" class="error invisible">닉네임을 입력해주세요</span> 
+					<td class="info-write invisible">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" name="nick" id="nick">
+						<span id="nickChk" class="error invisible">닉네임을 입력해 주세요.</span> 
 						<span id="nickError" class="error invisible">이미 존재하는 닉네임입니다.</span> 
-						<span id="valid-nick" class="valid invisible">사용가능한 닉네임입니다.</span>
+						<span id="valid-nick" class="valid invisible">사용 가능한 닉네임입니다.</span>
 					</td>
+
 				</tr>
 
 				<tr>
-					<td class="info">전화번호</td>
+					<td class="info">전화</td>
 					<c:choose>
 						<c:when test="${user.phone ne null }">
 							<td class="info-show">&nbsp;&nbsp;${user.phone }</td>
 						</c:when>
 						<c:when test="${user.phone eq null }">
-							<td class="info-show">&nbsp;&nbsp;설정된 전화번호 데이터가 없습니다.</td>
+							<td class="info-show" style="color: #777;">&nbsp;&nbsp;전화번호를 입력해 주세요.</td>
 						</c:when>
 					</c:choose>
-					<td class="info-write invisible">&nbsp;&nbsp;<input type="text" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" id="phone" name="phone" placeholder="'-'포함한 13자리 입력"></td>
-					<td class="info-write">
-						<span id="phoneChk" class="error invisible">'-'를 포함한 13자리 조합.</span> 
-						<span id="valid-phone" class="valid invisible">유효한 전화번호 입니다.</span>
+					<td class="info-write invisible">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" id="phone" name="phone" placeholder="010-2345-6789">
+						<span id="phoneChk" class="error invisible">'010-2345-6789'의 형식으로 적어주세요.</span> 
+						<span id="valid-phone" class="valid invisible">사용 가능한 전화번호 입니다.</span>
 					</td>
 				</tr>
 
 				<tr>
-					<td class="info">생일</td>
+					<td class="info">생년월일</td>
 					<c:choose>
 						<c:when test="${user.birth ne null }">
-							<td class="info-show">&nbsp;&nbsp;<fmt:formatDate
-									value="${user.birth }" pattern="yyyy년 MM월 dd일" /></td>
+							<td class="info-show">&nbsp;&nbsp;<fmt:formatDate value="${user.birth }" pattern="yyyy년 MM월 dd일" /></td>
 						</c:when>
 						<c:when test="${user.birth eq null }">
-							<td class="info-show">&nbsp;&nbsp;설정된 생일 데이터가 없습니다.</td>
+							<td class="info-show" style="color: #777;">&nbsp;&nbsp;생년월일을 입력해 주세요.</td>
 						</c:when>
 					</c:choose>
-					<td class="info-write invisible">&nbsp;&nbsp;<input type="text" readonly id="birth" name="birth"></td>
-					<td class="info-write">
-						<span id="birthChk" class="error invisible">생일을 선택해주세요.</span> 
+					<td class="info-write invisible">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="birth" name="birth">
+						<span id="birthChk" class="error invisible">생년월일을 선택해주세요.</span> 
 						<span id="valid-birth" class="valid invisible">선택 되었습니다.</span>
 					</td>
 				</tr>
 				<tr>
-					<td class="info">생성일</td>
+					<td class="info">가입일</td>
 					<td class="info">&nbsp;&nbsp;<fmt:formatDate
 							value="${user.createDate }" pattern="yyyy년 MM월 dd일" />
 					<td>
@@ -619,18 +634,16 @@ input[name=file] {
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">&nbsp;&nbsp;
-						<input type="radio" checked="checked" name="gender" value="F" id="female">
-						<label for="female">여성</label>&nbsp;&nbsp; 
-						<input type="radio" name="gender" value="M" id="male"> <label for="male">남성</label>
+						<input type="radio" name="gender" value="F" id="female" checked="checked"><label for="female" style="font-weight:300">여성</label>&nbsp;&nbsp; 
+						<input type="radio" name="gender" value="M" id="male"><label for="male" style="font-weight:300">남성</label>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<button id="modifyBtn" class="info-show" type="button">수정하기</button>
-		<button class="info-write invisible" id="updateBtn" type="button">수정</button>
-		<button class="info-write invisible" id="cancleBtn" type="button">취소</button>
+		<button id="modifyBtn" class="btnProfile btn info-show" type="button">수정하기</button>
+		<div class="infoTable">
+		<button class="btnProfile info-write invisible btn" id="updateBtn" type="button">수정</button>
+		<button class="btnProfile info-write invisible btn" id="cancleBtn" type="button">취소</button>
+		</div>
 	</form>
 </div>
-
-
-<hr>

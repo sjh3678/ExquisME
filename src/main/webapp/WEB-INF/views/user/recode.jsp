@@ -56,10 +56,12 @@ li{
 	margin-left:50px;
 }
 .indexArea{
-	width:100%;
+	width: 95%;
 	height: 5%;
-	background-color: #34ebe1;
+	background-color: #8A7E6B;
+	font-size: 18px;
 	border-radius: 15px;
+	margin: 0 auto;
 }
 .into-extagram:hover{
 	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/

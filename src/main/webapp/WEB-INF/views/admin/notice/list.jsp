@@ -222,7 +222,9 @@ $(document).ready(function(){
 	</div>
 	<div class="content">
 		<div class="contentChild" style="display: none;">
+			<c:if test="${not empty i.STORED_NAME}">
 			<div class="contentFile"><img src="/upload/${i.STORED_NAME}"/></div>
+			</c:if>
 			<div class="contentText">${i.NOTICE_CONTENT}</div>
 			<div class="contentDate">
 				<br><br><br><fmt:formatDate value="${i.NOTICE_DATE}" pattern="YY년 MM월 dd일"/>
