@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import web.dto.Layer;
 import web.dto.LayerLike;
 import web.util.PagingLayer;
 import web.util.PagingLayerWrite;
@@ -31,14 +32,6 @@ public interface LayerService {
 	 * @return - 조회한 좋아요 행 수
 	 */
 	public int getCntLike(LayerLike lLike);
-
-	/**
-	 * 게시글 등록
-	 * 
-	 * 
-	 * @param model
-	 */
-	public void setLayer(HttpSession session,Model model);
 
 	/**
 	 * paramData 로 페이징 처리
@@ -81,6 +74,12 @@ public interface LayerService {
 	 * @return - 자신의 좋아요 등록 결과 반환
 	 */
 	public HashMap<String, Object> setLayerLike(int cnt, LayerLike lLike);
+
+	/**
+	 * 레이어링 등록
+	 * @param layer - 전달된 정보 객체
+	 */
+	public void setLayer(Layer layer);
 
 
 }

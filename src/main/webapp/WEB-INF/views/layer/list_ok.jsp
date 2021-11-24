@@ -14,7 +14,7 @@
 				작성자 :  ${layer.NICK }
 			</div>
 		</div>
-		<div id="content">내용 : ${layer.CONTENT }</div>
+		<div id="content">내용 : ${layer.LAYERING_CONTENT }</div>
 		
 		<div id="perf_pic">
 			<div class="imgcontainer1" style="background-image: url('/upload/${layer.FILES1 }')">

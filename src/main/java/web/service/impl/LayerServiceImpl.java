@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import web.dao.face.LayerDao;
+import web.dto.Layer;
 import web.dto.LayerLike;
 import web.service.face.LayerService;
 import web.util.PagingLayer;
@@ -86,9 +87,9 @@ public class LayerServiceImpl implements LayerService {
 	}
 
 	@Override
-	public void setLayer(HttpSession session, Model model) {
+	public void setLayer(Layer layer) {
 		
-		layerDao.insertLayerByUserNo(model);
+		layerDao.insertLayerByUserNo(layer);
 	}
 
 	@Override

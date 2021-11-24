@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import web.dto.Layer;
 import web.dto.LayerLike;
 import web.util.PagingLayer;
 import web.util.PagingLayerWrite;
@@ -46,9 +47,9 @@ public interface LayerDao {
 	/**
 	 * model로 전달된 정보로 레이어드 등록
 	 * 
-	 * @param model - 등록될 레이어드 정보
+	 * @param layer - 등록될 레이어드 정보
 	 */
-	public void insertLayerByUserNo(Model model);
+	public void insertLayerByUserNo(Layer layer);
 
 	public int selectLayerCntAll();
 

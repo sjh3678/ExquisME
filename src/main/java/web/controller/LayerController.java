@@ -115,8 +115,14 @@ public class LayerController {
 	@RequestMapping(value="/layer/write", method = RequestMethod.POST)
 	public String layerInsertProc(HttpSession session, Model model, Layer layer) { //레이어드 등록
 		int userNo = (int) session.getAttribute("userNo");
+		
+		layer.setUserNo(userNo);
+		
+		layerService.setLayer(layer);
+		
 		logger.info("per1 : {}", layer.getPerfumeNo1());
 		logger.info("per1 : {}", layer);
+		
 		return "redirect: /layer/list";
 	}
 

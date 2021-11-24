@@ -5,6 +5,30 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <style type="text/css">
+#btnSub {
+	box-shadow:inset 0px 1px 0px 0px #a6827e;
+	background:linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
+	background-color:#7d5d3b;
+	border-radius:10px;
+	border:1px solid #54381e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #4d3534;
+	font-weight: bold;
+}
+#btnSub:hover {
+	background:linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
+	background-color:#634b30;
+}
+#btnSub:active {
+	position:relative;
+	top:1px;
+}
 input[type=range] {
   height: 28px;
   -webkit-appearance: none;
@@ -98,6 +122,16 @@ input[type=range]:focus::-ms-fill-upper {
 .container {
 	width: 100%;
 }
+.h5 {
+	width: 60%;
+	padding: 10px 0px 0px 10px;
+}
+.R-title {
+	text-align: center;
+	margin: 0 auto;
+	font-weight: bold;
+	font-size: 20px;
+}
 .flex-container {
 	display: flex;
 	flex-direction: row;
@@ -116,10 +150,10 @@ input[type=range]:focus::-ms-fill-upper {
 	margin:4px auto;
 }
 .perf_pic {
-	border: 1px solid #ccc;
 	margin: 10px;
 	height: 90px;
 	text-align:center;
+	padding-top: 5px;
 }
 
 .perf_name {
@@ -152,9 +186,6 @@ input[type=range]:focus::-ms-fill-upper {
 	background-color: #ECE6CC;
 	border-radius: 15px;
 }
-.layer-container h5 {
-	margin-top: 10px 5px 0 0 ;
-}
 .layer-item {
 	width: 20%;
 	height: 320.5px;
@@ -162,20 +193,15 @@ input[type=range]:focus::-ms-fill-upper {
 	padding-left: 10px;
 	float: left;
 }
-.layer-img {
-	border-radius: 50px;
-	background-color: #fff;
-}
-.layer-img div{
-/* 	display: none; */
-}
+
 .layer-result {
-	width: 40%;
-	height: 87%;
-	margin: 10px auto;
+	width: 38%;
+	height: 230px;
+	margin: 0 auto;
 	padding: 10px;
 	float: left;
 	padding:0px;
+	border-radius: 15px;
 }
 
 .layer-operator {
@@ -194,9 +220,11 @@ input[type=range]:focus::-ms-fill-upper {
 	font-weight: bold;
 }
 .layer-img {
-	width:100%;
-	height: 210px;
+	width:90%;
+	height: 170px;
 	margin: 0 auto;
+	border-radius: 50px;
+	background-color: #fff;
 }
 .graf-bar {
 	width:100%;
@@ -208,38 +236,40 @@ li span {
 	cursor: pointer;
 }
 .imgR {
-	width: 100%;
-	height: 150px;
+	width: 50%;
+	height: 110px;
+	float:left;
+	margin:0 auto;
 }
 
 .img_result1{
-	width:80px;
-	height:90px;
-	border: 1px solid #ccc;
-	margin-left: 25px;
+	width:90px;
+	height:100px;
+	margin: 0 auto;
 	float:left;
 	background-color: #fff;
+	border-radius: 15px;
 }
 .slash{
-	width:80px; 
-	height: 90px; 
+	width:90px; 
+	height: 100px; 
 	float:left; 
-	font-size: 50px; 
+	font-size: 70px; 
 	text-align: center;
 	margin:0 auto;
 }
 .img_result2{
-	width:80px;
-	height:90px;
-	border: 1px solid #ccc;
+	width:90px;
+	height:100px;
 	margin:0 auto;
 	float:left;
 	background-color: #fff;
+	border-radius: 15px;
 }
 .perB{
 	margin-top:30px;
 	width:90%;
-	height:30%;
+	height:30px;
 }
 .per-1 div {
 	float:left;
@@ -316,24 +346,29 @@ $(document).ready(function(){
 	
 		
 }) */
-/* 	$("#layer-form").submit(function(e){
-		
-		console.log("perfNo1 :" + $(".img_result2").children(".perf_img").attr("data-img") );
-		var perfumeNo1 = $(".img_result1").attr("img", "data-img");
-		console.log("perfumeNo1 : {}", perfumeNo1);
-		var perfumeNo2 = $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img");
-		var perfume1Per = $("#perfume1Per").val();
-		var layeringContent = $("#layeringContent").val();
-		
-	}); */
 	
 	$("#btnSub").click(function(){
-		console.log("perfNo2 :" + $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img") );
-		var perfumeNo1 = $(".img_result1").attr("img", "data-img");
-		console.log("perfumeNo1 : {}", perfumeNo1);
-		var perfumeNo2 = $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img");
-		var perfume1Per = $("#perfume1Per").val();
-		var layeringContent = $("#layeringContent").val();
+		$("#perfumeNo1").val($(".img_result1").children().children().attr("data-img"));
+		$("#perfumeNo2").val($(".img_result2").children().children().attr("data-img"));
+		
+		var perfumeNo1 = ("#perfumeNo1").val();
+		var perfumeNo2 = ("#perfumeNo1").val();
+		var perfume1Per = ("#perfume1Per").val();
+		if (perfumeNo1 == "" || perfumeNo1 == null ) {
+			alert("향수를 2가지 선택해 주세요");
+			
+			return false;
+		}
+		if (perfumeNo2 == "" || perfumeNo2 == null) {
+			alert("향수를 2가지 선택해 주세요");
+			
+			return false;
+		}
+		if (perfume1Per == "" || perfume1Per == null) {
+			alert("향수의 퍼센트를 정해주세요");
+			
+			return false;
+		}
 		$("#layer-form").submit();
 	});
 });
@@ -449,7 +484,6 @@ $(function(){
 				
 				$(".img_result1").append($(ui.helper).clone()); // 결과창에 클론 입력하기
 				
-				
 				//드롭된 이미지 가져오기
 				var dropImg = $(ui).innerHTML;
 				console.log("dorpImg : " + dropImg)
@@ -467,7 +501,7 @@ $(function(){
 				$(this).children("div").removeAttr("style");
 				//드롭된 div내 자식요소div 스타일 등록
 // 				$(this).children("div").css("margin", "40px 50px");
-				$(this).children("div").css({"margin":"0px 50px", "padding":"65px 0px 65px 20px"});
+				$(this).children("div").css({"margin":"0px 40px", "padding":"40px 0px 40px 15px"});
 //				$(this).children("div").attr(".ui-wrapper").css("margin", "0 auto");
 				//결과창 div내 자식요소div 스타일 제거
 				$(".img_result1").children("div").removeAttr("style");
@@ -510,7 +544,7 @@ $(function(){
 				
 				$(this).children("div").removeAttr("style");
 // 				$(this).children("div").css("margin", "40px 50px");
-				$(this).children("div").css({"margin":"0px 50px", "padding":"65px 0px 65px 20px"});
+				$(this).children("div").css({"margin":"0px 40px", "padding":"40px 0px 40px 15px"});
 				//결과창 div내 자식요소div 스타일 제거
 				$(".img_result2").children("div").removeAttr("style");
 				//결과창 div내 자식요소div 스타일 등록
@@ -548,7 +582,9 @@ $(function(){
 <div class="container">
 
 	<div class="layer-container">
-		<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
+		<div class="h5">
+			<h5>* 원하는 향수를 검색해서 드래그 해보세요</h5>
+		</div>
 		<div class="layer-item">
 		
 			<div class="layer-img" id="img1" ></div>
@@ -556,7 +592,7 @@ $(function(){
 			
 			<div class="graf-bar" id="graf1">
 			    <input type="range" id="graf-in1" min="1" max="100"/>
-				<div id="graf-out1" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
+				<div id="graf-out1" style="text-align: center;">막대를 조절하여 <br> 퍼센트를 정해주세요</div>
 			</div>
 			
 		</div><!-- layer-item -->
@@ -570,21 +606,23 @@ $(function(){
 			
 			<div class="graf-bar" id="graf2">
 				<input id="graf-in2" type="range" min="1" max="100" />
-				<div id="graf-out2" style="text-align: center;">막대를 조절하여 퍼센트를 정해주세요</div>
+				<div id="graf-out2" style="text-align: center;">막대를 조절하여 <br> 퍼센트를 정해주세요</div>
 			</div><!-- graf-bar -->
 			
 		</div><!-- layer-item -->
 		
 		<div class="layer-operator" ><span class="child">=</span></div>
 		<form id="layer-form" action="/layer/write" method="post">
-			<div class="layer-result">결과
+			<div class="layer-result">
+				<div class="R-title">조합 결과</div>
 				<div id="imgbox">
 					<div class="imgR">
 						<div class="img_result1"></div>
-						<input type="hidden" id="perfNo1" name="perfNo2"/>
-						<div class="slash">/</div>
+						<input type="hidden" id="perfumeNo1" name="perfumeNo1" value=""/>
+					</div>
+					<div class="imgR">
 						<div class="img_result2" ></div>
-						<input type="hidden" id="perfNo2" name="perfNo2"/>
+						<input type="hidden" id="perfumeNo2" name="perfumeNo2" value=""/>
 					</div>
 					<div class="perB">
 						<div class="per-1">
@@ -592,6 +630,8 @@ $(function(){
 							<div id="perbox1"></div>
 							<input type="hidden" id="perfume1Per" name="perfume1Per" value="">
 						</div>
+					</div>
+					<div class="perB">
 						<div class="per-2">
 							<div id="perbox2"style="margin-left:5px;"></div>
 							<div id="per2">향수 2 : </div>
@@ -599,8 +639,10 @@ $(function(){
 					</div>
 				</div><!-- imgbox -->
 			</div><!-- layer-result -->
-		<textarea rows="2" cols="30" maxlength="60" style="resize:none; width:300px;" id="layeringContent" name="layeringContent" placeholder="간단한 소개, 설명을 적어주세요"></textarea>
-		<input type="submit" id="btnSub" value="작성하기"/>
+		<textarea rows="2" cols="30" maxlength="60" 
+		style="resize:none; width:300px; border:0px; border-radius: 15px; font-weight: bold;" 
+		id="layeringContent" name="layeringContent" placeholder="    간단한 소개, 설명을 적어주세요"></textarea>
+		<input type="button" id="btnSub" value="작성하기"/>
 		</form>
 	</div><!-- layer-container -->
 

@@ -97,4 +97,9 @@
 	) PerfList
 	WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
+	<insert id="insertLayerByUserNo" parameterType="web.dto.Layer">
+		INSERT INTO tb_layer (
+			layering_no, user_no, perfume_no1, perfume_no2, perfume1_per, layering_content)
+		VALUES (tb_layer_seq.nextval,#{userNo } ,#{perfumeNo1 } ,#{perfumeNo2 } ,#{perfume1Per } ,#{layeringContent } )
+	</insert>
 </mapper> 
