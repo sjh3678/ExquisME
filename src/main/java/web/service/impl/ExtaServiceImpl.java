@@ -281,4 +281,8 @@ public class ExtaServiceImpl implements ExtaService {
 		return paging;
 	}
 
+	@Override
+	public void setReportStart(Report report) {
+		extaDao.updateReportStart(report);
+	}
 }

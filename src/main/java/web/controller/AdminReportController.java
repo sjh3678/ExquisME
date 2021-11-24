@@ -40,6 +40,8 @@ public class AdminReportController {
 		
 		logger.info("##report : {}", report);
 		
-		return "redirect:/admin/report/list?curPage=1";
+		extaService.setReportStart(report);
+		
+		return "redirect:/admin/report/list";
 	}
 }

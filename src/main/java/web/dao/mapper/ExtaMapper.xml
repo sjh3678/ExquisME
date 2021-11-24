@@ -217,11 +217,13 @@
 		SELECT rownum rnum, R.* FROM ( 
 			SELECT
 				ex_post_no, report_no, report_content, reporter, defendant, report_date, ban_type, ban_date, expire_date, reason, is_execute, 
-				u1.nick AS reporterNick, u2.nick AS defendantNick
+				u1.nick AS reporterNick, u2.nick AS defendantNick,
+				(SELECT count(*) FROM tb_report WHERE is_execute = 'N') waiting,
+				(SELECT count(*) FROM tb_report WHERE is_execute = 'Y') success
 			FROM tb_report R
 			LEFT OUTER JOIN tb_user u1 ON u1.user_no = r.reporter
 			LEFT OUTER JOIN tb_user u2 ON u2.user_no = r.defendant
-			ORDER BY is_execute, report_no DESC 
+			ORDER BY is_execute, report_no DESC
 		) R
 	) tb_report
 	WHERE rnum BETWEEN #{startNo } AND #{endNo }		
@@ -231,6 +233,12 @@
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM tb_report
 	</select>
+	
+	<update id="updateReportStart" parameterType="web.dto.Report">
+		UPDATE tb_report
+		SET	 reason = #{reason}, ban_type = #{banType}, ban_date = sysdate, expire_date = sysdate + #{banType}, is_execute = 'Y'
+		WHERE report_no = #{reportNo}
+	</update>
 	
 	
 </mapper>

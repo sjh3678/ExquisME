@@ -199,6 +199,12 @@ public interface ExtaDao {
 	public List<HashMap<String, Object>> selectReportList(Paging paging);
 	public int selectCntAll(Paging paramData);
 
+	/**
+	 * 제재 사유, 형태, 시작일, 종료일, 처리여부 업데이트
+	 * @param report
+	 */
+	public void updateReportStart(Report report);
+
 	
 	
 
