@@ -190,6 +190,12 @@ public interface PerfService {
 	 */
 	public List<HashMap<String, Object>> getUserNoteVote(Perf perf, int userNo);
 
+	/**
+	 * (좋아요 - 싫어요)가 높은 향수 리스트
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getPerfMostLike();
+
 
 
 

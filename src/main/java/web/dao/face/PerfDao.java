@@ -265,6 +265,12 @@ public interface PerfDao {
 	 * @param perf
 	 */
 	public void deletePerfLike(Perf perf);
+
+	/**
+	 * 향수 좋아요-싫어요가 n 이상인 것 리스트
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectPerfMostLike();
 	
 	
 }

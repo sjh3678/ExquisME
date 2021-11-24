@@ -291,5 +291,19 @@
 	DELETE FROM tb_file WHERE FILE_NO = #{fileNo }
 </delete>
 
+<select id="selectPerfMostLike" resultType="hashmap">
+	SELECT plsc.*, f.stored_name, p.brand_no, p.perfume_vitality, b.brand_name FROM
+	(SELECT PLC.perfume_no, NVL2(plc.likecnt - pdlc.dislikecnt, plc.likecnt - pdlc.dislikecnt, plc.likecnt) cnt, plc.likecnt, NVL2(dislikecnt, dislikecnt, 0) dislikecnt FROM
+	(SELECT perfume_no, count(*) likecnt FROM tb_perf_like
+	WHERE perfume_islike=1
+	GROUP BY perfume_no) PLC
+	LEFT OUTER JOIN (SELECT perfume_no, count(*) dislikecnt FROM tb_perf_like
+	WHERE perfume_islike=0
+	GROUP BY perfume_no) PDLC ON plc.perfume_no = pdlc.perfume_no) PLSC
+	LEFT OUTER JOIN tb_perf P ON plsc.perfume_no = p.perfume_no
+	LEFT OUTER JOIN tb_file F ON p.file_no = f.file_no
+	LEFT OUTER JOIN tb_brand B ON p.brand_no = b.brand_no
+	WHERE cnt >=1
+</select>
 
 </mapper>

@@ -328,4 +328,9 @@ public class PerfServiceImpl implements PerfService{
 		return perfDao.selectUserNoteVote(hashmap);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getPerfMostLike() {
+		return perfDao.selectPerfMostLike();
+	}
+	
 }
