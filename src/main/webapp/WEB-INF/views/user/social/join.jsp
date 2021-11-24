@@ -505,10 +505,10 @@ async function submit() {
 			success: function(result) {
 				// 회원가입 성공
 				if (result == "true") {
-					console.log("회원가입 성공")
+					alert("회원가입 성공")
 					return true;
 				} else {
-					console.log("회원가입 실패")
+					alert("회원가입 실패")
 					return false;
 				}
 			},
@@ -567,13 +567,9 @@ $(document).ready(function(){
     	checkAnswer();
     })
     $("#nextBtn").click(function(){
-    	var isJoin = submit();
-    	if(isJoin == true)
-    		$(location).attr("href", "/")
-    	else
-    		alert("회원가입 실패")
+    	submit(); 	
     })
-    $("#cancle").click(function(){
+    $("#cancleBtn").click(function(){
     	$(location).attr("href", "/");
     })
 })
