@@ -42,7 +42,7 @@ $(document).ready(function(){
 				if (result == "true") {
 					console.log("로그인 성공")
 					alert("로그인 성공", result);
-					$(location).attr("href", "/user/main");
+					$(location).attr("href", "/");
 					return true;
 				} else {
 					alert("로그인 실패");
