@@ -80,24 +80,24 @@
 	<div class="flavorContainer">
 		<c:if test="${A1 eq 1 }">
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=1&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=1&A2=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
 				<div>1.다정한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=2&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=1&A2=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=3&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=1&A2=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
 				<div>3.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=4&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=1&A2=4">
 					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
 				</a>
 				<div>4.우아한</div>
@@ -105,24 +105,24 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 2 }">
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=1&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
 				<div>1.다정한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=2&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=3&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
 				<div>3.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=4&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=4">
 					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
 				</a>
 				<div>4.우아한</div>
@@ -130,24 +130,24 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 3 }">
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=1&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
 				<div>1.다정한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=2&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=3&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
 				<div>3.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=4&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=4">
 					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
 				</a>
 				<div>4.우아한</div>
@@ -155,24 +155,24 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 4 }">
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=1&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
 				<div>1.다정한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=2&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=3&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
 				<div>3.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/Q2?useName=${useName }&A1=4&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=4">
 					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
 				</a>
 				<div>4.우아한</div>

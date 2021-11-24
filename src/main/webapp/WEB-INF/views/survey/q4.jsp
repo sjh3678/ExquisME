@@ -45,11 +45,13 @@
 	margin:0 auto;
 	float: left;
 }
+
 .item img {
 	width: 130px;
 	height: 130px;
 	cursor: pointer;
 }
+
 .item div {
 	width: 130px; 
 	text-align: center;
@@ -61,47 +63,45 @@
 
 <div class="container">
 
-<div class="q1Container">
+<div class="q2Container">
 	<div class="curPage">
 		<ul class="pagination pagination-sm">
-			<li><span>1</span></li>
 			<li><span> </span></li>
 			<li><span> </span></li>
 			<li><span> </span></li>
+			<li><span>4</span></li>
 			<li><span> </span></li>
 			<li><span> </span></li>
 			<li><span> </span></li>
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>좋아하는 향이있으신가요? 그것은 어떤 향인가요?</h3></div>
+	<div class="pageQ"><h3>4번 질문</h3></div>
 	<div class="flavorContainer">
-
-		<div class="item">
-			<a href="/survey/Q2?useName=${useName }&A1=1">
-				<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-			<div>1.꽃</div>
-		</div>
-		<div class="item">
-			<a href="/survey/Q2?useName=${useName }&A1=2">
-				<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
-			</a>
-			<div>2.과일</div>
-		</div>
-		<div class="item">
-			<a href="/survey/Q2?useName=${useName }&A1=3">
-				<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
-			</a>
-			<div>3.달콤</div>
-		</div>
-		<div class="item">
-			<a href="/survey/Q2?useName=${useName }&A1=4">
-				<img alt="바다" src="/resources/img/survey/1-nature.jpg"><br>
-			</a>
-			<div>4.자연</div>
-		</div>
-	
-	</div>
+			<div class="item">
+				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=1">
+					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
+				<div>Q4-A1</div>
+			</div>
+			<div class="item">
+				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=2">
+					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+				</a>
+				<div>Q4-A2</div>
+			</div>
+			<div class="item">
+				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=3">
+					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+				</a>
+				<div>Q4-A3</div>
+			</div>
+			<div class="item">
+				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=4">
+					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+				</a>
+				<div>Q4-A4</div>
+			</div>
+	</div><!-- flavorContainer end -->
 	
 </div>
 

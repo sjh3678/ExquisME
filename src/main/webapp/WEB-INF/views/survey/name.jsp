@@ -61,7 +61,7 @@
 
 	<div class="item-container">
 		<div class="title"><h4>회원님의 성함 또는 호칭을 입력 해 주세요</h4></div><br>
-		<form id="nameform" name="nameform" action="/survey/Q1">
+		<form id="nameform" name="nameform" action="/survey/q1">
 			<input type="hidden"/>
 			<div class="input">
 				<input type="text" id="name" name="useName" placeholder="이름 입력 칸"/><br>
