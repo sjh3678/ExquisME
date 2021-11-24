@@ -247,6 +247,10 @@ li span {
 .per-2 div {
 	float: right;
 }
+.perf_img{
+	margin: 0 auto;
+}
+
 </style>
 
 
@@ -312,8 +316,26 @@ $(document).ready(function(){
 	
 		
 }) */
+/* 	$("#layer-form").submit(function(e){
+		
+		console.log("perfNo1 :" + $(".img_result2").children(".perf_img").attr("data-img") );
+		var perfumeNo1 = $(".img_result1").attr("img", "data-img");
+		console.log("perfumeNo1 : {}", perfumeNo1);
+		var perfumeNo2 = $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img");
+		var perfume1Per = $("#perfume1Per").val();
+		var layeringContent = $("#layeringContent").val();
+		
+	}); */
 	
-
+	$("#btnSub").click(function(){
+		console.log("perfNo2 :" + $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img") );
+		var perfumeNo1 = $(".img_result1").attr("img", "data-img");
+		console.log("perfumeNo1 : {}", perfumeNo1);
+		var perfumeNo2 = $(".img_result2").children("perf_pic").children(".perf_img").attr("data-img");
+		var perfume1Per = $("#perfume1Per").val();
+		var layeringContent = $("#layeringContent").val();
+		$("#layer-form").submit();
+	});
 });
 	function loadCurPage(i){
 		var curPage =  i ;
@@ -368,7 +390,7 @@ $(document).ready(function(){
 			}
 		})
 	}
-
+	
 /* function dragEnter(ev) {
 	ev.preventDefault();
 }
@@ -444,7 +466,9 @@ $(function(){
 				//드롭된 div내 자식요소div 스타일 제거
 				$(this).children("div").removeAttr("style");
 				//드롭된 div내 자식요소div 스타일 등록
-				$(this).children("div").css("margin", "40px 50px");
+// 				$(this).children("div").css("margin", "40px 50px");
+				$(this).children("div").css({"margin":"0px 50px", "padding":"65px 0px 65px 20px"});
+//				$(this).children("div").attr(".ui-wrapper").css("margin", "0 auto");
 				//결과창 div내 자식요소div 스타일 제거
 				$(".img_result1").children("div").removeAttr("style");
 				//결과창 div내 자식요소div 스타일 등록
@@ -485,7 +509,8 @@ $(function(){
 				$("#img2 .item-"+counts[0]).removeClass("perf_pic ui-draggable ui-draggable-dragging");
 				
 				$(this).children("div").removeAttr("style");
-				$(this).children("div").css("text-align", "center");
+// 				$(this).children("div").css("margin", "40px 50px");
+				$(this).children("div").css({"margin":"0px 50px", "padding":"65px 0px 65px 20px"});
 				//결과창 div내 자식요소div 스타일 제거
 				$(".img_result2").children("div").removeAttr("style");
 				//결과창 div내 자식요소div 스타일 등록
@@ -551,21 +576,21 @@ $(function(){
 		</div><!-- layer-item -->
 		
 		<div class="layer-operator" ><span class="child">=</span></div>
-		<form action="/layer/write" method="post">
+		<form id="layer-form" action="/layer/write" method="post">
 			<div class="layer-result">결과
 				<div id="imgbox">
 					<div class="imgR">
 						<div class="img_result1"></div>
-						<input type="hidden" name="perfumeNo1" value="$(img_result1).children('img').Attr('data-img')" />
+						<input type="hidden" id="perfNo1" name="perfNo2"/>
 						<div class="slash">/</div>
 						<div class="img_result2" ></div>
-						<input type="hidden" name="perfumeNo2" value="$(img_result2).img.Attr('data-img')" />
+						<input type="hidden" id="perfNo2" name="perfNo2"/>
 					</div>
 					<div class="perB">
 						<div class="per-1">
 							<div id="per1" style="margin-right:5px;">향수 1 : </div>
 							<div id="perbox1"></div>
-							<input type="hidden" name="perfume1Per" value="">
+							<input type="hidden" id="perfume1Per" name="perfume1Per" value="">
 						</div>
 						<div class="per-2">
 							<div id="perbox2"style="margin-left:5px;"></div>
@@ -575,7 +600,7 @@ $(function(){
 				</div><!-- imgbox -->
 			</div><!-- layer-result -->
 		<textarea rows="2" cols="30" maxlength="60" style="resize:none; width:300px;" id="layeringContent" name="layeringContent" placeholder="간단한 소개, 설명을 적어주세요"></textarea>
-		<input type="submit" id="submit" value="작성하기" />
+		<input type="submit" id="btnSub" value="작성하기"/>
 		</form>
 	</div><!-- layer-container -->
 
@@ -617,7 +642,7 @@ document.querySelector('#graf-in1').addEventListener('input',e=>{
     document.querySelector('#graf-out2').innerHTML= value2;
     document.querySelector('#perbox2').innerHTML= value2;
     document.querySelector('#perbox1').innerHTML= value1;
-    document.querySelector('input[name="perfume1Per"]').innerHTML= e.target.value;
+    document.querySelector("#perfume1Per").value = e.target.value;
 });
 document.querySelector('#graf-in2').addEventListener('input',i=>{
     var value1 = 100 - i.target.value + "%";
@@ -628,7 +653,7 @@ document.querySelector('#graf-in2').addEventListener('input',i=>{
     document.querySelector('#graf-out1').innerHTML= value1;
     document.querySelector('#perbox1').innerHTML= value1;
     document.querySelector('#perbox2').innerHTML= value2;
-    document.querySelector('input[name="perfume1Per"]').innerHTML= 100 - i.target.value;
+    document.querySelector("#perfume1Per").value = value3;
 });
 
 </script>

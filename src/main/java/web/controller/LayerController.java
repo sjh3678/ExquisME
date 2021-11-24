@@ -116,6 +116,7 @@ public class LayerController {
 	public String layerInsertProc(HttpSession session, Model model, Layer layer) { //레이어드 등록
 		int userNo = (int) session.getAttribute("userNo");
 		logger.info("per1 : {}", layer.getPerfumeNo1());
+		logger.info("per1 : {}", layer);
 		return "redirect: /layer/list";
 	}
 
