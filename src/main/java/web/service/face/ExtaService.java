@@ -156,8 +156,6 @@ public interface ExtaService {
 	public List<HashMap<String, Object>> setReportList(Paging paging);
 	public Paging getPaging(Paging paramData);
 
-
-
 	
 
 	

@@ -14,7 +14,7 @@
 	<a href="/admin/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
 	<a href="/admin/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/admin/layer/list"><button class="btn btnHeader">LAYER</button></a>
-	<a href="#"><button class="btn btnHeader">REPORT</button></a>
+	<a href="/admin/report/list"><button class="btn btnHeader">REPORT</button></a>
 </div>
 </c:if>
 </footer>

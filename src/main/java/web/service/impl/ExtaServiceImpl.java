@@ -280,6 +280,5 @@ public class ExtaServiceImpl implements ExtaService {
 		
 		return paging;
 	}
-	
 
 }

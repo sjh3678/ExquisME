@@ -200,6 +200,7 @@ public interface ExtaDao {
 	public int selectCntAll(Paging paramData);
 
 	
+	
 
 
 
