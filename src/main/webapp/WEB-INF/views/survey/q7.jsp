@@ -76,7 +76,7 @@
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>7번 질문</h3></div>
+	<div class="pageQ"><h3>회원님의 성별과 연령대를 알려주세요</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=1">

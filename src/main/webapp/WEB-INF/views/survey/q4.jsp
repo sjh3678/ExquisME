@@ -76,31 +76,26 @@
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>4번 질문</h3></div>
+	<div class="pageQ"><h3>자신이 가장 중요하다고 생각하는 노트는 무엇인가요?</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>Q4-A1</div>
+				<div>탑 노트</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
-				<div>Q4-A2</div>
+				<div>미들 노트</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=3">
 					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
 				</a>
-				<div>Q4-A3</div>
+				<div>베이스 노트</div>
 			</div>
-			<div class="item">
-				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
-				</a>
-				<div>Q4-A4</div>
-			</div>
+
 	</div><!-- flavorContainer end -->
 	
 </div>

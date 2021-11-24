@@ -81,24 +81,24 @@
 		<c:if test="${A1 eq 1 }">
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=1&A2=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
+					<img alt="다정한" src="/resources/img/survey/2-fond.jpg"></a><br>
 				<div>1.다정한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=1&A2=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="달콤한" src="/resources/img/survey/2-sweety.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=1&A2=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+					<img alt="포근한" src="/resources/img/survey/2-comfy.jpg"><br>
 				</a>
 				<div>3.포근한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=1&A2=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+					<img alt="우아한" src="/resources/img/survey/2-elegant.jpg"><br>
 				</a>
 				<div>4.우아한</div>
 			</div>
@@ -106,49 +106,49 @@
 		<c:if test="${A1 eq 2 }">
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=2&A2=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>1.다정한</div>
+					<img alt="새콤한" src="/resources/img/survey/2-acidulous.jpg"></a><br>
+				<div>1.새콤한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=2&A2=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="달콤한" src="/resources/img/survey/2-sweety.jpg"><br>
 				</a>
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=2&A2=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+					<img alt="신선한" src="/resources/img/survey/2-fresh.jpg"><br>
 				</a>
-				<div>3.포근한</div>
+				<div>3.신선한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=2&A2=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+					<img alt="가벼운" src="/resources/img/survey/2-light.jpg"><br>
 				</a>
-				<div>4.우아한</div>
+				<div>4.가벼운</div>
 			</div>
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 3 }">
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=3&A2=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>1.다정한</div>
+					<img alt="매력적인" src="/resources/img/survey/2-attractive.jpg"></a><br>
+				<div>1.매력적인</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=3&A2=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="포근한" src="/resources/img/survey/2-comfy.jpg"><br>
 				</a>
-				<div>2.달콤한</div>
+				<div>2.포근한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=3&A2=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+					<img alt="달콤한" src="/resources/img/survey/2-sweety.jpg"><br>
 				</a>
-				<div>3.포근한</div>
+				<div>3.달콤한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=3&A2=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+					<img alt="우아한" src="/resources/img/survey/2-elegant.jpg"><br>
 				</a>
 				<div>4.우아한</div>
 			</div>
@@ -156,26 +156,26 @@
 		<c:if test="${A1 eq 4 }">
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=4&A2=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>1.다정한</div>
+					<img alt="포근한" src="/resources/img/survey/2-comfy.jpg"></a><br>
+				<div>1.포근한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=4&A2=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
+					<img alt="시원한" src="/resources/img/survey/2-cool.jpg"><br>
 				</a>
-				<div>2.달콤한</div>
+				<div>2.시원한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=4&A2=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
+					<img alt="단단한" src="/resources/img/survey/2-hard.jpg"><br>
 				</a>
-				<div>3.포근한</div>
+				<div>3.단단한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=4&A2=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
+					<img alt="깔끔한" src="/resources/img/survey/2-neat.jpg"><br>
 				</a>
-				<div>4.우아한</div>
+				<div>4.깔끔한</div>
 			</div>
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 	</div><!-- flavorContainer end -->

@@ -350,26 +350,22 @@ $(document).ready(function(){
 	$("#btnSub").click(function(){
 		$("#perfumeNo1").val($(".img_result1").children().children().attr("data-img"));
 		$("#perfumeNo2").val($(".img_result2").children().children().attr("data-img"));
-		
-		var perfumeNo1 = ("#perfumeNo1").val();
-		var perfumeNo2 = ("#perfumeNo1").val();
-		var perfume1Per = ("#perfume1Per").val();
-		if (perfumeNo1 == "" || perfumeNo1 == null ) {
+		console.log("perNo1 : "+$("#perfumeNo1").val());
+ 		var perfumeNo1 = $("#perfumeNo1").val();
+ 		console.log("perfumeNo1 : " + perfumeNo1);
+		var perfumeNo2 = $("#perfumeNo2").val();
+
+		if ($("#perfumeNo2").val() == "" ) {
 			alert("향수를 2가지 선택해 주세요");
 			
 			return false;
-		}
-		if (perfumeNo2 == "" || perfumeNo2 == null) {
+			
+		}else if (perfumeNo2 == "") {
 			alert("향수를 2가지 선택해 주세요");
-			
+				
 			return false;
 		}
-		if (perfume1Per == "" || perfume1Per == null) {
-			alert("향수의 퍼센트를 정해주세요");
-			
-			return false;
-		}
-		$("#layer-form").submit();
+//		$("#layer-form").submit();
 	});
 });
 	function loadCurPage(i){
@@ -627,13 +623,13 @@ $(function(){
 					<div class="perB">
 						<div class="per-1">
 							<div id="per1" style="margin-right:5px;">향수 1 : </div>
-							<div id="perbox1"></div>
-							<input type="hidden" id="perfume1Per" name="perfume1Per" value="">
+							<div id="perbox1">50%</div>
+							<input type="hidden" id="perfume1Per" name="perfume1Per" value="50">
 						</div>
 					</div>
 					<div class="perB">
 						<div class="per-2">
-							<div id="perbox2"style="margin-left:5px;"></div>
+							<div id="perbox2"style="margin-left:5px;">50%</div>
 							<div id="per2">향수 2 : </div>
 						</div>
 					</div>

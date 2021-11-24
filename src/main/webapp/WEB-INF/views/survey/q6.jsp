@@ -76,31 +76,20 @@
 			<li><span> </span></li>
 		</ul>
 	</div>
-	<div class="pageQ"><h3>6번 질문</h3></div>
+	<div class="pageQ"><h3>향수를 언제 사용하시나요?</h3></div>
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=1">
 					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>Q6-A1</div>
+				<div>낮</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=2">
 					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
 				</a>
-				<div>Q6-A2</div>
+				<div>밤</div>
 			</div>
-			<div class="item">
-				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
-				</a>
-				<div>Q6-A3</div>
-			</div>
-			<div class="item">
-				<a href="/survey/q7?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
-				</a>
-				<div>Q6-A4</div>
-			</div>
+
 	</div><!-- flavorContainer end -->
 	
 </div>

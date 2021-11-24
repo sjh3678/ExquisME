@@ -16,7 +16,7 @@ public class SurveyController {
 	public void surveyName() {}
 	
 	@RequestMapping(value="/survey/q1", method = RequestMethod.GET)
-	public void surveyQ1(Model model, String useName) {
+	public void surveyQ1proc(Model model, String useName) {
 		
 		model.addAttribute("useName", useName);
 	}
@@ -104,5 +104,4 @@ public class SurveyController {
 		model.addAttribute("A7", A7);
 		model.addAttribute("A8", A8);
 	}
-	
 }
