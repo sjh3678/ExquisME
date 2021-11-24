@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<style type="text/css">
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover {
+	background-color: #ECE6CC;
+	border-color: #ECE6CC;
+	color: black;
+}
+</style>
+
 <div class="text-center">
-<ul class="pagination pagination-sm">
+<ul class="pagination pagination-ss">
 
 <!-- 첫 페이지로 -->
 <c:if test="${paging.curPage ne 1 }">

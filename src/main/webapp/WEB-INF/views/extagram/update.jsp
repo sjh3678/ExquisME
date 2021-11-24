@@ -40,8 +40,7 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h1><strong>Extagram Edit</strong></h1>
-<hr>
+<h1><strong>Edit Extagram</strong></h1><br>
 
 <form action="/extagram/update" method="post" enctype="multipart/form-data">
 <div class="form-group">

@@ -10,6 +10,7 @@ import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.Report;
+import web.util.Paging;
 import web.util.PagingExtagram;
 
 public interface ExtaService {
@@ -145,6 +146,15 @@ public interface ExtaService {
 	 * @return userNo
 	 */
 	public int getUserNoByNick(String defendantNick);
+
+//ADMIN REPORT	
+	/**
+	 * 접수된 신고글 리스트
+	 * @param report - 신고가 된 extagram의 게시글번호
+	 * @return 목록
+	 */
+	public List<HashMap<String, Object>> setReportList(Paging paging);
+	public Paging getPaging(Paging paramData);
 
 
 

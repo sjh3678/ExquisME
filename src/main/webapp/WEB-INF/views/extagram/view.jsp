@@ -227,15 +227,13 @@ function loadHeartComm() {
 		}
 	});
 }
-
-
 </script>
 
 <div class="container">
-<h1><Strong>Extagram view</Strong></h1><br>
+<h1><Strong>View</Strong></h1><br>
 
 <div class="topper">
-<div><img style="width: 30px; height: 30px; border-radius: 70%;" 
+<div><img style="width: 35px; height: 35px; border-radius: 70%;" 
 		   src="/upload/${viewExta.PROFILE}"></div>
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;">${viewExta.NICK }</div>
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>

@@ -61,8 +61,7 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h1><Strong>Extagram Write</Strong></h1>
-<hr>
+<h1><Strong>Write Extagram</Strong></h1><br>
 
 <form action="/extagram/write" method="post" enctype="multipart/form-data">
 <div class="form-group" style="text-align: center;">

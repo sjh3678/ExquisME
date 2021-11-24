@@ -8,6 +8,7 @@ import web.dto.ExLike;
 import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.Report;
+import web.util.Paging;
 import web.util.PagingExtagram;
 
 public interface ExtaDao {
@@ -188,6 +189,15 @@ public interface ExtaDao {
 	 * @return userNo
 	 */
 	public int selectUserNoByNick(String defendantNick);
+
+//ADMIN REPORT	
+	/**
+	 * 접수된 신고글 리스트
+	 * @param report - 신고가 된 extagram의 게시글번호
+	 * @return 목록
+	 */
+	public List<HashMap<String, Object>> selectReportList(Paging paging);
+	public int selectCntAll(Paging paramData);
 
 	
 

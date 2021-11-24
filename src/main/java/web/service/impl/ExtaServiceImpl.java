@@ -22,6 +22,7 @@ import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.Report;
 import web.service.face.ExtaService;
+import web.util.Paging;
 import web.util.PagingExtagram;
 
 @Service
@@ -259,6 +260,25 @@ public class ExtaServiceImpl implements ExtaService {
 	@Override
 	public void setExtaReport(Report report) {
 		extaDao.insertExtaReport(report);
+	}
+
+//ADMIN REPORT	
+	@Override
+	public List<HashMap<String, Object>> setReportList(Paging paging) {
+		return extaDao.selectReportList(paging);
+	}
+	
+	@Override
+	public Paging getPaging(Paging paramData) {
+		
+		//총 게시글 수 조회
+		int totalCount = extaDao.selectCntAll(paramData);
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		
+		return paging;
 	}
 	
 
