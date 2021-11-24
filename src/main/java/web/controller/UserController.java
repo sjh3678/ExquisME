@@ -73,7 +73,7 @@ public class UserController {
 		logger.info("/logout");
 		session.invalidate();
 		
-		return "redirect:/user/main";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
@@ -182,21 +182,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public @ResponseBody boolean userDeleteProc(HttpSession session) {
+	public String userDeleteProc(HttpSession session) {
 		logger.info("/delete [POST]");
 		int userNo = (Integer) session.getAttribute("userNo");
 		boolean isDelete = userService.deleteUser(userNo);
 		if(isDelete) {
 			session.invalidate();
-			return true;
+			return "redirect:/";
 		}else {
-			return false;
+			return "redirect:/user/mypage";
 		}
-	}
-		
-	@RequestMapping(value="/main")
-	public void main() {
-		logger.info("임시 메인 페이지 접속");
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.GET)

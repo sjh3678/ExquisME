@@ -30,21 +30,23 @@
 	
 	<select id="selectUserCnt" parameterType="web.dto.User" resultType="int">
 		SELECT count(*) FROM tb_user
-		<trim prefix="WHERE" prefixOverrides="OR">
-			<if test="id != null">
-				OR id = #{id}
-			</if>
+		WHERE 1=1
+		<if test='id != null and !id.equals("")'>
+			AND id = #{id}
+		</if>
 			
-			<if test="email != null">
-				OR email = #{email}
-			</if>
+		<if test='email != null and !email.equals("")'>
+			AND email = #{email}
+		</if>
 			
-			<if test="nick != null">
-				OR nick = #{nick}
-			</if>
-		</trim>
+		<if test='nick != null and !nick.equals("")'>
+			AND nick = #{nick}
+		</if>
+			
+		<if test='userNo != 0'>
+			AND user_no = #{userNo}
+		</if>
 
-		
 	</select>
 	
 	<select id="selectUserById" parameterType="web.dto.User" resultMap="User">
