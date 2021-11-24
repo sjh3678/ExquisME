@@ -27,6 +27,11 @@ $(document).ready(function(){
 	$("#btnWriteProc").click(function(){
 		if(confirm("새로운 게시글을 등록하시겠습니까?")){
 			submitContents($("#btnWriteProc"));
+			var isFile = $("#file").val();
+			if(!isFile){
+				alert("공지사항은 반드시 이미지 파일과 함께 작성할 수 있습니다.")
+				return false;
+			}
 			$("#formWrite").submit();
 		}else{
 			return false;
@@ -50,6 +55,26 @@ $(document).ready(function(){
     })
 })
 	
+function fileCheck(obj) {
+	pathpoint = obj.value.lastIndexOf('.');
+    filepoint = obj.value.substring(pathpoint+1,obj.length);
+    filetype = filepoint.toLowerCase();
+    
+    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+
+    } else {
+        alert('이미지 파일(jpg, gif, png만 선택할 수 있습니다.');
+
+        parentObj  = obj.parentNode
+        node = parentObj.replaceChild(obj.cloneNode(true),obj);
+
+        return false;
+    }
+    if(filetype=='bmp') {
+        upload = confirm('BMP 파일은 적절한 이미지 포맷이 아닙니다.\n업로드를 계속 하시겠습니까?');
+        if(!upload) return false;
+    }
+}
 </script>
 
 <style type="text/css">
@@ -204,7 +229,7 @@ $(document).ready(function(){
 			<textarea rows="10" style="width: 100%;" id="contentWrite" name="noticeContent"></textarea>
 
 			<label for="file">첨부파일</label>
-			<input type="file" id="file" name="file" />		
+			<input type="file" id="file" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />		
 		</form>
 		<button class="btn btnWrite" id="btnWriteProc">작성</button>
 	</div>

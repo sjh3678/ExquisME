@@ -6,8 +6,8 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/> -->
 
 <style>
-.chat_wrap{width:400px; padding:5px; font-size:13px; color:#333;}
-.chat_wrap .inner{background-color:#acc2d2; border-radius:5px; padding:10px; overflow-y:scroll; height:600px;}
+.chat_wrap{padding:200px; padding-top: 0px; padding-bottom: 0px; font-size:13px; color:#333;}
+.chat_wrap .inner{/*background-color:#acc2d2;*/ background-color:#ECE6CC; border-radius:5px; padding:10px; overflow-y:scroll; height:600px;}
 .chat_wrap .item{margin-top:15px}
 .chat_wrap .item:first-child{margin-top:0px}
 .chat_wrap .item .box{display:inline-block; max-width:180px; position:relative}
@@ -24,6 +24,9 @@
 
 input[type="text"]{border:0; width:100%;background:#ddd; border-radius:5px; height:30px; padding-left:5px; box-sizing:border-box; margin-top:5px}
 input[type="text"]::placeholder{color:#999}
+.container{
+	min-height: 650px;
+}
 </style>
 
 <div class="container">
@@ -33,11 +36,6 @@ input[type="text"]::placeholder{color:#999}
 안녕하세요, ${chatNick }님! 현재 페이지로부터 이동할 경우 채팅이 종료됩니다. <button type="button" onclick="openSocket()" id="btnFadeOut" class="btn">확인</button>
 </div>
 <input type="text" id="sender" value="${chatNick }" style="display: none;">
-<div>
- <br>
- <br>
- <br>
-</div>
 <div class="chat_wrap fadeInArea" style="display: none;">
     <div id="messages" class="inner">
         
