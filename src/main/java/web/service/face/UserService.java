@@ -155,5 +155,11 @@ public interface UserService {
 	 */
 	public List<Map<String, Object>> getUsercommentHistory(User user, PagingExtagram paging);
 
+	/**
+	 * 소셜 로그인 시 가입자 여부 요청
+	 * @param user - 조회할 회원의 정보
+	 * @return - 조회 결과 반환
+	 */
+	public boolean isJoinUser(User user);
 
 }

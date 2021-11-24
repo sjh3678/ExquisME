@@ -125,4 +125,5 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<Map<String, Object>> selectCommHistoryByUserNo(HashMap<String, Object> map);
+
 }

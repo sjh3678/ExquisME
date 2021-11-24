@@ -354,4 +354,15 @@ public class UserServiceImpl implements UserService{
 		
 		return list;
 	}
+	
+	@Override
+	public boolean isJoinUser(User user) {
+		int cnt = userDao.selectCntByEmail(user);
+		
+		if(cnt == 1) {
+			return true;
+		}
+		return false;
+	}
+
 }

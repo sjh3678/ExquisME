@@ -30,19 +30,20 @@
 	
 	<select id="selectUserCnt" parameterType="web.dto.User" resultType="int">
 		SELECT count(*) FROM tb_user
-		<choose>
-			<when test="id != null">
-				WHERE id = #{id}
-			</when>
+		<trim prefix="WHERE" prefixOverrides="OR">
+			<if test="id != null">
+				OR id = #{id}
+			</if>
 			
-			<when test="email != null">
-				WHERE email = #{email}
-			</when>
+			<if test="email != null">
+				OR email = #{email}
+			</if>
 			
-			<when test="nick != null">
-				WHERE nick = #{nick}
-			</when>
-		</choose> 
+			<if test="nick != null">
+				OR nick = #{nick}
+			</if>
+		</trim>
+
 		
 	</select>
 	

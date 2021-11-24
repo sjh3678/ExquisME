@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <script type="text/javascript">
 
 function visible(i){
@@ -58,7 +61,7 @@ $(document).ready(function(){
 	})
 	
 	$("#searchIdBtn").click(function(){
-		var searchID = $("#searchId").serialize();
+		var searchID = $("#searchId-form").serialize();
 		$.ajax({
 			type: "post",
 			url: "/user/search/id",
@@ -74,14 +77,13 @@ $(document).ready(function(){
 			},
 			error: function(e){
 				console.log(e);
-				
 			}
 			
 		})
 	})
 	
 	$("#searchPwBtn").click(function(){
-		var searchPW = $("#searchPw").serialize();
+		var searchPW = $("#searchPw-form").serialize();
 		$.ajax({
 			type: "post",
 			url: "/user/search/pw",
@@ -106,6 +108,11 @@ $(document).ready(function(){
 	$("#into-login").click(function(){
 		console.log("into-login clicked")
 		visible(2);
+	})
+	$("#kakao").click(function(){
+		console.log("카카오 로그인")
+		kakaoLogin();
+		console.log("로그인 이후")
 	})
 })
 </script>
@@ -203,11 +210,11 @@ label {
 <label >아이디 찾기</label>
 </div>
 <div class="inputArea text-left">
-<form action="user/serach/id" method="post" id="searchId">
+<form action="user/serach/id" method="post" id="searchId-form">
 <label for="email" class="form-label top">이메일</label>
 <input type="text" name="email" id= "email" class="form-control form-write"/>
 <br>
-<label for="question" class="form-label">자주 찾는 질문</label>
+<label for="questionNo1" class="form-label">자주 찾는 질문</label>
 
 <select id="questionNo1" name="questionNo" class="form-control form-write">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
@@ -217,7 +224,7 @@ label {
       <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
-<input type="text" class="form-control form-write" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<input type="text" class="form-control form-write" id="questionAnwser1" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <br>
 <button type="button" id="searchIdBtn" class="form-label button">아이디 찾기</button>
 </form>
@@ -230,7 +237,7 @@ label {
 </div>
 
 <div class="inputArea text-left">
-<form action="/user/serach/pw" method="post" id="searchPw">
+<form action="/user/serach/pw" method="post" id="searchPw-form">
 <label for="searchId" class="form-label top">아이디</label>
 <input type="text" name="id" id="searchId" class="form-control form-write"/>
 <span id="idChk" class="error invisible">아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.<br></span>
@@ -238,9 +245,9 @@ label {
 <span id="valid-id" class="valid invisible">사용가능한 아이디입니다.<br></span>
 <br>
 <label for="email" class="form-label">이메일</label>
-<input type="text" name="email" id="email" class="form-control form-write"/>
+<input type="text" name="email" id="send-email" class="form-control form-write"/>
 <br>
-<label for="question" class="form-label">자주 찾는 질문</label>
+<label for="questionNo2" class="form-label">자주 찾는 질문</label>
 <select id="questionNo2" name="questionNo" class="form-control form-write">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
       <option value="2">다시 태어나면 되고 싶은 것은?</option>
@@ -249,15 +256,61 @@ label {
       <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
-<input type="text" class="form-control form-write" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<input type="text" class="form-control form-write" id="questionAnwser2" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <br>
 <button type="button" id="searchPwBtn" class="form-label button">비밀번호 찾기</button>
 </form>
 
+<!-- 소셜 로그인 / 가입 폼 반환 -->
+<form action="/user/social/join" method="post" id="kakaoLogin">
+<input type="hidden" name="email" id="kakao-email">
+<input type="hidden" name="nick" id="kakao-nick">
+</form>
 </div>
 </div>
 
 <button id="into-login" >로그인으로</button>
 </div>
 </div>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+<script type="text/javascript">
+
+Kakao.init('00f8f4b7d54645c5187733d7b8196c4f'); //발급받은 키 중 javascript키를 사용해준다.
+
+//카카오로그인
+function kakaoLogin() {
+	console.log("카카오 로그인 시작");
+	
+	Kakao.Auth.login({
+		scope:'profile_nickname, account_email',
+		success: function(authObj){
+			console.log("접속 성공");
+			console.log(authObj);
+			Kakao.API.request({
+				url:'/v2/user/me',
+				success: res=>{
+					console.log("파라미터 확인");
+					const email = res.kakao_account.email;
+					const name = res.properties.nickname;
+					
+					console.log(email);
+					console.log(name);
+					
+					$("#kakao-email").val(email);
+					$("#kakao-nick").val(name);
+					$("#kakaoLogin").submit();
+				}, fail: error=>{
+					console.log(error)
+				}
+			});	
+		}, fail: function(error){
+			console.log(error);
+		}
+  		
+	});
+console.log("카카오 로그인 종료");
+}
+</script>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

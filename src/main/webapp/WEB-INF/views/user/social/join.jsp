@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript">
 async function ajaxPost(url, data) {
@@ -25,31 +23,43 @@ async function ajaxPost(url, data) {
 		})
 	})
 }
-
 //아이디 유효성 검사
 function checkId(){
 	console.log("아이디 유효성 검사");
 	var id = $("#id");
 	
-	const idFormCheck = RegExp(/^[a-zA-Z0-9-_]{4,12}$/);
+	const idFormCheck = RegExp(/^[a-zA-Z0-9-_]{4,30}$/);
 	var idWithoutNumber = id.val().replace(/\D/g, '');
 	var idWithoutString = id.val().replace(/[0-9]/g, '');
+	var emailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*[.][a-zA-Z]{2,3}$/);
+	console.log(emailCheck.test(id.val()));
+	if(!emailCheck.test(id.val())){
+		//에러
+		if(!idFormCheck.test(id.val()) || idWithoutNumber === "" || idWithoutString === ""){
+			console.log("유효하지 않은 아이디 형식");
+			
+			id.addClass("is-invalid"); // 오류
+			id.removeClass("is-valid"); // 정상
+		
+			$("#idChk").css("display", "inline");
+			$("#idError").css("display", "none");
+			$("#valid-id").css("display", "none");
+		
+			return false;
+		}else {//정상
+			console.log("유효한 아이디 형식");
 	
-	//에러
-	if(!idFormCheck.test(id.val()) || idWithoutNumber === "" || idWithoutString === ""){
-		console.log("유효하지 않은 아이디 형식");
+			id.addClass("is-valid");
+			id.removeClass("is-invalid");
 		
-		id.addClass("is-invalid"); // 오류
-		id.removeClass("is-valid"); // 정상
+			$("#idChk").css("display", "none");
+			$("#idError").css("display", "none");
+			
+			return true;
+		}
+	}else{
+		console.log("이메일 형식 아이디");
 		
-		$("#idChk").css("display", "inline");
-		$("#idError").css("display", "none");
-		$("#valid-id").css("display", "none");
-		
-		return false;
-	}else {//정상
-		console.log("유효한 아이디 형식");
-	
 		id.addClass("is-valid");
 		id.removeClass("is-invalid");
 		
@@ -87,7 +97,6 @@ async function checkIdExist(){
 			
 			id.removeClass("is-valid");
 			id.addClass("is-invalid");
-			
 
 			$("#idChk").css("display", "none");
 			$("#idError").css("display", "inline");
@@ -273,7 +282,7 @@ function checkPw() {
 	
 	var pw = $("#pw");
 
-	const pwFormCheck = RegExp(/^[a-zA-Z0-9-_]{8,12}$/); // 대소문자 + 숫자 4~12자
+	const pwFormCheck = RegExp(/^[a-zA-Z0-9-_]{8,30}$/); // 대소문자 + 숫자 4~12자
 	var pwWithoutNumber = pw.val().replace(/\D/g, ''); // 숫자만
 	var pwWithoutString = pw.val().replace(/[0-9]/g, ''); // 문자열만
 	
@@ -352,7 +361,6 @@ function checkPw2() {
 		}
 	}
 }
-
 function telValidator() {
 	console.log("전화번호 검사")
     var phone = $("#phone")
@@ -482,49 +490,8 @@ async function checked() {
 	
 	if (checkAnswer() == false) isvalid = false;
 	console.log(isvalid);
-	
-	if(authKeyCheck() == false) isvalid = false;
-	
-	return isvalid;
-}
-
-async function sendMail(){
-	console.log("인증 메일 전송");
-	var mail = $("#email"); //사용자의 이메일 입력값.
-	try {
-		$("#sendMail").css("display", "none");
-		$("#emailCheckLabel").css("display", "inline");
-		$("#emailCheck").css("display", "inline");
-		$("#isVailEmail").css("display", "inline");
-	
-		if (checkEmailExist() == true) {
-			console.log("유효하지 않은 형식이거나 이미 존재하는 메일")
-			return false;
-		} else {
-			console.log("email : ", mail.val());
-			const result = await ajaxPost('send/mail', {mail: mail.val()});
 		
-			console.log(result);
-			return true;
-		}
-	}catch (e){
-		console.log(e);
-
-	}
-}
-
-async function authKeyCheck(){
-	var authKey = $("#emailCheck")
-	console.log(authKey);
-	var result = await ajaxPost("/user/session/call", {authKey:authKey.val()});
-	if(result){
-		$("#sendSucess").css("display", "inline");
-		$("#sendFail").css("display", "none");
-	}else{
-		$("#sendSucess").css("display", "none");
-		$("#sendFail").css("display", "inline");
-	}
-	return result;
+	return isvalid;
 }
 
 async function submit() {
@@ -551,121 +518,8 @@ async function submit() {
 		})
 	}
 }
-
 $(document).ready(function(){
-	var joinCnt = 0;
-
-	$("#agree_all").change(function(){
-		//대상이 체크된 상태일때
-		if($(this).is(":checked")){
-			$(".chkSub").attr("checked", true);
-		}else{
-			$(".chkSub").attr("checked", false);
-		}
-	});
 	
-	$(".chkSub1").change(function(){
-		var checked = $(this).is(":checked");
-		if(!checked){
-			$(".chkSubAll").attr("checked", false);
-		}
-	})
-	$(".chkSub2").change(function(){
-		var checked = $(this).is(":checked");
-		if(!checked){
-			$(".chkSubAll").attr("checked", false);
-		}
-	})
-	$(".chkSub3").change(function(){
-		var checked = $(this).is(":checked");
-		if(!checked){
-			$(".chkSubAll").attr("checked", false);
-		}
-	})
-	$(".chkSub4").change(function(){
-		var checked = $(this).is(":checked");
-		if(!checked){
-			$(".chkSubAll").attr("checked", false);
-		}
-	})
-	
-	$("#nextBtn").click(function(){
-		console.log("#joinBtn clicked");
-		
-		if(joinCnt == 0 ){
-			if($(".chkSub1").is(":checked") == true && $(".chkSub2").is(":checked") == true && $(".chkSub3").is(":checked") == true){
-				console.log("약관 동의 완료");
-				joinCnt++;
-				$("#info").css("color", "black");
-				$("#agree").css("color", "#877b9e");
-				$("#agreement").css("display", "none");
-				$("#join-form").css("display", "inline");
-			}else{
-				alert("필수 항목에 체크해주세요");
-			}
-		}else if(joinCnt == 1){
-			console.log("회원 입력 페이지에서 이동")
-			var isCheck = checked();
-			if(isCheck){
-				// 모든 항목 검사 및 회원가입 실행
-				submit();
-				
-				$("#join-form").css("display", "none");
-				$("#info").css("color", "#877b9e");
-				$("#agree").css("color", "#877b9e");
-				$("#joinComplete").css("color", "black");
-				
-				$("#complete-join").css("display", "inline");
-				$("#pageBtn").css("display","none");
- 			}else{
- 				console.log("요소 중 에러사항 있음")
- 				alert("체크되지 않은 항목이 존재합니다.");
- 			}
-			
-		}
-	});
-	
-	//아이디 중복체크
-	$("#id").blur(function() {
-		checkIdExist();
-	})
-	
-	//닉네임 중복체크
-	$("#nick").blur(function() {
-		checkNickExist();
-	})
-	
-	//이메일 중복체크
-	$("#mail").blur(function() {
-		checkEmailExist();
-	})
-	
-	function birthCheck(obj){
-		checkBirth(obj);
-	}
-	$("#phone").blur(function(){
-		telValidator();
-	})
-	$("#questionAnwser").blur(function(){
-		checkAnswer()
-	})
-	
-	$("#cancleBtn").click(function(){
-		if(joinCnt == 0){
-			joinCnt--;
-			$(location).attr("href", "/user/main");
-			
-		}else if(joinCnt == 1){
-			
-			console.log("정보 입력 취소");
-			joinCnt--;
-			$("#info").css("color", "black");
-			$("#agree").css("color", "#877b9e");
-			$("#agreement").css("display", "inline");
-		}
-	})
-	
-	//날짜 선택기
 	$.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -687,13 +541,10 @@ $(document).ready(function(){
     $("#birth").click(function() {
         $("#birth").datepicker();
     });
-    
-    $("#birth").change(function(){
-    	checkBirth()
-    })
-    //입력이 안료되었을 때 호출
-    //유효성 검사 / 공백 체크 / 중복 체크
-    $("#id").blur(function(){
+    $("#phone").blur(function(){
+		telValidator();
+	})
+	$("#id").blur(function(){
     	checkIdExist();
     })
 
@@ -702,14 +553,7 @@ $(document).ready(function(){
     })
     
     $("#email").blur(function(){
-    	var isChecked = checkEmailExist();
-    	if(isChecked){
-    		$("#sendMail").css("display", "inline");
-			$("#emailCheckLabel").css("display", "none");
-			$("#emailCheck").css("display", "none");
-			$("#isVailEmail").css("display", "none");
-			$("#vail-email").css("display", "none");
-    	}
+    	checkEmailExist();
     }) 
     $("#pw").blur(function(){
     	checkPw();
@@ -722,29 +566,17 @@ $(document).ready(function(){
     $("#questionAnwser").blur(function(){
     	checkAnswer();
     })
-    
-    //메일 전송 및 인증 번호 입력단 활성화
-    $("#sendMail").click(function(){
-    	sendMail();
-    });
-    
-	$("#isVailEmail").click(function(){
-		if(checkEmailExist() == false){
-			console.log("중복된 이메일")
-		}else{
-			authKeyCheck();
-		}
-	})
-   
-	$("#into-login").click(function(){
-		$(location).attr('href', '/user/login');
-	})
-	
-	$("#into-main").click(function(){
-		$(location).attr('href', '/user/main');
-	})
+    $("#nextBtn").click(function(){
+    	var isJoin = submit();
+    	if(isJoin == true)
+    		$(location).attr("href", "/")
+    	else
+    		alert("회원가입 실패")
+    })
+    $("#cancle").click(function(){
+    	$(location).attr("href", "/");
+    })
 })
-
 </script>
 <style type="text/css">
 .error{
@@ -764,9 +596,6 @@ $(document).ready(function(){
     width: 200px;
     height: 30px;
 }
-#join-form { 
- 	display: none; 
-} 
 
 #agree {
 	color: black;
@@ -775,43 +604,17 @@ $(document).ready(function(){
 .form-control {
 	width:500px;
 }
-
 </style>
-<div class="container">
-<div class="text-center" id="pageName">
-<h1 id="ltitle"><span id="agree">약관 동의</span> <i class="fas fa-angle-right"></i> <span id="info">정보 입력</span> <i class="fas fa-angle-right"></i> <span id="joinComplete">가입완료</span></h1>
+<div class="container text-center">
+<div class="text-center">
+<h1>추가 정보 입력</h1>
 <hr>
 </div>
-<div class="text-center" id="agreement">
-<div class="text-center">
-<label for="agree_all">
-  <input type="checkbox" class="chkSub chkSubAll" id="agree_all">
-  <span>모두 동의합니다</span>
-</label>
-</div>
-<div class="text-center">
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub1" name="chkBox" value="1">
-  <span>이용약관 동의<strong>(필수)</strong><br></span>
-</label>
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub2" name="chkBox" value="2">
-  <span>개인정보 수집, 이용 동의<strong>(필수)<br></strong></span>
-</label>
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub3" name="chkBox" value="3">
-  <span>개인정보 이용 동의<strong>(필수)</strong><br></span>
-</label>
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub4" value="4">
-  <span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)<br></strong></span>
-</label>
-</div>
-</div>
-<form action="/user/join" method="post" id="join-form" class="form-horizontal"  style="dispaly:flex;">
 
+<form action="/user/join" method="post" id="join-form" class="form-horizontal">
+<input type="hidden" name="isSocial" value="Y">
 <label for="id" class="col-xs-3 control-label">아이디 </label>
-<input type="text" class="form-control" id="id" name="id" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
+<input type="text" class="form-control" id="id" name="id" value="${user.email }" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
 <span id="idChk" class="error col-xs-offset-3 feedback">아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.</span>
 <span id="idError" class="error col-xs-offset-3 feedback">이미 존재하는 아이디입니다.</span>
 <span id="valid-id" class="valid col-xs-offset-3 feedback">사용가능한 아이디입니다.</span>
@@ -832,7 +635,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="nick" class="col-xs-3 control-label">닉네임 </label>
-<input type="text" class="form-control" id="nick" name="nick" placeholder="닉네임을 입력해 주세요">
+<input type="text" class="form-control" id="nick" name="nick" value="${user.nick }" placeholder="닉네임을 입력해 주세요">
 <span id="nickChk" class="error col-xs-offset-3 feedback">닉네임을 입력해주세요</span>
 <span id="nickError" class="error col-xs-offset-3 feedback">이미 존재하는 닉네임입니다.</span>
 <span id="valid-nick" class="valid col-xs-offset-3 feedback">사용가능한 닉네임입니다.</span>
@@ -845,20 +648,10 @@ $(document).ready(function(){
 <br><br>
 
 <label for="email" class="col-xs-3 control-label">이메일 </label>
-<input  type="email" class="form-control" id="email" name="email" placeholder="ex) asdf1234@gmail.com">
+<input type="email" class="form-control" id="email" name="email" value="${user.email }" placeholder="ex) asdf1234@gmail.com">
 <span id="emailChk" class="error col-xs-offset-3 feedback">asd123@gmail.com의 형식이여야 합니다.</span>
 <span id="emailError" class="error col-xs-offset-3 feedback">이미 존재하는 이메일입니다.</span>
 <span id="valid-email" class="valid col-xs-offset-3 feedback">사용가능한 이메일입니다.</span>
-<br>
-<button id="sendMail" class="btn btn-primary col-xs-offset-3 feedback" type="button">인증번호 받기</button>
-
-<br>
-<label for="emailCheck" id="emailCheckLabel"class="col-xs-3 control-label feedback">인증번호 </label>
-<input id="emailCheck" class="form-control feedback" style="width:300px;" name="emailCheck" placeholder="메일을 확인하여 인증번호를 입력하세요">
-<button id="isVailEmail" class="btn btn-primary feedback" type="button">인증</button>
-<br>
-<span id="sendSucess" class="valid col-xs-offset-3 feedback">인증되었습니다.</span>
-<span id="sendFail" class="error col-xs-offset-3 feedback">인증번호가 일치하지않습니다.</span>
 <br><br>
 
 <label for="gender" class="col-xs-3 control-label">성별 </label>
@@ -886,19 +679,10 @@ $(document).ready(function(){
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>
 </form>
-<div id="complete-join" Class="feedback text-center">
-<div class="text-center">
-<span>가입을 축하드립니다.</span><br>
-<img alt="이미지 불러오기 실패" src="/resources/img/profile/메일 그림.png">
-<br>
-<button id="into-login" class="btn btn-primary" type="button">로그인페이지로</button>
-<button id="into-main" class="btn btn-default" type="button">메인페이지로</button>
-</div>
-</div>
 <div class="text-center" id="pageBtn"> 
-   	<button class="btn btn-primary" type="button" id="nextBtn">다음</button>
+   	<button class="btn btn-primary" type="button" id="nextBtn">작성</button>
     <button class="btn btn-danger" type="button" id="cancleBtn">취소</button>
 </div>
-<br><br>
 </div>
+
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

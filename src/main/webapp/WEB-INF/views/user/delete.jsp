@@ -11,7 +11,7 @@ $(document).ready(function(){
 			, dataType: "json"
 			, success: function(res){
 				console.log("AJAX 성공");
-				$(location).attr('href', '/user/mypage')
+				$(location).attr('href', '/')
 
 			}, error: function(error){
 				console.log("AJAX 실패");

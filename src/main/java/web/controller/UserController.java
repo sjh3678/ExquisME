@@ -94,9 +94,8 @@ public class UserController {
 			logger.info("암호화 값 : {}", encPw);
 			boolean isJoin = userService.getJoinCheck(user);
 			if(isJoin) {
-				session.invalidate();
-				//인증키 값 삭제
-				session.removeAttribute("authKey");
+				if(session.getAttribute("authKey") != null)
+					session.removeAttribute("authKey");
 				return true;	
 			}else {
 				return false;
@@ -452,5 +451,22 @@ public class UserController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("commList", list);
 		return "/user/history/comment";
+	}
+	
+	@RequestMapping(value="/social/join", method=RequestMethod.POST)
+	public String socialLogin(User user, Model model,HttpSession session) {
+		logger.info("socialLogin called 전달값 : {}", user);
+		boolean isJoin = userService.isJoinUser(user);
+		logger.info("조회결과 : {}", isJoin);
+		if(isJoin) { // 조회결과가 존재할때
+			user = userService.getUserInfoByEmail(user);
+			session.setAttribute("login", isJoin);
+			session.setAttribute("nick", user.getNick());
+			session.setAttribute("userNo", user.getUserNo());
+			return "redirect:/";
+		}else {//조회결과 없을 때
+			model.addAttribute("user", user);
+			return "user/social/join";
+		}
 	}
 }

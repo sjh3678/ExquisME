@@ -43,19 +43,19 @@ li{
 	<ul>
 		<%-- 첫페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
-			<li><label onclick=getExtaList(1)><a>처음</a></label></li>
+			<li><label onclick=getCommList(1)><a>처음</a></label></li>
 		</c:if>
 		
 		<%-- 이전페이징 리스트로 이동 --%>
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
-				<li><label onclick=getExtaList(${paging.startPage - paging.pageCount })>이전</label></li>
+				<li><label onclick=getCommList(${paging.startPage - paging.pageCount })>이전</label></li>
 			</c:when>
 		</c:choose>
 		
 		<%-- 이전 페이지로 가기 --%>
 		<c:if test="${paging.curPage > 1 }">
-			<li><label onclick=getExtaList(${paging.curPage - 1 })>&lt;</label></li>
+			<li><label onclick=getCommList(${paging.curPage - 1 })>&lt;</label></li>
 		</c:if>
 		
 		<%-- 페이징 리스트 --%>
@@ -65,24 +65,24 @@ li{
 			</c:if>
 			
 			<c:if test="${paging.curPage ne i }">
-				<li><label onclick=getExtaList(${i })>${i }</label></li>
+				<li><label onclick=getCommList(${i })>${i }</label></li>
 			</c:if>
 		</c:forEach>
 		
 		<%-- 다음 페이지로 가기 --%>
 		<c:if test="${paging.curPage < paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.curPage + 1 })>&gt;</label></li>
+			<li><label onclick=getCommList(${paging.curPage + 1 })>&gt;</label></li>
 		</c:if>
 		
 		<%-- 다음페이징 리스트로 이동 --%>
 		
 		<c:if test="${paging.endPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.startPage + paging.pageCount })>&raquo;</label></li>
+			<li><label onclick=getCommList(${paging.startPage + paging.pageCount })>&raquo;</label></li>
 		</c:if>
 				
 		<%-- 끝페이지로 이동 --%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.totalPage })>끝</label></li>
+			<li><label onclick=getCommList(${paging.totalPage })>끝</label></li>
 		</c:if>
 	</ul>
 </div>
