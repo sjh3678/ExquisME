@@ -419,6 +419,9 @@ $(document).ready(function(){
 			alert("요소 중 오류가 있습니다.")
 		}
 	})
+	$("#modify-profile").click(function(){
+		$(this).
+	})
 })
 </script>
 
@@ -517,7 +520,7 @@ span{
 		<div class="imgBox" id="profile-show" style="margin-bottom: 40px;">
 			<img class="info-show profile" src="/upload/${file.storedName}">
 		</div>
-		
+
 		<!-- 업로드시 보이는 파일 업로드 창 -->
 		<div id="profile-file" class="info-write invisible">
 			<input class="info-write" type="file" name="file" id="file" value="${file.storedName }" />

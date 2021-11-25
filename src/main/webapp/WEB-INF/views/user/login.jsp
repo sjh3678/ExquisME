@@ -32,6 +32,7 @@ function f_enterLogin(){
 }
 
 $(document).ready(function(){
+	
 	$("#loginBtn").click(function(){
 		var formData = $(".login-form").serialize();
 		console.log("#loginBtn clicked");
@@ -313,7 +314,7 @@ function init() {
 	 gapi.load('auth2', function() {
 	  console.log("init()시작");
 	  auth2 = gapi.auth2.init({
-	        client_id: '952798466308-b2tnbjt5svuv39qgd38tbiqp9asv1u1t.apps.googleusercontent.com',
+	        client_id: '866297020402-d2ac85ogcm3kbgbc9i6vmsp1a50bv45f.apps.googleusercontent.com',
 	        cookiepolicy: 'single_host_origin',
 	      });
 	      attachSignin(document.getElementById('google'));
@@ -380,11 +381,12 @@ console.log("카카오 로그인 종료");
 }
 </script>
 
+<!-- 네이버 로그인 -->
 <script type="text/javascript">
-	var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
+	var naver_id_login = new naver_id_login("vwYk8fTxfuBjhAvAFcA5", "http://${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
 	var state = naver_id_login.getUniqState();
 	naver_id_login.setButton("white", 2, 40);
-	naver_id_login.setDomain("${pageContext.request.serverName}:${pageContext.request.serverPort}");
+	naver_id_login.setDomain("http://${pageContext.request.serverName}:${pageContext.request.serverPort}");
 	naver_id_login.setState(state);
 	naver_id_login.init_naver_id_login();
 </script>
@@ -392,7 +394,7 @@ console.log("카카오 로그인 종료");
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
+var naver_id_login = new naver_id_login("vwYk8fTxfuBjhAvAFcA5", "http://${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
 // 네이버 사용자 프로필 조회
 naver_id_login.get_naver_userprofile("naverSignInCallback()");
 // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function

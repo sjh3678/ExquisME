@@ -217,7 +217,7 @@ public class UserController {
 		
 		logger.info("profileUpdate called");
 		user.setUserNo((Integer)session.getAttribute("userNo"));
-		logger.info("전달된 생일 : {}", user.getBirth());
+		
 		boolean isUpdate = true;
 		logger.info("file : {}", file);
 		if(file != null) {
@@ -225,7 +225,8 @@ public class UserController {
 			user.setFileNo(fileUpload.getFileNo());
 		}
 		isUpdate = userService.updateUserInfo(user);
-		if(isUpdate) {
+		
+		if(session.getAttribute("authKey") != null) {
 			//인증키 값 삭제
 			session.removeAttribute("authKey");
 		}
