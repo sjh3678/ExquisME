@@ -118,6 +118,11 @@
 		WHERE email = #{email}
 	</select>
 	
+	<select id="selectCntByEmail2" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_user
+		WHERE id = #{email}
+	</select>
+	
 	<select id="selectUserByEmail" parameterType="web.dto.User" resultMap="User">
 		SELECT
 			user_no, id, nick, email, question_no, question_anwser 
@@ -190,4 +195,49 @@
 				OR nick LIKE '%' || #{search } || '%'
 			</if>
 	</select>
+	
+	<delete id="deleteCommByUserNo" parameterType="int">
+		DELETE tb_ex_comm
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deleteExtaByUserNo" parameterType="int">
+		DELETE tb_extagram
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deleteExtaLikeUserNo" parameterType="int">
+		DELETE tb_ex_like
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deleteLayerLikeByUserNo" parameterType="int">
+		DELETE tb_layer_like
+		WHERE user_no = #{userNo}
+	</delete>
+
+	<delete id="deleteLayerByUserNo" parameterType="int">
+		DELETE tb_layer
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deleteNoteLikeByUserNo" parameterType="int">
+		DELETE tb_note_like
+		WHERE user_no = #{userNo}
+	</delete>
+		
+	<delete id="deleteFaqByUserNo" parameterType="int">
+		DELETE tb_faq
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deleteNoticeByUserNo" parameterType="int">
+		DELETE tb_notice
+		WHERE user_no = #{userNo}
+	</delete>
+	
+	<delete id="deletePerfLikeByUserNo" parameterType="int">
+		DELETE tb_perf_like
+		WHERE user_no = #{userNO}
+	</delete>
 </mapper>

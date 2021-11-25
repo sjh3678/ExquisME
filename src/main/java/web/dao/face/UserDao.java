@@ -93,6 +93,12 @@ public interface UserDao {
 	public int selectCntByEmail(User user);
 
 	/**
+	 * 이메일과 아이디 대조로 유저의 유무를 조회
+	 * @param user - 조회할 유저의 정보
+	 * @return - 조회된 숫자 반환
+	 */
+	public int selectCntByEmail2(User user);
+	/**
 	 * 이메일을 통해 유저의 정보를 조회
 	 * @param user - 조회할 유저의 정보
 	 * @return - 조회할 숫자 반환
@@ -130,17 +136,75 @@ public interface UserDao {
 	/**
 	 * 조회할 회원 리스트 갯수
 	 * 
-	 * @param paramData
-	 * @return
+	 * @param paramData - 회원 페이징 객체
+	 * @return - 조회된 리스트 반환
 	 */
 	public int selectCntUserAll(PagingUser paramData);
 
 	/**
 	 * 조회된 회원 리스트 (페이징 적용, 검색 적용)
 	 * 
-	 * @param pagingUser
-	 * @return
+	 * @param pagingUser - 페이징 객체 
+	 * @return - 조회된 리스트 반환 
 	 */
 	public List<HashMap<String, Object>> selectUserAll(PagingUser pagingUser);
+
+	/**
+	 * 회원의 댓글 내역 전체를 삭제
+	 * @param userNo - 삭제할 회원정보
+	 */
+	public void deleteCommByUserNo(int userNo);
+
+	/**
+	 * 회원의 extagram 내역 전체를 삭제
+	 * @param userNo - 삭제할 회원 정보
+	 */
+	public void deleteExtaByUserNo(int userNo);
+
+	/**
+	 * 회원의 extagram 좋아요 내역 삭제
+	 * @param userNo - 삭제할 회원 정보
+	 */
+	public void deleteExtaLikeUserNo(int userNo);
+
+	/**
+	 * 레이어링 좋아요 내역 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deleteLayerLikeByUserNo(int userNo);
+
+	/**
+	 * 레이어링 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deleteLayerByUserNo(int userNo);
+
+	/**
+	 * 노트 좋아요 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deleteNoteLikeByUserNo(int userNo);
+
+	/**
+	 * 문의 정보 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deleteFaqByUserNo(int userNo);
+
+	/**
+	 * 공지사항 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deleteNoticeByUserNo(int userNo);
+
+	/**
+	 * 향수 좋아요 삭제
+	 * @param userNo - 삭제할 유저 정보
+	 */
+	public void deletePerfLikeByUserNo(int userNo);
+
+
+
+
 
 }

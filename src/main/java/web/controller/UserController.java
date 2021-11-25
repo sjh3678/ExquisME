@@ -107,27 +107,33 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/check/id", method=RequestMethod.POST)
-	public @ResponseBody boolean checkId(User user) {
+	public @ResponseBody boolean checkId(User user, HttpSession session) {
 		logger.info("checkId called");
 		logger.info("id : {}", user.getId());
+		if(session.getAttribute("userNo") != null)
+			user.setUserNo((Integer)session.getAttribute("userNo"));
 		boolean isIdExist = userService.searchId(user);
 		logger.info("{}",isIdExist);
 		return isIdExist;
 	}
 	
 	@RequestMapping(value="/check/email", method=RequestMethod.POST)
-	public @ResponseBody boolean checkEmail(User user) {
+	public @ResponseBody boolean checkEmail(User user, HttpSession session) {
 		logger.info("checkEmail called");
 		logger.info("email : {}", user.getEmail());
+		if(session.getAttribute("userNo") != null)
+			user.setUserNo((Integer)session.getAttribute("userNo"));
 		boolean isEmailExist = userService.searchEmail(user);
 		logger.info("{}",isEmailExist);
 		return isEmailExist;
 	}
 	
 	@RequestMapping(value="/check/nick", method=RequestMethod.POST)
-	public @ResponseBody boolean checkNick(User user) {
+	public @ResponseBody boolean checkNick(User user, HttpSession session) {
 		logger.info("checkNick called");
 		logger.info("email : {}", user.getEmail());
+		if(session.getAttribute("userNo") != null)
+			user.setUserNo((Integer)session.getAttribute("userNo"));
 		boolean isEmailExist = userService.searchNick(user);
 		logger.info("{}",isEmailExist);
 		return isEmailExist;
@@ -186,6 +192,7 @@ public class UserController {
 		logger.info("/delete [POST]");
 		int userNo = (Integer) session.getAttribute("userNo");
 		boolean isDelete = userService.deleteUser(userNo);
+		
 		if(isDelete) {
 			session.invalidate();
 			return "redirect:/";
@@ -459,6 +466,8 @@ public class UserController {
 			session.setAttribute("login", isJoin);
 			session.setAttribute("nick", user.getNick());
 			session.setAttribute("userNo", user.getUserNo());
+			logger.info("userNo : {}",session.getAttribute("userNo"));
+			
 			return "redirect:/";
 		}else {//조회결과 없을 때
 			model.addAttribute("user", user);

@@ -49,7 +49,7 @@ function checkEmail(){
 	console.log("이메일 유효성 검사");
 	
 	var email = $("#email");
-	var emailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*[.][a-zA-Z]{2,3}$/);
+	var emailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*[.][a-zA-Z]{3}$/);
 	console.log(emailCheck.test(email.val()));
 	
 	if(emailCheck.test(email.val()) == false){
@@ -57,16 +57,15 @@ function checkEmail(){
 		
 		$("#emailChk").removeClass("invisible");
 		$("#emailError").addClass("invisible");
-		
-		$("#email").val() = "";
-		$("#email").focus();
-		
+		$("#valid-email").addClass("invisible");
+		$("#sendMail").addClass("invisible");
 		return false;
 	}else{
 		console.log("유효한 이메일 형식");
 		
 		$("#emailChk").removeClass("invisible");
 		$("#emailError").addClass("invisible");
+		$("#valid-email").removeClass("invisible");
 		
 		return true;
 	}
@@ -83,11 +82,8 @@ async function checkEmailExist() {
 		
 		$("#emailChk").removeClass("invisible");
 		$("#emailError").addClass("invisible");
-		$("#valid-email").addClass("invisible");
-		
-		$("#email").val() = "";
-		$("#email").focus();
-		
+		$("#valid-email").css("display", "none");
+		$("#sendMail").addClass("invisible");
 		return false;
 	}
 	
@@ -109,8 +105,8 @@ async function checkEmailExist() {
 			// 중복되는 이메일 있음
 			$("#emailChk").addClass("invisible");
 			$("#emailError").removeClass("invisible");
-			$("#valid-email").addClass("invisible");
-			
+			$("#valid-email").css("display", "none");
+			$("#sendMail").addClass("invisible");
 			email.val() = "";
 			email.focus();
 			
@@ -157,9 +153,9 @@ function checkNick() {
 	var pattern = /\s/g;
 	
 	if (nick.val() == "") {
-		console.log("닉네임 공백")
+		console.log("닉네임 공백");
 		
-		$("#valid-nick").addClass("invisible");
+		$("#valid-nick").css("display", "none");
 		$("#nickError").addClass("invisible");
 		$("#nickChk").removeClass("invisible");
 		$("#nick").val() = "";
@@ -169,7 +165,7 @@ function checkNick() {
 	}else if(nick.val().match(pattern)){
 		console.log("스페이스바는 문자로 취급되지 않습니다.")
 		
-		$("#valid-nick").addClass("invisible");
+		$("#valid-nick").css("display", "none");
 		$("#nickError").addClass("invisible");
 		$("#nickChk").removeClass("invisible");
 		
@@ -180,7 +176,7 @@ function checkNick() {
 		
 		$("#nickError").addClass("invisible");
 		$("#nickChk").addClass("invisible");
-		
+		$("#valid-nick").css("display", "inline");
 		return true;
 	}
 }
@@ -385,6 +381,7 @@ $(document).ready(function(){
 	$("#sendMail").click(function(){
 		console.log("인증 메일 발송")
 		sendMail();//인증메일 발송
+		$(this).addClass("invisible");
 		$(".keyCheck").removeClass("invisible");
 	});
 	
@@ -418,9 +415,6 @@ $(document).ready(function(){
 		}else{
 			alert("요소 중 오류가 있습니다.")
 		}
-	})
-	$("#modify-profile").click(function(){
-		$(this).
 	})
 })
 </script>
@@ -525,7 +519,7 @@ span{
 		<div id="profile-file" class="info-write invisible">
 			<input class="info-write" type="file" name="file" id="file" value="${file.storedName }" />
 			<div class="imgBox" id="profile-show">
-				<img id="img" class="pre-show profile" width="200px" height="200px;" />
+				<img id="img" class="pre-show profile" width="200px" height="200px;" src="/upload/${file.storedName}" />
 			</div>
 		</div>
 
@@ -542,7 +536,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible" id="email-write">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="email" name="email">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="email" name="email" value="${user.email }">
 						<span id="emailChk" class="error invisible">올바른 이메일 형식이 아닙니다.</span> 
 						<span id="emailError" class="error invisible">이미 존재하는 이메일입니다.</span> 
 						<span id="valid-email" class="valid invisible">사용 가능한 이메일입니다.</span>
@@ -575,7 +569,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" name="nick" id="nick">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" name="nick" id="nick" value="${user.nick }">
 						<span id="nickChk" class="error invisible">닉네임을 입력해 주세요.</span> 
 						<span id="nickError" class="error invisible">이미 존재하는 닉네임입니다.</span> 
 						<span id="valid-nick" class="valid invisible">사용 가능한 닉네임입니다.</span>
@@ -594,7 +588,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" id="phone" name="phone" placeholder="010-2345-6789">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" value="${user.phone }" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" id="phone" name="phone" placeholder="010-2345-6789">
 						<span id="phoneChk" class="error invisible">'010-2345-6789'의 형식으로 적어주세요.</span> 
 						<span id="valid-phone" class="valid invisible">사용 가능한 전화번호 입니다.</span>
 					</td>
@@ -611,7 +605,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="birth" name="birth">
+						&nbsp;&nbsp;<input class="form-control classInput" value="<fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd" />" type="text" id="birth" name="birth">
 						<span id="birthChk" class="error invisible">생년월일을 선택해주세요.</span> 
 						<span id="valid-birth" class="valid invisible">선택 되었습니다.</span>
 					</td>
@@ -622,6 +616,7 @@ span{
 							value="${user.createDate }" pattern="yyyy년 MM월 dd일" />
 					<td>
 				</tr>
+				
 				<tr>
 					<td class="info">성별</td>
 					<c:choose>

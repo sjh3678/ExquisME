@@ -2,7 +2,6 @@ package web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import web.dao.face.ExtaDao;
 import web.dao.face.UserDao;
+import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
@@ -128,11 +129,39 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean deleteUser(int userNo) {
 		logger.info("deleteUser called {}", userNo);
+		
+		User user = new User();
+		
+		user = userDao.selectUserByUserno(userNo);
+		
+		//사용자
+		userDao.deleteCommByUserNo(userNo);//댓글 내역 삭제
+		userDao.deleteExtaLikeUserNo(userNo);//좋아요 내역 삭제
+		userDao.deleteExtaByUserNo(userNo);//extagran 내역 삭제
+		
+		userDao.deleteLayerLikeByUserNo(userNo); //레이어링 좋아요 삭제
+		userDao.deleteLayerByUserNo(userNo); // 레이어링 삭제
+		
+		userDao.deleteNoteLikeByUserNo(userNo);//노트 좋아요 삭제
+		userDao.deletePerfLikeByUserNo(userNo); // 향수 좋아요 삭제
+		
+		if(user.getIsAdmin().equals("A") || user.getIsAdmin().equals("S")) {
+			//관리자
+			userDao.deleteFaqByUserNo(userNo);// 자주묻는 질문 삭제
+			userDao.deleteNoticeByUserNo(userNo); // 공지사항 삭제
+		}
+		
+		int fileNo = user.getFileNo();
+		
 		//회원정보 삭제
 		userDao.deleteUserByUserno(userNo);
-		User user = new User();
-		user.setUserNo(userNo);
+		
+		if(fileNo != 91) {
+			userDao.deleteFileByFileNo(user);
+		}
+		
 		int cnt = userDao.selectUserCnt(user);
+		
 		logger.info("cnt : {}", cnt);
 		if(cnt == 0) {
 			logger.info("삭제 성공");
@@ -170,6 +199,13 @@ public class UserServiceImpl implements UserService{
 		if(cnt == 0) {
 			logger.info("매칭된 이메일 없음");
 			return false;	
+		}else if(cnt != 0 && user.getUserNo() != 0) {
+			String email = user.getEmail();
+			user = userDao.selectUserByUserno(user.getUserNo());
+			if(email.equals(user.getEmail()) && !email.equals("")) {
+				logger.info("회원의 기존 이메일");
+				return false;
+			}
 		}
 		logger.info("이메일 중복");
 		return true;
@@ -181,6 +217,13 @@ public class UserServiceImpl implements UserService{
 		if(cnt == 0) {
 			logger.info("매칭된 닉네임 없음");
 			return false;	
+		}else if(cnt != 0 && user.getUserNo() != 0) {
+			String nick = user.getNick();
+			user = userDao.selectUserByUserno(user.getUserNo());
+			if(nick.equals(user.getNick()) && !nick.equals("")) {
+				logger.info("회원의 기존 닉네임");
+				return false;
+			}
 		}
 		logger.info("닉네임 중복");
 		return true;
@@ -359,7 +402,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean isJoinUser(User user) {
 		int cnt = userDao.selectCntByEmail(user);
-		
+		if(cnt == 0) {//id값 대조 - 소셜 로그인 유저 확인
+			cnt = userDao.selectCntByEmail2(user);
+		}
 		if(cnt == 1) {
 			return true;
 		}
