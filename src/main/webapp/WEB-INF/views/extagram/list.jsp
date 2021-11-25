@@ -14,20 +14,26 @@
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 385px;
-	border-radius: 3px; 
+	height: 410px;
+	border-radius: 5px; 
 	margin: 4px;
-	border: 1px solid #ddd;
+/* 	border: 1px solid #ddd; */
+	background: rgb(236, 230, 204, 0.5);
 }
 #flex-items img {
-	 transition: all 0.1s linear;
+	border-radius: 5px;
+	transition: all 0.1s linear;
 }
-#flex-items:hover img {
-	 transform: scale(1.05);
+#flex-items:hover {
+	transform: scale(1.02);
 }
 #a {
 	margin: 10px;
 	
+}
+#aDelete {
+	float:right;
+	margin: 5px;
 }
 #b {
 	margin: 10px;
@@ -37,16 +43,20 @@
 	text-overflow: ellipsis;
 }
 #c {
-	height: 180px;
+	height: 200px;
 	width: 258px;
 	overflow : hidden;
 	display: block;
 }
 #d {
-	margin: 5px 10px;
+    margin: 5px 10px;
+    padding: 0 10px;
+    padding: 0 10px;
+    border-radius: 10px;
 }
 #e {
 	margin: 5px 10px;
+    padding: 0 10px;
 }
 
 #go-top {
@@ -132,11 +142,10 @@ jQuery(document).ready(function () {
 });
 </script>
 
-<h1><Strong>Extagram</Strong></h1><br>
-
+<h1>Extagram &nbsp;&nbsp;&nbsp;<a href="/extagram/write"><button class="btn">WRITE</button></a></h1>
+<hr>
 <div class="container">
 
-<a href="/extagram/write"><button class="btn">WRITE</button></a><br><br>
 
 <div id="result"><!-- AJAX 결과값 -->
 

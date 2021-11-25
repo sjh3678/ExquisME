@@ -245,8 +245,8 @@ ${viewExta.EX_CONTENT }
 
 <div id="flex-container">
 	<div class="flex-items" style="margin: auto 0;">
-		<div id="viewPicture" style="text-align: center; height: 300px; padding: auto 0;">
-			<img style="max-width:500px; height: auto; max-height: 300px; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
+		<div id="viewPicture" style="text-align: center; height: 300px; padding: 0; margin: 15px 0px;">
+			<img style="max-width:500px; min-height: 300px; max-height: 300px; margin: auto; overflow: hidden;" src="/upload/${viewExta.PICTURE}">
 		</div>
 	</div>
 	<div class="flex-items">
@@ -258,7 +258,7 @@ ${viewExta.EX_CONTENT }
 			<!-- AJAX 하트, 댓글 count 자리 -->
 		</div>
 		
-		<div style="border: 1px solid #ddd; height: 37px;">
+		<div style="border: 1px solid #ddd; height: 37px; border-radius: 5px; margin-top: 10px;">
 			<c:if test="${not login }">
 				<input type="text" placeholder="로그인 후 댓글 확인 및 작성이 가능합니다." readonly="readonly" style="width: 470px; height: 34px; border: none;"/>
 				<button onclick='location.href="/user/login";' class="btn pull-right">LOGIN</button>
@@ -269,7 +269,7 @@ ${viewExta.EX_CONTENT }
 						<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 						<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
 						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" style="width: 475px; height: 34px; border: none;"/>
-						<button id="btnCommInsert" class="btn pull-right">POST</button>
+						<button id="btnCommInsert" class="btn pull-right" style="height:35px;">POST</button>
 					</form>
 				</div>
 			</c:if>
