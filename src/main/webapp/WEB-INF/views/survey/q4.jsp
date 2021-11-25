@@ -60,7 +60,12 @@
 	margin: auto;
 	border-radius: 10px;
 }
-
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:active {
+	position: relative;
+	top: 1px;
+}
 </style>
 
 <div class="container">
@@ -82,15 +87,15 @@
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=1">
-				<div style="background-color: gray;">Top-Notes <br> ~~~~한노트</div></a><br>
+				<div class="note" style="background-color: gray; color:white;">Top-Notes <br>향수를 뿌린 후 10분 전후에 나타나는 향으로 향의 첫 느낌</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=2">
-					<div style="background-color: gray;">Middle-Notes <br> ~~~~한노트</div></a><br>
+					<div class="note" style="background-color: gray; color:white;">Middle-Notes <br>향수를 뿌린 후 30~60 뒤 안정된 상태</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q5?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=3">
-					<div style="background-color: gray;">Base-Notes <br> ~~~~한노트</div></a><br>
+					<div class="note" style="background-color: gray; color:white;">Base-Notes <br>향수를 뿌린 후 2~3시간이 지난 후부터 향이 모두 날아가기까지</div></a><br>
 			</div>
 	</div><!-- flavorContainer end -->
 	

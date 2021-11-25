@@ -41,7 +41,7 @@
 }
 
 .item {
-	width: 50%;
+	width: 100%;
 	margin:0 auto;
 	float: left;
 }
@@ -53,12 +53,24 @@
 }
 
 .item div {
-	width: 130px; 
+	width: 400px;
+	height: 50px;
 	text-align: center;
 	font-weight: bold;
 	margin: auto;
+	border-radius: 10px;
 }
-
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:active {
+	position: relative;
+	top: 1px;
+}
+.note {
+	background-color: gray; 
+	color:white;
+	line-height: -30px;
+}
 </style>
 
 <div class="container">
@@ -80,26 +92,19 @@
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=1">
-					<img alt="꽃" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>10대</div>
+					<div class="note">10대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=2">
-					<img alt="과일" src="/resources/img/survey/1-fruit.jpg"><br>
-				</a>
-				<div>20-30대</div>
+					<div class="note">20~30대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=3">
-					<img alt="달콤" src="/resources/img/survey/1-sweet.jpg"><br>
-				</a>
-				<div>40-50대</div>
+					<div class="note">40~50대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=4">
-					<img alt="바다" src="/resources/img/survey/1-sea.jpg"><br>
-				</a>
-				<div>60대 이상</div>
+					<div class="note">60대이상</div></a><br>
 			</div>
 	</div><!-- flavorContainer end -->
 	

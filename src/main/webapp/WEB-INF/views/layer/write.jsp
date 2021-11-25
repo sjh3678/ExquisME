@@ -30,7 +30,8 @@
 }
 #btnSub:active {
 	position:relative;
-	top:1px;
+	top: -17px;
+    left: 10px;
 }
 input[type=range] {
   height: 28px;
@@ -521,9 +522,9 @@ $(function(){
 				//결과창 이미지 스타일 추가
 				$(".img_result1").children().children().css({"width":"100%","height":"130px", "float":"left", "position":"relative","top":"10px","left":"50px"});
 				//등록된 요소 더블 클릭 시 삭제
-				$(".item-"+counts[0]).dblclick(function() {
-					$(this).remove();
-				});   
+// 				$(".item-"+counts[0]).dblclick(function() {
+// 					$(this).remove();
+// 				});   
 				
 //				make_draggable($(".item-"+counts[0])); 
 					
@@ -565,10 +566,9 @@ $(function(){
 				$(".img_result2").children().children().removeAttr("style");
 				//결과창 이미지 스타일 추가
 				$(".img_result2").children().children().css({"width":"100%","height":"130px", "float":"left", "position":"relative","top":"10px","right":"50px"});
-				$(".item-"+counts[0]).dblclick(function() {
-					$(this).remove();
-					/* $(".img_result2").children().children(".item-"+counts[0]).remove(); */
-				});
+// 				$(".item-"+counts[0]).dblclick(function() {
+// 					$(this).remove();
+// 				});
 				$("#img2 .perf_img").addClass("perf_imgSize-"+counts[0]);
 				
 //				make_draggable($(".item-"+counts[0]));
