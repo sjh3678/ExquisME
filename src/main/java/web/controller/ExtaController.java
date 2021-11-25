@@ -219,6 +219,15 @@ public class ExtaController {
 		
 		return"redirect:/extagram/list";
 	}
+
+//ADMIN - DELETE
+	@RequestMapping(value="/admin/extagram/delete")
+	public String extaAdminDelete(Extagram extagram, Model model) {
+		
+		extaService.deleteExta(extagram);
+		
+		return"redirect:/extagram/list";
+	}
 	
 //REPORT
 	@RequestMapping(value="/extagram/report", method=RequestMethod.GET)

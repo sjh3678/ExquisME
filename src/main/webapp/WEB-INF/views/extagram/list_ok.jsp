@@ -12,7 +12,7 @@
 			<div id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button class="btn">삭제</button></a></div>
 			</c:if>
 		</div>
-		<div id="b">${list.EX_CONTENT }</div>
+		<div id="b" style="width: 251px;">${list.EX_CONTENT }</div>
 		<div id="c" style="display:table;">
 			<div id="cCenter" style="display:table-cell; vertical-align:middle;">
 			<img style="max-width: 240px; max-height: 240px; display: block; margin: 0 auto;" src="/upload/${list.PICTURE}">

@@ -20,12 +20,12 @@
 
 <!-- 이전 페이지로 가기 -->
 <c:if test="${paging.curPage > 1 }">
-	<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage - 1 }">&larr;</a></li>
+	<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage - 1 }">◀</a></li>
 </c:if>
 
 <!-- 다음 페이지로 가기 -->
 <c:if test="${paging.curPage < paging.totalPage }">
-	<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage + 1 }">&rarr;</a></li>
+	<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.curPage + 1 }">▶</a></li>
 </c:if>
 
 </ul>
