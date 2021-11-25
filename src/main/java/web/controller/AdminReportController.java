@@ -42,6 +42,6 @@ public class AdminReportController {
 		
 		extaService.setReportStart(report);
 		
-		return "redirect:/admin/report/list";
+		return "redirect:/admin/report/list?curPage=1";
 	}
 }

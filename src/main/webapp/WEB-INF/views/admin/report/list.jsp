@@ -8,13 +8,13 @@
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+.tg td{border-color:black;border-style:solid;border-width:1px; sans-serif;font-size:14px;
   overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+.tg th{border-color:black;border-style:solid;border-width:1px; sans-serif;font-size:14px;
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-fjr1{background-color:#eee;border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-data{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-title{background-color:#eee;border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-content{border-color:inherit;text-align:left;vertical-align:top}
 </style>
 
 <script type="text/javascript">
@@ -42,7 +42,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container">
+<div class="container table">
 
 <h1><Strong>Admin Report</Strong></h1><br>
 
@@ -53,27 +53,28 @@ $(document).ready(function() {
 <table class="tg" style="width: 100%;">
 <tbody>
   <tr>
-    <td class="tg-fjr1">No</td>
-    <td class="tg-c3ow">${reportList.REPORT_NO }<input type="hidden" name="reportNo" value="${reportList.REPORT_NO }"/></td>
-    <td class="tg-fjr1">신고인</td>
-    <td class="tg-c3ow">${reportList.REPORTERNICK }<input type="hidden" name="reportNo" value="${reportList.REPORTER }"/></td>
-    <td class="tg-fjr1">피 신고인</td>
-    <td class="tg-c3ow">${reportList.DEFENDANTNICK }<input type="hidden" name="reportNo" value="${reportList.DEFENDANT }"/></td>
+    <td class="tg-title">No</td>
+    <td class="tg-data">${reportList.REPORT_NO }<input type="hidden" name="reportNo" value="${reportList.REPORT_NO }"/></td>
+    <td class="tg-title">신고인</td>
+    <td class="tg-data">${reportList.REPORTERNICK }<input type="hidden" name="reportNo" value="${reportList.REPORTER }"/></td>
+    <td class="tg-title">피 신고인</td>
+    <td class="tg-data">${reportList.DEFENDANTNICK }<input type="hidden" name="reportNo" value="${reportList.DEFENDANT }"/></td>
   </tr>
   <tr>
-    <td class="tg-fjr1">신고일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.REPORT_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
-    <td class="tg-fjr1">제재 시작일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.BAN_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
-    <td class="tg-fjr1">제재 종료일</td>
-    <td class="tg-c3ow"><fmt:formatDate value="${reportList.EXPIRE_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
+    <td class="tg-title">신고일</td>
+    <td class="tg-data"><fmt:formatDate value="${reportList.REPORT_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
+    <td class="tg-title">제재 시작 일</td>
+    <td class="tg-data"><fmt:formatDate value="${reportList.BAN_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
+    <td class="tg-title">제재 종료 일</td>
+    <td class="tg-data"><fmt:formatDate value="${reportList.EXPIRE_DATE }" pattern="yyyy-MM-dd HH:mm"/></td>
   </tr>
   <tr>
-    <td class="tg-fjr1">제제 사유</td>
-    <td class="tg-c3ow">
+    <td class="tg-title">제제 사유</td>
+    <td class="tg-data">
     	<select id="reason" name="reason">
 			<option value="${reportList.REASON }">${reportList.REASON }</option>
 			<option value="무혐의">무혐의</option>
+			<option value="사면">사면</option>
 			<option value="선동">선동</option>
 			<option value="도배">도배</option>
 			<option value="광고">광고</option>
@@ -82,8 +83,8 @@ $(document).ready(function() {
 			<option value="음란물">음란물</option>
 		</select>
     </td>
-    <td class="tg-fjr1">제재 처분</td>
-    <td class="tg-c3ow">
+    <td class="tg-title">제재 처분</td>
+    <td class="tg-data">
     	<select id="banType" name="banType">
 			<option value="${reportList.BAN_TYPE }">
 				<c:if test="${reportList.BAN_TYPE == 0}">
@@ -113,14 +114,14 @@ $(document).ready(function() {
 			<option value="99999">영구 정지</option>
 		</select>
     </td>
-    <td class="tg-fjr1">처리 상태</td>
-    <td class="tg-c3ow">${reportList.IS_EXECUTE}</td>
+    <td class="tg-title">처리 상태</td>
+    <td class="tg-data">${reportList.IS_EXECUTE}</td>
   </tr>
   <tr>
-    <td class="tg-fjr1" colspan="6">신고 사유<br>(클릭 시 해당 게시글 이동)</td>
+    <td class="tg-title" colspan="6">신고 사유<br>(클릭 시 해당 게시글 이동)</td>
   </tr>
   <tr>
-    <td class="tg-0pky" colspan="6"><div style="height: 500px;"><a href="/extagram/view?exNo=${reportList.EX_POST_NO }">${reportList.REPORT_CONTENT}</a></div></td>
+    <td class="tg-content" colspan="6"><div style="height: 500px;"><a href="/extagram/view?exNo=${reportList.EX_POST_NO }">${reportList.REPORT_CONTENT}</a></div></td>
   </tr>
 </tbody>
 </table>
@@ -128,7 +129,7 @@ $(document).ready(function() {
 <div class="text-center"><button id="complete" class="btn" style="background-color: #eee;">완료</button></div>
 </form>
 
-<c:import url="/WEB-INF/views/layout/paging.jsp" />
+<c:import url="/WEB-INF/views/layout/paging2.jsp" />
 
 </div><!-- .container -->
 
