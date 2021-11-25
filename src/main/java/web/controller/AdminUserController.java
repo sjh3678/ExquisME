@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import web.service.face.UserService;
 import web.util.PagingUser;
 
-@Controller
-@RequestMapping(value = "/admin/user")
-public class AdminUserController {
+	@Controller
+	@RequestMapping(value = "/admin/user")
+	public class AdminUserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminUserController.class);
 	
@@ -34,6 +34,13 @@ public class AdminUserController {
 		model.addAttribute("paging", pagingUser);
 		model.addAttribute("list", list);
 		
+	}
+	
+	@RequestMapping(value = "/delete")
+	public String userDelete(int userNo) {
+		logger.info("userNo : {}", userNo);
+		userService.deleteUser(userNo);
+		return "redirect:/admin/user/list";
 	}
 	
 }

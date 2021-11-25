@@ -9,7 +9,7 @@
 <h1>회원 리스트</h1>
 <hr>
 <div style="text-align: center;">
-<form action="/admin/perf/list" method="get">
+<form action="/admin/user/list" method="get">
 <input type="text" name="search"><button>검색</button>
 </form>
 </div>
@@ -38,7 +38,7 @@
 		<td style="text-align: center;">${user.PHONE }</td>
 		<td style="text-align: center;">${user.GENDER }</td>
 		<td style="text-align: center;">${user.IS_ADMIN }</td>
-		<td style="text-align: center;"><a href="/admin/perf/delete?perfumeNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete">회원 삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/delete?userNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete">회원 삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>
