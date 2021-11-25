@@ -292,7 +292,7 @@
 </delete>
 
 <select id="selectPerfMostLike" resultType="hashmap">
-	SELECT plsc.*, f.stored_name, p.brand_no, p.perfume_vitality, b.brand_name FROM
+	SELECT plsc.*, f.stored_name, p.perfume_name, p.brand_no, p.perfume_vitality, b.brand_name FROM
 	(SELECT PLC.perfume_no, NVL2(plc.likecnt - pdlc.dislikecnt, plc.likecnt - pdlc.dislikecnt, plc.likecnt) cnt, plc.likecnt, NVL2(dislikecnt, dislikecnt, 0) dislikecnt FROM
 	(SELECT perfume_no, count(*) likecnt FROM tb_perf_like
 	WHERE perfume_islike=1
