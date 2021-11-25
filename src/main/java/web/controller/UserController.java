@@ -236,6 +236,9 @@ public class UserController {
 			//인증키 값 삭제
 			session.removeAttribute("authKey");
 		}
+		if(!isUpdate) {
+			logger.info("회원정보 수정 실패");
+		}
 		return "redirect:/user/mypage";
 	}
 	

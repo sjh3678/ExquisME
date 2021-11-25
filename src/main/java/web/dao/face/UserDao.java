@@ -202,9 +202,4 @@ public interface UserDao {
 	 * @param userNo - 삭제할 유저 정보
 	 */
 	public void deletePerfLikeByUserNo(int userNo);
-
-
-
-
-
 }

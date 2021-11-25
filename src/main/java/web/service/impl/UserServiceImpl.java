@@ -197,39 +197,56 @@ public class UserServiceImpl implements UserService{
 	public boolean searchEmail(User user) {
 		int cnt = userDao.selectUserCnt(user);
 		boolean isChecked = true;
+		
 		if(cnt == 0) {
 			logger.info("매칭된 이메일 없음");
 			 isChecked = false;	
+		}else {
+			logger.info("이메일 중복");
+			isChecked = true;
 		}
+		
 		if(user.getUserNo() != 0) {
 			String email = user.getEmail();
 			user = userDao.selectUserByUserno(user.getUserNo());
-			if(email.equals(user.getEmail()) && !email.equals("")) {
-				logger.info("회원의 기존 이메일");
+			if(!email.equals(user.getEmail()) || email.equals("")) {
+				logger.info("비어있거나 형식에 맞지않는 이메일");
+				isChecked = true;
+			}else {
+				logger.info("유효한 형식");
 				isChecked = false;
 			}
 		}
-		logger.info("이메일 중복");
-		
+
 		return isChecked;
 	}
 
 	@Override
 	public boolean searchNick(User user) {
 		int cnt = userDao.selectUserCnt(user);
+		boolean isChecked = true;
+		
 		if(cnt == 0) {
 			logger.info("매칭된 닉네임 없음");
-			return false;	
-		}else if(user.getUserNo() != 0) {
+			isChecked =  false;	
+		}else {
+			logger.info("닉네임 중복");
+			isChecked = true;
+		}
+		
+		if(user.getUserNo() != 0) {
 			String nick = user.getNick();
 			user = userDao.selectUserByUserno(user.getUserNo());
-			if(nick.equals(user.getNick()) && !nick.equals("")) {
-				logger.info("회원의 기존 닉네임");
-				return false;
+			if(!nick.equals(user.getNick()) || nick.equals("")) {
+				logger.info("비어있거나 형식에 맞지않는 닉네임");
+				isChecked = true;
+			}else {
+				logger.info("유효한 형식");
+				isChecked = false;
 			}
 		}
-		logger.info("닉네임 중복");
-		return true;
+
+		return isChecked;
 	}
 
 	@Override
