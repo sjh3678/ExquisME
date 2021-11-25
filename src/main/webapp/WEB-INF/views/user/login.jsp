@@ -123,6 +123,8 @@ $(document).ready(function(){
 		init();
 		
 	})
+	
+
 })
 </script>
 <style type="text/css">
@@ -164,7 +166,9 @@ label {
 	height: 80%;
 }
 .button {
-	
+	margin-bottom: 10px;
+	width: 375px;
+	font-weight: 700;
 }
 .form-write{
 	width:300px;
@@ -177,6 +181,7 @@ label {
 	margin-top:80px;
 }
 .btnLogin{
+	margin: 0 2.5px;
 	width: 120px;
 	font-weight: 700;
 }
@@ -219,13 +224,13 @@ label {
 <label id="serchIdPw">아이디 / 비밀번호 찾기 </label>
 </div>
 <div class="text-center" id="btnArea"> 
-   <button class="btn button form-control" type="button" id="loginBtn">로그인</button><br><br>
+   <button class="btn button form-control" type="button" id="loginBtn">로그인</button>
    <div>
    <button class="btn btnLogin" type="button" id="google"><i class="fab fa-google"></i>구글 로그인</button>
    <button class="btn btnLogin" type="button" id="kakao">카카오 로그인</button>
-   <button class="btn btnLogin" type="button" id="naver">네이버 로그인</button>
-   <div id="naver_id_login"></div>
+   <button class="btn btnLogin" type="button" id="naver" onclick="$('#naver_id_login_anchor').trigger('click')">네이버 로그인</button>
    </div>
+   <div id="naver_id_login"></div>
 </div>
 </form>
 
