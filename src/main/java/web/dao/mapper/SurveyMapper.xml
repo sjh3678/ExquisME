@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.dao.face.SurveyDao">
+	<select id="selectNoteLiteByParam" resultType="Hashmap" parameterType="Hashmap">
+		SELECT NOTE_NO, NOTE_NAME, NOTE_ATTRIBUTES, NOTE_TYPE FROM tb_note
+		WHERE LIKE_MOOD = #{A2 } 
+	</select>
+	
+	<select id="selectRandomPerfNo" resultType="int" parameterType="HashMap">
+		SELECT * FROM (
+    		SELECT perfume_no
+		        FROM tb_perf_note
+		        WHERE
+		        <foreach collection="list" item="list"  separator="OR">
+		         note_no = #{list.NOTE_NO } 
+		         </foreach>
+		        ORDER BY DBMS_RANDOM.VALUE
+      		)
+  		WHERE 3 >= rownum
+	</select>
+	<select id="selecPerfByPerfNo" resultType="HashMap" parameterType="List">
+		SELECT P.perfume_no, B.brand_name
+    			, P.perfume_name, F.stored_name
+    		FROM tb_perf P 
+    		LEFT OUTER JOIN tb_file F ON F.file_no = P.file_no
+    		LEFT OUTER JOIN tb_brand B ON B.brand_no = P.brand_no
+    	WHERE 
+    	<foreach collection="list" item="perfNo" separator="OR" >
+    		perfume_no = #{perfNo }
+    	</foreach>
+	</select>
+</mapper>

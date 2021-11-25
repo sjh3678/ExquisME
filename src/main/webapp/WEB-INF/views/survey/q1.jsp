@@ -96,7 +96,7 @@
 		</div>
 		<div class="item">
 			<a href="/survey/q2?useName=${useName }&A1=4">
-				<img alt="바다" src="/resources/img/survey/1-nature.jpg"><br>
+				<img alt="자연" src="/resources/img/survey/1-nature.jpg"><br>
 			</a>
 			<div>4.자연</div>
 		</div>

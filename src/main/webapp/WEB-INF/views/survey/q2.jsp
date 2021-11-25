@@ -105,9 +105,9 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 2 }">
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=2&A2=1">
-					<img alt="새콤한" src="/resources/img/survey/2-acidulous.jpg"></a><br>
-				<div>1.새콤한</div>
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=5">
+					<img alt="상큼한" src="/resources/img/survey/2-acidulous.jpg"></a><br>
+				<div>1.상큼한</div>
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=2&A2=2">
@@ -116,13 +116,13 @@
 				<div>2.달콤한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=2&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=6">
 					<img alt="신선한" src="/resources/img/survey/2-fresh.jpg"><br>
 				</a>
 				<div>3.신선한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=2&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=2&A2=7">
 					<img alt="가벼운" src="/resources/img/survey/2-light.jpg"><br>
 				</a>
 				<div>4.가벼운</div>
@@ -130,18 +130,18 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 3 }">
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=3&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=8">
 					<img alt="매력적인" src="/resources/img/survey/2-attractive.jpg"></a><br>
 				<div>1.매력적인</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=3&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=3">
 					<img alt="포근한" src="/resources/img/survey/2-comfy.jpg"><br>
 				</a>
 				<div>2.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=3&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=3&A2=2">
 					<img alt="달콤한" src="/resources/img/survey/2-sweety.jpg"><br>
 				</a>
 				<div>3.달콤한</div>
@@ -155,24 +155,24 @@
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 		<c:if test="${A1 eq 4 }">
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=4&A2=1">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=9">
 					<img alt="포근한" src="/resources/img/survey/2-comfy.jpg"></a><br>
 				<div>1.포근한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=4&A2=2">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=10">
 					<img alt="시원한" src="/resources/img/survey/2-cool.jpg"><br>
 				</a>
 				<div>2.시원한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=4&A2=3">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=11">
 					<img alt="단단한" src="/resources/img/survey/2-hard.jpg"><br>
 				</a>
 				<div>3.단단한</div>
 			</div>
 			<div class="item">
-				<a href="/survey/q3?useName=${useName }&A1=4&A2=4">
+				<a href="/survey/q3?useName=${useName }&A1=4&A2=12">
 					<img alt="깔끔한" src="/resources/img/survey/2-neat.jpg"><br>
 				</a>
 				<div>4.깔끔한</div>

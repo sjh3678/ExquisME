@@ -46,30 +46,25 @@
 	float: left;
 }
 
-.item img {
-	width: 130px;
-	height: 130px;
-	cursor: pointer;
-}
-
 .item div {
-	width: 400px;
+	width: 300px;
 	height: 50px;
 	text-align: center;
 	font-weight: bold;
 	margin: auto;
 	border-radius: 10px;
 }
-a:link { color: red; text-decoration: none;}
-a:visited { color: black; text-decoration: none;}
+a:link { color: white; text-decoration: none;}
+a:visited { color: white; text-decoration: none;}
 a:active {
 	position: relative;
 	top: 1px;
 }
 .note {
 	background-color: gray; 
-	color:white;
-	line-height: -30px;
+	color: white;
+	display:table-cell;
+	vertical-align: middle;
 }
 </style>
 
@@ -92,19 +87,19 @@ a:active {
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=1">
-					<div class="note">10대</div></a><br>
+				<div class="note">10대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=2">
-					<div class="note">20~30대</div></a><br>
+				<div class="note">20~30대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=3">
-					<div class="note">40~50대</div></a><br>
+				<div class="note">40~50대</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/q8?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=4">
-					<div class="note">60대이상</div></a><br>
+				<div class="note">60대이상</div></a><br>
 			</div>
 	</div><!-- flavorContainer end -->
 	

@@ -7,14 +7,20 @@
 <h1>결과창</h1>
 <hr>
 <h4>닉네임 : ${useName }</h4>
-<h4>1번 : ${A1 }</h4>
-<h4>2번 : ${A2 }</h4>
-<h4>3번 : ${A3 }</h4>
-<h4>4번 : ${A4 }</h4>
-<h4>5번 : ${A5 }</h4>
-<h4>6번 : ${A6 }</h4>
-<h4>7번 : ${A7 }</h4>
-<h4>8번 : ${A8 }</h4>
+
+<div class="result-wrap">
+	<c:forEach items="${list }" var="list">
+		${list.NOTE_NAME }
+		${list.NOTE_ATTRIBUTES }
+		${list.NOTE_TYPE }
+		<img alt="" src="/resources/img/note/${list.NOTE_NAME }.jpg">
+	</c:forEach>
+</div>
+<div class="result-perf">
+	<c:forEach items="${perfList }" var="perfList">
+		<img alt="" src="/upload/${perfList.STORED_NAME }">
+	</c:forEach>
+</div>
 
 
 </div><!-- container end -->

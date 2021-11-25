@@ -41,24 +41,31 @@
 }
 
 .item {
-	width: 50%;
+	width: 100%;
 	margin:0 auto;
 	float: left;
 }
 
-.item img {
-	width: 130px;
-	height: 130px;
-	cursor: pointer;
-}
-
 .item div {
-	width: 130px; 
+	width: 300px;
+	height: 50px;
 	text-align: center;
 	font-weight: bold;
 	margin: auto;
+	border-radius: 10px;
 }
-
+a:link { color: white; text-decoration: none;}
+a:visited { color: white; text-decoration: none;}
+a:active {
+	position: relative;
+	top: 1px;
+}
+.gender {
+	background-color: gray; 
+	color: white;
+	display:table-cell;
+	vertical-align: middle;
+}
 </style>
 
 <div class="container">
@@ -80,14 +87,11 @@
 	<div class="flavorContainer">
 			<div class="item">
 				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7}&A8=1">
-					<img alt="여자" src="/resources/img/survey/1-flower.jpg"></a><br>
-				<div>여자</div>
+				<div class="gender">여성</div></a><br>
 			</div>
 			<div class="item">
 				<a href="/survey/result?useName=${useName }&A1=${A1 }&A2=${A2 }&A3=${A3 }&A4=${A4 }&A5=${A5 }&A6=${A6 }&A7=${A7}&A8=2">
-					<img alt="남자" src="/resources/img/survey/1-fruit.jpg"><br>
-				</a>
-				<div>남자</div>
+				<div class="gender">남성</div></a><br>
 			</div>
 	</div><!-- flavorContainer end -->
 	
