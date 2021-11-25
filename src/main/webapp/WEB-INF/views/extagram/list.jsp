@@ -14,7 +14,7 @@
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 410px;
+	height: 450px;
 	border-radius: 5px; 
 	margin: 4px;
 /* 	border: 1px solid #ddd; */
@@ -43,10 +43,14 @@
 	text-overflow: ellipsis;
 }
 #c {
-	height: 200px;
-	width: 258px;
+	background: #FFF;
+	height: 250px;
+	width: 250px;
 	overflow : hidden;
 	display: block;
+	margin: 0 auto;
+	border-radius: 5px;
+	padding: auto;
 }
 #d {
     margin: 5px 10px;

@@ -13,8 +13,11 @@
 			</c:if>
 		</div>
 		<div id="b">${list.EX_CONTENT }</div>
-		<div id="c"><img style="max-width: 95%; height: auto; max-height: 180px; display: block; margin: auto;"
-					src="/upload/${list.PICTURE}"></div><!-- width: 258px -->
+		<div id="c" style="display:table;">
+			<div id="cCenter" style="display:table-cell; vertical-align:middle;">
+			<img style="max-width: 95%; height: auto; max-height: 95%; display: block; margin: 0 auto;" src="/upload/${list.PICTURE}">
+			</div>
+		</div><!-- width: 258px -->
 		<div id="d">
 			<img style="width: 20px; height: auto;" src="/resources/img/heart/heartEmpty2.png"/> ${list.HEART }&nbsp;&nbsp;
 			<img style="width: 20px; height: auto;" src="/resources/img/heart/balloon.png"/> ${list.COMM }
