@@ -16,23 +16,33 @@ ul{
 li{
 	display: inline-block;
 }
+table{
+	table-layout:fixed;
+	width:100%;
+	border: 1px solid #ccc;
+	cellpadding: 0;
+	
+}
 table tr td{
 	text-align: center;
+}
+td{
+	overflow:hidden;
 }
 </style>
 <table>
 <tr>
-	<td>번호</td>
-	<td>작성자</td>
+	<td>extagram번호</td>
+	<td>업로드한 파일</td>
 	<td>내용</td>
 	<td>작성일</td>
 </tr>
 <c:forEach items="${extaList}" var="list">
 <tr>
-	<td style="width:10%" onclick="location.href='/extagram/view?exNo=${list.EX_NO}';">${list.EX_NO}</td>
-	<td style="width:20%"><img width="20px" height="20px" src="/upload/${list.PROFILE }"/>${list.NICK }</td>
-	<td style="width:50%">${list.EX_CONTENT }</td>
-	<td style="width:20%"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';">${list.EX_NO}</td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><img width="20px" height="20px" src="/upload/${list.UPFILE }"/></td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';" nowrap style="overflow:hidden;">${list.EX_CONTENT }</td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 </tr>
 </c:forEach>
 </table>

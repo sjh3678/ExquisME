@@ -18,23 +18,29 @@ li{
 }
 .hitoryList{
 	text-align: center;
+	table-layout:fixed;
+	width:100%;
+	border: 1px solid #ccc;
+	cellpadding: 0;
+}
+
+td{
+	overflow:hidden;
 }
 </style>
 <table class="hitoryList">
 <tr>
-	<td>구분</td>
-	<td>댓글 번호</td>
+	<td>extagram번호</td>
 	<td>작성자</td>
 	<td>내용</td>
 	<td>작성일</td>
 </tr>
 <c:forEach items="${commList}" var="list">
 <tr>
-	<td style="width:5%" onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';">${list.EX_POST_NO}</td>
-	<td style="width:5%">${list.EX_COMM_NO}</td>
-	<td style="width:20%"><img width="20px" height="20px" src="/upload/${list.PROFILE }"/>${list.NICK }</td>
-	<td style="width:50%">${list.EX_COMM }</td>
-	<td style="width:20%"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
+	<td  onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';">${list.EX_POST_NO}</td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';"><img width="20px" height="20px" src="/upload/${list.POSTPROFILE }"/>${list.POSTOWNER }</td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';" nowrap style="overflow:hidden;">${list.EX_COMM }</td>
+	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 </tr>
 </c:forEach>
 </table>

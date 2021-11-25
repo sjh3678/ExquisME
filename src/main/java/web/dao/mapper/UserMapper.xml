@@ -142,8 +142,9 @@
 		SELECT * FROM(
 			SELECT rownum rnum, R.* FROM(
 				SELECT
-    				 e.ex_no, fx.stored_name upFile, e.user_no, u.nick,
+    				 e.ex_no, fx.stored_name upFile, e.user_no POSTOWNER, u.nick,
    					 e.ex_content, e.ex_date, e.ex_views, fu.stored_name Profile
+   					 , u.user_no YOU
 				FROM tb_extagram e, tb_user u, tb_file fx, tb_file fu
 				WHERE e.user_no = u.user_no AND fx.file_no = e.file_no
 				AND u.file_no = fu.file_no AND e.user_no = #{user.userNo}
@@ -163,15 +164,17 @@
 	
 	<select id="selectCommHistoryByUserNo" resultType="hashmap" parameterType="hashmap">
 		SELECT * FROM(
-			SELECT rownum rnum, R.* FROM(
-				SELECT
-    				c.ex_comm_no, c.user_no, c.ex_post_no, c.ex_comm,
-    				 c.ex_comm_date, u.nick, fu.stored_name profile
-				FROM tb_ex_comm c, tb_extagram e, tb_user u,  tb_file fu
-				WHERE e.ex_no = c.ex_post_no AND u.file_no = fu.file_no 
-				AND u.user_no = #{user.userNo} AND c.user_no = #{user.userNo}
-                ORDER BY ex_comm DESC
-			) R
+    		SELECT rownum rnum, R.* FROM(
+        		SELECT
+            		c.ex_comm_no, c.user_no, c.ex_post_no, c.ex_comm,
+            		c.ex_comm_date, u.nick, fu.stored_name profile, pu.nick POSTOWNER
+            		, fp.stored_name POSTPROFILE
+        		FROM tb_ex_comm c, tb_extagram e, tb_user u,  tb_file fu, tb_user pu, tb_file fp
+        		WHERE e.ex_no = c.ex_post_no AND u.file_no = fu.file_no 
+         		   	AND pu.user_no = e.user_no AND pu.file_no = fp.file_no
+            		AND u.user_no = #{user.userNo} AND c.user_no = #{user.userNo}
+        		ORDER BY ex_comm DESC
+    		) R
 		)T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
 	</select>

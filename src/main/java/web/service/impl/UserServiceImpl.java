@@ -196,19 +196,22 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean searchEmail(User user) {
 		int cnt = userDao.selectUserCnt(user);
+		boolean isChecked = true;
 		if(cnt == 0) {
 			logger.info("매칭된 이메일 없음");
-			return false;	
-		}else if(cnt != 0 && user.getUserNo() != 0) {
+			 isChecked = false;	
+		}
+		if(user.getUserNo() != 0) {
 			String email = user.getEmail();
 			user = userDao.selectUserByUserno(user.getUserNo());
 			if(email.equals(user.getEmail()) && !email.equals("")) {
 				logger.info("회원의 기존 이메일");
-				return false;
+				isChecked = false;
 			}
 		}
 		logger.info("이메일 중복");
-		return true;
+		
+		return isChecked;
 	}
 
 	@Override
@@ -217,7 +220,7 @@ public class UserServiceImpl implements UserService{
 		if(cnt == 0) {
 			logger.info("매칭된 닉네임 없음");
 			return false;	
-		}else if(cnt != 0 && user.getUserNo() != 0) {
+		}else if(user.getUserNo() != 0) {
 			String nick = user.getNick();
 			user = userDao.selectUserByUserno(user.getUserNo());
 			if(nick.equals(user.getNick()) && !nick.equals("")) {
@@ -393,6 +396,8 @@ public class UserServiceImpl implements UserService{
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("user", user);
 		map.put("paging", paging);
+		
+		logger.info("{}", map);
 		
 		List<Map<String, Object>> list = userDao.selectCommHistoryByUserNo(map);
 		

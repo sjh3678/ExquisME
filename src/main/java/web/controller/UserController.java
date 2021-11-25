@@ -110,8 +110,7 @@ public class UserController {
 	public @ResponseBody boolean checkId(User user, HttpSession session) {
 		logger.info("checkId called");
 		logger.info("id : {}", user.getId());
-		if(session.getAttribute("userNo") != null)
-			user.setUserNo((Integer)session.getAttribute("userNo"));
+
 		boolean isIdExist = userService.searchId(user);
 		logger.info("{}",isIdExist);
 		return isIdExist;
