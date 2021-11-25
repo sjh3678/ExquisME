@@ -8,6 +8,7 @@ import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.util.PagingExtagram;
+import web.util.PagingUser;
 
 public interface UserDao {
 
@@ -125,5 +126,21 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<Map<String, Object>> selectCommHistoryByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 조회할 회원 리스트 갯수
+	 * 
+	 * @param paramData
+	 * @return
+	 */
+	public int selectCntUserAll(PagingUser paramData);
+
+	/**
+	 * 조회된 회원 리스트 (페이징 적용, 검색 적용)
+	 * 
+	 * @param pagingUser
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectUserAll(PagingUser pagingUser);
 
 }

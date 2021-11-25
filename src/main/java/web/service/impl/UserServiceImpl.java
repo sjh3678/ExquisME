@@ -21,6 +21,7 @@ import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
+import web.util.PagingUser;
 
 
 @Service
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired ServletContext context;
 	
-	private Logger logger = LoggerFactory.getLogger(UserService.class);
+	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Override
 	public boolean getLoginCheck(User param) {
@@ -363,6 +364,23 @@ public class UserServiceImpl implements UserService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public PagingUser getPaging(PagingUser paramData) {
+		
+		//총 게시글 수 조회
+		int totalCount = userDao.selectCntUserAll(paramData);
+
+		//페이징 계산
+		PagingUser pagingUser = new PagingUser(totalCount, paramData.getCurPage());
+						
+		return pagingUser;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getUserList(PagingUser pagingUser) {
+		return userDao.selectUserAll(pagingUser);
 	}
 
 }

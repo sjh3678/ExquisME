@@ -11,6 +11,7 @@ import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.User;
 import web.util.PagingExtagram;
+import web.util.PagingUser;
 
 public interface UserService {
 
@@ -161,5 +162,21 @@ public interface UserService {
 	 * @return - 조회 결과 반환
 	 */
 	public boolean isJoinUser(User user);
+
+	/**
+	 * 관리자 회원 리스트 페이징가져오기
+	 * 
+	 * @param paramData
+	 * @return
+	 */
+	public PagingUser getPaging(PagingUser paramData);
+
+	/**
+	 * 관리자 회원 리스트 가져오기 (페이징 적용)
+	 * 
+	 * @param pagingUser
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getUserList(PagingUser pagingUser);
 
 }

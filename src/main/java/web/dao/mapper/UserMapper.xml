@@ -170,4 +170,24 @@
 		)T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
 	</select>
+	
+	<select id="selectCntUserAll" resultType="int" parameterType="web.util.PagingUser">
+		SELECT count(*) cnt FROM (
+			SELECT * FROM tb_user
+			<if test='search != null and !search.equals("")'>
+				WHERE id LIKE '%' || #{search } || '%'
+				OR nick LIKE '%' || #{search } || '%'
+			</if>
+				)
+	</select>
+	
+	<select id="selectUserAll" resultType="hashmap" parameterType="web.util.PagingUser">
+		SELECT f.stored_name, u.user_no, u.id, u.nick, u.email, u.phone, u.gender, u.is_admin FROM tb_user U
+			LEFT OUTER JOIN tb_file F
+   			ON u.file_no = f.file_no
+			<if test='search != null and !search.equals("")'>
+				WHERE id LIKE '%' || #{search } || '%'
+				OR nick LIKE '%' || #{search } || '%'
+			</if>
+	</select>
 </mapper>
