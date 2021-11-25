@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <!-- google signin api -->
@@ -163,9 +164,7 @@ label {
 	height: 80%;
 }
 .button {
-	background-color: #036bfc;
-	color: white;
-	border-radius: 8px;
+	
 }
 .form-write{
 	width:300px;
@@ -176,6 +175,22 @@ label {
 }
 .top{
 	margin-top:80px;
+}
+.btnLogin{
+	width: 120px;
+	font-weight: 700;
+}
+#google{
+	background: #EA4335;
+	color: white;
+}
+#kakao{
+	background: #F7E600;
+	color: #3A1D1D;
+}
+#naver{
+	background: #2DB400;
+	color: white;
 }
 </style>
 <div class="container">
@@ -204,10 +219,13 @@ label {
 <label id="serchIdPw">아이디 / 비밀번호 찾기 </label>
 </div>
 <div class="text-center" id="btnArea"> 
-   <button class="button form-control" type="button" id="loginBtn">로그인</button><br><br>
-   <button class="btn btn-primary form-control" type="button" id="google"><i class="fab fa-google"></i>&nbsp;&nbsp;구글 로그인</button><br><br>
-   <button class="btn btn-warning form-control" type="button" id="kakao">카카오 로그인</button><br><br>
+   <button class="btn button form-control" type="button" id="loginBtn">로그인</button><br><br>
+   <div>
+   <button class="btn btnLogin" type="button" id="google"><i class="fab fa-google"></i>구글 로그인</button>
+   <button class="btn btnLogin" type="button" id="kakao">카카오 로그인</button>
+   <button class="btn btnLogin" type="button" id="naver">네이버 로그인</button>
    <div id="naver_id_login"></div>
+   </div>
 </div>
 </form>
 
@@ -358,10 +376,10 @@ console.log("카카오 로그인 종료");
 </script>
 
 <script type="text/javascript">
-	var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "http://localhost:8891/user/login");
+	var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
 	var state = naver_id_login.getUniqState();
-	naver_id_login.setButton("white", 2,40);
-	naver_id_login.setDomain("http://localhost:8891");
+	naver_id_login.setButton("white", 2, 40);
+	naver_id_login.setDomain("${pageContext.request.serverName}:${pageContext.request.serverPort}");
 	naver_id_login.setState(state);
 	naver_id_login.init_naver_id_login();
 </script>
@@ -369,7 +387,7 @@ console.log("카카오 로그인 종료");
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "http://localhost:8891/user/login");
+var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "${pageContext.request.serverName}:${pageContext.request.serverPort}/user/login");
 // 네이버 사용자 프로필 조회
 naver_id_login.get_naver_userprofile("naverSignInCallback()");
 // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
