@@ -505,10 +505,11 @@ async function submit() {
 			success: function(result) {
 				// 회원가입 성공
 				if (result == "true") {
-					alert("회원가입 성공")
+					console.log("회원가입 성공")
+					$(location).attr("href", "/");
 					return true;
 				} else {
-					alert("회원가입 실패")
+					console.log("회원가입 실패")
 					return false;
 				}
 			},
@@ -568,7 +569,6 @@ $(document).ready(function(){
     })
     $("#nextBtn").click(function(){
     	submit(); 	
-    	$(location).attr("href", "/");
     })
     $("#cancleBtn").click(function(){
     	$(location).attr("href", "/");

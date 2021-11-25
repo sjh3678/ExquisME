@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<!-- google signin api -->
+<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript">
@@ -117,6 +120,7 @@ $(document).ready(function(){
 	$("#google").click(function(){
 		console.log("구글 로그인")
 		init();
+		
 	})
 })
 </script>
@@ -203,7 +207,7 @@ label {
    <button class="button form-control" type="button" id="loginBtn">로그인</button><br><br>
    <button class="btn btn-primary form-control" type="button" id="google"><i class="fab fa-google"></i>&nbsp;&nbsp;구글 로그인</button><br><br>
    <button class="btn btn-warning form-control" type="button" id="kakao">카카오 로그인</button><br><br>
-   <button class="btn btn-success form-control" type="button" id="naver">네이버 로그인</button><br><br>
+   <div id="naver_id_login"></div>
 </div>
 </form>
 
@@ -266,10 +270,11 @@ label {
 </form>
 
 <!-- 소셜 로그인 / 가입 폼 반환 -->
-<form action="/user/social/join" method="post" id="socialLogin">
+<form action="/user/social/join" method="get" id="socialLogin">
 <input type="hidden" name="email" id="social-email">
 <input type="hidden" name="nick" id="social-nick">
 </form>
+
 </div>
 </div>
 
@@ -277,10 +282,6 @@ label {
 
 </div>
 </div>
-<!-- google signin api -->
-<script src="https://apis.google.com/js/platform.js"></script>
-<!-- 카카오 소셜 로그인 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <script type="text/javascript">
 //google signin API
@@ -319,7 +320,6 @@ function attachSignin(element) {
 
 <script type="text/javascript">
 
-
 Kakao.init('00f8f4b7d54645c5187733d7b8196c4f'); //발급받은 키 중 javascript키를 사용해준다.
 
 //카카오로그인
@@ -354,6 +354,34 @@ function kakaoLogin() {
   		
 	});
 console.log("카카오 로그인 종료");
+}
+</script>
+
+<script type="text/javascript">
+	var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "http://localhost:8891/user/login");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("white", 2,40);
+	naver_id_login.setDomain("http://localhost:8891");
+	naver_id_login.setState(state);
+	naver_id_login.init_naver_id_login();
+</script>
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+var naver_id_login = new naver_id_login("3cpR3IA9PSUVGuiCnHnh", "http://localhost:8891/user/login");
+// 네이버 사용자 프로필 조회
+naver_id_login.get_naver_userprofile("naverSignInCallback()");
+// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+function naverSignInCallback() {
+  	const email = naver_id_login.getProfileData('email');
+  	const nick = naver_id_login.getProfileData('nickname');
+ 	console.log(email);
+	console.log(name);
+	
+	$("#social-email").val(email);
+	$("#social-nick").val(name);
+	$("#socialLogin").submit();
 }
 </script>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

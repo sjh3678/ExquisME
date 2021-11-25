@@ -448,7 +448,7 @@ public class UserController {
 		return "/user/history/comment";
 	}
 	
-	@RequestMapping(value="/social/join", method=RequestMethod.POST)
+	@RequestMapping(value="/social/join", method=RequestMethod.GET)
 	public String socialLogin(User user, Model model,HttpSession session) {
 		logger.info("socialLogin called 전달값 : {}", user);
 		boolean isJoin = userService.isJoinUser(user);

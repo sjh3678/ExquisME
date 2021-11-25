@@ -510,6 +510,7 @@ span{
 <div id="title">
 	<div style="font-size: 21px; margin: 20px; margin-bottom: 40px;">${user.nick }님의 프로필</div>
 </div>
+
 <div id="infoArea">
 	<form action="/user/profile" method="post" enctype="multipart/form-data" id="update-form">
 		<!-- 보여지는 프로필 사진 -->
