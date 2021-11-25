@@ -15,7 +15,7 @@
 		<div id="b">${list.EX_CONTENT }</div>
 		<div id="c" style="display:table;">
 			<div id="cCenter" style="display:table-cell; vertical-align:middle;">
-			<img style="max-width: 95%; height: auto; max-height: 95%; display: block; margin: 0 auto;" src="/upload/${list.PICTURE}">
+			<img style="max-width: 240px; max-height: 240px; display: block; margin: 0 auto;" src="/upload/${list.PICTURE}">
 			</div>
 		</div><!-- width: 258px -->
 		<div id="d">

@@ -10,7 +10,7 @@
     <div class="flex-items">
 		<div class="perf_pic">
 			<a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">
-				<img class="perf_img" style="width:230px; height:240px; display: block; margin: auto;"
+				<img class="perf_img" style="max-width:240px; height:240px; display: block; margin: auto;"
 					src="/upload/${perf.STORED_NAME }">
 			</a>
 		</div>

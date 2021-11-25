@@ -160,7 +160,7 @@ $(document).ready(function() {
 </colgroup>
 <thead>
   <tr>
-    <th class="tg-c3ow" rowspan="4"><img class="perf_img" style="width:500px; height:500px; display: block; margin: auto;"
+    <th class="tg-c3ow" rowspan="4"><img class="perf_img" style="max-width:500px; height:500px; display: block; margin: auto;"
 					src="/upload/${perf.STORED_NAME }"></th>
     <th class="tg-c3ow" colspan="2"><img class="perf_img" style="width: 150px; display: block; margin: auto;"
 					src="/resources/img/brand/${perf.BRAND_NAME }.png"><hr class="hrPerfView"></th>

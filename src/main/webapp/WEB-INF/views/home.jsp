@@ -213,6 +213,12 @@ $(document).ready(function(){
 #pBrand {
 	font-size: 28px;
 }
+#middleImg{
+	 width: 270px;
+	 height: 270px;
+	 background: #FFF;
+	 border-radius: 10px;
+}
 </style>
 
 <div class="container">
@@ -241,7 +247,7 @@ $(document).ready(function(){
 						<ul id="slider">
 						<c:forEach items="${list }" var="showList">
 							<li>
-							<div class="list_detail">
+							<div class="list_detail" id="middleImg">
 								<a href="/perf/view?perfumeNo=${showList.PERFUME_NO }">
 								<img class="poster" id="poster" src="/upload/${showList.STORED_NAME }"/>
 								</a>
