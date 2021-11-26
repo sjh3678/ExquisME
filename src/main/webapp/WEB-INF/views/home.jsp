@@ -23,7 +23,7 @@ $(document).ready(function(){
 		$("#sliderbox").click()
 	}
 	
-	//3초마다 #sliderbox에 클릭 이벤트 발생 시키기
+	//4초마다 #sliderbox에 클릭 이벤트 발생 시키기
 	var tid = setInterval(sliderClick, 4000)
 	
 	//--------------------------------------------------
@@ -33,7 +33,7 @@ $(document).ready(function(){
 	var curSlide = 0;
 	$("#sliderbox").click(function(){
 		
-		//초기화하고 다시 3초 걸어주기
+		//초기화하고 다시 4초 걸어주기
 		clearInterval(tid)
 		tid = setInterval(sliderClick, 4000)
 		
@@ -64,7 +64,7 @@ $(document).ready(function(){
 </script>
 
 <style>
-.section div {
+.section>div {
     height:300px;
     width: 49%;
     border-radius: 10px;
@@ -129,6 +129,7 @@ $(document).ready(function(){
 	font-size: 21px;
 	font-weight: 300;
 	vertical-align: middle;
+	border-radius: 10px;
 }
 #base {
 	float: left;
@@ -147,16 +148,42 @@ $(document).ready(function(){
 	font-size: 21px;
 	font-weight: 300;
 	vertical-align: middle;
+	border-radius: 10px;
 }
-#baseContent {
+.card {
+	height: 100%;
+    width: 1040px;
+    margin: 0;
+}
+.card>div {
 	float: left;
 	height: 322px;
-	width: 97%;
-	margin-top: 0px;
-	margin-left: 16px;
-	margin-right: 16px;
-	margin-bottom: 0px;
+	width: 200px;
 	background-color: white;
+	margin: 0 4px;
+	border-radius: 5px;
+}
+.cardTitle{
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+.cardTitleImage{
+	float: left;
+	margin-left: 10px;
+}
+.cardTitleNick{
+	float: left;
+	margin-left: 10px;
+}
+.cardImage{
+	width: 100%;
+	float: left;
+	height: 250px;
+}
+.cardHeart{
+	width: 100%;
+	float: left;
 }
 .btnHome {
 	display: block;
@@ -226,6 +253,10 @@ $(document).ready(function(){
 #middleImg:hover {
 	transform: scale(1.02);
 }
+.cardFrame:hover { 
+	transform: scale(1.02);
+}
+
 </style>
 
 <div class="container">
@@ -278,8 +309,24 @@ $(document).ready(function(){
 			<div id="baseTop">
 			가장 많은 좋아요를 받은 EXTAGRAM
 			</div>
-			<div id="baseContent">
-			하하 - extagram 이미지 슬라이드 4~5개
+			<div class="card" style="height: 400px; width: 1040px; margin: 0 15px;">
+			<c:forEach items="${listExta }" var="listExta">
+				<div class="cardFrame" onclick="location.href='/extagram/view?exNo=${listExta.EX_NO}';" style="cursor: pointer;">
+				<div class="cardTitle">
+					<div class="cardTitleImage">
+					<img style="width: 30px; height: 30px; border-radius: 70%;" src="/upload/${listExta.PROFILE}">
+					</div>
+					<div class="cardTitleNick">${listExta.NICK }</div>
+				</div>
+				<div class="cardImage">
+					<img style="max-width: 95%; max-height: 240px; display: block; margin: 10px auto;" src="/upload/${listExta.PICTURE}">
+				</div>
+				<div class="cardHeart">
+					<img style="width: 20px; height: auto;" src="/resources/img/heart/heartRed.png"/> ${listExta.HEART }&nbsp;&nbsp;
+					<img style="width: 20px; height: auto;" src="/resources/img/heart/balloonBlue.png"/> ${listExta.COMM }
+				</div>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</div>
