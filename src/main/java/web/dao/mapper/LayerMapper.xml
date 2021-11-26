@@ -102,4 +102,15 @@
 			layering_no, user_no, perfume_no1, perfume_no2, perfume1_per, layering_content)
 		VALUES (tb_layer_seq.nextval,#{userNo } ,#{perfumeNo1 } ,#{perfumeNo2 } ,#{perfume1Per } ,#{layeringContent } )
 	</insert>
+	
+	
+	<delete id="deleteLayerLikeByLayerNo" parameterType="int">
+		DELETE FROM tb_layer_like WHERE layering_no = #{layerNo }
+	
+	</delete>
+	
+	<delete id="deleteLayerByLayerNo" parameterType="int">
+		DELETE FROM tb_layer WHERE layering_no = #{layerNo }
+	
+	</delete>
 </mapper> 

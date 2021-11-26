@@ -12,7 +12,7 @@
 					<br>
 
 
-<h1 style="text-align: center;"> ${user.nick } 님 Extagram 댓글</h1>
+<h1 style="text-align: center;"> ${user.nick } 님의 Extagram 댓글</h1>
 <hr>
 <div style="text-align: center;">
 <a href="/admin/user/history/extagram?userNo=${user.userNo }"><button>extagram</button></a>
@@ -40,7 +40,7 @@
 		<td style="text-align: center;">${list.EX_COMM }</td>
 		<td style="text-align: center;">${list.EX_COMM_DATE }</td>
 		<td style="text-align: center;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button>상세보기</button></a></td>
-		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/deleteComment?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }"><button>댓글 삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/delete?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }" onclick="return confirm('댓글을 삭제하시겠습니까? 삭제된 댓글은 원상복구 할 수 없습니다.');"><button>댓글 삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Layer;
 import web.dto.User;
 import web.service.face.ExtaService;
+import web.service.face.LayerService;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
@@ -28,6 +32,7 @@ import web.util.PagingUser;
 	
 	@Autowired private UserService userService;
 	@Autowired private ExtaService extaService;
+	@Autowired private LayerService layerService;
 	
 	
 	@RequestMapping(value = "/list")
@@ -123,7 +128,7 @@ import web.util.PagingUser;
 		
 		
 		//COMMENT DELETE
-		@RequestMapping(value="/history/extagramComment/deleteComment")
+		@RequestMapping(value="/history/extagramComment/delete")
 		public String extaCommentDelete(ExComm comment) {
 			
 			logger.info("ExComm : {}", comment);
@@ -136,4 +141,41 @@ import web.util.PagingUser;
 		}
 		
 		
+		@RequestMapping(value = "/history/layer")
+		public String userLayerHistory(int userNo, Model model, PagingExtagram paramData) {
+			
+			User user = new User();
+			user.setUserNo(userNo);
+			
+			user = userService.getUserNickByUserno(user);
+			logger.info("user: {}" , user);
+			
+			FileUpload file = new FileUpload();
+			file = userService.getFileInfo(user);
+			logger.info("file: {}" , file);
+			
+			
+			PagingExtagram paging = userService.getLayerPaging(paramData, user);
+			logger.info("페이징 : {}", paging);
+			
+			List<Map<String, Object>> list = userService.getUserLayerHistory(user, paging);
+			
+			model.addAttribute("user", user);
+			model.addAttribute("file", file);
+			model.addAttribute("paging", paging);
+			model.addAttribute("layerList", list);
+			
+			return "/admin/user/history/layer";
+		}
+		
+		@RequestMapping(value="/history/layer/delete")
+		public String layerDelete(Layer layer) {
+			
+			logger.info("layer : {}", layer);
+			int layerNo = layer.getLayeringNo();
+			
+			layerService.deleteLayer(layerNo);
+			
+			return "redirect:/admin/user/history/layer?userNo=" + layer.getUserNo();
+		}
 }

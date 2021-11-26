@@ -114,6 +114,17 @@ public class LayerServiceImpl implements LayerService {
 	}
 
 
+	@Override
+	public void deleteLayer(int layerNo) {
+		//레이어링 게시글의 전체 좋아요 DB 삭제
+		layerDao.deleteLayerLikeByLayerNo(layerNo);
+		
+		//레이어링 게시글 삭제 DB
+		layerDao.deleteLayerByLayerNo(layerNo);
+		
+	}
+
+
 
 
 
