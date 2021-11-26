@@ -99,7 +99,7 @@ $(document).ready(function(){
 			dataType: "text",
 			success: function(res){
 				if(res){
-					alert("작성하신 메일을 통해 임시 비밀번호가 전달되었습니다.")
+					alert("작성하신 메일을 통해 임시 패스워드가 전달되었습니다.")
 					$(location).attr("href", "/user/login");
 				}else{
 					alert("조회결과가 없습니다. 다시 확인해주세요.");
@@ -176,7 +176,7 @@ label {
 }
 .form-write{
 	width:300px;
-	margin: 0 auto;
+	margin: 5px auto;
 }
 .form-label{
 	margin-left: 110px;
@@ -201,6 +201,15 @@ label {
 	background: #2DB400;
 	color: white;
 }
+label{
+	font-weight: 300;
+	font-size: 24px;
+}
+#serchIdPw:hover{
+	background: rgb(138, 126, 107, 0.5);
+	color: white;
+	trasnform: scale(1.05);
+}
 </style>
 <div class="container">
 <div class="text-center" id="pageName1">
@@ -208,7 +217,7 @@ label {
 <hr>
 </div>
 <div class="text-center invisible" id="pageName2">
-<h1>아이디 / 비밀번호 찾기</h1>
+<h1>아이디 / 패스워드 찾기</h1>
 <hr>
 </div>
 <form action="/user/login" method="post" class="form-horizontal login-form">
@@ -224,17 +233,17 @@ label {
       <input type="password" class="form-control" onkeyup="f_enterLogin()" id="pw" name="pw" placeholder="Password">
     </div>
 </div>
-<div class="text-center">
-<label id="serchIdPw">아이디 / 비밀번호 찾기 </label>
-</div>
 <div class="text-center" id="btnArea"> 
    <button class="btn button form-control" type="button" id="loginBtn">로그인</button>
    <div>
    <button class="btn btnLogin" type="button" id="google"><i class="fab fa-google"></i>구글 로그인</button>
    <button class="btn btnLogin" type="button" id="kakao">카카오 로그인</button>
-   <button class="btn btnLogin" type="button" id="naver" onclick="$('#naver_id_login_anchor').trigger('click')">네이버 로그인</button>
+   <button class="btn btnLogin" type="button" id="naver" onclick="$('#naver_id_login_anchor').trigger('click');">네이버 로그인</button>
    </div>
-   <div id="naver_id_login"></div>
+   <div id="naver_id_login" style="display:none;"></div>
+</div>
+<div class="text-center" style="margin-top: 20px;">
+<label id="serchIdPw" style="background: rgb(236, 230, 204, 0.5); border-radius: 5px; color: #35312B; font-size: 15px; margin: 10px auto; cursor: pointer; width: 375px; padding: 5px;">아이디 / 패스워드 찾기 </label>
 </div>
 </form>
 
@@ -261,14 +270,14 @@ label {
 </select>
 <input type="text" class="form-control form-write" id="questionAnwser1" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <br>
-<button type="button" id="searchIdBtn" class="form-label button">아이디 찾기</button>
+<button type="button" id="searchIdBtn" class="button btn" style="width: 300px; background: #8A7E6B; color: #ECE6CC; position: relative; left: 110px;">아이디 찾기</button>
 </form>
 </div>
 </div>
 
 <div class="searchPwArea">
 <div class="text-center">
-<label class="form-label">비밀번호 찾기</label>
+<label>패스워드 찾기</label>
 </div>
 
 <div class="inputArea text-left">
@@ -293,7 +302,7 @@ label {
 </select>
 <input type="text" class="form-control form-write" id="questionAnwser2" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <br>
-<button type="button" id="searchPwBtn" class="form-label button">비밀번호 찾기</button>
+<button type="button" id="searchPwBtn" class="button btn" style="width: 300px; background: #8A7E6B; color: #ECE6CC; position: relative; left: 110px;">패스워드 찾기</button>
 </form>
 
 <!-- 소셜 로그인 / 가입 폼 반환 -->
@@ -305,7 +314,7 @@ label {
 </div>
 </div>
 
-<button id="into-login" >로그인으로</button>
+<button id="into-login" class="btn" style="margin: 15px;">로그인으로</button>
 
 </div>
 </div>
@@ -412,5 +421,9 @@ function naverSignInCallback() {
 	$("#social-nick").val(name);
 	$("#socialLogin").submit();
 }
+$("#naver").click(function(){
+	console.log("naver clicked")
+	$(this).parent().next().children().children().click()
+})
 </script>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
