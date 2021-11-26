@@ -562,6 +562,11 @@ async function submit() {
 }
 
 $(document).ready(function(){
+	
+	$(".btnPerf").click(function(){
+		location.href="/survey/name";
+	});
+	
 	var joinCnt = 0;
 
 	$("#agree_all").change(function(){
@@ -605,8 +610,8 @@ $(document).ready(function(){
 			if($(".chkSub1").is(":checked") == true && $(".chkSub2").is(":checked") == true && $(".chkSub3").is(":checked") == true){
 				console.log("약관 동의 완료");
 				joinCnt++;
-				$("#info").css("color", "black");
-				$("#agree").css("color", "#877b9e");
+				$("#info").css("color", "#35312B");
+				$("#agree").css("color", "#8A7E6B");
 				$("#agreement").css("display", "none");
 				$("#join-form").css("display", "inline");
 			}else{
@@ -625,9 +630,9 @@ $(document).ready(function(){
 	 				alert("체크되지 않은 항목이 존재합니다.");
 				}else{
 					$("#join-form").css("display", "none");
-					$("#info").css("color", "#877b9e");
-					$("#agree").css("color", "#877b9e");
-					$("#joinComplete").css("color", "black");
+					$("#info").css("color", "#8A7E6B");
+					$("#agree").css("color", "#8A7E6B");
+					$("#joinComplete").css("color", "#35312B");
 				
 					$("#complete-join").css("display", "inline");
 					$("#pageBtn").css("display","none");
@@ -674,8 +679,8 @@ $(document).ready(function(){
 			
 			console.log("정보 입력 취소");
 			joinCnt--;
-			$("#info").css("color", "black");
-			$("#agree").css("color", "#877b9e");
+			$("#info").css("color", "#35312B");
+			$("#agree").css("color", "#8A7E6B");
 			$("#agreement").css("display", "inline");
 			$("#join-form").css("display","none");
 		}
@@ -780,8 +785,10 @@ $(document).ready(function(){
 	display:none;
 }
 #ltitle{
-	background: #ccc;
-	color: #877b9e;
+	border-radius: 30px;
+    height: 60px;
+	background: #ECE6CC;
+	color: #8A7E6B;
 }
 #questionNo {
     width: 200px;
@@ -805,7 +812,13 @@ $(document).ready(function(){
 </style>
 <div class="container">
 <div class="text-center" id="pageName">
-<h1 id="ltitle"><span id="agree">약관 동의</span> <i class="fas fa-angle-right"></i> <span id="info">정보 입력</span> <i class="fas fa-angle-right"></i> <span id="joinComplete">가입완료</span></h1>
+<h1 id="ltitle">
+	<div id="agree" style="padding: 10px;padding-left: 170px;float: left;color:#35312B;">약관 동의</div> 
+	<i class="fas fa-angle-right" style="padding: 10px 50px;float: left;font-weight: 700;"></i> 
+	<div id="info" style="padding: 10px;float: left;">정보 입력</div> 
+	<i class="fas fa-angle-right" style="padding: 10px 50px;float: left;font-weight: 700;"></i> 
+	<div id="joinComplete" style="padding: 10px;float: left;">가입완료</div>
+</h1>
 <hr>
 </div>
 <div class="text-center" id="agreement">
@@ -1080,11 +1093,11 @@ $(document).ready(function(){
 <span id="emailError" class="error col-xs-offset-3 feedback">이미 존재하는 이메일입니다.<br></span>
 <span id="valid-email" class="valid col-xs-offset-3 feedback">사용가능한 이메일입니다.<br></span>
 
-<button id="sendMail" class="btn btn-primary col-xs-offset-3 feedback" type="button">인증번호 받기</button>
+<button id="sendMail" class="btn col-xs-offset-3 feedback" type="button">인증번호 받기</button>
 <br>
 <label for="emailCheck" id="emailCheckLabel"class="col-xs-3 control-label feedback">인증번호 </label>
 <input id="emailCheck" class="form-control feedback" style="width:300px;" name="emailCheck" placeholder="메일을 확인하여 인증번호를 입력하세요">
-<button id="isVailEmail" class="btn btn-primary feedback" type="button">인증</button>
+<button id="isVailEmail" class="btn feedback" type="button">인증</button>
 <br>
 <span id="sendSucess" class="valid col-xs-offset-3 feedback">인증되었습니다.<br></span>
 <span id="sendFail" class="error col-xs-offset-3 feedback">인증번호가 일치하지않습니다.<br></span>
@@ -1102,7 +1115,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
-<select id="questionNo" name="questionNo" style="width:500px;">
+<select id="questionNo" name="questionNo" style="width:500px;border: 1px solid #ccc;border-radius: 5px;margin-bottom:5px;">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
       <option value="2">다시 태어나면 되고 싶은 것은?</option>
       <option value="3">가장 감명깊게 본 영화는?</option>
@@ -1117,17 +1130,19 @@ $(document).ready(function(){
 </form>
 
 <div id="complete-join" Class="feedback text-center">
-<div class="text-center">
-<span>가입을 축하드립니다.</span><br>
-<img alt="이미지 불러오기 실패" src="/resources/img/profile/메일 그림.png">
+<div class="text-center" style="font-size: 24px; font-weight: 300;">
+향기로운 당신이 되어 주셔서 고맙습니다.<br>
+로그인 후 <span style="font-size:32px; font-weight: 300;">EXQUIS ME</span>의 모든 향기를 맡아 보실 수 있습니다.<br>
+<button id="into-login" class="btn" type="button">로그인 하기</button>
 <br>
-<button id="into-login" class="btn btn-primary" type="button">로그인페이지로</button>
-<button id="into-main" class="btn btn-default" type="button">메인페이지로</button>
+<br>
+오늘의 당신에게 어울리는 향기를 찾아 보세요!<br>
+<button class="btn btnPerf">나만의 노트 찾기</button>
 </div>
 </div>
 <div class="text-center" id="pageBtn"> 
-   	<button class="btn btn-primary" type="button" id="nextBtn">다음</button>
-    <button class="btn btn-danger" type="button" id="cancleBtn">취소</button>
+   	<button class="btn" type="button" id="nextBtn">다음</button>
+    <button class="btn" type="button" id="cancleBtn">취소</button>
 </div>
 <br><br>
 </div>
