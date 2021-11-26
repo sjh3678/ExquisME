@@ -173,7 +173,7 @@
    			count(*) 
 		FROM tb_ex_comm c, tb_user u
 		WHERE c.user_no = u.user_no
-		AND c.user_no = #{user.userNo}
+			AND c.user_no = #{user.userNo}
 	</select>
 	
 	<select id="selectCommHistoryByUserNo" resultType="hashmap" parameterType="hashmap">
@@ -190,6 +190,30 @@
         		ORDER BY ex_comm DESC
     		) R
 		)T
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
+	
+	<select id="selectLayerCntByUserNo" parameterType="hashmap" resultType="int">
+		SELECT 
+			count(*) 
+		FROM tb_layer l, tb_user u
+		WHERE l.user_no = u.user_no 
+			AND l.user_no = #{user.userNo}
+	</select>
+	
+	<select id="selectLayerHistoryByUserNo" parameterType="hashmap" resultType="hashMap">
+		SELECT * FROM(
+			SELECT rownum rnum, R.* FROM(
+				SELECT 
+    				layering_no, l.user_no, perfume1_per, layering_content, 
+    				layering_date, f1.stored_name perfume1, f2.stored_name perfume2
+				FROM tb_layer l, tb_user u, tb_perf p1, tb_perf p2, tb_file f1, tb_file f2
+				WHERE  l.perfume_no1 = p1.perfume_no AND l.perfume_no2 = p2.perfume_no 
+    				AND p1.file_no = f1.file_no AND p2.file_no = f2.file_no
+    				AND l.user_no = u.user_no AND l.user_no = #{user.userNo}
+    			ORDER BY layering_no DESC
+    		) R
+		) T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
 	</select>
 	

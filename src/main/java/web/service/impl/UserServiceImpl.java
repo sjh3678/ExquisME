@@ -2,8 +2,6 @@ package web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,15 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import web.dao.face.ExtaDao;
 import web.dao.face.UserDao;
-import web.dto.Extagram;
 import web.dto.FileUpload;
 import web.dto.Report;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
+import web.util.PagingUserHistory;
 
 
 @Service
@@ -477,6 +474,37 @@ public class UserServiceImpl implements UserService{
 		report = list.get(0);
 		
 		return report;
+	}
+
+	@Override
+	public PagingExtagram getLayerPaging(PagingExtagram paramData, User user) {
+		logger.info("getLayerPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectLayerCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingExtagram paging = new PagingExtagram(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
+
+	@Override
+	public List<Map<String, Object>> getUserLayerHistory(User user, PagingExtagram paging) {
+		logger.info("getUserLayerHistory called");
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paging);
+		
+		logger.info("{}", map);
+		
+		List<Map<String, Object>> list = userDao.selectLayerHistoryByUserNo(map);
+		
+		return list;
 	}
 
 }

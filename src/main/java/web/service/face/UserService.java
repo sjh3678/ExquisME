@@ -13,6 +13,7 @@ import web.dto.Report;
 import web.dto.User;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
+import web.util.PagingUserHistory;
 
 public interface UserService {
 
@@ -194,5 +195,9 @@ public interface UserService {
 	 * @return - 조회된 정보 반환
 	 */
 	public boolean getCheckReport(User user);
+
+	public PagingExtagram getLayerPaging(PagingExtagram paramData, User user);
+
+	public List<Map<String, Object>> getUserLayerHistory(User user, PagingExtagram paging);
 
 }

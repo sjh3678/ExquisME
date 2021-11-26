@@ -35,6 +35,22 @@ function getCommList(curPage){
 	});
 }
 
+function getLayerList(curPage){
+	console.log("받은 값 : ",curPage);
+	$.ajax({
+		type: "get",
+		data: {curPage:curPage},
+		dataType: "html",
+		url: "/user/recode/layer",
+		success: function(res){
+			console.log("AJAX 성공");
+			$("#historyArea").html(res);
+		}, error: function(e){
+			console.log(e);
+		}
+	});
+}
+
 $(document).ready(function(){
 	$("#into-extagram").click(function(){
 		 getExtaList(1);
@@ -42,6 +58,10 @@ $(document).ready(function(){
 	
 	$("#into-comment").click(function(){
 		getCommList(1);
+	})
+	$("#into-layer").click(function(){
+		getLayerList(1);
+		
 	})
 })
 
@@ -63,17 +83,16 @@ li{
 	border-radius: 15px;
 	margin: 0 auto;
 }
-.into-extagram:hover{
+.into:hover{
 	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/
 }
-.into-comment:hover{
-	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/
-}
+
 </style>
 <div class="indexArea">
 <ul class="historyIndex">
-	<li class="into-extagram" id="into-extagram">Extagram 기록</li>
-	<li class="into-comment" id="into-comment">댓글 기록</li>
+	<li class="into" id="into-extagram">Extagram 기록</li>
+	<li class="into" id="into-comment">댓글 기록</li>
+	<li class="into" id="into-layer">Layering 기록</li>
 </ul>
 </div>
 <div id="historyArea">

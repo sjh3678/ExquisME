@@ -35,17 +35,19 @@ td{
 </style>
 <table>
 <tr>
-	<td>업로드한 파일</td>
-	<td>내용</td>
+	<td>레이어링 번호</td>
+	<td>향수1</td>
+	<td>향수2</td>
+	<td>비율</td>
 	<td>작성일</td>
-	<td>삭제</td>
 </tr>
-<c:forEach items="${extaList}" var="list">
+<c:forEach items="${layerList}" var="list">
 <tr>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><img width="50px" height="40px" src="/upload/${list.UPFILE }"/></td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';" nowrap style="overflow:hidden;">${list.EX_CONTENT }</td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
-	<td id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button>삭제</button></a></td>
+	<td>${list.LAYERING_NO }</td>
+	<td><img width="50px" height="40px" src="/upload/${list.PERFUME1 }"/></td>
+	<td><img width="50px" height="40px" src="/upload/${list.PERFUME2 }"/></td>
+	<td>${list.PERFUME1_PER }% / ${100 - list.PERFUME1_PER }%</td>
+	<td><fmt:formatDate value="${list.LAYERING_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
 </tr>
 </c:forEach>
 </table>
@@ -54,19 +56,19 @@ td{
 	<ul>
 		<%-- 첫페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
-			<li><label onclick=getExtaList(1)><a>처음</a></label></li>
+			<li><label onclick=getLayerList(1)><a>처음</a></label></li>
 		</c:if>
 		
 		<%-- 이전페이징 리스트로 이동 --%>
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
-				<li><label onclick=getExtaList(${paging.startPage - paging.pageCount })>이전</label></li>
+				<li><label onclick=getLayerList(${paging.startPage - paging.pageCount })>이전</label></li>
 			</c:when>
 		</c:choose>
 		
 		<%-- 이전 페이지로 가기 --%>
 		<c:if test="${paging.curPage > 1 }">
-			<li><label onclick=getExtaList(${paging.curPage - 1 })>&lt;</label></li>
+			<li><label onclick=getLayerList(${paging.curPage - 1 })>&lt;</label></li>
 		</c:if>
 		
 		<%-- 페이징 리스트 --%>
@@ -76,24 +78,24 @@ td{
 			</c:if>
 			
 			<c:if test="${paging.curPage ne i }">
-				<li><label onclick=getExtaList(${i })>${i }</label></li>
+				<li><label onclick=getLayerList(${i })>${i }</label></li>
 			</c:if>
 		</c:forEach>
 		
 		<%-- 다음 페이지로 가기 --%>
 		<c:if test="${paging.curPage < paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.curPage + 1 })>&gt;</label></li>
+			<li><label onclick=getLayerList(${paging.curPage + 1 })>&gt;</label></li>
 		</c:if>
 		
 		<%-- 다음페이징 리스트로 이동 --%>
 		
 		<c:if test="${paging.endPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.startPage + paging.pageCount })>&raquo;</label></li>
+			<li><label onclick=getLayerList(${paging.startPage + paging.pageCount })>&raquo;</label></li>
 		</c:if>
 				
 		<%-- 끝페이지로 이동 --%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.totalPage })>끝</label></li>
+			<li><label onclick=getLayerList(${paging.totalPage })>끝</label></li>
 		</c:if>
 	</ul>
 </div>

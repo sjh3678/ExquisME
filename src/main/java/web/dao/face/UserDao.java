@@ -217,4 +217,18 @@ public interface UserDao {
 	 * @return - 조회된 결과 리스트 반환
 	 */
 	public List<Report> selectReportByUserNo(User user);
+
+	/**
+	 * 유저의 레이어링 총 갯수 조회
+	 * @param map - 조회할 페이징 및 유저 정보
+	 * @return - 조회된 총 갯수 반환
+	 */
+	public int selectLayerCntByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 유저의 레이어링 기록 리스트 조회
+	 * @param map - 조회할 유저 및 페이징 정보
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<Map<String, Object>> selectLayerHistoryByUserNo(HashMap<String, Object> map);
 }

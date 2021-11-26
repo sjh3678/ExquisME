@@ -1,7 +1,5 @@
 package web.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +26,7 @@ import web.dto.Report;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
+import web.util.PagingUserHistory;
 import web.util.UserSHA256;
 
 @Controller
@@ -475,6 +474,22 @@ public class UserController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("commList", list);
 		return "/user/history/comment";
+	}
+	
+	@RequestMapping(value="/recode/layer")
+	public String layerRecode(User user, 
+			HttpSession session, 
+			Model model,
+			PagingExtagram paramData) {
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		logger.info("user : {}", user);
+		PagingExtagram paging = userService.getLayerPaging(paramData, user);
+		logger.info("페이징 : {}", paging);
+		user.setUserNo((Integer) session.getAttribute("userNo"));
+		List<Map<String, Object>> list = userService.getUserLayerHistory(user, paging); 
+		model.addAttribute("paging", paging);
+		model.addAttribute("layerList", list);
+		return "/user/history/layer";
 	}
 	
 	@RequestMapping(value="/social/join", method=RequestMethod.GET)
