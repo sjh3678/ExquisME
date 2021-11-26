@@ -205,6 +205,13 @@ public interface ExtaDao {
 	 */
 	public void updateReportStart(Report report);
 
+//MAIN - 좋아요 탑5
+	/**
+	 * 좋아요 Top5 AND 7일 리스트
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectGetHeartTop5();
+
 	
 	
 
