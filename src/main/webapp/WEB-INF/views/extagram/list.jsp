@@ -96,10 +96,12 @@ $(document).ready(function(){
 	window.onscroll = function(e) {
 	    //추가되는 임시 콘텐츠
 	    //window height + window scrollY 값이 document height보다 클 경우,
-	    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-	    	//실행할 로직 (콘텐츠 추가)
-		    	loadList();
-// 	        $('#result').append(addContent);
+	    if (bool_sw) {
+		    if((window.innerHeight + window.scrollY + 1) >= document.body.offsetHeight) {
+		    	//실행할 로직 (콘텐츠 추가)
+			    	loadList();
+	// 	        $('#result').append(addContent);
+		    }
 	    }
 	};
 	
@@ -108,6 +110,7 @@ $(document).ready(function(){
 	var target = null;
 	var curPage = 1;
 	function loadList() {
+		bool_sw = false;
 		$.ajax({
 			type: "get"
 			, url: "/extagram/list_ok"
@@ -124,6 +127,7 @@ $(document).ready(function(){
 				console.log("무한스크롤 실패")
 			}
 		})
+		setTimeout(function(){bool_sw = true;},500)
 		$("#cur").html(curPage)
 };
 

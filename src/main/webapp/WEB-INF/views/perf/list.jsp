@@ -90,15 +90,17 @@ $(document).ready(function(){
 window.onscroll = function(e) {
   //추가되는 임시 콘텐츠
   //window height + window scrollY 값이 document height보다 클 경우,
-  if((window.innerHeight + window.scrollY + 1)>= document.body.offsetHeight) {
-  	//실행할 로직 (콘텐츠 추가)
-  	loadList();
-  }
+	if(bool_sw){
+		if((window.innerHeight + window.scrollY + 1)>= document.body.offsetHeight) {
+			//실행할 로직 (콘텐츠 추가)
+			loadList();
+		}
+	}
 };
 
 var curPage = 1;
 function loadList() {
-	
+	bool_sw = false;
 	var noteArray = [];
     $('input[name="noteCode"]:checked').each(function(i){//체크된 리스트 저장
     	noteArray.push($(this).val());
@@ -127,6 +129,7 @@ function loadList() {
 			console.log("AJAX 실패")
 		}
 	})
+	setTimeout(function(){bool_sw = true;},500)
 }
 
 function keyword(){
