@@ -288,6 +288,7 @@ input[type=range]:focus::-ms-fill-upper {
 li span {
 	cursor: pointer;
 }
+
 .imgbox {
 	width: 100%;
 	height: 140px;
@@ -376,6 +377,7 @@ li span {
 	max-height: 150px;
 	margin: auto;
 }
+
 </style>
 
 
@@ -465,16 +467,15 @@ $(document).ready(function(){
 		$("#layer-form").submit();
 	});
 });
-	function loadCurPage(i,s){
+	function loadCurPage(i){
 		var curPage =  i ;
-		var search = s;
 		console.log(curPage);
 			$.ajax({
 				type: "post"
 				, url: "/layer/write_ok"
 				, data: { 
 					curPage: curPage
-					, search: search
+					, search: $("#keyWord").val()
 				}
 				, dataType: "html"
 				, success: function(data){
@@ -514,6 +515,12 @@ $(document).ready(function(){
 				result.innerHTML = res;
 				console.log( res )	;
 				console.log( curPage )	
+				
+				$(".perf_pic").draggable({
+					helper: "clone",
+					//Create counter
+					start: function() { counts[0]++; }
+				});
 			}
 			, error: function(res){
 				console.log("AJAX 실패")	

@@ -4,8 +4,8 @@
 <div class="text-center">
 <ul class="pagination pagination-sm">
 
-<c:if test="${not empty param.search }">
-	<c:set var="searchParam" value="&search=${param.search }"/>
+<c:if test="${not empty paging.search }">
+	<c:set var="searchParam" value="${paging.search }"/>
 </c:if>
 
 <!-- 첫 페이지로 -->

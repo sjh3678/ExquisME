@@ -173,13 +173,12 @@
 			</div>
 			<div class="item">
 				<a href="/survey/q3?useName=${useName }&A1=4&A2=12">
-					<img alt="깔끔한" src="/resources/img/survey/2-neat.jpg"><br>
+					<img alt="깔끔한" src="/resources/img/survey/2-neat.png"><br>
 				</a>
 				<div>4.깔끔한</div>
 			</div>
 		</c:if><!-- if test="${A1 eq 1 }" end -->
 	</div><!-- flavorContainer end -->
-	
 </div>
 
 </div><!-- container end -->

@@ -127,6 +127,10 @@ public class SurveyController {
 		map.put("A7", a7);
 		map.put("A8", a8);
 		
+		if (useName == null || useName == "") {
+			useName = "회원";
+		}
+		
 		logger.info("map : {}", map);
 		
 		List<HashMap<String, Object>> list = surveyService.getNoteList(map);
