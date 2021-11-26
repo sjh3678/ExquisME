@@ -22,15 +22,19 @@
 	float: left;
 }
 .items-wrap {
-	width:60%;
+	display: flex;
+	width:100%;
 	height: 250px;
  	margin: 0 auto;
 	font-size: 15px;
+	justify-content: center;
 }
 .perf-wrap {
+	display: flex;
 	width:100%;
 	height: 250px;
 	margin: 0 auto;
+	justify-content: center;
 }
 .note-img {
 	width:100%;
@@ -61,13 +65,39 @@ h4 {
 .perf-info {
 	text-align: center;
 }
+.icon-wrap {
+	width: 250px;
+	height: 45px;
+	margin: 0 auto;
+}
+.sns{
+	list-style: none;
+	margin: 0 auto;
+	
+}
+.sns>li>a {
+	min-width: 30px;
+	min-height: 30px;
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 150px;
+	margin-left: 10px;
+	font-weight: bold;
+	color: #000;
+
+}
 </style>
 
 
 <div class="container">
 
 
-<h1 style="text-align: center;">결과창</h1>
+<h1 style="text-align: center;">Found Your Own Cent</h1>
 <hr>
 
 
@@ -98,19 +128,26 @@ h4 {
 			</div>
 		</div>
 	</div>
-	<ul class="sns">
-		<li>
-			<a id="create-kakao-link-btn" href="javascript:shareKakao();">
-	 			 <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-			</a>
-		</li>
-    	<li class="twitter">
-    		<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
-		</li>
-    	<li class="band">
-    		<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a>    
-    	</li>
-	</ul>	
+	<div class="icon-wrap">
+	<h4>${useName }님의 테스트 결과를 SNS에 공유해 보세요</h4>
+		<ul class="sns">
+			<li>
+				<a id="create-kakao-link-btn" href="javascript:shareKakao();">
+		 			 <img src="/resources/img/sns/kakao.png"/>
+				</a>
+			</li>
+	    	<li class="twitter">
+	    		<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">
+	    			<img src="/resources/img/sns/twitter.png"> 
+	    		</a>
+			</li>
+	    	<li class="band">
+	    		<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">
+	    			<img src="/resources/img/sns/facebook.png">
+	    		</a>    
+	    	</li>
+		</ul>
+	</div>	
 </div><!-- container end -->
 
 <script type="text/javascript">
