@@ -12,7 +12,7 @@
 					<br>
 
 
-<h1 style="text-align: center;"> ${user.nick } 님 Extagram 작성 게시글</h1>
+<h1 style="text-align: center;"> ${user.nick } 님 Extagram 댓글</h1>
 <hr>
 <div style="text-align: center;">
 <a href="/admin/user/history/extagram?userNo=${user.userNo }"><button>extagram</button></a>
@@ -22,9 +22,10 @@
 <br>
 <table class="table table-striped table-hover">
 <thead>
-	<tr>
-		<th style="width: 30%; text-align: center;">exta사진</th>
-		<th style="width: 40%; text-align: center;">내용</th>
+	<tr>		
+		<th style="width: 10%; text-align: center;">Exta번호</th>
+		<th style="width: 10%; text-align: center;">Exta작성자</th>
+		<th style="width: 50%; text-align: center;">댓글 내용</th>
 		<th style="width: 10%; text-align: center;">작성일</th>
 		<th style="width: 10%; text-align: center;">상세보기</th>
 		<th style="width: 10%; text-align: center;">삭제</th>
@@ -32,14 +33,14 @@
 	</tr>
 </thead>
 <tbody>
-<c:forEach items="${extaList }" var="exta">
+<c:forEach items="${extaCommList }" var="list">
 	<tr>
-		<td style="text-align: center;"><img class="user_img" style="width:100px; height:100px; display: block; margin: auto;"
-					src="/upload/${exta.UPFILE }"></td>
-		<td style="text-align: center;">${exta.EX_CONTENT }</td>
-		<td style="text-align: center;">${exta.EX_DATE  }</td>
-		<td style="text-align: center;"><a href="/extagram/view?exNo=${exta.EX_NO }"><button>상세보기</button></a></td>
-		<td style="text-align: center;"><a href="/admin/user/history/extagram/delete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }"><button>게시글 삭제</button></a></td>
+		<td style="text-align: center;">${list.EX_POST_NO }</td>
+		<td style="text-align: center;">${list.POSTOWNER }</td>
+		<td style="text-align: center;">${list.EX_COMM }</td>
+		<td style="text-align: center;">${list.EX_COMM_DATE }</td>
+		<td style="text-align: center;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button>상세보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/deleteComment?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }"><button>댓글 삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

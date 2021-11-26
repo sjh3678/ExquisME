@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import web.dto.ExComm;
 import web.dto.Extagram;
+import web.dto.FileUpload;
 import web.dto.User;
 import web.service.face.ExtaService;
 import web.service.face.UserService;
@@ -51,19 +53,34 @@ import web.util.PagingUser;
 	}
 	
 	@RequestMapping(value = "/history/extagram")
-	public String userHistory(int userNo, Model model, PagingExtagram paramData) {
+	public String userExtaHistory(int userNo, Model model, PagingExtagram paramData) {
 		
 		User user = new User();
 		user.setUserNo(userNo);
+		
+		user = userService.getUserNickByUserno(user);
+		logger.info("user: {}" , user);
+		
+		FileUpload file = new FileUpload();
+		file = userService.getFileInfo(user);
+		logger.info("file: {}" , file);
+		
 		
 		PagingExtagram paging = userService.getExtaPaging(paramData, user);
 		logger.info("페이징 : {}", paging);
 		
 		List<Map<String, Object>> list = userService.getUserExtagramHistory(user, paging); 
+		logger.info("list: {}", list);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("file", file);
 		model.addAttribute("paging", paging);
 		model.addAttribute("extaList", list);
 		return "/admin/user/history/extagram";
 	}
+	
+	
+	
 	
 	//DELETE
 		@RequestMapping(value="/history/extagram/delete")
@@ -76,4 +93,47 @@ import web.util.PagingUser;
 			return "redirect:/admin/user/history/extagram?userNo="+extagram.getUserNo();
 		}
 	
+		@RequestMapping(value = "/history/extagramComment")
+		public String userExtaCommHistory(int userNo, Model model, PagingExtagram paramData) {
+			
+			User user = new User();
+			user.setUserNo(userNo);
+			
+			user = userService.getUserNickByUserno(user);
+			logger.info("user: {}" , user);
+			
+			FileUpload file = new FileUpload();
+			file = userService.getFileInfo(user);
+			logger.info("file: {}" , file);
+			
+			
+			PagingExtagram paging = userService.getCommPaging(paramData, user);
+			logger.info("페이징 : {}", paging);
+			
+			List<Map<String, Object>> list = userService.getUsercommentHistory(user, paging); 
+			logger.info("list: {}", list);
+			
+			model.addAttribute("user", user);
+			model.addAttribute("file", file);
+			model.addAttribute("paging", paging);
+			model.addAttribute("extaCommList", list);
+			
+			return "/admin/user/history/extagramComment";
+		}
+		
+		
+		//COMMENT DELETE
+		@RequestMapping(value="/history/extagramComment/deleteComment")
+		public String extaCommentDelete(ExComm comment) {
+			
+			logger.info("ExComm : {}", comment);
+			
+			ExComm comm = extaService.getInfoComment(comment);
+			
+			extaService.deleteComment(comm);
+			
+			return "redirect:/admin/user/history/extagramComment?userNo=" + comment.getUserNo();
+		}
+		
+		
 }

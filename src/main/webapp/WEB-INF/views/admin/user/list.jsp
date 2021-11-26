@@ -18,13 +18,14 @@
 <thead>
 	<tr>
 		<th style="width: 15%; text-align: center;">프로필사진</th>
-		<th style="width: 15%; text-align: center;">아이디</th>
+		<th style="width: 10%; text-align: center;">아이디</th>
 		<th style="width: 15%; text-align: center;">닉네임</th>
 		<th style="width: 15%; text-align: center;">이메일</th>
 		<th style="width: 15%; text-align: center;">전화번호</th>
-		<th style="width: 7%; text-align: center;">성별</th>
-		<th style="width: 7%; text-align: center;">등급</th>
-		<th style="width: 11%; text-align: center;">관리</th>
+		<th style="width: 5%; text-align: center;">성별</th>
+		<th style="width: 5%; text-align: center;">등급</th>
+		<th style="width: 10%; text-align: center;">상세보기</th>
+		<th style="width: 10%; text-align: center;">회원탈퇴</th>
 	</tr>
 </thead>
 <tbody>
@@ -38,7 +39,8 @@
 		<td style="text-align: center;">${user.PHONE }</td>
 		<td style="text-align: center;">${user.GENDER }</td>
 		<td style="text-align: center;">${user.IS_ADMIN }</td>
-		<td style="text-align: center;"><a href="/admin/user/delete?userNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete">회원 삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagram?userNo=${user.USER_NO }""><button id="btnDelete">작성글 보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/delete?userNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete">회원 탈퇴</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>
