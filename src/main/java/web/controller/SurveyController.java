@@ -145,4 +145,6 @@ public class SurveyController {
 		model.addAttribute("list", list);
 		model.addAttribute("perfList", perfList);
 	}
+	@RequestMapping(value="/layout/404error")
+	public void error() {}
 }

@@ -41,6 +41,13 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
+		
+		<!-- 404에러 처리 -->
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
 		<load-on-startup>1</load-on-startup>
 		<!-- 웹소켓을 위한 설정(비동기지원) -->
 		<async-supported>true</async-supported>
