@@ -260,7 +260,7 @@
 		        ORDER BY heart DESC
 		    ) E
 		) tb_extagram
-		WHERE rnum BETWEEN 1 AND 5;
+		WHERE rnum BETWEEN 1 AND 5
 	</select>
 	
 	
