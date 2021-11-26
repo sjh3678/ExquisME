@@ -6,6 +6,7 @@ import java.util.Map;
 
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Layer;
 import web.dto.Report;
 import web.dto.User;
 import web.util.PagingExtagram;
@@ -50,7 +51,7 @@ public interface UserDao {
 	 * 회원 탈퇴 요청
 	 * @param userno - 탈퇴할 회원 번호 
 	 */
-	public void deleteUserByUserno(int userNo);
+	public void deleteUserByUserNo(int userNo);
 
 	/**
 	 * 회원의 프로필 사진 정보 조회
@@ -154,31 +155,31 @@ public interface UserDao {
 	 * 회원의 댓글 내역 전체를 삭제
 	 * @param userNo - 삭제할 회원정보
 	 */
-	public void deleteCommByUserNo(int userNo);
+	public void deleteCommByUserNo(Extagram e);
 
 	/**
 	 * 회원의 extagram 내역 전체를 삭제
 	 * @param userNo - 삭제할 회원 정보
 	 */
-	public void deleteExtaByUserNo(int userNo);
+	public void deleteExtaByUserNo(int exNo);
 
 	/**
 	 * 회원의 extagram 좋아요 내역 삭제
 	 * @param userNo - 삭제할 회원 정보
 	 */
-	public void deleteExtaLikeUserNo(int userNo);
+	public void deleteExtaLikeUserNo(Extagram e);
 
 	/**
 	 * 레이어링 좋아요 내역 삭제
 	 * @param userNo - 삭제할 유저 정보
 	 */
-	public void deleteLayerLikeByUserNo(int userNo);
+	public void deleteLayerLikeByUserNo(Layer l);
 
 	/**
 	 * 레이어링 삭제
 	 * @param userNo - 삭제할 유저 정보
 	 */
-	public void deleteLayerByUserNo(int userNo);
+	public void deleteLayerByUserNo(int layeringNo);
 
 	/**
 	 * 노트 좋아요 삭제
@@ -231,4 +232,24 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<Map<String, Object>> selectLayerHistoryByUserNo(HashMap<String, Object> map);
+
+	/**
+	 * 회원번호를 통해 exta번호를 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 정보 반환
+	 */
+	public List<Extagram> selectExtaListByUserNo(int userNo);
+
+	/**
+	 * 회원번호를 통해 Layer 번호를 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 정보 반환
+	 */
+	public List<Layer> selectLayerListByUserNo(int userNo);
+
+	/**
+	 * 
+	 * @param fileNo
+	 */
+	public void deleteFileByFileNo(int fileNo);
 }

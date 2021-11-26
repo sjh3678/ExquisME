@@ -16,13 +16,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dao.face.UserDao;
+import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Layer;
 import web.dto.Report;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
-import web.util.PagingUserHistory;
 
 
 @Service
@@ -132,15 +133,38 @@ public class UserServiceImpl implements UserService{
 		
 		User user = new User();
 		
+		//사용자 정보 조회
 		user = userDao.selectUserByUserno(userNo);
+
+		List<Extagram> extaList = userDao.selectExtaListByUserNo(userNo);
+		logger.info("리스트 : {}", extaList);
+		for(Extagram e : extaList) {
+			userDao.deleteCommByUserNo(e);//댓글 내역 삭제
+		}
+		logger.info("댓글 삭제");
 		
-		//사용자
-		userDao.deleteCommByUserNo(userNo);//댓글 내역 삭제
-		userDao.deleteExtaLikeUserNo(userNo);//좋아요 내역 삭제
-		userDao.deleteExtaByUserNo(userNo);//extagran 내역 삭제
+		for(Extagram e : extaList) {
+			userDao.deleteExtaLikeUserNo(e);//좋아요 내역 삭제
+		}
+		logger.info("좋아요 삭제");
 		
-		userDao.deleteLayerLikeByUserNo(userNo); //레이어링 좋아요 삭제
-		userDao.deleteLayerByUserNo(userNo); // 레이어링 삭제
+		for(Extagram e : extaList) {
+			userDao.deleteExtaByUserNo(e.getExNo());//extagran 내역 삭제	
+		}
+		logger.info("extagram 삭제");
+		for(Extagram e : extaList) {
+			userDao.deleteFileByFileNo(e.getFileNo()); // 파일 삭제
+		}
+		logger.info("파일 삭제");
+		logger.info("extagram 연결 요소 삭제 완료");
+		
+		List<Layer> layerList = userDao.selectLayerListByUserNo(userNo);
+		for(Layer l : layerList) 
+			userDao.deleteLayerLikeByUserNo(l); //레이어링 좋아요 삭제
+		logger.info("layering 연결 요소 모두 삭제");
+		for(Layer l : layerList)
+			userDao.deleteLayerByUserNo(l.getLayeringNo()); // 레이어링 삭제
+		logger.info("layering 연결 요소 삭제 완료");
 		
 		userDao.deleteNoteLikeByUserNo(userNo);//노트 좋아요 삭제
 		userDao.deletePerfLikeByUserNo(userNo); // 향수 좋아요 삭제
@@ -151,13 +175,13 @@ public class UserServiceImpl implements UserService{
 			userDao.deleteNoticeByUserNo(userNo); // 공지사항 삭제
 		}
 		
-		int fileNo = user.getFileNo();
+		int fileNo = user.getFileNo(); // 프로필 사진 정보
 		
 		//회원정보 삭제
-		userDao.deleteUserByUserno(userNo);
+		userDao.deleteUserByUserNo(userNo);
 		
 		if(fileNo != 91) {
-			userDao.deleteFileByFileNo(user);
+			userDao.deleteFileByFileNo(user); // 프로필 사진 삭제 (기본 프로필 제외)
 		}
 		
 		int cnt = userDao.selectUserCnt(user);

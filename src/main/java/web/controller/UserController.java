@@ -191,7 +191,7 @@ public class UserController {
 		user.setPw(UserSHA256.encrypt(user)); // 변경값 암호화 후 저장
 		
 		boolean isUpdate = userService.setUpdatePw(user, pwChk);
-		logger.info("결과 : {}",isUpdate);
+		logger.info("결과 : {}", isUpdate);
 		return isUpdate;
 	}
 	

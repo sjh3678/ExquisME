@@ -42,6 +42,15 @@
 		<result column="reason" property="reason"/>
 	</resultMap>
 	
+	<resultMap type="web.dto.Extagram" id="Extagram">
+		<id column="ex_no" property="exNo"/>
+		<result column="file_no" property="fileNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="ex_content" property="exContent"/>
+		<result column="ex_date" property="exDate"/>
+		<result column="ex_views" property="exViews"/>
+	</resultMap>
+		
 	<select id="selectUserCnt" parameterType="web.dto.User" resultType="int">
 		SELECT count(*) FROM tb_user
 		WHERE 1=1
@@ -95,7 +104,7 @@
 		WHERE user_no = #{userNo}
 	</update>
 	
-	<delete id="deleteUserByUserno" parameterType="int">
+	<delete id="deleteUserByUserNo" parameterType="int">
 		DELETE tb_user
 		WHERE user_no = #{userNo}
 	</delete>	
@@ -237,29 +246,29 @@
 			</if>
 	</select>
 	
-	<delete id="deleteCommByUserNo" parameterType="int">
+	<delete id="deleteCommByUserNo" parameterType="web.dto.Extagram">
 		DELETE tb_ex_comm
-		WHERE user_no = #{userNo}
+		WHERE ex_post_no = #{exNo} OR user_no = #{userNo}
 	</delete>
 	
 	<delete id="deleteExtaByUserNo" parameterType="int">
 		DELETE tb_extagram
-		WHERE user_no = #{userNo}
+		WHERE ex_no = #{exNo}
 	</delete>
 	
-	<delete id="deleteExtaLikeUserNo" parameterType="int">
+	<delete id="deleteExtaLikeUserNo" parameterType="web.dto.Extagram">
 		DELETE tb_ex_like
-		WHERE user_no = #{userNo}
+		WHERE ex_post_no = #{exNo} OR user_no =#{userNo}
 	</delete>
 	
-	<delete id="deleteLayerLikeByUserNo" parameterType="int">
+	<delete id="deleteLayerLikeByUserNo" parameterType="web.dto.Layer">
 		DELETE tb_layer_like
-		WHERE user_no = #{userNo}
+		WHERE layering_no  = #{layeringNo} OR user_no = #{userNo}
 	</delete>
 
 	<delete id="deleteLayerByUserNo" parameterType="int">
 		DELETE tb_layer
-		WHERE user_no = #{userNo}
+		WHERE layering_no = #{layeringNo} 
 	</delete>
 	
 	<delete id="deleteNoteLikeByUserNo" parameterType="int">
@@ -296,5 +305,18 @@
 		FROM tb_report
 		WHERE defendant = #{userNo}
 		ORDER BY expire_date DESC
+	</select>
+	
+	<select id="selectExtaListByUserNo" parameterType="int" resultMap="Extagram">
+		SELECT 
+			ex_no, e.file_no, e.user_no
+		FROM tb_extagram e, tb_user u
+		WHERE e.user_no = u.user_no AND e.user_no = #{userNo}
+	</select>
+	
+	<select id="selectLayerListByUserNo" parameterType="int" resultType="web.dto.Layer">
+		SELECT layering_no, perfume_no1, perfume_no2, l.user_no
+		FROM tb_layer l, tb_user u
+		WHERE l.user_no = u.user_no AND l.user_no = #{userNo}
 	</select>
 </mapper>
