@@ -1,5 +1,8 @@
 package web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
@@ -41,7 +45,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public @ResponseBody boolean loginProc( User user, HttpSession session){
+	public @ResponseBody boolean loginProc(User user, Report report, HttpSession session, Model model){
 		logger.info("/login [POST]");
 		
 		//비밀번호 암호화
@@ -50,22 +54,34 @@ public class UserController {
 		user.setPw(encPw);
 		
 		boolean isLogin = userService.getLoginCheck(user);
-		logger.info("로그인 성공 여부 : {}", isLogin);
+		logger.info("회원정보 매칭 여부 : {}", isLogin);
+		
 		if(isLogin) {
 			
 			user = userService.getUserInfo(user);
 			
+			//신고 여부 조회
+			boolean isReport = userService.getCheckReport(user);
+			
+			if(isReport) {
+				report = userService.getReportInfo(user, report);
+				
+				if( new Date().before( report.getExpireDate() ) ) {
+		        	logger.info("제재된 유저 [로그인 거부]");
+					return false;
+				}
+			}
 			session.setAttribute("login", isLogin);
 			session.setAttribute("admin", user.getIsAdmin());
 			session.setAttribute("nick", user.getNick() );
 			session.setAttribute("userNo", user.getUserNo() );
 			session.setMaxInactiveInterval(180*60); //3시간뒤 세션값 삭제
 			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
-			logger.info("{}",userNo);
+			logger.info("[로그인 성공] 회원번호 : {}",userNo);
 			return true;
-		}else {
-			return false;
 		}
+		return false;
+		
 	}
 	
 	@RequestMapping(value="/logout")
@@ -218,9 +234,12 @@ public class UserController {
 	
 	@RequestMapping(value="/profile", method=RequestMethod.POST)
 	public String profileUpdate(User user, 
-			MultipartFile file, 
+			MultipartFile file, String emailCheck,
 			FileUpload fileUpload, HttpSession session, Model model) {
-		
+		if(emailCheck == null || emailCheck.equals("")) {
+			logger.info("[정보 수정 실패] 인증키 값이 없음");
+			return "redirect:/user/mypage";
+		}
 		logger.info("profileUpdate called");
 		user.setUserNo((Integer)session.getAttribute("userNo"));
 		

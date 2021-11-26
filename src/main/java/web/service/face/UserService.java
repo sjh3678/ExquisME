@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.dto.ExComm;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.dto.User;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
@@ -178,5 +179,20 @@ public interface UserService {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> getUserList(PagingUser pagingUser);
+
+	/**
+	 * 신고자 여부 판단을 위한 정보 조회
+	 * @param user - 조회할 회원 정보
+	 * @param report 
+	 * @return - 조회된 정보 반환
+	 */
+	public Report getReportInfo(User user, Report report);
+
+	/**
+	 * 신고여부 조회
+	 * @param user - 조회할 회원 정보
+	 * @return - 조회된 정보 반환
+	 */
+	public boolean getCheckReport(User user);
 
 }

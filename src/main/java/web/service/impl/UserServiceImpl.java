@@ -2,6 +2,8 @@ package web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,7 @@ import web.dao.face.ExtaDao;
 import web.dao.face.UserDao;
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
@@ -208,7 +211,10 @@ public class UserServiceImpl implements UserService{
 		
 		if(user.getUserNo() != 0) {
 			String email = user.getEmail();
+			logger.info("email : {}", email);
+			
 			user = userDao.selectUserByUserno(user.getUserNo());
+			
 			if(!email.equals(user.getEmail()) || email.equals("")) {
 				logger.info("비어있거나 형식에 맞지않는 이메일");
 				isChecked = true;
@@ -448,6 +454,29 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<HashMap<String, Object>> getUserList(PagingUser pagingUser) {
 		return userDao.selectUserAll(pagingUser);
+	}
+
+	@Override
+	public boolean getCheckReport(User user) {
+		int cnt = userDao.selectReportCntByUserNo(user);
+		if(cnt > 0) {
+			logger.info("제재결과 존재");
+			return true;
+		}else {
+			logger.info("제재결과 없음");
+			return false;
+		}
+		
+	}
+	
+	@Override
+	public Report getReportInfo(User user, Report report) {
+		List<Report> list = null;//리스트 초기화
+		list = userDao.selectReportByUserNo(user); 
+		
+		report = list.get(0);
+		
+		return report;
 	}
 
 }

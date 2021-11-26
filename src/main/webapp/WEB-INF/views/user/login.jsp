@@ -42,7 +42,7 @@ $(document).ready(function(){
 			dataType: 'text',
 			data: formData,
 			success: function(result) {
-				console.log(result);
+				console.log("로그인 결과 : ", result);
 				// 회원가입 성공
 				if (result == "true") {
 					console.log("로그인 성공")
@@ -52,6 +52,7 @@ $(document).ready(function(){
 				} else {
 					alert("로그인 실패");
 					console.log("로그인 실패")
+					
 					return false;
 				}
 			},
@@ -306,6 +307,7 @@ label {
 
 </div>
 </div>
+<input type="hidden" id="banDate" value="${banDate }"/>
 
 <script type="text/javascript">
 //google signin API

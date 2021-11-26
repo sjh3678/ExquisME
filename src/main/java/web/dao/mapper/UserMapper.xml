@@ -28,6 +28,20 @@
 		<result column="file_size" property="fileSize"/>
 	</resultMap>
 	
+	<resultMap type="web.dto.Report" id="Report">
+		<id column="report_no" property="reportNo"/>
+		<result column="ex_post_no" property="exPostNo"/>
+		<result column="reporter" property="reporter"/>
+		<result column="defendant" property="defendant"/>
+		<result column="report_content" property="reportContent"/>
+		<result column="report_date" property="reportDate"/>
+		<result column="is_execute" property="isExecute"/>
+		<result column="ban_date" property="banDate"/>
+		<result column="expire_date" property="expireDate"/>
+		<result column="ban_type" property="banType"/> 
+		<result column="reason" property="reason"/>
+	</resultMap>
+	
 	<select id="selectUserCnt" parameterType="web.dto.User" resultType="int">
 		SELECT count(*) FROM tb_user
 		WHERE 1=1
@@ -243,4 +257,20 @@
 		DELETE tb_perf_like
 		WHERE user_no = #{userNO}
 	</delete>
+	
+	<!-- 피고자의 유저번호로 조회 -->
+	<select id="selectReportCntByUserNo" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_report
+		WHERE defendant = #{userNo}
+	</select>
+	
+	<!-- 피고자의 유저번호로 조회 -->
+	<select id="selectReportByUserNo" parameterType="web.dto.User" resultMap="Report">
+		SELECT 
+			report_no, ex_post_no, reporter, defendant, report_content, 
+			report_date, is_execute, ban_type, reason, expire_date
+		FROM tb_report
+		WHERE defendant = #{userNo}
+		ORDER BY expire_date DESC
+	</select>
 </mapper>

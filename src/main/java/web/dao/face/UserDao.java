@@ -6,6 +6,7 @@ import java.util.Map;
 
 import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Report;
 import web.dto.User;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
@@ -202,4 +203,18 @@ public interface UserDao {
 	 * @param userNo - 삭제할 유저 정보
 	 */
 	public void deletePerfLikeByUserNo(int userNo);
+
+	/**
+	 * 유저의 제재유무 조회
+	 * @param user - 조회할 유저 정보
+	 * @return - 조회된 수 반환
+	 */
+	public int selectReportCntByUserNo(User user);
+
+	/**
+	 * 유저의 제재 결과 조회
+	 * @param user - 조회할 유저 정보
+	 * @return - 조회된 결과 리스트 반환
+	 */
+	public List<Report> selectReportByUserNo(User user);
 }

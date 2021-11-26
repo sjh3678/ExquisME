@@ -30,6 +30,10 @@ async function ajaxPost(url, data) {
 async function authKeyCheck(){
 	var authKey = $("#emailCheck")
 	console.log(authKey);
+	if(authKey == ""){
+		console.log("인증키 값 없음");
+		return false;
+	}
 	var result = await ajaxPost("/user/session/call", {authKey:authKey.val()});
 	if(result){
 		$("#sendSucess").removeClass("invisible")
@@ -38,8 +42,6 @@ async function authKeyCheck(){
 		$("#sendSucess").addClass("invisible");
 		$("#sendFail").removeClass("invisible");
 		
-		$("#emailCheck").val() = "";
-		$("#email.Check").focus();
 	}
 	return result;
 }
@@ -107,8 +109,6 @@ async function checkEmailExist() {
 			$("#emailError").removeClass("invisible");
 			$("#valid-email").css("display", "none");
 			$("#sendMail").addClass("invisible");
-			email.val() = "";
-			email.focus();
 			
 			//이메일 체크 패스못함
 			return false;
@@ -158,7 +158,6 @@ function checkNick() {
 		$("#valid-nick").css("display", "none");
 		$("#nickError").addClass("invisible");
 		$("#nickChk").removeClass("invisible");
-		$("#nick").val() = "";
 		
 		return false;
 		
@@ -286,25 +285,35 @@ async function checked() {
 	
 	if (checkEmail() == false) isvalid = false;
 	else if (await checkEmailExist() == false) isvalid = false;
- 	else $("#valid-email").css("display", "inline");
-	console.log(isvalid);
+ 	console.log(isvalid);
  	
 	if (checkNick() == false) isvalid = false;
 	else if (await checkNickExist() == false) isvalid = false;
-	else $("#valid-nick").css("display", "inline");
 	console.log(isvalid);
 	
 	if (checkBirth() == false) isvalid = false;
 	console.log(isvalid);
 	
-	if(authKeyCheck() == false) isvalid = false;
+	if(await authKeyCheck() == false) isvalid = false;
 	
+	var fileCheck = document.getElementById("file").value;
+	
+	if( !fileCheck ) {
+		alert("프로필 변경 시 사진을 업로드해야 합니다.");
+		invalid = false
+	}
+		
 	return isvalid;
 }
 
 async function submit() {
-	if (await checked() == true) {
+	var isChecked = await checked();
+	
+	if (isChecked == true) {
+		alert("회원정보 수정 요청");
 		$("#update-form").submit();
+	}else{
+		alert("유효하지 않은 형식이 있습니다.");
 	}
 }
 
