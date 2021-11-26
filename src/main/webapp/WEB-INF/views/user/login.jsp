@@ -44,14 +44,16 @@ $(document).ready(function(){
 			success: function(result) {
 				console.log("로그인 결과 : ", result);
 				// 회원가입 성공
-				if (result == "true") {
+				if (result == "success") {
 					console.log("로그인 성공")
-					alert("로그인 성공", result);
 					$(location).attr("href", "/");
 					return true;
-				} else {
-					alert("로그인 실패");
-					console.log("로그인 실패")
+				}else if (result == "ban"){
+					console.log("제재 대상");
+					alert("회원님은 현재 제대 대상입니다.");
+				}else {
+					alert("회원정보를 찾을 수 없습니다.");
+					console.log("로그인 실패");
 					
 					return false;
 				}

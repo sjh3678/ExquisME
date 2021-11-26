@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public @ResponseBody boolean loginProc(User user, Report report, HttpSession session, Model model){
+	public @ResponseBody String loginProc(User user, Report report, HttpSession session, Model model){
 		logger.info("/login [POST]");
 		
 		//비밀번호 암호화
@@ -68,7 +68,7 @@ public class UserController {
 				
 				if( new Date().before( report.getExpireDate() ) ) {
 		        	logger.info("제재된 유저 [로그인 거부]");
-					return false;
+					return "ban";
 				}
 			}
 			session.setAttribute("login", isLogin);
@@ -78,9 +78,9 @@ public class UserController {
 			session.setMaxInactiveInterval(180*60); //3시간뒤 세션값 삭제
 			int userNo = ((Integer)(session.getAttribute("userNo"))).intValue();
 			logger.info("[로그인 성공] 회원번호 : {}",userNo);
-			return true;
+			return "success";
 		}
-		return false;
+		return "fail";
 		
 	}
 	
