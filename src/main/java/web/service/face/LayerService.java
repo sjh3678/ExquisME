@@ -81,5 +81,12 @@ public interface LayerService {
 	 */
 	public void setLayer(Layer layer);
 
+	/**
+	 * 레이어링번호로 레이어링 게시글 삭제
+	 * 
+	 * @param layerNo
+	 */
+	public void deleteLayer(int layerNo);
+
 
 }

@@ -240,6 +240,29 @@
 		WHERE report_no = #{reportNo}
 	</update>
 	
+<!-- 좋아요 탑5 -->
+	<select id="selectGetHeartTop5" resultType="hashmap">
+		SELECT * FROM (
+		    SELECT rownum rnum, E.* FROM (
+		        SELECT DISTINCT
+		            x.ex_no, u.nick, x.ex_content,x.ex_date,
+		            x.file_no XX , u.file_no UU, FX.file_no FFXX, FU.file_no FFUU,
+		            FX.origin_name AS PIC, FX.stored_name AS PICTURE,
+		            FU.origin_name AS PRO, FU.stored_name AS PROFILE,
+		            (SELECT count(*) FROM tb_ex_comm WHERE ex_post_no = x.ex_no) AS comm ,
+		            (SELECT count(*) FROM tb_ex_like WHERE ex_post_no = x.ex_no) AS heart
+		        FROM tb_extagram x
+		            LEFT OUTER JOIN tb_user u ON x.user_no = u.user_no
+		            LEFT OUTER JOIN tb_file FX ON x.file_no = FX.file_no
+		            LEFT OUTER JOIN tb_file FU ON u.file_no = FU.file_no
+		            LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
+		            LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
+		        ORDER BY heart DESC
+		    ) E
+		) tb_extagram
+		WHERE rnum BETWEEN 1 AND 5
+	</select>
+	
 	
 </mapper>
 

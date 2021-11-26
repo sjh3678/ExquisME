@@ -11,7 +11,7 @@
 <div class="menu">
 	<a href="/admin/notice/list"><button class="btn btnHeader">NOTICE</button></a>
 	<a href="/admin/faq/list"><button class="btn btnHeader">FAQ</button></a>
-	<a href="/admin/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
+	<a href="/admin/user/list"><button class="btn btnHeader">USER</button></a>
 	<a href="/admin/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/admin/layer/list"><button class="btn btnHeader">LAYER</button></a>
 	<a href="/admin/report/list"><button class="btn btnHeader">REPORT</button></a>

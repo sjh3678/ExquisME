@@ -67,6 +67,22 @@ public interface LayerDao {
 	public void insertLayerLike(LayerLike lLike);
 
 
+	/**
+	 * 레이러링 특정 게시글의 좋아요 전체 DB삭제
+	 * 
+	 * @param layerNo
+	 */
+	public void deleteLayerLikeByLayerNo(int layerNo);
+
+
+	/**
+	 * 레이어링 번호로 게시글 삭제
+	 * 
+	 * @param layerNo
+	 */
+	public void deleteLayerByLayerNo(int layerNo);
+
+
 
 
 

@@ -285,4 +285,14 @@ public class ExtaServiceImpl implements ExtaService {
 	public void setReportStart(Report report) {
 		extaDao.updateReportStart(report);
 	}
+	
+	
+//Main - 좋아요 탑5
+	@Override
+	public List<HashMap<String, Object>> getHeartTop5() {
+		return extaDao.selectGetHeartTop5();
+	}
+	
+	
+	
 }
