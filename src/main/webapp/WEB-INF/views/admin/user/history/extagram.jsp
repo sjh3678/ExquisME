@@ -45,6 +45,8 @@
 </tbody>
 </table>
 
-<c:import url="/WEB-INF/views/layout/paging.jsp" />
+
+
+<c:import url="/WEB-INF/views/layout/paging3.jsp" />
 </div><%-- .container --%>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
