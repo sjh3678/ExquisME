@@ -112,6 +112,7 @@ h4 {
     	</li>
 	</ul>	
 </div><!-- container end -->
+
 <script type="text/javascript">
 	//현재 페이지의 URL불러오기
 	var curr_url = document.URL;
@@ -158,13 +159,27 @@ function shareKakao(){
 	});
 };
 
+//현재 페이지의 URL불러오기
+var curr_url = document.URL;
+//URL객체 생성
+var new_curr_url = new URL(curr_url); 
+//url에서 type이라는 파라미터를 찾아서 param에 넣음
+var urlparam = new_curr_url.searchParams; 
+console.log("param : "+ urlparam);
 function shareFacebook() {
     var sendUrl = "devpad.tistory.com/"; // 전달할 URL
-    window.open("http://www.facebook.com/sharer/sharer.php?u=http://localhost:8088/survey/result" + urlparam);
+    window.open("http://www.facebook.com/sharer/sharer.php?u=http://localhost:8088/survey/result?" + urlparam);
 }
+//현재 페이지의 URL불러오기
+var curr_url = document.URL;
+//URL객체 생성
+var new_curr_url = new URL(curr_url); 
+//url에서 type이라는 파라미터를 찾아서 param에 넣음
+var urlparam = new_curr_url.searchParams; 
+console.log("param : "+ urlparam);
 function shareTwitter() {
     var sendUrl = "devpad.tistory.com/"; // 전달할 URL
-    window.open("https://twitter.com/intent/tweet?url=http://localhost:8088/survey/result" + urlparam);
+    window.open("https://twitter.com/intent/tweet?text=ExquisMe&url=http://localhost:8088/survey/result?"+urlparam);
 }
 </script>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
