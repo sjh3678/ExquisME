@@ -58,6 +58,10 @@ h4 {
 	height: 120px;
 	border-radius: 10px;
 	border: 5px solid #000;
+	cursor:  pointer;
+}
+.perf-img img:hover{
+ transform: scale(1.1);
 }
 .result-perf {
 	margin: 0 auto;
@@ -97,7 +101,7 @@ h4 {
 <div class="container">
 
 
-<h1 style="text-align: center;">Found Your Own Cent</h1>
+<h1 style="text-align: center; font-family: serif; font-weight: bold;">Found Your Own Scent</h1>
 <hr>
 
 
@@ -120,7 +124,7 @@ h4 {
 			<div class="perf-wrap">
 				<c:forEach items="${perfList }" var="perfList">
 				 <div class="flex-items">
-				 	<div class="perf-img"><img alt="" src="/upload/${perfList.STORED_NAME }" style="margin: 0 auto;"></div>
+				 	<div class="perf-img"><a href="/perf/view?perfumeNo=${perfList.PERFUME_NO }"><img alt="" src="/upload/${perfList.STORED_NAME }" style="margin: 0 auto;"></a></div>
 					<div class="perf-info" style="font-size: 13px; font-weight: bold;">${perfList.PERFUME_NAME }</div>
 					<div class="perf-info">${perfList.BRAND_NAME }</div>
 				</div>

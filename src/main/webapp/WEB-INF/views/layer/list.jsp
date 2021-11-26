@@ -300,6 +300,7 @@ td:nth-child(2) {
 	margin: 5px 10px 0px 10px;
 	background: #fff;
 	border-radius: 5px;	
+	white-space: normal;
 }
 .imgcontainer1{
 	overflow: hidden;
