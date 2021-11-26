@@ -56,7 +56,7 @@
 input[type=range] {
   height: 28px;
   -webkit-appearance: none;
-  margin: 10px 0;
+  margin: 40px 0;
   width: 100%;
   background: #ECE6CC;
 }
@@ -228,7 +228,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .layer-container{
 	width: 100%;
-    height: 400px;
+    height: 350px;
     margin: 10px auto;
     margin-bottom: 40px;
     background-color: #ECE6CC;
@@ -278,6 +278,12 @@ input[type=range]:focus::-ms-fill-upper {
     margin: 0 auto;
     border-radius: 20px;
     background-color: #fff;
+}
+.layer-img-text{
+	text-align: center;
+    height: 100%;
+    position: relative;
+    top: 40%;
 }
 .graf-bar {
 	width:100%;
@@ -350,18 +356,18 @@ li span {
 #perbox1{
 	position: relative;
     margin-left: 5px;
-    top: -155px;
+    top: -200px;
     left: -90px;
-    font-size: 48px;
+    font-size: 108px;
     font-weight: 700;
     color: rgb(128, 128, 128, 0.5);
 }
 #perbox2{
 	position: relative;
     margin-left: 5px;
-    top: -225px;
-    left: 110px;
-    font-size: 48px;
+    top: -350px;
+    left: 80px;
+    font-size: 108px;
     font-weight: 700;
     color: rgb(128, 128, 128, 0.5);
 }
@@ -752,17 +758,14 @@ $(function(){
 <div class="container">
 
 	<div class="layer-container">
-		<div class="h5">
-			<div>원하는 향수를 검색해서 드래그 해보세요.</div>
-		</div>
 		<div class="layer-item">
 		
-			<div class="layer-img" id="img1"></div>
+			<div class="layer-img" id="img1"><div class="layer-img-text">향수를 드래그해서<br>올려 보세요.</div></div>
  			<!-- <div class="layer-img" id="img1" ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 			
 			<div class="graf-bar" id="graf1">
-			    <input type="range" id="graf-in1" min="1" max="100"/>
-				<div id="graf-out1" style="text-align: center;">막대를 조절하여 <br> 비율을 정해주세요.</div>
+			    <input type="range" id="graf-in1" min="1" max="99"/>
+				<div id="graf-out1" style="text-align: center; color:transparent;"></div>
 			</div>
 			
 		</div><!-- layer-item -->
@@ -771,17 +774,17 @@ $(function(){
 		
 		<div class="layer-item">
 		
-			<div class="layer-img" id="img2"></div>
+			<div class="layer-img" id="img2"><div class="layer-img-text">향수를 드래그해서<br> 올려 보세요.</div></div>
 <!-- 			<div class="layer-img" id="img2" ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 			
 			<div class="graf-bar" id="graf2">
-				<input id="graf-in2" type="range" min="1" max="100" />
-				<div id="graf-out2" style="text-align: center;">막대를 조절하여 <br> 비율을 정해주세요.</div>
+				<input id="graf-in2" type="range" min="1" max="99" />
+				<div id="graf-out2" style="text-align: center; color:transparent;"></div>
 			</div><!-- graf-bar -->
 			
 		</div><!-- layer-item -->
 		
-		<div class="layer-operator" ><span class="child">=</span></div>
+		<div class="layer-operator" ><span class="child" style="left: 70px;">=</span></div>
 		<form id="layer-form" action="/layer/write" method="post">
 			<div class="layer-result">
 <!-- 				<div class="R-title">조합 결과</div> -->
@@ -794,11 +797,11 @@ $(function(){
 					</div>
 					<div class="perB">
 						<div class="per-1">
-							<span id="perbox1">50%</span>
+							<span id="perbox1">50</span>
 							<input type="hidden" id="perfume1Per" name="perfume1Per" value="50">
 						</div>
 						<div class="per-2">
-							<span id="perbox2"style="margin-left:5px;">50%</span>
+							<span id="perbox2"style="margin-left:5px;">50</span>
 						</div>
 					</div>
 				</div><!-- imgbox -->
@@ -815,7 +818,7 @@ $(function(){
 
 <div class="search">
 		<div class="search_div">
-			<input type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해보세요." />
+			<input class="form-control" type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해 보세요." />
 		</div>
 </div>
 
@@ -840,8 +843,8 @@ $(function(){
 
 <script>
 document.querySelector('#graf-in1').addEventListener('input',e=>{
-    var value1 = e.target.value + "%";
-    var value2 = 100 - e.target.value +"%";
+    var value1 = e.target.value;
+    var value2 = 100 - e.target.value;
     var value3 = 100 - e.target.value;
     document.querySelector('#graf-out1').innerHTML= value1;
     document.querySelector('#graf-in2').value= value3;
@@ -851,8 +854,8 @@ document.querySelector('#graf-in1').addEventListener('input',e=>{
     document.querySelector("#perfume1Per").value = e.target.value;
 });
 document.querySelector('#graf-in2').addEventListener('input',i=>{
-    var value1 = 100 - i.target.value + "%";
-    var value2 = i.target.value + "%";
+    var value1 = 100 - i.target.value;
+    var value2 = i.target.value;
     var value3 = 100 - i.target.value;
     document.querySelector('#graf-out2').innerHTML= value2;
     document.querySelector('#graf-in1').value= value3;

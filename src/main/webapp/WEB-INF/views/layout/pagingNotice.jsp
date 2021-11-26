@@ -21,18 +21,13 @@
 
 	<!-- 첫 페이지로 -->
 	<c:if test="${paging.curPage ne 1 }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }">&laquo; 첫 페이지로 </a></li>
+		<li><a href="<%=request.getContextPath() %>${linkUrl }">첫 페이지로 </a></li>
 	</c:if>
 	
 	<!-- 이전 페이징 리스트로 이동 -->
-	<c:choose>
-		<c:when test="${paging.startPage ne 1 }">
-			<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.startPage - paging.pageCount }"> &lt; </a></li>
-		</c:when>
-		<c:when test="${paging.startPage eq 1 }">
-			<li class="disabled"><a>&lt;</a>
-		</c:when>
-	</c:choose>
+	<c:if test="${paging.startPage ne 1 }">
+		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.startPage - paging.pageCount }"> &lt; </a></li>
+	</c:if>
 	
 	<!-- 이전 페이지로 가기 -->
 <%-- 	<c:if test="${paging.curPage > 1 }"> --%>
@@ -55,18 +50,13 @@
 <%-- 	</c:if> --%>
 	
 	<!-- 다음 페이징 리스트로 이동 -->
-	<c:choose>
-		<c:when test="${paging.endPage ne paging.totalPage }">
-			<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.startPage + paging.pageCount }"> &gt; </a></li>
-		</c:when>
-		<c:when test="${paging.endPage eq paging.totalPage }">
-			<li class="disabled"><a>&gt;</a>
-		</c:when>
-	</c:choose>
+	<c:if test="${paging.endPage ne paging.totalPage }">
+		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.startPage + paging.pageCount }"> &gt; </a></li>
+	</c:if>
 	
 	<!-- 마지막 페이지로 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.totalPage }">끝 페이지로 &raquo;</a></li>
+		<li><a href="<%=request.getContextPath() %>${linkUrl }?curPage=${paging.totalPage }">끝 페이지로</a></li>
 	</c:if>
 
 </ul>
