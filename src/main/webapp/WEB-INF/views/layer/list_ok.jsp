@@ -11,10 +11,10 @@
 				src="/upload/${layer.PROFILE }" >
 			</div>
 			<div id="writer_nick">
-				작성자 :  ${layer.NICK }
+				${layer.NICK }
 			</div>
 		</div>
-		<div id="content">내용 : ${layer.LAYERING_CONTENT }</div>
+		<div id="content">${layer.LAYERING_CONTENT }</div>
 		
 		<div id="perf_pic">
 			<div class="imgcontainer1" style="background-image: url('/upload/${layer.FILES1 }')">
@@ -24,26 +24,28 @@
 				<%-- <img style="width:230px; height:240px; display: block; margin: auto;" class="img2" src="/resources/img/perf/${layer.FILES2 }"> --%>
 			</div>
 		</div>
-		<div id="perf_name1">1 :${layer.PNAME1 }</div>
-		<div id="perf_name2">2 :${layer.PNAME2 }</div>
+		<div id="perf_name1"><span style="font-weight: 700">L</span> ${layer.PNAME1 }</div>
+		<div id="perf_name2"><span style="font-weight: 700">R</span> ${layer.PNAME2 }</div>
 		
 		<div class="perf_per">
-			<div class="per1">향수1 : ${layer.PERFUME1_PER } %</div>
-			<div class="per2">향수2 : ${100 - layer.PERFUME1_PER } % </div>
+			<div class="per1">${layer.PERFUME1_PER }%</div>
+			<div class="per2">${100 - layer.PERFUME1_PER }% </div>
 		</div>
 		<div id="heart">
+			<div id="heartInner">
 			<img alt="heart" 
 				onload="if('true' == '${layer.SLIKE eq 1}') { $(this).addClass('heartRed'); }" 
 				src="/resources/img/heart/heartEmpty.png" 
-				style="with:15px; height:15px; cursor: pointer;" 
+				style="width:20px; height:20px; cursor: pointer;" 
 				onclick=loadLike(${layer.LAYERING_NO })>
+			<span class="heart_scnt">${layer.SCNT }</span>
+			</div>
 		</div>
 <%-- 		<div id="heart"><img alt="heart" src="/resources/img/heart/ --%>
 <%-- 		<c:if test="${layer.SLIKE eq 0}">heartEmpty</c:if> --%>
 <%-- 		<c:if test="${layer.SLIKE eq 1}">heartRed</c:if> --%>
 <%-- 		.png" style="with:15px; height:15px;" onclick=loadLike(${layer.LAYERING_NO })> --%>
 <!-- 		</div> -->
-		<div id="heart_cnt">좋아요 수 : <span class="heart_scnt">${layer.SCNT }</span></div>
     </div>
 </c:forEach>
 </div>

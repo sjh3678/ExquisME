@@ -165,6 +165,7 @@
 }
 
 .btnHeader:hover {
+	transform: scale(1.1);
 	background-color: #ECE6CC;
  	color: #35312B; 
 }
@@ -172,9 +173,10 @@
 .btnModal{
 	background-color: #8A7E6B;
 	color: #ECE6CC;
-	margin: 10px;
+	margin: 10px auto;
 }
 .btnModal:hover {
+	transform: scale(1.02);
 	background-color: #35312B;
 }
 @keyframes blink-effect{
@@ -190,6 +192,12 @@
 }
 h1{
 	margin-top: 0px;
+}
+.titleChild:hover{
+	transform: scale(1.02);
+}
+.btn:hover{
+	transform: scale(1.01);
 }
 </style>
 

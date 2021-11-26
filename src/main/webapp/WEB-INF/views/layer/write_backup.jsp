@@ -465,16 +465,14 @@ $(document).ready(function(){
 		$("#layer-form").submit();
 	});
 });
-	function loadCurPage(i,s){
+	function loadCurPage(i, s){
 		var curPage =  i ;
-		var search = s;
 		console.log(curPage);
 			$.ajax({
 				type: "post"
 				, url: "/layer/write_ok"
 				, data: { 
 					curPage: curPage
-					, search: search
 				}
 				, dataType: "html"
 				, success: function(data){

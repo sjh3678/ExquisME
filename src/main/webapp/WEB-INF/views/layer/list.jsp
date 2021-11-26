@@ -8,6 +8,22 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	$(".btnFunction").click(function(){
+		
+		if($("#like").css("display") === "none"){
+			$("#like").show();
+			$("#last").hide();
+			return false;
+		}
+		
+		if($("#last").css("display") === "none"){
+			$("#last").show();
+			$("#like").hide();
+			return false;
+		}
+	})
+	
 	loadList(); //init list
 	
 
@@ -147,6 +163,11 @@ function loadLike( layeringNo ) {
 	}
 };// loadLike end	
 
+
+
+
+
+
 </script>
 
 <style type="text/css">
@@ -173,12 +194,12 @@ td:nth-child(2) {
 	flex-wrap: wrap;
 	width: 90%;
 	min-width: 1080px;
-	font-size: 11px;
+	font-size: 15px;
 }
 #flex-items {
 	min-width: 260px;
 	width: 260px;
-	height: 480px;
+	height: 470px;
 	border-radius: 10px; 
 	margin:4px;
 	background: #ECE6CC;
@@ -192,10 +213,10 @@ td:nth-child(2) {
 }
 
 #writer {
-	margin: 5px 10px 0px 10px;
+	margin: 10px 10px 0px 10px;
 	text-align: left;
 	font-size: 15px;
-	background: #fff;
+/* 	background: #fff; */
 	border-radius: 5px;
 }
 
@@ -214,18 +235,32 @@ td:nth-child(2) {
 	padding-left: 10px;	
 }
 .perf_per {
-	height: 20px;
-	margin: 5px 10px 0px 10px;
-	background: #fff;
-	border-radius: 5px;	
 }
 .per1 {
+	
+	position: relative;
+    top: -220px;
+    font-size: 48px;
+    font-weight: 700;
+    width: 50%;
+    color: rgb(255, 255, 255, 0.7);
+	background: rgb(0, 0, 0, 0.2);
+	
 	width: 50%;
     float: left;
     text-align: center;
 }
 
 .per2 {
+	
+	position: relative;
+    top: -220px;
+    font-size: 48px;
+    font-weight: 700;
+    width: 50%;
+    color: rgb(0, 0, 0, 0.3);
+	background: rgb(255, 255, 255, 0.5);
+
 	width: 50%;
 	float:right;
 	text-align: center;
@@ -234,12 +269,30 @@ td:nth-child(2) {
 #heart {
 	margin: 15px 10px 0px 10px;
 	text-align: center;
+	height: 30px;
+}
+#heart:hover {
+	transform: scale(1.02);
+}
+#heartInner {
+	vertical-align: middle;
+    position: absolute;
+    height: 30px;
+    padding-left: 110px;
+}
+#heartInner span {
+	vertical-align: middle;
 }
 #heart_cnt {
-	margin: 0px 10px 0px 10px;
+/* 	margin: 0px 10px 0px 10px; */
 	text-align: center;
 }
 #content {
+    overflow: hidden;
+    width: 240px;
+	height: 60px;
+	font-size: 12px;
+	padding: 5px;
 	margin: 5px 10px 0px 10px;
 	background: #fff;
 	border-radius: 5px;	
@@ -280,14 +333,29 @@ td:nth-child(2) {
 	max-width: 230px;
 	margin-left:50%;
 } */
+
+#perf_name1, #perf_name2{
+	background: rgb(138, 126, 107, 0.3);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 23px;
+    width: 240px;
+}
+.btnLayer {
+	margin: 5px;
+}
+#like, #last {
+	width: 80px;
+}
 </style>
 
 
 <div class="container">
 
-<input type="button" id="last" value="최신순" class="btn btn-primary pull-left"/>
-<input type="button" id="like" value="좋아요순" class="btn btn-primary pull-left"/>
-<a href="/layer/write"><button class="btn btn-primary pull-left">레이어링등록</button></a>
+<input type="button" id="last" value="최신순" class="btn btnFunction btnLayer pull-left"/>
+<input type="button" id="like" value="좋아요순" class="btn btnFunction btnLayer pull-left" style="display: none;"/>
+<a href="/layer/write"><button id="writeLayer" class="btn btnLayer pull-left">나만의 레이어링 등록</button></a>
 
 
 

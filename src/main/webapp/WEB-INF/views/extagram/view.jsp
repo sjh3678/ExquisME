@@ -54,7 +54,9 @@
 	margin: 10px;
 	padding: 10px;
 }
-
+#btnHeart:hover{
+	transform: scale(1.1);
+}
 ::-webkit-scrollbar {
   width: 7px;
 }

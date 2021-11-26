@@ -158,7 +158,7 @@ $(document).ready(function(){
 	margin-bottom: 0px;
 	background-color: white;
 }
-.btnHome{
+.btnHome {
 	display: block;
 	height: 60px;
     width: 240px;
@@ -169,11 +169,12 @@ $(document).ready(function(){
 	margin: 0 auto;
 	margin-top: 50px;
 }
-.btnHome:hover{
+.btnHome:hover {
+	transform: scale(1.02);
 	background-color: rgb(138, 126, 107);
 }
 
-#sliderbox{
+#sliderbox {
 	height: 274px;
 	width: 1040px;
 /*  	border: 1px solid red; */
@@ -186,14 +187,14 @@ $(document).ready(function(){
 	overflow: hidden;
 	
 }
-#slider{
+#slider {
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
 	
 	position: relative;
 }
-#slider li{
+#slider li {
 	position: absolute;
 }
 #poster {
@@ -203,12 +204,15 @@ $(document).ready(function(){
     background-position: center;
     border-radius: 10px;
 }
-
+#pName {
+	font-size: 18px;
+	font-weight: 700;
+}
 #pVital {
 	font-size: 21px;
 }
 #pLike, #pDislike {
-	font-size: 18px;
+	font-size: 15px;
 }
 #pBrand {
 	font-size: 28px;
@@ -218,6 +222,9 @@ $(document).ready(function(){
 	 height: 270px;
 	 background: #FFF;
 	 border-radius: 10px;
+}
+#middleImg:hover {
+	transform: scale(1.02);
 }
 </style>
 
@@ -253,6 +260,7 @@ $(document).ready(function(){
 								</a>
 							</div>
 							<div class="middleR" style="position: absolute; top: 0px; left: 300px; float: right; height: 270px; width: 730px; background-color: transparent; padding-top: 50px;">
+								<p id="pName">${showList.PERFUME_NAME }</p>
 								<p id="pVital">${showList.PERFUME_VITALITY }</p>
 								<p id="pLike">이 향수를 좋아하는 분 ${showList.LIKECNT}명</p>
 								<p id="pDislike">이 향수를 싫어하는 분 ${showList.DISLIKECNT }명</p>
@@ -268,7 +276,7 @@ $(document).ready(function(){
 		</div>
 		<div id="base">
 			<div id="baseTop">
-			이번 주 가장 많은 좋아요를 받은 EXTAGRAM
+			가장 많은 좋아요를 받은 EXTAGRAM
 			</div>
 			<div id="baseContent">
 			하하 - extagram 이미지 슬라이드 4~5개
