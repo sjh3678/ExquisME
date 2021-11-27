@@ -200,4 +200,16 @@ public interface UserService {
 
 	public List<Map<String, Object>> getUserLayerHistory(User user, PagingExtagram paging);
 
+	public PagingUserHistory getCommPaging2(PagingUserHistory paramData, User user);
+
+	public PagingUserHistory getExtaPaging2(PagingUserHistory paramData, User user);
+
+	public List<Map<String, Object>> getUserExtagramHistory2(User user, PagingUserHistory paging);
+
+	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory paging);
+
+	public PagingUserHistory getLayerPaging2(PagingUserHistory paramData, User user);
+
+	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory paging);
+
 }

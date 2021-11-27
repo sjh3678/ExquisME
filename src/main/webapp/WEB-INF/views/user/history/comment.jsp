@@ -28,21 +28,30 @@ td{
 	overflow:hidden;
 }
 </style>
-<table class="hitoryList">
-<tr>
-	<td>extagram번호</td>
-	<td>작성자</td>
-	<td>내용</td>
-	<td>작성일</td>
-</tr>
-<c:forEach items="${commList}" var="list">
-<tr>
-	<td  onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';">${list.EX_POST_NO}</td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';"><img width="20px" height="20px" src="/upload/${list.POSTPROFILE }"/>${list.POSTOWNER }</td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';" nowrap style="overflow:hidden;">${list.EX_COMM }</td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_POST_NO}';"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
-</tr>
+<table class="table table-striped table-hover">
+<thead>
+	<tr>		
+		<th style="width: 10%; text-align: center;">Exta번호</th>
+		<th style="width: 10%; text-align: center;">Exta작성자</th>
+		<th style="width: 50%; text-align: center;">댓글 내용</th>
+		<th style="width: 10%; text-align: center;">작성일</th>
+		<th style="width: 10%; text-align: center;">상세보기</th>
+		<th style="width: 10%; text-align: center;">삭제</th>
+		
+	</tr>
+</thead>
+<tbody>
+<c:forEach items="${commList }" var="list">
+	<tr>
+		<td style="text-align: center;">${list.EX_POST_NO }</td>
+		<td style="text-align: center;">${list.POSTOWNER }</td>
+		<td style="text-align: center;">${list.EX_COMM }</td>
+		<td style="text-align: center;">${list.EX_COMM_DATE }</td>
+		<td style="text-align: center;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button>상세보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/delete?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }" onclick="return confirm('댓글을 삭제하시겠습니까? 삭제된 댓글은 원상복구 할 수 없습니다.');"><button>댓글 삭제</button></a></td>
+	</tr>	
 </c:forEach>
+</tbody>
 </table>
 
 <div class="pagingArea">

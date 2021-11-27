@@ -448,13 +448,13 @@ public class UserController {
 	public String extagramRecode(User user, 
 			HttpSession session, 
 			Model model,
-			PagingExtagram paramData) {
+			PagingUserHistory paramData) {
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		logger.info("user : {}", user);
-		PagingExtagram paging = userService.getExtaPaging(paramData, user);
+		PagingUserHistory paging = userService.getExtaPaging2(paramData, user);
 		logger.info("페이징 : {}", paging);
 		user.setUserNo((Integer) session.getAttribute("userNo"));
-		List<Map<String, Object>> list = userService.getUserExtagramHistory(user, paging); 
+		List<Map<String, Object>> list = userService.getUserExtagramHistory2(user, paging); 
 		model.addAttribute("paging", paging);
 		model.addAttribute("extaList", list);
 		return "/user/history/extagram";
@@ -464,13 +464,13 @@ public class UserController {
 	public String commentRecode(User user, 
 			HttpSession session, 
 			Model model,
-			PagingExtagram paramData) {
+			PagingUserHistory paramData) {
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		logger.info("user : {}", user);
-		PagingExtagram paging = userService.getCommPaging(paramData, user);
+		PagingUserHistory paging = userService.getCommPaging2(paramData, user);
 		logger.info("페이징 : {}", paging);
 		user.setUserNo((Integer) session.getAttribute("userNo"));
-		List<Map<String, Object>> list = userService.getUsercommentHistory(user, paging); 
+		List<Map<String, Object>> list = userService.getUsercommentHistory2(user, paging); 
 		model.addAttribute("paging", paging);
 		model.addAttribute("commList", list);
 		return "/user/history/comment";
@@ -480,13 +480,13 @@ public class UserController {
 	public String layerRecode(User user, 
 			HttpSession session, 
 			Model model,
-			PagingExtagram paramData) {
+			PagingUserHistory paramData) {
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		logger.info("user : {}", user);
-		PagingExtagram paging = userService.getLayerPaging(paramData, user);
+		PagingUserHistory paging = userService.getLayerPaging2(paramData, user);
 		logger.info("페이징 : {}", paging);
 		user.setUserNo((Integer) session.getAttribute("userNo"));
-		List<Map<String, Object>> list = userService.getUserLayerHistory(user, paging); 
+		List<Map<String, Object>> list = userService.getUserLayerHistory2(user, paging); 
 		model.addAttribute("paging", paging);
 		model.addAttribute("layerList", list);
 		return "/user/history/layer";

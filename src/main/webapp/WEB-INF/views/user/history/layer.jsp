@@ -33,23 +33,32 @@ td{
 	margin: 5px;
 }
 </style>
-<table>
-<tr>
-	<td>레이어링 번호</td>
-	<td>향수1</td>
-	<td>향수2</td>
-	<td>비율</td>
-	<td>작성일</td>
-</tr>
-<c:forEach items="${layerList}" var="list">
-<tr>
-	<td>${list.LAYERING_NO }</td>
-	<td><img width="50px" height="40px" src="/upload/${list.PERFUME1 }"/></td>
-	<td><img width="50px" height="40px" src="/upload/${list.PERFUME2 }"/></td>
-	<td>${list.PERFUME1_PER }% / ${100 - list.PERFUME1_PER }%</td>
-	<td><fmt:formatDate value="${list.LAYERING_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
-</tr>
+<table class="table table-striped table-hover">
+<thead>
+	<tr>		
+		<th style="width: 15%; text-align: center;">Layering 번호</th>
+		<th style="width: 20%; text-align: center;">향수 1</th>
+		<th style="width: 20%; text-align: center;">향수 2</th>
+		<th style="width: 10%; text-align: center;">비율</th>
+		<th style="width: 20%; text-align: center;">작성일</th>
+		<th style="width: 15%; text-align: center;">삭제</th>
+		
+	</tr>
+</thead>
+<tbody>
+<c:forEach items="${layerList }" var="list">
+	<tr>
+		<td style="text-align: center;">${list.LAYERING_NO }</td>
+		<td style="text-align: center;"><img class="user_img" style=" width:50px; height:50px; display: block; margin: auto;"
+					src="/upload/${list.PERFUME1 }"></td>
+		<td style="text-align: center;"><img class="user_img" style=" width:50px; height:50px; display: block; margin: auto;"
+					src="/upload/${list.PERFUME2 }"></td>
+		<td style="text-align: center;">${list.PERFUME1_PER } / ${100 - list.PERFUME1_PER }</td>
+		<td style="text-align: center;">${list.LAYERING_DATE }</td>
+		<td style="text-align: center;"><a href="/admin/user/history/layer/delete?layeringNo=${list.LAYERING_NO }&userNo=${list.USER_NO }" onclick="return confirm('레이어링을 삭제하시겠습니까? 삭제된 레이어링은 원상복구 할 수 없습니다.');"><button>레이어링 삭제</button></a></td>
+	</tr>	
 </c:forEach>
+</tbody>
 </table>
 
 <div class="pagingArea">

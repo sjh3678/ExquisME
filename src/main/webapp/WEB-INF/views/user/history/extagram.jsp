@@ -33,23 +33,30 @@ td{
 	margin: 5px;
 }
 </style>
-<table>
-<tr>
-	<td>업로드한 파일</td>
-	<td>내용</td>
-	<td>작성일</td>
-	<td>삭제</td>
-</tr>
-<c:forEach items="${extaList}" var="list">
-<tr>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><img width="50px" height="40px" src="/upload/${list.UPFILE }"/></td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';" nowrap style="overflow:hidden;">${list.EX_CONTENT }</td>
-	<td onclick="location.href='/extagram/view?exNo=${list.EX_NO}';"><fmt:formatDate value="${list.EX_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
-	<td id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button>삭제</button></a></td>
-</tr>
+<table class="table table-striped table-hover">
+<thead>
+	<tr>
+		<th style="width: 30%; text-align: center;">exta사진</th>
+		<th style="width: 40%; text-align: center;">내용</th>
+		<th style="width: 10%; text-align: center;">작성일</th>
+		<th style="width: 10%; text-align: center;">상세보기</th>
+		<th style="width: 10%; text-align: center;">삭제</th>
+		
+	</tr>
+</thead>
+<tbody>
+<c:forEach items="${extaList }" var="exta">
+	<tr>
+		<td style="text-align: center;"><img class="user_img" style="width:100px; height:100px; display: block; margin: auto;"
+					src="/upload/${exta.UPFILE }"></td>
+		<td style="text-align: center;">${exta.EX_CONTENT }</td>
+		<td style="text-align: center;">${exta.EX_DATE  }</td>
+		<td style="text-align: center;"><a href="/extagram/view?exNo=${exta.EX_NO }"><button>상세보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagram/delete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시글은 원상복구 할 수 없습니다.');"><button>게시글 삭제</button></a></td>
+	</tr>	
 </c:forEach>
+</tbody>
 </table>
-
 <div class="pagingArea">
 	<ul>
 		<%-- 첫페이지로 이동 --%>

@@ -24,6 +24,7 @@ import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
+import web.util.PagingUserHistory;
 
 
 @Service
@@ -518,6 +519,93 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<Map<String, Object>> getUserLayerHistory(User user, PagingExtagram paging) {
+		logger.info("getUserLayerHistory called");
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paging);
+		
+		logger.info("{}", map);
+		
+		List<Map<String, Object>> list = userDao.selectLayerHistoryByUserNo(map);
+		
+		return list;
+	}
+
+	@Override
+	public PagingUserHistory getCommPaging2(PagingUserHistory paramData, User user) {
+		logger.info("getCommPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectCommCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingUserHistory paging = new PagingUserHistory(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
+
+	@Override
+	public PagingUserHistory getExtaPaging2(PagingUserHistory paramData, User user) {
+		logger.info("getExtaPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectExtaCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingUserHistory paging = new PagingUserHistory(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
+
+	@Override
+	public List<Map<String, Object>> getUserExtagramHistory2(User user, PagingUserHistory paging) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paging);
+		
+		List<Map<String, Object>> list = userDao.selectExtaHistoryByUserNo(map);
+
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory paging) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("paging", paging);
+		
+		logger.info("{}", map);
+		
+		List<Map<String, Object>> list = userDao.selectCommHistoryByUserNo(map);
+		
+		return list;
+	}
+
+	@Override
+	public PagingUserHistory getLayerPaging2(PagingUserHistory paramData, User user) {
+		logger.info("getLayerPaging called");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paramData", paramData);
+		map.put("user", user);
+		
+		int totalCount = userDao.selectLayerCntByUserNo(map);
+		logger.info("totalCount : {}", totalCount);
+		
+		PagingUserHistory paging = new PagingUserHistory(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		logger.info("paging : {}", paging);
+		return paging;
+	}
+
+	@Override
+	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory paging) {
 		logger.info("getUserLayerHistory called");
 		
 		HashMap<String, Object> map = new HashMap<>();
