@@ -9,6 +9,9 @@ $(document).ready(function(){
 	$(".btnPerf").click(function(){
 		location.href="/survey/name";
 	});
+	$(".btnLayer").click(function(){
+		location.href="/layer/write";
+	});
 
 	//이미지 슬라이더
 	var $slider_list = $("#slider li")
@@ -276,7 +279,7 @@ $(document).ready(function(){
 			</div>
 			<div id="topR">
 			나만 알고 있었던 향기로운 조합!
-			<button class="btn btnHome">나만의 레이어 등록하기</button>
+			<button class="btn btnHome btnLayer">나만의 레이어 등록하기</button>
 			</div>
 		</c:if>
 		<div id="middle">
