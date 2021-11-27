@@ -65,13 +65,13 @@ td{
 	<ul>
 		<%-- 첫페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
-			<li><label onclick=getExtaList(1)><a>첫</a></label></li>
+			<li><label onclick=getLayerList(1)><a>첫</a></label></li>
 		</c:if>
 		
 		<%-- 이전페이징 리스트로 이동 --%>
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
-				<li><label onclick=getExtaList(${paging.startPage - paging.pageCount })>&lt;</label></li>
+				<li><label onclick=getLayerList(${paging.startPage - paging.pageCount })>&lt;</label></li>
 			</c:when>
 		</c:choose>
 		
@@ -82,18 +82,18 @@ td{
 			</c:if>
 			
 			<c:if test="${paging.curPage ne i }">
-				<li><label onclick=getExtaList(${i })>${i }</label></li>
+				<li><label onclick=getLayerList(${i })>${i }</label></li>
 			</c:if>
 		</c:forEach>
 
 		<%-- 다음페이징 리스트로 이동 --%>	
 		<c:if test="${paging.endPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.startPage + paging.pageCount })>&gt;</label></li>
+			<li><label onclick=getLayerList(${paging.startPage + paging.pageCount })>&gt;</label></li>
 		</c:if>
 				
 		<%-- 끝페이지로 이동 --%>
 		<c:if test="${paging.curPage ne paging.totalPage }">
-			<li><label onclick=getExtaList(${paging.totalPage })>끝</label></li>
+			<li><label onclick=getLayerList(${paging.totalPage })>끝</label></li>
 		</c:if>
 	</ul>
 </div>

@@ -207,9 +207,6 @@ $(document).ready(function(){
 
   transform: translateX(-50%) translateY(-50%);
 }
-.pwCheck{
-	margin:0 auto;
-}
 .pageList{
 	font-size:20px;
 }
@@ -240,21 +237,12 @@ $(document).ready(function(){
 
 <div class="modal" id="modal">
 <div class="modal_body" id="modal-body">
-<div class="text-right">
-<input style="margin: 5px;" type="button" class="btn" id="close-modal" value="닫기">
-</div>
-<table class="pwCheck">
-<tr>
-	<td><label for="pw">비밀번호 확인</label></td>
-</tr>
-
-<tr>
-	<td><input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요."></td>
-	<td><button style="margin-left: 10px;"type="button" class="btn" id="checkBtn">인증</button><br></td>
-</tr>
-</table>
-
-
+	<div class="text-right">
+		<input style="margin: 5px;" type="button" class="btn" id="close-modal" value="닫기">
+	</div>
+	<label for="pw">비밀번호 확인</label>
+	<input style="width: 200px; margin: auto; margin-bottom: 6px;" type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요.">
+	<button style="margin-left: 10px;"type="button" class="btn" id="checkBtn">인증</button>
 </div>
 </div>
 

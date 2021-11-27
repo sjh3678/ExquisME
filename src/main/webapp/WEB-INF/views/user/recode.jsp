@@ -91,7 +91,7 @@ $(document).ready(function(){
 	transform: scale(1.1);
 	background: #35312B;
 }
-.pagingArea li{
+.pagingArea label{
 	border-radius: 5px;
 	background: #8A7E6B;
     width: 20px;
@@ -99,14 +99,23 @@ $(document).ready(function(){
     text-align: center;
     cursor: pointer;
 }
-.pagingArea li:hover{
+.pagingArea label:hover{
 	background: #35312B;
+}
+.pagingArea a{
+	color: #ECE6CC;
 }
 table{
 	font-size: 12px;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgb(138, 126, 107, 0.2);
+}
+.table-striped>tbody>tr:nth-of-type(odd):hover {
+	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/
+}
+.table-striped>tbody>tr:nth-of-type(even):hover {
+	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/
 }
 </style>
 <div class="indexArea">
