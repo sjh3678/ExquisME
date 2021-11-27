@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 .error-wrap {
+    width: 1100px;
+    height: 800px;
+    margin: 0 auto;
 	text-align: center;
 }
 #prev {
@@ -14,7 +17,7 @@
     height: 40px;
     position: relative;
     top: -300px;
-    left: 525px;
+    left: 250px;
     border: 3.5px solid black;
     cursor: pointer;
     line-height: 38px;
@@ -27,7 +30,7 @@
     height: 40px;
     position: relative;
     top: -346px;
-    left: 990px;
+    left: 725px;
     border: 3.5px solid black;
     cursor: pointer;
     line-height: 38px;

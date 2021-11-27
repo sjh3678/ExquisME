@@ -14,6 +14,7 @@ import web.dto.User;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
 import web.util.PagingUserHistory;
+import web.util.PagingUserHistory2;
 
 public interface UserService {
 
@@ -200,16 +201,16 @@ public interface UserService {
 
 	public List<Map<String, Object>> getUserLayerHistory(User user, PagingExtagram paging);
 
-	public PagingUserHistory getCommPaging2(PagingUserHistory paramData, User user);
+	public PagingUserHistory2 getCommPaging2(PagingUserHistory2 paramData, User user);
 
 	public PagingUserHistory getExtaPaging2(PagingUserHistory paramData, User user);
 
 	public List<Map<String, Object>> getUserExtagramHistory2(User user, PagingUserHistory paging);
 
-	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory paging);
+	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory2 paging);
 
-	public PagingUserHistory getLayerPaging2(PagingUserHistory paramData, User user);
+	public PagingUserHistory2 getLayerPaging2(PagingUserHistory2 paramData, User user);
 
-	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory paging);
+	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory2 paging);
 
 }

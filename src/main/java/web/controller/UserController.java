@@ -27,6 +27,7 @@ import web.dto.User;
 import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUserHistory;
+import web.util.PagingUserHistory2;
 import web.util.UserSHA256;
 
 @Controller
@@ -464,10 +465,10 @@ public class UserController {
 	public String commentRecode(User user, 
 			HttpSession session, 
 			Model model,
-			PagingUserHistory paramData) {
+			PagingUserHistory2 paramData) {
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		logger.info("user : {}", user);
-		PagingUserHistory paging = userService.getCommPaging2(paramData, user);
+		PagingUserHistory2 paging = userService.getCommPaging2(paramData, user);
 		logger.info("페이징 : {}", paging);
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		List<Map<String, Object>> list = userService.getUsercommentHistory2(user, paging); 
@@ -480,10 +481,10 @@ public class UserController {
 	public String layerRecode(User user, 
 			HttpSession session, 
 			Model model,
-			PagingUserHistory paramData) {
+			PagingUserHistory2 paramData) {
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		logger.info("user : {}", user);
-		PagingUserHistory paging = userService.getLayerPaging2(paramData, user);
+		PagingUserHistory2 paging = userService.getLayerPaging2(paramData, user);
 		logger.info("페이징 : {}", paging);
 		user.setUserNo((Integer) session.getAttribute("userNo"));
 		List<Map<String, Object>> list = userService.getUserLayerHistory2(user, paging); 

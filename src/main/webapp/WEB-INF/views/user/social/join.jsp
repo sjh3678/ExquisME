@@ -506,7 +506,7 @@ async function submit() {
 				// 회원가입 성공
 				if (result == "true") {
 					console.log("회원가입 성공")
-					$(location).attr("href", "/");
+					$(location).attr("href", "/user/login");
 					return true;
 				} else {
 					console.log("회원가입 실패")
@@ -571,7 +571,7 @@ $(document).ready(function(){
     	submit(); 	
     })
     $("#cancleBtn").click(function(){
-    	$(location).attr("href", "/");
+    	$(location).attr("href", "/user/login");
     })
 })
 </script>
@@ -663,7 +663,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
-<select id="questionNo" name="questionNo" style="width:500px;">
+<select id="questionNo" name="questionNo" style="width:500px;border: 1px solid #ccc;border-radius: 5px;margin-bottom:5px;">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
       <option value="2">다시 태어나면 되고 싶은 것은?</option>
       <option value="3">가장 감명깊게 본 영화는?</option>
