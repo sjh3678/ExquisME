@@ -25,6 +25,7 @@ import web.service.face.UserService;
 import web.util.PagingExtagram;
 import web.util.PagingUser;
 import web.util.PagingUserHistory;
+import web.util.PagingUserHistory2;
 
 
 @Service
@@ -552,7 +553,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public PagingUserHistory getCommPaging2(PagingUserHistory paramData, User user) {
+	public PagingUserHistory2 getCommPaging2(PagingUserHistory2 paramData, User user) {
 		logger.info("getCommPaging called");
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("paramData", paramData);
@@ -561,7 +562,7 @@ public class UserServiceImpl implements UserService{
 		int totalCount = userDao.selectCommCntByUserNo(map);
 		logger.info("totalCount : {}", totalCount);
 		
-		PagingUserHistory paging = new PagingUserHistory(totalCount, paramData.getCurPage());
+		PagingUserHistory2 paging = new PagingUserHistory2(totalCount, paramData.getCurPage());
 		paging.setSearch(paramData.getSearch());
 		logger.info("paging : {}", paging);
 		return paging;
@@ -595,7 +596,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory paging) {
+	public List<Map<String, Object>> getUsercommentHistory2(User user, PagingUserHistory2 paging) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("user", user);
 		map.put("paging", paging);
@@ -608,7 +609,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public PagingUserHistory getLayerPaging2(PagingUserHistory paramData, User user) {
+	public PagingUserHistory2 getLayerPaging2(PagingUserHistory2 paramData, User user) {
 		logger.info("getLayerPaging called");
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("paramData", paramData);
@@ -617,14 +618,14 @@ public class UserServiceImpl implements UserService{
 		int totalCount = userDao.selectLayerCntByUserNo(map);
 		logger.info("totalCount : {}", totalCount);
 		
-		PagingUserHistory paging = new PagingUserHistory(totalCount, paramData.getCurPage());
+		PagingUserHistory2 paging = new PagingUserHistory2(totalCount, paramData.getCurPage());
 		paging.setSearch(paramData.getSearch());
 		logger.info("paging : {}", paging);
 		return paging;
 	}
 
 	@Override
-	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory paging) {
+	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory2 paging) {
 		logger.info("getUserLayerHistory called");
 		
 		HashMap<String, Object> map = new HashMap<>();
