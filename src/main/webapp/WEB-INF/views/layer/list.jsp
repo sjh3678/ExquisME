@@ -358,10 +358,14 @@ td:nth-child(2) {
 
 <div class="container">
 
-<input type="button" id="last" value="최신순" class="btn btnFunction btnLayer pull-left"/>
-<input type="button" id="like" value="좋아요순" class="btn btnFunction btnLayer pull-left" style="display: none;"/>
-<a href="/layer/write"><button id="writeLayer" class="btn btnLayer pull-left">나만의 레이어링 등록</button></a>
-
+<input type="button" id="last" value="최신순" class="btn btnFunction btnLayer pull-left" style="display: none;"/>
+<input type="button" id="like" value="좋아요순" class="btn btnFunction btnLayer pull-left"/>
+<c:if test="${login }">
+	<a href="/layer/write"><button id="writeLayer" class="btn btnLayer pull-left">나만의 레이어링 등록</button></a>
+</c:if>
+<c:if test="${empty login }">
+	<a href="/user/login"><button id="writeLayer" class="btn btnLayer pull-left" onclick="if(!confirm('회원만 등록할 수 있습니다. 로그인 하시겠습니까?')){return false;}">나만의 레이어링 등록</button></a>
+</c:if>
 
 
 <div id="result">
