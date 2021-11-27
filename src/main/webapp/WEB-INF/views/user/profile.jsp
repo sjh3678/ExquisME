@@ -578,7 +578,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" name="nick" id="nick" value="${user.nick }">
+						&nbsp;&nbsp;<input class="form-control classInput" maxlength="8" type="text" name="nick" id="nick" value="${user.nick }">
 						<span id="nickChk" class="error invisible">닉네임을 입력해 주세요.</span> 
 						<span id="nickError" class="error invisible">이미 존재하는 닉네임입니다.</span> 
 						<span id="valid-nick" class="valid invisible">사용 가능한 닉네임입니다.</span>

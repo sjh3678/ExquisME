@@ -632,7 +632,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="nick" class="col-xs-3 control-label">닉네임 </label>
-<input type="text" class="form-control" id="nick" name="nick" value="${user.nick }" placeholder="닉네임을 입력해 주세요">
+<input type="text" class="form-control" id="nick" maxlength="8" name="nick" value="${user.nick }" placeholder="닉네임을 입력해 주세요">
 <span id="nickChk" class="error col-xs-offset-3 feedback">닉네임을 입력해주세요</span>
 <span id="nickError" class="error col-xs-offset-3 feedback">이미 존재하는 닉네임입니다.</span>
 <span id="valid-nick" class="valid col-xs-offset-3 feedback">사용가능한 닉네임입니다.</span>
