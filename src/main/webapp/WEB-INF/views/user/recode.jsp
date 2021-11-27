@@ -67,33 +67,52 @@ $(document).ready(function(){
 
 </script>
 <style type="text/css">
-ul{
-	list-style-type: none;
-	font-size: 20px;
-}
-li{
-	float: left;
-	margin-left:50px;
-}
 .indexArea{
 	width: 95%;
 	height: 5%;
 	background-color: #8A7E6B;
 	font-size: 18px;
 	border-radius: 15px;
-	margin: 0 auto;
+	margin: 10px auto;
 }
-.into:hover{
-	background-color:rgba(0, 0, 0, 0.2);/*까만색(0,0,0) 80% 투명도*/
+.btnHistory{
+	width: 150px;
+	margin: 3px 10px;
 }
-
+.btnHistory:hover{
+	transform: scale(1.1);
+	background: #35312B;
+}
+.btnDetail{
+	background: #8A7E6B;
+	color: #ECE6CC;
+}
+.btnDetail:hover{
+	transform: scale(1.1);
+	background: #35312B;
+}
+.pagingArea li{
+	border-radius: 5px;
+	background: #8A7E6B;
+    width: 20px;
+    color: #ECE6CC;
+    text-align: center;
+    cursor: pointer;
+}
+.pagingArea li:hover{
+	background: #35312B;
+}
+table{
+	font-size: 12px;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: rgb(138, 126, 107, 0.2);
+}
 </style>
 <div class="indexArea">
-<ul class="historyIndex">
-	<li class="into" id="into-extagram">Extagram 기록</li>
-	<li class="into" id="into-comment">댓글 기록</li>
-	<li class="into" id="into-layer">Layering 기록</li>
-</ul>
+	<button class="btn btnHistory into" id="into-extagram">Extagram 작성 내역</button>
+	<button class="btn btnHistory into" id="into-comment">댓글 작성 내역</button>
+	<button class="btn btnHistory into" id="into-layer">Layer 등록 내역</button>
 </div>
 <div id="historyArea">
 </div>

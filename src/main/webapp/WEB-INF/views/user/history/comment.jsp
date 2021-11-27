@@ -31,24 +31,33 @@ td{
 <table class="table table-striped table-hover">
 <thead>
 	<tr>		
-		<th style="width: 10%; text-align: center;">Exta번호</th>
-		<th style="width: 10%; text-align: center;">Exta작성자</th>
-		<th style="width: 50%; text-align: center;">댓글 내용</th>
-		<th style="width: 10%; text-align: center;">작성일</th>
-		<th style="width: 10%; text-align: center;">상세보기</th>
+		<th style="width: 10%; text-align: center;">글번호</th>
+		<th style="width: 15%; text-align: center;">작성자</th>
+		<th style="width: 40%; text-align: center;">댓글</th>
+		<th style="width: 15%; text-align: center;">일시</th>
+		<th style="width: 10%; text-align: center;">상세</th>
 		<th style="width: 10%; text-align: center;">삭제</th>
 		
 	</tr>
 </thead>
 <tbody>
+<c:set var="exno" value="0"/>
 <c:forEach items="${commList }" var="list">
 	<tr>
-		<td style="text-align: center;">${list.EX_POST_NO }</td>
-		<td style="text-align: center;">${list.POSTOWNER }</td>
-		<td style="text-align: center;">${list.EX_COMM }</td>
-		<td style="text-align: center;">${list.EX_COMM_DATE }</td>
-		<td style="text-align: center;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button>상세보기</button></a></td>
-		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/delete?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }" onclick="return confirm('댓글을 삭제하시겠습니까? 삭제된 댓글은 원상복구 할 수 없습니다.');"><button>댓글 삭제</button></a></td>
+		<c:choose>
+		<c:when test="${exno eq list.EX_POST_NO }">
+			<td></td>
+		</c:when>
+		<c:when test="${exno ne list.EX_POST_NO }">
+			<td style="text-align: center; vertical-align: middle;">${list.EX_POST_NO }</td>	
+		</c:when>
+		</c:choose>
+		<c:set var="exno" value="${list.EX_POST_NO }"/>
+		<td style="text-align: center; vertical-align: middle;">${list.POSTOWNER }</td>
+		<td style="text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap;">${list.EX_COMM }</td>
+		<td style="text-align: center; vertical-align: middle;"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="YY-MM-dd"/></td>
+		<td style="text-align: center; vertical-align: middle;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button class="btn btnDetail">보기</button></a></td>
+		<td style="text-align: center; vertical-align: middle;"><a href="/admin/user/history/extagramComment/delete?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }" onclick="return confirm('댓글을 삭제하시겠습니까? 삭제된 댓글은 원상복구 할 수 없습니다.');"><button class="btn btnDetail">삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>
@@ -58,20 +67,15 @@ td{
 	<ul>
 		<%-- 첫페이지로 이동 --%>
 		<c:if test="${paging.curPage ne 1 }">
-			<li><label onclick=getCommList(1)><a>처음</a></label></li>
+			<li><label onclick=getCommList(1)><a>첫</a></label></li>
 		</c:if>
 		
 		<%-- 이전페이징 리스트로 이동 --%>
 		<c:choose>
 			<c:when test="${paging.startPage ne 1 }">
-				<li><label onclick=getCommList(${paging.startPage - paging.pageCount })>이전</label></li>
+				<li><label onclick=getCommList(${paging.startPage - paging.pageCount })>&lt;</label></li>
 			</c:when>
 		</c:choose>
-		
-		<%-- 이전 페이지로 가기 --%>
-		<c:if test="${paging.curPage > 1 }">
-			<li><label onclick=getCommList(${paging.curPage - 1 })>&lt;</label></li>
-		</c:if>
 		
 		<%-- 페이징 리스트 --%>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
@@ -83,16 +87,10 @@ td{
 				<li><label onclick=getCommList(${i })>${i }</label></li>
 			</c:if>
 		</c:forEach>
-		
-		<%-- 다음 페이지로 가기 --%>
-		<c:if test="${paging.curPage < paging.totalPage }">
-			<li><label onclick=getCommList(${paging.curPage + 1 })>&gt;</label></li>
-		</c:if>
-		
-		<%-- 다음페이징 리스트로 이동 --%>
-		
+
+		<%-- 다음페이징 리스트로 이동 --%>	
 		<c:if test="${paging.endPage ne paging.totalPage }">
-			<li><label onclick=getCommList(${paging.startPage + paging.pageCount })>&raquo;</label></li>
+			<li><label onclick=getCommList(${paging.startPage + paging.pageCount })>&gt;</label></li>
 		</c:if>
 				
 		<%-- 끝페이지로 이동 --%>

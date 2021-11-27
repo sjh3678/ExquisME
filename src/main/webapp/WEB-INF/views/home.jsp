@@ -180,6 +180,8 @@ $(document).ready(function(){
 	width: 100%;
 	float: left;
 	height: 250px;
+    display: inline-flex;
+    align-items: center;
 }
 .cardHeart{
 	width: 100%;

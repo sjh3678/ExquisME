@@ -197,7 +197,7 @@ h1{
 	transform: scale(1.02);
 }
 .btn:hover{
-	transform: scale(1.01);
+	transform: scale(1.1);
 }
 </style>
 
