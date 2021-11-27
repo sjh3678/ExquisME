@@ -78,11 +78,6 @@
 		FROM tb_user
 		WHERE id = #{id}
 	</select>
-
-	<insert id="insertUserJoin" parameterType="web.dto.User">
-		INSERT INTO tb_user (user_no, file_no, id, pw, nick, email, phone, birth, gender, question_no, question_anwser)
-		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{email}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
-	</insert>
 	
 	<select id="selectFileByFileNo" parameterType="int" resultMap="File">
 		SELECT 
@@ -98,6 +93,11 @@
 		FROM tb_user
 		WHERE user_no = #{userNo}
 	</select>
+	
+	<insert id="insertUserJoin" parameterType="web.dto.User">
+		INSERT INTO tb_user (user_no, file_no, id, pw, nick, email, phone, birth, gender, question_no, question_anwser)
+		VALUES (tb_user_seq.nextval, 91, #{id}, #{pw}, #{nick}, #{email}, #{phone}, #{birth}, #{gender}, #{questionNo}, #{questionAnwser})
+	</insert>
 	
 	<update id="updatePw" parameterType="web.dto.User">
 		UPDATE tb_user SET pw = #{pw}
@@ -118,7 +118,7 @@
 		VALUES (#{fileNo}, #{originName}, #{storedName}, #{fileSize})
 	</insert>
   	
-	<delete id="deleteFileByFileNo" parameterType="web.dto.User">
+	<delete id="deleteFileByFileNo" parameterType="int">
 		DELETE tb_file
 		WHERE file_no = #{fileNo}
 	</delete>
@@ -253,22 +253,22 @@
 	
 	<delete id="deleteExtaByUserNo" parameterType="int">
 		DELETE tb_extagram
-		WHERE ex_no = #{exNo}
+		WHERE user_no = #{userNo}
 	</delete>
 	
 	<delete id="deleteExtaLikeUserNo" parameterType="web.dto.Extagram">
 		DELETE tb_ex_like
-		WHERE ex_post_no = #{exNo} OR user_no =#{userNo}
+		WHERE ex_post_no = #{exNo} OR user_no = #{userNo}
 	</delete>
 	
 	<delete id="deleteLayerLikeByUserNo" parameterType="web.dto.Layer">
 		DELETE tb_layer_like
-		WHERE layering_no  = #{layeringNo} OR user_no = #{userNo}
+		WHERE user_no = #{userNo} OR layering_no = #{layeringNo}
 	</delete>
 
 	<delete id="deleteLayerByUserNo" parameterType="int">
 		DELETE tb_layer
-		WHERE layering_no = #{layeringNo} 
+		WHERE user_no = #{userNo} 
 	</delete>
 	
 	<delete id="deleteNoteLikeByUserNo" parameterType="int">
@@ -318,5 +318,15 @@
 		SELECT layering_no, perfume_no1, perfume_no2, l.user_no
 		FROM tb_layer l, tb_user u
 		WHERE l.user_no = u.user_no AND l.user_no = #{userNo}
+	</select>
+	
+	<select id="selectLayerCntByUserNo2" parameterType="int" resultType="int">
+		SELECT count(*) FROM tb_layer
+		WHERE user_no = #{userNo}
+	</select>
+	
+	<select id="selectExtaCntByUserNo2" parameterType="int" resultType="int">
+		SELECT count(*) FROM tb_extagram
+		WHERE user_no = #{userNo}
 	</select>
 </mapper>

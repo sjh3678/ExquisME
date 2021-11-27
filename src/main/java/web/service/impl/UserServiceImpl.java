@@ -136,35 +136,54 @@ public class UserServiceImpl implements UserService{
 		
 		//사용자 정보 조회
 		user = userDao.selectUserByUserno(userNo);
-
-		List<Extagram> extaList = userDao.selectExtaListByUserNo(userNo);
-		logger.info("리스트 : {}", extaList);
-		for(Extagram e : extaList) {
-			userDao.deleteCommByUserNo(e);//댓글 내역 삭제
-		}
-		logger.info("댓글 삭제");
+		int cnt = userDao.selectExtaCntByUserNo2(userNo);
+		if(cnt != 0) {
+			List<Extagram> extaList = userDao.selectExtaListByUserNo(userNo);
+			logger.info("리스트 : {}", extaList);
+			for(Extagram e : extaList) {
+				userDao.deleteCommByUserNo(e);//댓글 내역 삭제
+			}
+			logger.info("댓글 삭제");
 		
-		for(Extagram e : extaList) {
-			userDao.deleteExtaLikeUserNo(e);//좋아요 내역 삭제
-		}
-		logger.info("좋아요 삭제");
+			for(Extagram e : extaList) {
+				userDao.deleteExtaLikeUserNo(e);//좋아요 내역 삭제
+			}
+			logger.info("좋아요 삭제");
 		
-		for(Extagram e : extaList) {
-			userDao.deleteExtaByUserNo(e.getExNo());//extagran 내역 삭제	
-		}
-		logger.info("extagram 삭제");
-		for(Extagram e : extaList) {
-			userDao.deleteFileByFileNo(e.getFileNo()); // 파일 삭제
+			userDao.deleteExtaByUserNo(userNo);//extagram 내역 삭제	
+			logger.info("extagram 삭제");
+	
+			for(Extagram e : extaList) {
+				userDao.deleteFileByFileNo(e.getFileNo()); // 파일 삭제
+			}
+		}else {
+			Extagram exta = new Extagram();
+			exta.setUserNo(userNo);
+			userDao.deleteCommByUserNo(exta);//댓글 내역 삭제
+			userDao.deleteExtaLikeUserNo(exta);//좋아요 내역 삭제
 		}
 		logger.info("파일 삭제");
 		logger.info("extagram 연결 요소 삭제 완료");
 		
-		List<Layer> layerList = userDao.selectLayerListByUserNo(userNo);
-		for(Layer l : layerList) 
-			userDao.deleteLayerLikeByUserNo(l); //레이어링 좋아요 삭제
-		logger.info("layering 연결 요소 모두 삭제");
-		for(Layer l : layerList)
-			userDao.deleteLayerByUserNo(l.getLayeringNo()); // 레이어링 삭제
+		cnt = userDao.selectLayerCntByUserNo2(userNo);
+		
+		if(cnt > 0) {
+			logger.info("등록된 레이어링 존재");
+			List<Layer> layerList = userDao.selectLayerListByUserNo(userNo);
+			for(Layer l : layerList) {	
+				userDao.deleteLayerLikeByUserNo(l); //레이어링 좋아요 삭제
+			}
+			logger.info("layering 연결 요소 모두 삭제");
+			
+			userDao.deleteLayerByUserNo(userNo); // 레이어링 삭제
+			
+		}else {
+			logger.info("등록된 레이어링 없음");
+			Layer ulayer = new Layer();
+			ulayer.setUserNo(userNo);
+			userDao.deleteLayerLikeByUserNo(ulayer); //레이어링 좋아요 삭제
+		}
+		
 		logger.info("layering 연결 요소 삭제 완료");
 		
 		userDao.deleteNoteLikeByUserNo(userNo);//노트 좋아요 삭제
@@ -182,10 +201,10 @@ public class UserServiceImpl implements UserService{
 		userDao.deleteUserByUserNo(userNo);
 		
 		if(fileNo != 91) {
-			userDao.deleteFileByFileNo(user); // 프로필 사진 삭제 (기본 프로필 제외)
+			userDao.deleteFileByFileNo(user.getFileNo()); // 프로필 사진 삭제 (기본 프로필 제외)
 		}
 		
-		int cnt = userDao.selectUserCnt(user);
+		cnt = userDao.selectUserCnt(user);
 		
 		logger.info("cnt : {}", cnt);
 		if(cnt == 0) {
@@ -370,7 +389,7 @@ public class UserServiceImpl implements UserService{
 		if(user.getFileNo() != 91) {
 					
 			//기존 프로필 사진 삭제
-			userDao.deleteFileByFileNo(user);
+			userDao.deleteFileByFileNo(user.getFileNo());
 			
 			//파일정보 삭제 확인
 			int cnt = userDao.selectFileCntByFileNo(user);

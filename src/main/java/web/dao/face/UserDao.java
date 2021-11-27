@@ -252,4 +252,18 @@ public interface UserDao {
 	 * @param fileNo
 	 */
 	public void deleteFileByFileNo(int fileNo);
+
+	/**
+	 * 삭제할 레이어링의 유무를 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 결과 반환
+	 */
+	public int selectLayerCntByUserNo2(int userNo);
+
+	/**
+	 * 삭제할 extagram의 유무를 조회
+	 * @param userNo - 조회할 회원 번호
+	 * @return - 조회된 결과 반환
+	 */
+	public int selectExtaCntByUserNo2(int userNo);
 }
