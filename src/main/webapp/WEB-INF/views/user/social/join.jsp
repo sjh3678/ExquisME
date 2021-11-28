@@ -541,9 +541,6 @@ $(document).ready(function(){
         closeText: '닫기'  // 닫기 버튼 패널
     });
 
-    $("#birth").click(function() {
-        $("#birth").datepicker();
-    });
     $("#phone").blur(function(){
 		telValidator();
 	})
@@ -672,7 +669,7 @@ function f_datepicker(obj) {
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" readonly onchage=birthCheck(this)>
+<input type="text" class="form-control" id="birth" readonly onclick="javascript:f_datepicker(this);">
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>

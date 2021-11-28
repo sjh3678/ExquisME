@@ -364,15 +364,7 @@ $(document).ready(function(){
 	        reader.readAsDataURL(f);
 	    });
 	}
-	
-	$("#birth").click(function() {
-        $("#birth").datepicker();
-    });
-	
-	$("#birth").change(function(){
-    	checkBirth()
-    })
-    
+	    
 	$("#email").blur(function(){
 		var isCheck = checkEmailExist();
 // 		$(".keyCheck").removeClass("invisible");
@@ -428,7 +420,19 @@ $(document).ready(function(){
 	})
 })
 </script>
-
+<script>
+//특수문자(<, >, \) 입력 방지 네이버SE2에는 적용 안 되므로 글 내용 작성에는 영향 없음
+function characterCheck(obj){
+ 	var regExp = /[<>\\]/gi; 
+	if( regExp.test(obj.value) ){
+		alert("일부 특수문자는 입력하실수 없습니다.");
+		obj.value = obj.value.substring( 0 , obj.value.length - 1 );
+		}
+}
+function f_datepicker(obj) {
+	 $( obj ).datepicker().datepicker("show");
+}
+</script>
 <style>
 .error {
 	color: red;
@@ -615,7 +619,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" value="<fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd" />" type="text" id="birth" name="birth">
+						&nbsp;&nbsp;<input class="form-control classInput" value="<fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd" />" readonly onclick="javascript:f_datepicker(this);" type="text" id="birth" name="birth">
 						<span id="birthChk" class="error invisible">생년월일을 선택해주세요.</span> 
 						<span id="valid-birth" class="valid invisible">선택 되었습니다.</span>
 					</td>
