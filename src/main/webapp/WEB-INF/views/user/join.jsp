@@ -139,6 +139,7 @@ async function checkEmailExist() {
 	
 	if (checkEmail() == false) {
 		console.log("유효하지 않은 이메일형식");
+		$("#sendMail").css("display", "none");
 		return false;
 	}
 	
@@ -152,6 +153,7 @@ async function checkEmailExist() {
 			email.removeClass("is-invalid");
 			email.addClass("is-valid");
 			
+			$("#sendMail").css("display", "inline");
 			$("#valid-email").css("display", "inline");
 			$("#emailChk").css("display", "none");
 			$("#emailError").css("display", "none");
@@ -164,6 +166,7 @@ async function checkEmailExist() {
 			email.removeClass("is-valid");
 			email.addClass("is-invalid");
 			
+			$("#sendMail").css("display", "none");
 			$("#valid-email").css("display", "none");
 			$("#emailChk").css("display", "none");
 			$("#emailError").css("display", "inline");			
@@ -405,11 +408,12 @@ function checkBirth() {
 		
 	} else {
 		console.log("유효한 생일 형식")
-		birth.addClass("is-valid");
+
 		birth.removeClass("is-invalid");
+		birth.addClass("is-valid");
 		
+		$("#valid-birth").css("display", "inline");
 		$("#birthChk").css("display", "none");
-		$("#valid-birth").css("display", "inline");		
 		
 		return true;
 	}
@@ -432,7 +436,7 @@ function checkAnswer() {
 		
 		return false;
 		
-	} else if(answer.val().match(pattern)){
+	}else if(answer.val().match(pattern)){
 		console.log("공백문자");
 		answer.addClass("is-invalid");
 		answer.removeClass("is-valid");
@@ -547,11 +551,18 @@ async function submit() {
 			// 회원가입 성공
 			if (result == "true") {
 				console.log("회원가입 성공")
-				alert("회원정보 전송을 완료했습니다.");
+				alert("회원가입 성공")
+				$("#join-form").css("display", "none");
+				$("#info").css("color", "#8A7E6B");
+				$("#agree").css("color", "#8A7E6B");
+				$("#joinComplete").css("color", "#35312B");
+				
+				$("#complete-join").css("display", "inline");
+				$("#pageBtn").css("display","none");
 				return true;
 			} else {
 				console.log("회원가입 실패")
-				alert("회원정보 전송을 실패했습니다.");
+
 				return false;
 			}
 		},
@@ -621,25 +632,12 @@ $(document).ready(function(){
 			console.log("회원 입력 페이지에서 이동")
 			var isCheck = checked();
 			console.log("회원 입력정보 체크 : ", isCheck);
-			if(isCheck){ //이건 넘어감
-				// 모든 항목 검사 및 회원가입 실행
-				isCheck = submit();
-				console.log("회원 입력정보 전송 확인 : ", isCheck);
-				if(isCheck == false){
-					console.log("요소 중 에러사항 있음")
-	 				alert("체크되지 않은 항목이 존재합니다.");
-				}else{
-					$("#join-form").css("display", "none");
-					$("#info").css("color", "#8A7E6B");
-					$("#agree").css("color", "#8A7E6B");
-					$("#joinComplete").css("color", "#35312B");
-				
-					$("#complete-join").css("display", "inline");
-					$("#pageBtn").css("display","none");
-				}
- 			}else{
- 				console.log("요소 중 에러사항 있음")
+			if(isCheck == false){ //이건 넘어감
+				console.log("요소 중 에러사항 있음")
  				alert("체크되지 않은 항목이 존재합니다.");
+ 			}else{
+	 			// 모든 항목 검사 및 회원가입 실행
+ 				submit()	
  			}
 			
 		}
@@ -660,20 +658,19 @@ $(document).ready(function(){
 		checkEmailExist();
 	})
 	
-	function birthCheck(obj){
-		checkBirth(obj);
-	}
 	$("#phone").blur(function(){
 		telValidator();
 	})
 	$("#questionAnwser").blur(function(){
-		checkAnswer()
+		checkAnswer();
 	})
-	
+// 	#("#birth").blur(function(){
+// 		checkBirth();
+// 	})
 	$("#cancleBtn").click(function(){
 		if(joinCnt == 0){
 			joinCnt--;
-			$(location).attr("href", "/user/main");
+			$(location).attr("href", "/");
 			
 		}else if(joinCnt == 1){
 			
@@ -698,15 +695,12 @@ $(document).ready(function(){
         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
         showMonthAfterYear: true,
         yearSuffix: '년',
+        maxDate: 0, // 오늘 이후 날짜 선택 불가
         changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-        yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+        yearRange: 'c-100:c+0', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
         showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
         currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
         closeText: '닫기'  // 닫기 버튼 패널
-    });
-
-    $("#birth").click(function() {
-        $("#birth").datepicker();
     });
     
     $("#birth").change(function(){
@@ -723,17 +717,9 @@ $(document).ready(function(){
     })
     
     $("#email").blur(function(){
-    	var isChecked = checkEmailExist();
-    	if(isChecked){
-    		$("#sendMail").css("display", "inline");
-			$("#emailCheckLabel").css("display", "none");
-			$("#emailCheck").css("display", "none");
-			$("#isVailEmail").css("display", "none");
-			$("#vail-email").css("display", "none");
-    	}else{
-    		$("#sendMail").css("display", "none");
-    	}
+    	checkEmailExist();
     }) 
+    
     $("#pw").blur(function(){
     	checkPw();
     })
@@ -748,12 +734,10 @@ $(document).ready(function(){
     
     //메일 전송 및 인증 번호 입력단 활성화
     $("#sendMail").click(function(){
-    	if(checkEmailExist() == false){
-    		$(this).css("display", "none")
-    	}else{
-    		$(this).css("display", "none")
-    		sendMail();
-    	}
+    	console.log("이메일 전송 버튼 눌림")   	
+    	checkEmailExist();
+    	sendMail();
+ 
     });
     
 	$("#isVailEmail").click(function(){
@@ -773,6 +757,20 @@ $(document).ready(function(){
 	})
 })
 
+</script>
+
+<script>
+//특수문자(<, >, \) 입력 방지 네이버SE2에는 적용 안 되므로 글 내용 작성에는 영향 없음
+function characterCheck(obj){
+ 	var regExp = /[<>\\]/gi; 
+	if( regExp.test(obj.value) ){
+		alert("일부 특수문자는 입력하실수 없습니다.");
+		obj.value = obj.value.substring( 0 , obj.value.length - 1 );
+		}
+}
+function f_datepicker(obj) {
+	 $( obj ).datepicker().datepicker("show");
+}
 </script>
 <style type="text/css">
 .error{
@@ -813,11 +811,11 @@ $(document).ready(function(){
 <div class="container">
 <div class="text-center" id="pageName">
 <h1 id="ltitle">
-	<div id="agree" style="padding: 10px;padding-left: 170px;float: left;color:#35312B;">약관 동의</div> 
-	<i class="fas fa-angle-right" style="padding: 10px 50px;float: left;font-weight: 700;"></i> 
-	<div id="info" style="padding: 10px;float: left;">정보 입력</div> 
-	<i class="fas fa-angle-right" style="padding: 10px 50px;float: left;font-weight: 700;"></i> 
-	<div id="joinComplete" style="padding: 10px;float: left;">가입완료</div>
+	<strong id="agree" style="padding: 10px; padding-left: 170px; float: left;color:#35312B;">약관 동의</strong> 
+	<i class="fas fa-angle-right" style="padding: 10px 50px; float: left; font-weight: 700;"></i> 
+	<strong id="info" style="padding: 10px; float: left;">정보 입력</strong> 
+	<i class="fas fa-angle-right" style="padding: 10px 50px; float: left; font-weight: 700;"></i> 
+	<strong id="joinComplete" style="padding: 10px; float: left;">가입완료</strong>
 </h1>
 <hr>
 </div>
@@ -1075,7 +1073,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="nick" class="col-xs-3 control-label">닉네임 </label>
-<input type="text" class="form-control" id="nick" name="nick" maxlength="8" placeholder="닉네임을 입력해 주세요">
+<input type="text" class="form-control" id="nick"  onKeyup="characterCheck(this)" name="nick" maxlength="8" placeholder="닉네임을 입력해 주세요">
 <span id="nickChk" class="error col-xs-offset-3 feedback">닉네임을 입력해주세요</span>
 <span id="nickError" class="error col-xs-offset-3 feedback">이미 존재하는 닉네임입니다.</span>
 <span id="valid-nick" class="valid col-xs-offset-3 feedback">사용가능한 닉네임입니다.</span>
@@ -1088,7 +1086,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="email" class="col-xs-3 control-label">이메일 </label>
-<input  type="email" class="form-control" id="email" name="email" placeholder="ex) asdf1234@gmail.com">
+<input  type="email" onKeyup="characterCheck(this)" class="form-control" id="email" name="email" placeholder="ex) asdf1234@gmail.com">
 <span id="emailChk" class="error col-xs-offset-3 feedback">asd123@gmail.com의 형식이여야 합니다.<br></span>
 <span id="emailError" class="error col-xs-offset-3 feedback">이미 존재하는 이메일입니다.<br></span>
 <span id="valid-email" class="valid col-xs-offset-3 feedback">사용가능한 이메일입니다.<br></span>
@@ -1109,9 +1107,9 @@ $(document).ready(function(){
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" readonly name="birth" placeholder="birth" onchage=birthCheck(this)>
-<span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
-<span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
+<input type="text" class="form-control" id="birth" readonly onclick="javascript:f_datepicker(this);" name="birth" placeholder="ex) 2021-11-28의 형식으로 입력하거나 날짜를 선택하세요">
+<span id="birthChk" class="error col-xs-offset-3 feedback">잘못된 형식의 입력입니다.</span>
+<span id="valid-birth" class="valid col-xs-offset-3 feedback">확인 되었습니다.</span>
 <br><br>
 
 <label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
@@ -1123,7 +1121,7 @@ $(document).ready(function(){
       <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
-<input type="text" class="col-xs-offset-3 form-control" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<input type="text" class="col-xs-offset-3 form-control"  onKeyup="characterCheck(this)" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <span id="answerChk" class="error col-xs-offset-3 feedback">답을 입력해주세요</span>
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>

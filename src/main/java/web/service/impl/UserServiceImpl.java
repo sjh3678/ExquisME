@@ -5,13 +5,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +32,7 @@ import web.util.PagingExtagram;
 import web.util.PagingUser;
 import web.util.PagingUserHistory;
 import web.util.PagingUserHistory2;
+import web.util.UserSHA256;
 
 
 @Service
@@ -637,6 +644,160 @@ public class UserServiceImpl implements UserService{
 		List<Map<String, Object>> list = userDao.selectLayerHistoryByUserNo(map);
 		
 		return list;
+	}
+	@Autowired private JavaMailSenderImpl mailSender;
+	@Override
+	public boolean sendMailAuthKey(String mail, HttpSession session, Random random) {
+		String authKey="";
+		
+        int size = 6;
+        int num = 0;
+        
+        for(int i = 0; i< size; i++) {
+        	num = (int) (Math.random()*10);
+        	authKey += num; 
+        }
+        
+        //인증메일 보내기
+        MimeMessage mailSend = mailSender.createMimeMessage();
+        String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 인증키를 입력창에 입력하시면 이메일 인증이 완료됩니다.</p>" 
+                            +"<p> 인증 번호 : " + authKey + "</p>";
+
+        try {
+            mailSend.setSubject("회원가입 이메일 인증 ", "utf-8");
+            mailSend.setText(mailContent, "utf-8", "html");
+            mailSend.setRecipients(Message.RecipientType.TO, mail);
+            mailSender.send(mailSend);
+            logger.info("인증키 : " + authKey);
+            
+            //인증키값이 있을 경우 삭제
+            if(session.getAttribute("authKey") != null)
+            	session.removeAttribute("authKey");
+            
+            //세션에 인증키 + 메일 주소 저장
+            session.setAttribute("mail", mail);
+            session.setAttribute("authKey", authKey);
+            
+            session.setMaxInactiveInterval(5*60); //5분뒤 세션값 삭제
+            
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+	}
+
+	@Override
+	public boolean sendMailId(User user, int questionNo, String questionAnswer) {
+		logger.info("아이디 : {}" + user.getId());
+		
+		if(questionNo != user.getQuestionNo()) {
+			logger.info("질문 틀림");
+			return false;
+		}
+		
+		if(!questionAnswer.equals(user.getQuestionAnwser())) {
+			logger.info("답 틀림");
+			return false;
+		}
+		
+		if(user.getId() != null) {
+			MimeMessage mailSend = mailSender.createMimeMessage();
+	    	String mailContent = "<h1>[아이디 찾기]</h1><br><p>하단에 적힌 아이디가 본 사이트에 접속가능한 회원님의 아이디입니다.</p>" 
+	                +"<p> 회원의 아이디 : " + user.getId() + "</p>";
+	    	try {
+	            mailSend.setSubject("아이디 찾기 ", "utf-8");
+	            mailSend.setText(mailContent, "utf-8", "html");
+	            mailSend.setRecipients(Message.RecipientType.TO, user.getEmail());
+	            mailSender.send(mailSend);
+	            logger.info("아이디 : {}", user.getId());
+	 
+	            return true;   
+	        } catch (MessagingException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+        }
+
+        logger.info("조회된 결과 없음 [ERROR]");
+		return false;
+	}
+
+	@Override
+	public boolean sendMailPw(User user, String id, int questionNo, String questionAnswer) {
+
+		logger.info("아이디 :" + user.getId());
+		String pw = "";
+		
+		if(questionNo != user.getQuestionNo()) {
+			logger.info("질문 틀림");
+			return false;
+		}
+		
+		if(!questionAnswer.equals(user.getQuestionAnwser())) {
+			logger.info("답 틀림");
+			return false;
+		}
+
+		if(!id.equals(user.getId())) {
+			logger.info("회원 아이디 불일치");
+			return false;
+		}else {
+			
+			//문자열 6자리 랜덤 생성
+			int leftLimit = 97; // letter 'a'
+			int rightLimit = 122; // letter 'z' -> a~z까지의 문자열 조합
+			int targetStringLength = 6; // 문자열 길이 설정
+			Random random = new Random();
+			StringBuilder buffer = new StringBuilder(targetStringLength); // 버퍼를 통해 문자열 생성
+			for (int i = 0; i < targetStringLength; i++) {
+			    int randomLimitedInt = leftLimit + (int)
+			            (random.nextFloat() * (rightLimit - leftLimit + 1));
+			    buffer.append((char) randomLimitedInt);
+			}//버퍼에 append를 통해 랜덤으로 생성한 문자열을 조합
+			String generatedString = buffer.toString();
+			pw += generatedString;
+			
+			//숫자 6자리 랜덤 생성
+	        int size = 6;
+	        int num = 0;
+	        
+	        for(int i = 0; i< size; i++) {
+	        	num = (int) (Math.random()*10);
+	        	pw += num; 
+	        	user.setPw(pw);
+	        }
+	        
+	        //비밀번호 암호화
+	        user.setPw(UserSHA256.encrypt(user));
+	        
+	        //비밀번호 변경 서비스 호출
+	        boolean isUpdate = setUpdatePw(user, user.getPw());
+	        
+	        if(!isUpdate) {
+	        	logger.info("임시 비밀번호 변경 실패");
+	        	return false;
+	        }
+		}
+		
+		if(user.getId() != null) {
+        	MimeMessage mailSend = mailSender.createMimeMessage();
+        	String mailContent = "<h1>[비밀번호 찾기]</h1><br><p>하단에 적힌 비밀번호로 접속하여 안전한 비밀번호로 변경해주세요.</p>" 
+                    +"<p> 회원의 임시 비밀번호 : " + pw + "</p>";
+        	try {
+                mailSend.setSubject("임시 비밀번호 발송 ", "utf-8");
+                mailSend.setText(mailContent, "utf-8", "html");
+                mailSend.setRecipients(Message.RecipientType.TO, user.getEmail());
+                mailSender.send(mailSend);
+                
+                return true;   
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        logger.info("조회된 결과 없음 [ERROR]");
+		return false;
 	}
 
 }

@@ -521,6 +521,7 @@ async function submit() {
 }
 $(document).ready(function(){
 	
+	//날짜 선택기
 	$.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -532,8 +533,9 @@ $(document).ready(function(){
         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
         showMonthAfterYear: true,
         yearSuffix: '년',
+        maxDate: 0, // 오늘 이후 날짜 선택 불가
         changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-        yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+        yearRange: 'c-100:c+0', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
         showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
         currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
         closeText: '닫기'  // 닫기 버튼 패널
@@ -574,6 +576,19 @@ $(document).ready(function(){
     	$(location).attr("href", "/user/login");
     })
 })
+</script>
+<script>
+//특수문자(<, >, \) 입력 방지 네이버SE2에는 적용 안 되므로 글 내용 작성에는 영향 없음
+function characterCheck(obj){
+ 	var regExp = /[<>\\]/gi; 
+	if( regExp.test(obj.value) ){
+		alert("일부 특수문자는 입력하실수 없습니다.");
+		obj.value = obj.value.substring( 0 , obj.value.length - 1 );
+		}
+}
+function f_datepicker(obj) {
+	 $( obj ).datepicker().datepicker("show");
+}
 </script>
 <style type="text/css">
 .error{
@@ -632,7 +647,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="nick" class="col-xs-3 control-label">닉네임 </label>
-<input type="text" class="form-control" id="nick" maxlength="8" name="nick" value="${user.nick }" placeholder="닉네임을 입력해 주세요">
+<input type="text" class="form-control" id="nick" onKeyup="characterCheck(this)" maxlength="8" name="nick" value="${user.nick }" placeholder="닉네임을 입력해 주세요">
 <span id="nickChk" class="error col-xs-offset-3 feedback">닉네임을 입력해주세요</span>
 <span id="nickError" class="error col-xs-offset-3 feedback">이미 존재하는 닉네임입니다.</span>
 <span id="valid-nick" class="valid col-xs-offset-3 feedback">사용가능한 닉네임입니다.</span>
@@ -645,7 +660,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="email" class="col-xs-3 control-label">이메일 </label>
-<input type="email" class="form-control" id="email" name="email" value="${user.email }" placeholder="ex) asdf1234@gmail.com">
+<input type="email" class="form-control" id="email" onKeyup="characterCheck(this)" name="email" value="${user.email }" placeholder="ex) asdf1234@gmail.com">
 <span id="emailChk" class="error col-xs-offset-3 feedback">asd123@gmail.com의 형식이여야 합니다.</span>
 <span id="emailError" class="error col-xs-offset-3 feedback">이미 존재하는 이메일입니다.</span>
 <span id="valid-email" class="valid col-xs-offset-3 feedback">사용가능한 이메일입니다.</span>
@@ -657,7 +672,7 @@ $(document).ready(function(){
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" readonly name="birth" placeholder="birth" onchage=birthCheck(this)>
+<input type="text" class="form-control" id="birth" readonly onchage=birthCheck(this)>
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>
@@ -671,7 +686,7 @@ $(document).ready(function(){
       <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
-<input type="text" class="col-xs-offset-3 form-control" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<input type="text" class="col-xs-offset-3 form-control" id="questionAnwser" onKeyup="characterCheck(this)" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <span id="answerChk" class="error col-xs-offset-3 feedback">답을 입력해주세요</span>
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>

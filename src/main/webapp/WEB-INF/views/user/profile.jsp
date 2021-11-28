@@ -152,6 +152,7 @@ function checkNick() {
 	var nick = $("#nick");
 	var pattern = /\s/g;
 	
+	
 	if (nick.val() == "") {
 		console.log("닉네임 공백");
 		
@@ -161,7 +162,7 @@ function checkNick() {
 		
 		return false;
 		
-	}else if(nick.val().match(pattern)){
+	} else if(nick.val().match(pattern)){
 		console.log("스페이스바는 문자로 취급되지 않습니다.")
 		
 		$("#valid-nick").css("display", "none");

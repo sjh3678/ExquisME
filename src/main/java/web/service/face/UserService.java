@@ -3,6 +3,9 @@ package web.service.face;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -212,5 +215,33 @@ public interface UserService {
 	public PagingUserHistory2 getLayerPaging2(PagingUserHistory2 paramData, User user);
 
 	public List<Map<String, Object>> getUserLayerHistory2(User user, PagingUserHistory2 paging);
+
+	/**
+	 * 인증키 메일 전송
+	 * @param mail - 전송할 이메일
+	 * @param session - 세션 값
+	 * @param random - 랜덤 난수
+	 * @return - 전송 여부 확인
+	 */
+	public boolean sendMailAuthKey(String mail, HttpSession session, Random random);
+
+	/**
+	 * 아이디 메일 전송
+	 * @param user - 전송할 회원 정보
+	 * @param questionAnswer - 입력된 답
+	 * @param questionNo - 입력된 질문 번호
+	 * @return - 전송 여부 확인
+	 */
+	public boolean sendMailId(User user, int questionNo, String questionAnswer);
+
+	/**
+	 * 비밀번호 메일 전송
+	 * @param user - 전송할 회원 정보
+	 * @param questionAnswer - 입력된 질문의 답
+	 * @param questionNo  - 입력된 질문의 번호
+	 * @param id - 입력된 아이디
+	 * @return - 전송 여부 확인
+	 */
+	public boolean sendMailPw(User user, String id, int questionNo, String questionAnswer);
 
 }

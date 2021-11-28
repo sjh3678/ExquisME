@@ -10,6 +10,8 @@ integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChi
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
+<script>
+</script>
 <script type="text/javascript">
 
 function visible(i){
@@ -50,7 +52,7 @@ $(document).ready(function(){
 					return true;
 				}else if (result == "ban"){
 					console.log("제재 대상");
-					alert("회원님은 현재 제대 대상입니다.");
+					alert("회원님은 현재 제재 대상입니다.");
 				}else {
 					alert("회원정보를 찾을 수 없습니다.");
 					console.log("로그인 실패");
@@ -76,11 +78,12 @@ $(document).ready(function(){
 			data: searchID,
 			dataType: "text",
 			success: function(res){
-				if(res){
+				if(res == false){
+					alert("조회결과가 없습니다. 다시 확인해주세요.");
+						
+				}else{
 					alert("작성하신 메일을 통해 아이디 정보가 전달되었습니다.")
 					$(location).attr("href", "/user/login");
-				}else{
-					alert("조회결과가 없습니다. 다시 확인해주세요.");
 				}
 			},
 			error: function(e){
@@ -98,11 +101,11 @@ $(document).ready(function(){
 			data: searchPW,
 			dataType: "text",
 			success: function(res){
-				if(res){
+				if(res == false){
+					alert("조회결과가 없습니다. 다시 확인해주세요.");
+				}else{
 					alert("작성하신 메일을 통해 임시 패스워드가 전달되었습니다.")
 					$(location).attr("href", "/user/login");
-				}else{
-					alert("조회결과가 없습니다. 다시 확인해주세요.");
 				}
 			},
 			error: function(e){
