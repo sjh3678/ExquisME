@@ -222,7 +222,7 @@ h1{
 		<span class="pull-left blink" style="background: red; color: white; font-size: 12px; font-weight: 400; vertical-align: middle; border-radius: 2px; margin: 10px;">&nbsp;&nbsp;관리자 로그인&nbsp;&nbsp;</span> 	
 	</c:if>
 </div>
-<div class="logo"><span style="vertical-align: middle; cursor: pointer;" onclick="location.href='/';">EXQUIS ME</span></div>
+<div class="logo"><span style="font-size: 27px; vertical-align: middle; cursor: pointer;" onclick="location.href='/';">EXQUIS ME</span></div>
 <div class="menu">
 	<a href="/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/layer/list"><button class="btn btnHeader">LAYER</button></a>
