@@ -5,15 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import web.dto.ExComm;
+import web.dto.Extagram;
 import web.dto.FileUpload;
+import web.dto.Layer;
 import web.dto.Report;
 import web.dto.User;
+import web.service.face.ExtaService;
+import web.service.face.LayerService;
 import web.service.face.UserService;
-import web.util.PagingExtagram;
 import web.util.PagingUserHistory;
 import web.util.PagingUserHistory2;
 import web.util.UserSHA256;
@@ -37,7 +37,8 @@ public class UserController {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired private UserService userService;
-	
+	@Autowired private ExtaService extaService;
+	@Autowired private LayerService layerService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public void login() {
@@ -384,5 +385,41 @@ public class UserController {
 			model.addAttribute("user", user);
 			return "user/social/join";
 		}
+	}
+	
+	@RequestMapping(value = "/mypage/extaDelete", method = RequestMethod.GET)
+	public String extaDelete(Extagram extagram, HttpSession session) {
+		
+		int userNo = (Integer) session.getAttribute("userNo");
+		
+		if(extagram.getUserNo() == userNo) {
+			extaService.deleteExta(extagram);
+		}
+		return "redirect:/user/mypage";
+	}
+	@RequestMapping(value = "/mypage/extaCommentDelete", method = RequestMethod.GET)
+	public String extaCommentDelete(ExComm comment, HttpSession session) {
+		
+		int userNo = (Integer) session.getAttribute("userNo");
+		
+		ExComm comm = extaService.getInfoComment(comment);
+		
+		if(comment.getUserNo() == userNo) {
+			extaService.deleteComment(comm);
+		}
+		return "redirect:/user/mypage";
+	}
+	
+	@RequestMapping(value = "/mypage/layerDelete", method = RequestMethod.GET)
+	public String layerDelete(Layer layer, HttpSession session) {
+		
+		int userNo = (Integer) session.getAttribute("userNo");
+		
+		if(layer.getUserNo() == userNo) {
+			int layerNo = layer.getLayeringNo();
+			
+			layerService.deleteLayer(layerNo);
+		}
+		return "redirect:/user/mypage";
 	}
 }

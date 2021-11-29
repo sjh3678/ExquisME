@@ -50,7 +50,7 @@ td{
 		<td style="text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap;">${exta.EX_CONTENT }</td>
 		<td style="text-align: center; vertical-align: middle;"><fmt:formatDate value="${exta.EX_DATE }" pattern="YY-MM-dd"/></td>
 		<td style="text-align: center; vertical-align: middle;"><a href="/extagram/view?exNo=${exta.EX_NO }"><button class="btn btnDetail">보기</button></a></td>
-		<td style="text-align: center; vertical-align: middle;"><a href="/admin/user/history/extagram/delete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시글은 원상복구 할 수 없습니다.');"><button class="btn btnDetail">삭제</button></a></td>
+		<td style="text-align: center; vertical-align: middle;"><a href="/user/mypage/extaDelete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시글은 원상복구 할 수 없습니다.');"><button class="btn btnDetail">삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

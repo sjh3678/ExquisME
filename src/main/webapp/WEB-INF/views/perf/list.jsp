@@ -167,6 +167,23 @@ function keyword(){
 
 var selectedLabel = $("form")
 
+
+
+/* 맨 위로 */
+jQuery(document).ready(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('#go-top').fadeIn(500);
+    } else {
+      $('#go-top').fadeOut('slow');
+    }
+  });
+  $('#go-top').click(function (e) {
+    e.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 200);
+  });
+});
+
 </script>
 
 
@@ -293,6 +310,9 @@ label{
 .container{
 	position: relative;
 }
+.footer{
+	position: relative;
+}
 #slideLeft{
 	background: #ccc;
 	position: absolute;
@@ -307,6 +327,19 @@ label{
 }
 .btnSlide{
 	display: block;	
+}
+
+#go-top {
+  display: none;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  outline: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 9999;
+  color: #3f4547; /* 색상변경*/
 }
 </style>
 
@@ -465,6 +498,12 @@ label{
 </div><%-- .container --%>
 <button class="btn" id="slideLeft">&lt;</button>
 <button class="btn" id="slideRight" style="display: none;">&gt;</button>
+<button id="go-top">
+	<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+  		class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+	</svg>
+</button>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
 
 

@@ -297,6 +297,11 @@ $(document).ready(function() {
 </table>
 <br>
 
+<div style="text-align: center">
+<a href="/perf/list"><button class="btn" style="margin-top: 10px;">목록</button></a>
+</div>
+
+<br>
 
 </div><!-- .container -->
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

@@ -55,7 +55,7 @@ td{
 		</td>
 		<td style="text-align: center; vertical-align: middle;">${list.PERFUME1_PER } / ${100 - list.PERFUME1_PER }</td>
 		<td style="text-align: center; vertical-align: middle;"><fmt:formatDate value="${list.LAYERING_DATE }" pattern="YY-MM-dd"/></td>
-		<td style="text-align: center; vertical-align: middle;"><a href="/admin/user/history/layer/delete?layeringNo=${list.LAYERING_NO }&userNo=${list.USER_NO }" onclick="return confirm('레이어링을 삭제하시겠습니까? 삭제된 레이어링은 원상복구 할 수 없습니다.');"><button class="btn btnDetail">삭제</button></a></td>
+		<td style="text-align: center; vertical-align: middle;"><a href="/user/mypage/layerDelete?layeringNo=${list.LAYERING_NO }&userNo=${list.USER_NO }" onclick="return confirm('레이어링을 삭제하시겠습니까? 삭제된 레이어링은 원상복구 할 수 없습니다.');"><button class="btn btnDetail">삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>
