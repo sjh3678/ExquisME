@@ -7,20 +7,11 @@
 <!-- <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script> -->
 
 <script type="text/javascript">
-function submitContents(elClickedObj) {
-	oEditors.getById["exContent"].exec("UPDATE_CONTENTS_FIELD", []);
-	
-	try {
-		elClickedObj.form.submit();
-	} catch(e) {}
-}
-
 $(document).ready(function() {
 	//작성버튼 동작
 	$("#btnUpdate").click(function() {
 		var answer = confirm("게시글을 수정하시겠습니까?")
 		if( answer == true ){
-			submitContents( $("#btnUpdate") )
 			$("form").submit();
 		} else {
 			return false;
@@ -66,16 +57,6 @@ $(document).ready(function() {
 	<button class="btn" id="btnCancel">취소</button>
 </div>
 </form>
-
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "exContent",
-	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
-});
-</script>
 
 </div><!-- .container -->
 

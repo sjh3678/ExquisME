@@ -8,7 +8,5 @@
 <c:if test="${not result}">	 
 	<img id="btnHeart" onclick=heartClick() src="/resources/img/heart/heartEmpty2.png" style="width: 20px; cursor: pointer; height: auto;" />
 </c:if>
-
-${viewExta.HEART}&nbsp;&nbsp;&nbsp;
-
+																				 ${viewExta.HEART}&nbsp;&nbsp;&nbsp;
 <img style="width: 20px; height: auto;" src="/resources/img/heart/balloon.png"/> ${viewExta.COMM }

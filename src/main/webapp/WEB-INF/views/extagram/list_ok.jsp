@@ -9,7 +9,7 @@
 		<div id="a">
 			<img style="width: 30px; height: 30px; border-radius: 70%;" src="/upload/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }
 			<c:if test="${admin eq 'S' || admin eq 'M' }">
-				<div id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button class="btn">삭제</button></a></div>
+				<div id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }" onclick="return confirm('삭제 하시 겠습니까?');"><button type="button" id="aaDelete" class="btn">삭제</button></a></div>
 			</c:if>
 		</div>
 		<div id="b" style="width: 251px;"><c:out value="${list.EX_CONTENT }"/></div>

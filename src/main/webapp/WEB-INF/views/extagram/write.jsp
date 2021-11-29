@@ -17,12 +17,21 @@ function submitContents(elClickedObj) {
 </script>
 
 <script type="text/javascript">
+<c:if test="${not login}">
+	var message = "${msg}";
+	var url = "${url}";
+	alert(message);
+	document.location.href = url;
+</c:if>
+</script>
+
+<script type="text/javascript">
 $(document).ready(function() {
 	//작성버튼
 	$("#btnWrite").click(function() {
 		var answer = confirm("Extagram을 등록하시겠습니까?");
 		if(answer == true) {
-			var fileCheck = document.getElementById("fileCheck").value;
+			var fileCheck = document.getElementById("fileCheck(this)").value;
 			
 			if( !fileCheck ) {
 				alert("Extagram 작성 시 사진을 업로드해야 합니다.");
@@ -51,13 +60,26 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#exContent').on('keyup', function() {
-        if($(this).val().length > 1000) {
-            $(this).val($(this).val().substring(0, 1000));
-        }
-    });
-});
+function fileCheck(obj) {
+	pathpoint = obj.value.lastIndexOf('.');
+    filepoint = obj.value.substring(pathpoint+1,obj.length);
+    filetype = filepoint.toLowerCase();
+    
+    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+
+    } else {
+        alert('이미지 파일(jpg, gif, png만 선택할 수 있습니다. 이 외의 파일 첨부 시 게시글은 삭제됩니다.');
+
+        parentObj  = obj.parentNode
+        node = parentObj.replaceChild(obj.cloneNode(true),obj);
+
+        return false;
+    }
+    if(filetype=='bmp') {
+        upload = confirm('BMP 파일은 적절한 이미지 포맷이 아닙니다.\n업로드를 계속 하시겠습니까?');
+        if(!upload) return false;
+    }
+}
 </script>
 
 <div class="container">
@@ -83,7 +105,7 @@ $(document).ready(function() {
 
 <div class="form-group">
 	<label for="file">사진 첨부</label>
-	<input type="file" id="fileCheck" name="file" />
+	<input type="file" id="fileCheck(this)" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"/>
 </div>
 
 <div class="text-center">

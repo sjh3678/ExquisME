@@ -108,7 +108,6 @@ $(document).ready(function() {
 $(document).ready(function() {
 	
 	loadList();
-// 	$(document.body).click(function() {
 	$("#btnCommInsert").click(function() {
 		$.ajax({
 			type: "post"
@@ -175,8 +174,6 @@ function heartClick() {
 		, success: function(res) {
 			console.log("좋아요 성공")
 			
-			//좋아요 수 적용
-			//$("#btnHeartComm").html(res.cnt);
 			loadList();
 		}	
 		, error: function() {
@@ -226,7 +223,7 @@ function loadHeartComm() {
 <div class="topper">
 <div><img style="width: 35px; height: 35px; border-radius: 70%;" 
 		   src="/upload/${viewExta.PROFILE}"></div>
-		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;">${viewExta.NICK }</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;<div style="font-size: 25px;"><c:out value="${viewExta.NICK }"/></div>
 		&nbsp;&nbsp;&nbsp;&nbsp;<div style="margin: 12px;"><fmt:formatDate value="${viewExta.EX_DATE }" pattern="yyyy-MM-dd HH:mm"/></div>
 </div>
 

@@ -154,7 +154,6 @@ jQuery(document).ready(function () {
 <hr>
 <div class="container">
 
-
 <div id="result"><!-- AJAX 결과값 -->
 
 </div>
