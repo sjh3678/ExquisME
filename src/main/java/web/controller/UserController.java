@@ -139,7 +139,8 @@ public class UserController {
 		logger.info("email : {}", user.getEmail());
 		if(session.getAttribute("userNo") != null)
 			user.setUserNo((Integer)session.getAttribute("userNo"));
-		boolean isEmailExist = userService.searchEmail(user);
+		boolean isEmailExist = false;
+		isEmailExist = userService.searchEmail(user);
 		logger.info("{}",isEmailExist);
 		return isEmailExist;
 	}
@@ -150,9 +151,10 @@ public class UserController {
 		logger.info("email : {}", user.getEmail());
 		if(session.getAttribute("userNo") != null)
 			user.setUserNo((Integer)session.getAttribute("userNo"));
-		boolean isEmailExist = userService.searchNick(user);
-		logger.info("{}",isEmailExist);
-		return isEmailExist;
+		boolean isNickExist = false;
+		isNickExist = userService.searchNick(user);
+		logger.info("{}",isNickExist);
+		return isNickExist;
 	}
 	
 	@RequestMapping(value="/mypage")
@@ -182,21 +184,45 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/pw/update", method=RequestMethod.POST)
-	public @ResponseBody boolean pwUpdateProc(String pw, String pwChk, HttpSession session) {
+	public @ResponseBody boolean pwUpdateProc(User user, String pwChk, HttpSession session) {
 		logger.info("/pw/update [POST]");
-		User user = new User();
+		
 		int userNo = (Integer) session.getAttribute("userNo");
 		user.setUserNo(userNo);
 		user.setPw(pwChk); // 암호화 전
 		pwChk = UserSHA256.encrypt(user); // 확인값 암호화
-		user.setPw(pw); // 암호화 전
+		user.setPw(user.getPw()); // 암호화 전
 		user.setPw(UserSHA256.encrypt(user)); // 변경값 암호화 후 저장
 		
-		boolean isUpdate = userService.setUpdatePw(user, pwChk);
-		logger.info("결과 : {}", isUpdate);
-		return isUpdate;
+		boolean pwCheck = userService.getCheckPw(user.getPw(), userNo);
+		logger.info("비밀번호 중복 : {}", pwCheck);
+		
+		//비밀번호 중복검사
+		if(pwCheck) {
+			return false;
+		}else {
+			boolean isUpdate = userService.setUpdatePw(user, pwChk);
+			logger.info("결과 : {}", isUpdate);
+			return isUpdate;
+		}
 	}
-	
+	@RequestMapping(value="/pw/check", method=RequestMethod.POST)
+	public @ResponseBody boolean pwCheck(User user, HttpSession session) {
+		int userNo = (Integer) session.getAttribute("userNo");
+		user.setUserNo(userNo);
+
+		user.setPw(user.getPw()); // 암호화 전
+		user.setPw(UserSHA256.encrypt(user)); // 변경값 암호화 후 저장
+		
+		boolean pwCheck = userService.getCheckPassword(user.getPw(), userNo);
+		logger.info("비밀번호 중복 : {}", pwCheck);
+		
+		//비밀번호 중복검사
+		if(pwCheck) {
+			return true;
+		}
+		return false;
+	}
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String userDelete() {
 		logger.info("/delete [GET]");

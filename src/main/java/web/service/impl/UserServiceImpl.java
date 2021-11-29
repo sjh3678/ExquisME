@@ -98,10 +98,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean getCheckPassword(String pw, int userNo) {
 		
-		logger.info("getCheckPassword called");
+		logger.info("getCheckPassword called pw : {}", pw);
 		
 		User user = userDao.selectUserByUserno(userNo);
-		
+		logger.info("changePw : {}", user.getPw());
 		if(pw.equals(user.getPw())) {
 			//비밀번호 일치
 			return true;
@@ -117,6 +117,7 @@ public class UserServiceImpl implements UserService{
 		logger.info("setChangePw called");
 		logger.info("변경값 : {}", user.getPw());
 		logger.info("확인값 : {}",pwChk);
+		String pw = user.getPw();
 		//변경값 확인
 		if(user.getPw().equals(pwChk)) {
 			
@@ -264,9 +265,12 @@ public class UserServiceImpl implements UserService{
 			
 			user = userDao.selectUserByUserno(user.getUserNo());
 			
-			if(!email.equals(user.getEmail()) || email.equals("")) {
+			if(email.equals("")) {
 				logger.info("비어있거나 형식에 맞지않는 이메일");
 				isChecked = true;
+			}else if(email.equals(user.getEmail())){
+				logger.info("기존 이메일");
+				isChecked = false;
 			}else {
 				logger.info("유효한 형식");
 				isChecked = false;
@@ -292,9 +296,12 @@ public class UserServiceImpl implements UserService{
 		if(user.getUserNo() != 0) {
 			String nick = user.getNick();
 			user = userDao.selectUserByUserno(user.getUserNo());
-			if(!nick.equals(user.getNick()) || nick.equals("")) {
+			if(nick.equals("")) {
 				logger.info("비어있거나 형식에 맞지않는 닉네임");
 				isChecked = true;
+			}else if(nick.equals(user.getNick())){
+				logger.info("기존 닉네임");
+				isChecked = false;	
 			}else {
 				logger.info("유효한 형식");
 				isChecked = false;
@@ -807,6 +814,24 @@ public class UserServiceImpl implements UserService{
         }
         logger.info("조회된 결과 없음 [ERROR]");
 		return false;
+	}
+
+	@Override
+	public boolean getCheckPw(String pw, int userNo) {
+		
+		User user = userDao.selectUserByUserno(userNo);
+		boolean isChecked = true;
+		if(pw.equals("")) {
+			logger.info("비어있거나 형식에 맞지않는 닉네임");
+			isChecked = true;
+		}else if(pw.equals(user.getPw())){
+			logger.info("기존 닉네임");
+			isChecked = false;	
+		}else {
+			logger.info("유효한 형식");
+			isChecked = false;
+		}
+		return isChecked;
 	}
 
 }
