@@ -64,7 +64,7 @@ public class UserController {
 			//신고 여부 조회
 			boolean isReport = userService.getCheckReport(user);
 			
-			if(isReport) {
+			if(isReport && report.getExpireDate() != null) {
 				report = userService.getReportInfo(user, report);
 				
 				if( new Date().before( report.getExpireDate() ) ) {
