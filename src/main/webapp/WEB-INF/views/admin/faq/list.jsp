@@ -220,7 +220,7 @@ $(document).ready(function(){
 <div class="row" data-boardno="${i.faqNo }">
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
-			<span class="titleText">${i.faqTitle}</span>
+			<span class="titleText"><c:out value="${i.faqTitle}"/></span>
 			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/faq/delete?faqNo=${i.faqNo}" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시물은 원상복구 할 수 없습니다.');">삭제</a>&nbsp;&nbsp;&nbsp;</span>
 			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>

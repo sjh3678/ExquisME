@@ -76,7 +76,7 @@ $(document).ready(function(){
 <div class="row">
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
-			<span class="titleText">${i.faqTitle}</span>
+			<span class="titleText"><c:out value="${i.faqTitle}"/></span>
 		</div>
 	</div>
 	<div class="content">

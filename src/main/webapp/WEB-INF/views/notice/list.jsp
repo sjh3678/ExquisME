@@ -81,7 +81,7 @@ $(document).ready(function(){
 <c:forEach items="${noticeList }" var="i">
 <div class="row">
 	<div class="title">
-		<div class="titleChild" style="cursor: pointer;"><span class="titleText">${i.NOTICE_TITLE}</span></div>
+		<div class="titleChild" style="cursor: pointer;"><span class="titleText"><c:out value="${i.NOTICE_TITLE}"/></span></div>
 	</div>
 	<div class="content">
 		<div class="contentChild" style="display: none;">

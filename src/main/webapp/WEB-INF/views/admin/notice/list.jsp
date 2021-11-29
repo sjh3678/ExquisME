@@ -258,7 +258,7 @@ function fileCheck(obj) {
 <div class="row" data-boardno="${i.NOTICE_NO }" data-boardfile="${i.STORED_NAME }" data-fileno="${i.FILE_NO }">
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
-			<span class="titleText">${i.NOTICE_TITLE}</span>
+			<span class="titleText"><c:out value="${i.NOTICE_TITLE}"/></span>
 			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시물은 원상복구 할 수 없습니다.');">삭제</a>&nbsp;&nbsp;&nbsp;</span>
 			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>
