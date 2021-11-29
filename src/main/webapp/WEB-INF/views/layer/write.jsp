@@ -19,7 +19,7 @@
 	font-size:13px;
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #4d3534;
+ 	text-shadow:0px 1px 0px #4d3534; 
 	font-weight: bold;
 	position: relative;
     top: -18px;
@@ -49,6 +49,22 @@
     text-align: center;
 }
 #btnSub:hover{
+	transform: scale(1.1);
+	background: #35312B;
+}
+#btnCancle{
+    position: relative;
+    background: #8A7E6B;
+    color: #ECE6CC;
+    top: 3px;
+    left: 48px;
+    width: 42px;
+    height: 58px;
+    border-radius: 10px;
+    padding: 0px;
+    text-align: center;
+}
+#btnCancle:hover{
 	transform: scale(1.1);
 	background: #35312B;
 }
@@ -472,6 +488,14 @@ $(document).ready(function(){
 		}
 		$("#layer-form").submit();
 	});
+		
+	$("#btnCancle").click(function(){
+		if(confirm("작성을 취소하시겠습니까?")){
+			history.back();
+		}else{
+			return false;
+		}
+	})
 });
 	function loadCurPage(i){
 		var curPage =  i ;
@@ -808,9 +832,10 @@ $(function(){
 			</div><!-- layer-result -->
 			<div class="result-bottom">
 				<textarea rows="2" cols="30" maxlength="60" 
-				style="resize:none; width:310px; border:0px; border-radius: 10px; padding: 10px; position: relative; top: 30px; left: 40px;"
-				id="layeringContent" name="layeringContent" placeholder="간단한 소개와 설명을 적어주세요. (60자 이내)"></textarea>
+				style="resize:none; width:250px; border:0px; border-radius: 10px; padding: 10px; position: relative; top: 30px; left: 40px;"
+				id="layeringContent" name="layeringContent" placeholder="간단한 소개와 설명을 적어주세요.    (60자 이내)"></textarea>
 				<button class="btn" type="button" id="btnSub">작성</button>
+				<button class="btn-cancle" type="button" id="btnCancle">취소</button>
 			</div>
 		</form>
 	</div><!-- layer-container -->

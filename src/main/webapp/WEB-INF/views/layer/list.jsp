@@ -27,7 +27,7 @@ $(document).ready(function(){
 	loadList(); //init list
 	
 
-	$("#last").click(function(){
+	$("#like").click(function(){
 		target = 1;
 		var curPage = 1;
 		console.log("#ajax clicked")
@@ -51,7 +51,7 @@ $(document).ready(function(){
 		
 	})
 	
-	$("#like").click(function(){
+	$("#last").click(function(){
 		target = 2;
 		var curPage = 1;
 		console.log("#ajax clicked")
@@ -364,8 +364,8 @@ td:nth-child(2) {
 
 <div class="container">
 
-<input type="button" id="last" value="최신순" class="btn btnFunction btnLayer pull-left" style="display: none;"/>
-<input type="button" id="like" value="좋아요순" class="btn btnFunction btnLayer pull-left"/>
+<input type="button" id="last" value="최신순" class="btn btnFunction btnLayer pull-left" />
+<input type="button" id="like" value="좋아요순" class="btn btnFunction btnLayer pull-left" style="display: none;"/>
 <c:if test="${login }">
 	<a href="/layer/write"><button id="writeLayer" class="btn btnLayer pull-left">나만의 레이어링 등록</button></a>
 </c:if>

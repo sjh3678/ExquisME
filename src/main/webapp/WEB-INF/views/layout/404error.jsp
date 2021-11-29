@@ -48,8 +48,8 @@ a:visited{text-decoration: none; color: black;}
 <body>
 <div class="error-wrap">
 	<img alt="" src="/resources/img/error/404error.png">
-	<div id="prev"><a href="javascript:history.back();">이전 페이지</a></div>
-	<div id="main"><a href="/">메인 페이지</a></div>
+	<a href="javascript:history.back();"><div id="prev">이전 페이지</div></a>
+	<a href="/"><div id="main">메인 페이지</div></a>
 </div>
 
 </body>
