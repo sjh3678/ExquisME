@@ -41,18 +41,18 @@ td{
 	</tr>
 </thead>
 <tbody>
-<c:set var="exno" value="0"/>
+<%-- <c:set var="exno" value="0"/> --%>
 <c:forEach items="${commList }" var="list">
 	<tr>
-		<c:choose>
-		<c:when test="${exno eq list.EX_POST_NO }">
-			<td></td>
-		</c:when>
-		<c:when test="${exno ne list.EX_POST_NO }">
-			<td style="text-align: center; vertical-align: middle;">${list.EX_POST_NO }</td>	
-		</c:when>
-		</c:choose>
-		<c:set var="exno" value="${list.EX_POST_NO }"/>
+<%-- 		<c:choose> --%>
+<%-- 		<c:when test="${exno eq list.EX_POST_NO }"> --%>
+<!-- 			<td></td> -->
+<%-- 		</c:when> --%>
+<%-- 		<c:when test="${exno ne list.EX_POST_NO }"> --%>
+		<td style="text-align: center; vertical-align: middle;">${list.EX_POST_NO }</td>	
+<%-- 		</c:when> --%>
+<%-- 		</c:choose> --%>
+<%-- 		<c:set var="exno" value="${list.EX_POST_NO }"/> --%>
 		<td style="text-align: center; vertical-align: middle;">${list.POSTOWNER }</td>
 		<td style="text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap;"><c:out value="${list.EX_COMM }"/></td>
 		<td style="text-align: center; vertical-align: middle;"><fmt:formatDate value="${list.EX_COMM_DATE }" pattern="YY-MM-dd"/></td>
