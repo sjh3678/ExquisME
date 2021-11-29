@@ -390,22 +390,31 @@ public class UserServiceImpl implements UserService{
 		User user = userDao.selectUserByUserno(param.getUserNo());
 		
 		logger.info("이전 기록 : {}", user);
+		int fileNo = user.getFileNo();
+		
 		//정보 수정
 		userDao.updateUserInfo(param);
 		
-		//이전 프로필 사진이 기본 프로필이 아닐때
-		if(user.getFileNo() != 91) {
+		//정보 수정 후 기록 조회
+		user = userDao.selectUserByUserno(param.getUserNo());
+		
+		logger.info("수정 후 파일 : {}", user.getFileNo());
+		
+		//이전 프로필 사진이 기본 프로필이 아닐때와 이전 기록일때 비교
+		if(fileNo != 91 && fileNo != user.getFileNo()) {
 					
 			//기존 프로필 사진 삭제
-			userDao.deleteFileByFileNo(user.getFileNo());
+			userDao.deleteFileByFileNo(fileNo);
 			
 			//파일정보 삭제 확인
 			int cnt = userDao.selectFileCntByFileNo(user);
 			
 			if(cnt == 0) {
 				logger.info("이전 기록 삭제 완료");
+				return true;
 			}else {
 				logger.info("파일이 없거나 삭제 실패");		
+				return false;
 			}
 		}
 		return true;

@@ -133,7 +133,7 @@
 			<if test="fileNo != null"> 
 			file_no = #{fileNo},
 			</if>
-			email = #{email}, nick = #{nick}, phone = #{phone}, birth = #{birth}
+			email = #{email}, nick = #{nick}, phone = #{phone}, gender = #{gender}, birth = #{birth}
 		WHERE user_no = #{userNo}
 	</update>
 	<select id="selectCntByEmail" parameterType="web.dto.User" resultType="int">

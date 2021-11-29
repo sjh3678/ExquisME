@@ -296,13 +296,6 @@ async function checked() {
 	console.log(isvalid);
 	
 	if(await authKeyCheck() == false) isvalid = false;
-	
-	var fileCheck = document.getElementById("file").value;
-	
-	if( !fileCheck ) {
-		alert("프로필 변경 시 사진을 업로드해야 합니다.");
-		invalid = false
-	}
 		
 	return isvalid;
 }
