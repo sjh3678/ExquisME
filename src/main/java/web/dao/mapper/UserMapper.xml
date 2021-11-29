@@ -171,7 +171,7 @@
 				FROM tb_extagram e, tb_user u, tb_file fx, tb_file fu
 				WHERE e.user_no = u.user_no AND fx.file_no = e.file_no
 				AND u.file_no = fu.file_no AND e.user_no = #{user.userNo}
-				ORDER BY e.ex_no DESC
+				ORDER BY e.ex_date DESC
 			) R
 		)T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
@@ -196,7 +196,7 @@
         		WHERE e.ex_no = c.ex_post_no AND u.file_no = fu.file_no 
          		   	AND pu.user_no = e.user_no AND pu.file_no = fp.file_no
             		AND u.user_no = #{user.userNo} AND c.user_no = #{user.userNo}
-        		ORDER BY ex_comm DESC
+        		ORDER BY c.ex_comm_date DESC
     		) R
 		)T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
@@ -220,7 +220,7 @@
 				WHERE  l.perfume_no1 = p1.perfume_no AND l.perfume_no2 = p2.perfume_no 
     				AND p1.file_no = f1.file_no AND p2.file_no = f2.file_no
     				AND l.user_no = u.user_no AND l.user_no = #{user.userNo}
-    			ORDER BY layering_no DESC
+    			ORDER BY layering_date DESC
     		) R
 		) T
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
