@@ -9,12 +9,11 @@
 </div>
 <c:if test="${admin eq 'S' || admin eq 'M' }"><%-- 관리자 로그인 상태일 때 --%>
 <div class="menu">
-	<a href="/admin/notice/list"><button class="btn btnHeader">NOTICE</button></a>
-	<a href="/admin/faq/list"><button class="btn btnHeader">FAQ</button></a>
-	<a href="/admin/user/list"><button class="btn btnHeader">USER</button></a>
 	<a href="/admin/perf/list"><button class="btn btnHeader">PERFUME</button></a>
-	<a href="/admin/layer/list"><button class="btn btnHeader">LAYER</button></a>
+	<a href="/admin/user/list"><button class="btn btnHeader">USER</button></a>
 	<a href="/admin/report/list"><button class="btn btnHeader">REPORT</button></a>
+	<a href="/admin/faq/list"><button class="btn btnHeader">FAQ</button></a>
+	<a href="/admin/notice/list"><button class="btn btnHeader">NOTICE</button></a>
 </div>
 </c:if>
 </footer>

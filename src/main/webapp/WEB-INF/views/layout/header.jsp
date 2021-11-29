@@ -224,11 +224,11 @@ h1{
 </div>
 <div class="logo"><span style="vertical-align: middle; cursor: pointer;" onclick="location.href='/';">EXQUIS ME</span></div>
 <div class="menu">
-	<a href="/notice/list"><button class="btn btnHeader">NOTICE</button></a>
-	<a href="/faq/list"><button class="btn btnHeader">FAQ</button></a>
-	<a href="/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
 	<a href="/perf/list"><button class="btn btnHeader">PERFUME</button></a>
 	<a href="/layer/list"><button class="btn btnHeader">LAYER</button></a>
+	<a href="/extagram/list"><button class="btn btnHeader">EXTAGRAM</button></a>
+	<a href="/faq/list"><button class="btn btnHeader">FAQ</button></a>
+	<a href="/notice/list"><button class="btn btnHeader">NOTICE</button></a>
 	<hr class="hrMenu">
 </div>
 <%-- 모달 채팅방 입장 영역 --%>
