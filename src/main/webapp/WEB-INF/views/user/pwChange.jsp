@@ -113,26 +113,33 @@ $(document).ready(function(){
 		checkPw2();
 	})
 	$("#sendBtn").click(function(){
+		var isCheck = true;
+		isCheck = checkPw();
+		isCheck = checkPw2()
+		if(isCheck == false){
+			alert("비밀번호 형식을 다시 확인해 주세요")
+		}else{
 		var pw = $("#changePw1");
 		var pwChk = $("#changePw2");
-		$.ajax({
-			type: "post",
-			url: "/user/pw/update",
-			data: {pw:pw.val(), pwChk:pwChk.val()},
-			dataType: "json",
-			success: function(res){
-				console.log("결과값 : ", res);
-				if(res){
-					alert("비밀번호가 변경되었습니다.");
-					$(location).attr('href', '/user/mypage');
-				}else{
-					alert("비밀번호가 변경 실패했습니다.")
+			$.ajax({
+				type: "post",
+				url: "/user/pw/update",
+				data: {pw:pw.val(), pwChk:pwChk.val()},
+				dataType: "json",
+				success: function(res){
+					console.log("결과값 : ", res);
+					if(res){
+						alert("비밀번호가 변경되었습니다.");
+						$(location).attr('href', '/user/mypage');
+					}else{
+						alert("비밀번호가 변경 실패했습니다.")
+					}
+				}, error: function(e){
+					console.log(e);
 				}
-			}, error: function(e){
-				console.log(e);
-			}
 		
-		})
+			})
+		}
 	})
 })
 
