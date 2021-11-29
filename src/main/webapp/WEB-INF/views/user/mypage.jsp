@@ -25,22 +25,6 @@ async function ajaxPost(url, data) {
 	})
 }
 
-//비밀번호 인증 모달창 (비)활성화
-async function checkPw(pw){
-	var modal = $("#modal");
-	console.log("비밀번호 인증 시작")
-	const result = await ajaxPost("/user/check/password", {pw:pw.val()});
-	if(result === false){
-		console.log("인증 실패");
-		alert("인증 실패");
-
-	}else{
-		console.log("인증 성공");
-		alert("인증 성공");
-		$('#modal').css("display", "none");
-	}
-}
-
 $(document).ready(function(){
 	var authkey = 0;
 	
@@ -112,6 +96,7 @@ $(document).ready(function(){
 				, success: function(res){
 					console.log("AJAX 성공");
 					$("#rightArea").html(res);
+					
 				}, error: function(error){
 					console.log("AJAX 실패")
 					console.log(error);
@@ -123,8 +108,26 @@ $(document).ready(function(){
 	$("#checkBtn").click(function(){
 		console.log("인증버튼 눌림 ");
 		var pw = $("#pw");
-		console.log(pw.val());
-		checkPw(pw);
+		$.ajax({
+			type: "post",
+			url: "/user/check/password",
+			data: {pw:pw.val()},
+			dataType: "json",
+			success : function(res){
+				console.log(res);
+				if(res == false){
+					console.log("인증 실패")
+					alert("인증 실패")
+					authkey = 0;
+				}else{
+					console.log("인증 확인됨")
+					authkey = 1;	
+					$("#modal").css("display", "none")
+				}
+			}, error : function(error){
+				console.log(error)
+			}
+		})
 		
 	})
 

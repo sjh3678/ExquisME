@@ -266,4 +266,10 @@ public interface UserDao {
 	 * @return - 조회된 결과 반환
 	 */
 	public int selectExtaCntByUserNo2(int userNo);
+
+	/**
+	 * 유저 정보 대조를 위한 유저 리스트 조회
+	 * @return - 조회된 리스트 반환
+	 */
+	public List<User> selectUserList();
 }

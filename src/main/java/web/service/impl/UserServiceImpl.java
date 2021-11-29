@@ -250,21 +250,12 @@ public class UserServiceImpl implements UserService{
 	public boolean searchEmail(User user) {
 		int cnt = userDao.selectUserCnt(user);
 		boolean isChecked = true;
-		
-		if(cnt == 0) {
-			logger.info("매칭된 이메일 없음");
-			 isChecked = false;	
-		}else {
-			logger.info("이메일 중복");
-			isChecked = true;
-		}
-		
 		if(user.getUserNo() != 0) {
 			String email = user.getEmail();
-			logger.info("email : {}", email);
+			logger.info("input email : {}", email);
 			
 			user = userDao.selectUserByUserno(user.getUserNo());
-			
+			logger.info("db email : {}", user.getEmail());
 			if(email.equals("")) {
 				logger.info("비어있거나 형식에 맞지않는 이메일");
 				isChecked = true;
@@ -275,7 +266,16 @@ public class UserServiceImpl implements UserService{
 				logger.info("유효한 형식");
 				isChecked = false;
 			}
+		}else {
+			if(cnt == 0) {
+				logger.info("매칭된 이메일 없음");
+				isChecked = false;	
+			}else {
+				logger.info("이메일 중복");
+				isChecked = true;
+			}
 		}
+		
 
 		return isChecked;
 	}
@@ -825,19 +825,19 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean getCheckPw(String pw, int userNo) {
 		
-		User user = userDao.selectUserByUserno(userNo);
-		boolean isChecked = true;
-		if(pw.equals("")) {
-			logger.info("비어있거나 형식에 맞지않는 닉네임");
-			isChecked = true;
-		}else if(pw.equals(user.getPw())){
-			logger.info("기존 닉네임");
-			isChecked = false;	
-		}else {
-			logger.info("유효한 형식");
-			isChecked = false;
+		List<User> list = userDao.selectUserList();
+		int cnt = 0;
+		for(User u : list) {
+			if(pw.equals(u.getPw())) {
+				cnt++;
+			}
 		}
-		return isChecked;
+		if(cnt < 1) {
+			logger.info("중복없음");
+			return false;
+		}
+		logger.info("비밀번호 중복");
+		return true;
 	}
 
 }

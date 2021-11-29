@@ -20,7 +20,6 @@ input{
 }
 </style>
 <script type="text/javascript">
-
 //비밀번호 유효성 / 공백 검사
 function checkPw() {
 	console.log("비밀번호 유효성 검사")
@@ -106,48 +105,6 @@ function checkPw2() {
 		}
 	}
 }
-
-async function check(){
-	var isCheck = true;
-	if (checkPw() == false){
-		console.log("유효하지 않은 형식")
-		isCheck = false;
-	}
-	
-	if (checkPw2() == false){
-		console.log("유효하지 않은 형식")
-		isCheck = false;
-	}
-	return isCheck;
-}
-async function submit(){
-	
-	if(await check() == ture){
-		var pw = $("#changePw1");
-		var pwChk = $("#changePw2");
-		$.ajax({
-			type: "post",
-			url: "/user/pw/update",
-			data: {pw:pw.val(), pwChk:pwChk.val()},
-			dataType: "json",
-			success: function(res){
-				console.log("결과값 : ", res);
-				if(res == false){
-					alert("비밀번호가 변경 실패했습니다.")
-				}else{
-					alert("비밀번호가 변경되었습니다.");
-					$(location).attr('href', '/user/mypage');						
-				}
-			}, error: function(e){
-				console.log(e);
-			}
-	
-		})
-
-	}else{
-		alert("비밀번호 형식을 다시 확인해 주세요")
-	}
-}
 $(document).ready(function(){
 	$("#changePw1").blur(function(){
 		checkPw();
@@ -156,9 +113,34 @@ $(document).ready(function(){
 		checkPw2();
 	})
 	$("#sendBtn").click(function(){
-		var isCheck = true;
-		submit();
-		
+		var pw = $("#changePw1");
+		var pwChk = $("#changePw2");
+		var	isCheck = true;
+		if (checkPw() == false) isCheck = false;
+		if (checkPw2() == false) isCheck = false;
+		if(isCheck == false){
+			console.log("전송 실패")
+			alert("입력값을 다시 확인하세요")
+		}else{
+			$.ajax({
+				type: "post",
+				url: "/user/pw/update",
+				data: {pw:pw.val(), pwChk:pwChk.val()},
+				dataType: "json",
+				success: function(res){
+					console.log("결과값 : ", res);
+					if(res){
+						alert("비밀번호가 변경되었습니다.");
+						$(location).attr('href', '/user/mypage');
+					}else{
+						alert("비밀번호가 변경 실패했습니다.")
+					}
+				}, error: function(e){
+					console.log(e);
+				}
+			
+			})
+		}
 	})
 })
 
@@ -189,7 +171,7 @@ span{
 <tr>
 	<td> </td>
 	<td id="pw1Chk" class="error feedback"><span>비밀번호는 영문 대소문자와 숫자 8~12자리로 입력해야합니다.</span></td>
-	<td id="pw1Error" class="error feedback"><span>비밀번호가 기존값과 일치합니다.</span></td>
+	<td id="pw1Error" class="error feedback"><span>비밀번호가 일치하지 않습니다.</span></td>
 	<td id="valid-pw1" class="valid feedback"><span>사용가능한 비밀번호입니다.</span></td>
 </tr>
 <tr>

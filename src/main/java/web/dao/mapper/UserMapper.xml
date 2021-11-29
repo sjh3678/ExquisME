@@ -329,4 +329,8 @@
 		SELECT count(*) FROM tb_extagram
 		WHERE user_no = #{userNo}
 	</select>
+	<select id="selectUserList" resultMap="User">
+		SELECT user_no, id. pw, nick, email FROM tb_user
+		ORDER BY user_no
+	</select>
 </mapper>
