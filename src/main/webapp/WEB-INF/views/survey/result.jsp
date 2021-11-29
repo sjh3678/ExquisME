@@ -105,7 +105,7 @@ h4 {
 <hr>
 
 
-	<h4>${useName }님 이런 향을 써보시는 것은 어떠신가요?</h4>
+	<h4><c:out value="${useName }님 이런 향을 써보시는 것은 어떠신가요?"/></h4>
 	<div class="flex-container">
 		<div class="items-wrap">
 			<c:forEach items="${list }" var="list">
@@ -120,7 +120,7 @@ h4 {
 			</c:forEach><!-- list end -->
 		</div><!-- items-wrap end -->	
 		<div class="result-perf">
-			<h4>${useName }님께 추천드린 향이 포함된 향수를 써보시는건 어떨까요?</h4>
+			<h4><c:out value="${useName }님께 추천드린 향이 포함된 향수를 써보시는건 어떨까요?"/></h4>
 			<div class="perf-wrap">
 				<c:forEach items="${perfList }" var="perfList">
 				 <div class="flex-items">
@@ -133,7 +133,7 @@ h4 {
 		</div>
 	</div>
 	<div class="icon-wrap">
-	<h4>${useName }님의 테스트 결과를 SNS에 공유해 보세요</h4>
+	<h4><c:out value="${useName }님의 테스트 결과를 SNS에 공유해 보세요"/></h4>
 		<ul class="sns">
 			<li>
 				<a id="create-kakao-link-btn" href="javascript:shareKakao();">

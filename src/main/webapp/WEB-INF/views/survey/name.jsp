@@ -64,7 +64,7 @@
 		<form id="nameform" name="nameform" action="/survey/q1">
 			<input type="hidden"/>
 			<div class="input">
-				<input type="text" id="name" name="useName" placeholder="이름 입력 칸"/><br>
+				<input type="text" id="name" name="useName" placeholder="이름 입력 칸 (최대 10글자)" maxlength="10"/><br>
 			</div>
 			<div class="submit">
 				<input type="submit" class="btnsub" id="nameSub" value="입력완료" />

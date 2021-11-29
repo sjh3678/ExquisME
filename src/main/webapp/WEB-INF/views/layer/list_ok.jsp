@@ -14,7 +14,7 @@
 				${layer.NICK }
 			</div>
 		</div>
-		<div id="content">${layer.LAYERING_CONTENT }</div>
+		<div id="content"><c:out value="${layer.LAYERING_CONTENT }"/></div>
 		
 		<div id="perf_pic">
 			<div class="imgcontainer1" style="background-image: url('/upload/${layer.FILES1 }')">

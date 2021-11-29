@@ -345,6 +345,16 @@ li span {
 	width:50%;
 	height:30px;
 }
+.per-1 {
+	position: relative;
+    top: -200px;
+    left: -90px;
+}
+.per-2 {
+	position: relative;
+	top: -355px;
+    left: 80px;
+}
 .per-1 div {
 	float:left;
 }
@@ -370,19 +380,13 @@ li span {
     left: 50px;
 }
 #perbox1{
-	position: relative;
     margin-left: 5px;
-    top: -200px;
-    left: -90px;
     font-size: 108px;
     font-weight: 700;
     color: rgb(128, 128, 128, 0.5);
 }
 #perbox2{
-	position: relative;
     margin-left: 5px;
-    top: -350px;
-    left: 80px;
     font-size: 108px;
     font-weight: 700;
     color: rgb(128, 128, 128, 0.5);
@@ -486,7 +490,11 @@ $(document).ready(function(){
 			
 			return false;
 		}
-		$("#layer-form").submit();
+		if (confirm("현재 작성하신 레이어링을 등록하시겠습니까?")) {
+			$("#layer-form").submit();
+		}else{
+			return false;
+		}
 	});
 		
 	$("#btnCancle").click(function(){
