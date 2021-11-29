@@ -20,6 +20,24 @@ input{
 }
 </style>
 <script type="text/javascript">
+
+async function ajaxPost(url, data) {
+	return new Promise((resolve, reject) => {
+		$.ajax({
+			type: 'post',
+			url: url,
+			dataType: 'json',
+			data: data,
+			success: (result) => {
+				resolve(result);
+			},
+			error: (request,status,error) => {
+				reject("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	})
+}
+
 //비밀번호 유효성 / 공백 검사
 function checkPw() {
 	console.log("비밀번호 유효성 검사")
@@ -105,41 +123,100 @@ function checkPw2() {
 		}
 	}
 }
+async function checkPwExist(){
+	console.log("비밀번호 중복검사");
+	var pw = $("#pw");
+	if (checkPw() == false){
+		console.log("유효하지 않은 형식")
+		return false;
+	}
+	
+	try {
+		const result = await ajaxPost('/user/pw/check', {pw: pw.val()});
+		console.log("중복 체크 결과 :",result);
+		if (result === false) {
+			//중복되는 비밀번호 없음
+			console.log("사용가능한 비밀번호");
+			
+			email.removeClass("is-invalid");
+			email.addClass("is-valid");
+			
+			$("#valid-pw1").css("display", "inline");
+			$("#pw1Chk").css("display", "none");
+			$("#pw1Error").css("display", "none");
+			
+			//비밀번호 체크 패스
+			return true;
+		} else {
+			console.log("이미 존재하는 비밀번호");
+			// 기존값과 일치
+			pw.removeClass("is-valid");
+			pw.addClass("is-invalid");
+			
+			$("#valid-pw1").css("display", "none");
+			$("#pw1Chk").css("display", "none");
+			$("#pw1Error").css("display", "inline");			
+			//비밀번호 체크 패스못함
+			return false;
+		}
+	} catch (e) {
+		console.log("에러")
+		console.log(e);
+		alert("에러가 발생했습니다.");
+	}
+}
+async function check(){
+	var isCheck = true;
+	if (await checkPwExist() == false){
+		console.log("유효하지 않은 형식")
+		isCheck = false;
+	}
+	
+	if (checkPw2() == false){
+		console.log("유효하지 않은 형식")
+		isCheck = false;
+	}
+	return isCheck;
+}
+async function submit(){
+	
+	if(await check() == ture){
+		var pw = $("#changePw1");
+		var pwChk = $("#changePw2");
+		$.ajax({
+			type: "post",
+			url: "/user/pw/update",
+			data: {pw:pw.val(), pwChk:pwChk.val()},
+			dataType: "json",
+			success: function(res){
+				console.log("결과값 : ", res);
+				if(res == false){
+					alert("비밀번호가 변경 실패했습니다.")
+				}else{
+					alert("비밀번호가 변경되었습니다.");
+					$(location).attr('href', '/user/mypage');						
+				}
+			}, error: function(e){
+				console.log(e);
+			}
+	
+		})
+
+	}else{
+		alert("비밀번호 형식을 다시 확인해 주세요")
+	}
+}
 $(document).ready(function(){
 	$("#changePw1").blur(function(){
-		checkPw();
+		checkPwExist();
 	})
 	$("#changePw2").blur(function(){
 		checkPw2();
 	})
 	$("#sendBtn").click(function(){
 		var isCheck = true;
-		isCheck = checkPw();
-		isCheck = checkPw2()
-		if(isCheck == false){
-			alert("비밀번호 형식을 다시 확인해 주세요")
-		}else{
-		var pw = $("#changePw1");
-		var pwChk = $("#changePw2");
-			$.ajax({
-				type: "post",
-				url: "/user/pw/update",
-				data: {pw:pw.val(), pwChk:pwChk.val()},
-				dataType: "json",
-				success: function(res){
-					console.log("결과값 : ", res);
-					if(res){
-						alert("비밀번호가 변경되었습니다.");
-						$(location).attr('href', '/user/mypage');
-					}else{
-						alert("비밀번호가 변경 실패했습니다.")
-					}
-				}, error: function(e){
-					console.log(e);
-				}
+		submit();
 		
-			})
-		}
 	})
 })
 
@@ -170,7 +247,7 @@ span{
 <tr>
 	<td> </td>
 	<td id="pw1Chk" class="error feedback"><span>비밀번호는 영문 대소문자와 숫자 8~12자리로 입력해야합니다.</span></td>
-	<td id="pw1Error" class="error feedback"><span>비밀번호가 일치하지 않습니다.</span></td>
+	<td id="pw1Error" class="error feedback"><span>비밀번호가 기존값과 일치합니다.</span></td>
 	<td id="valid-pw1" class="valid feedback"><span>사용가능한 비밀번호입니다.</span></td>
 </tr>
 <tr>
