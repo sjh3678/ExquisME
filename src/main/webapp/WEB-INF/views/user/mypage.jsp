@@ -30,13 +30,14 @@ async function checkPw(pw){
 	var modal = $("#modal");
 	console.log("비밀번호 인증 시작")
 	const result = await ajaxPost("/user/check/password", {pw:pw.val()});
-	if(result == true){
-		console.log("인증 성공")
-		$("#modal").css("display", "none");
-		return true;
+	if(result === false){
+		console.log("인증 실패");
+		alert("인증 실패");
+
 	}else{
-		console.log("인증 실패")
-		return false;
+		console.log("인증 성공");
+		alert("인증 성공");
+		$('#modal').css("display", "none");
 	}
 }
 
@@ -123,18 +124,8 @@ $(document).ready(function(){
 		console.log("인증버튼 눌림 ");
 		var pw = $("#pw");
 		console.log(pw.val());
-		var isCheck = checkPw(pw);
-		console.log(isCheck);
-		if(isCheck){
-			console.log("인증 성공");
-			authkey = 1;
-			alert("인증 성공");
-			$('#modal').css("display", "none");
-		}else{
-			console.log("인증 실패");
-			alert("인증 실패");
-			authkey = 0;
-		}
+		checkPw(pw);
+		
 	})
 
 	$("#close-modal").click(function(){

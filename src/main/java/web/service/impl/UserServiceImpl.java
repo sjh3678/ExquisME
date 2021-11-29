@@ -294,8 +294,12 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		if(user.getUserNo() != 0) {
+			
+			//입력값 저장
 			String nick = user.getNick();
+			//DB데이터 조회
 			user = userDao.selectUserByUserno(user.getUserNo());
+			
 			if(nick.equals("")) {
 				logger.info("비어있거나 형식에 맞지않는 닉네임");
 				isChecked = true;
@@ -661,7 +665,9 @@ public class UserServiceImpl implements UserService{
 		
 		return list;
 	}
+	
 	@Autowired private JavaMailSenderImpl mailSender;
+	
 	@Override
 	public boolean sendMailAuthKey(String mail, HttpSession session, Random random) {
 		String authKey="";

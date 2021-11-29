@@ -581,7 +581,7 @@ function characterCheck(obj){
 	if( regExp.test(obj.value) ){
 		alert("일부 특수문자는 입력하실수 없습니다.");
 		obj.value = obj.value.substring( 0 , obj.value.length - 1 );
-		}
+	}
 }
 function f_datepicker(obj) {
 	 $( obj ).datepicker().datepicker("show");

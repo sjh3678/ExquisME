@@ -21,23 +21,6 @@ input{
 </style>
 <script type="text/javascript">
 
-async function ajaxPost(url, data) {
-	return new Promise((resolve, reject) => {
-		$.ajax({
-			type: 'post',
-			url: url,
-			dataType: 'json',
-			data: data,
-			success: (result) => {
-				resolve(result);
-			},
-			error: (request,status,error) => {
-				reject("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		})
-	})
-}
-
 //비밀번호 유효성 / 공백 검사
 function checkPw() {
 	console.log("비밀번호 유효성 검사")
@@ -123,51 +106,10 @@ function checkPw2() {
 		}
 	}
 }
-async function checkPwExist(){
-	console.log("비밀번호 중복검사");
-	var pw = $("#pw");
-	if (checkPw() == false){
-		console.log("유효하지 않은 형식")
-		return false;
-	}
-	
-	try {
-		const result = await ajaxPost('/user/pw/check', {pw: pw.val()});
-		console.log("중복 체크 결과 :",result);
-		if (result === false) {
-			//중복되는 비밀번호 없음
-			console.log("사용가능한 비밀번호");
-			
-			email.removeClass("is-invalid");
-			email.addClass("is-valid");
-			
-			$("#valid-pw1").css("display", "inline");
-			$("#pw1Chk").css("display", "none");
-			$("#pw1Error").css("display", "none");
-			
-			//비밀번호 체크 패스
-			return true;
-		} else {
-			console.log("이미 존재하는 비밀번호");
-			// 기존값과 일치
-			pw.removeClass("is-valid");
-			pw.addClass("is-invalid");
-			
-			$("#valid-pw1").css("display", "none");
-			$("#pw1Chk").css("display", "none");
-			$("#pw1Error").css("display", "inline");			
-			//비밀번호 체크 패스못함
-			return false;
-		}
-	} catch (e) {
-		console.log("에러")
-		console.log(e);
-		alert("에러가 발생했습니다.");
-	}
-}
+
 async function check(){
 	var isCheck = true;
-	if (await checkPwExist() == false){
+	if (checkPw() == false){
 		console.log("유효하지 않은 형식")
 		isCheck = false;
 	}
@@ -208,7 +150,7 @@ async function submit(){
 }
 $(document).ready(function(){
 	$("#changePw1").blur(function(){
-		checkPwExist();
+		checkPw();
 	})
 	$("#changePw2").blur(function(){
 		checkPw2();
