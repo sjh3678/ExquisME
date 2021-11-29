@@ -53,7 +53,8 @@ public class ChatServerController {
                     LocalTime now = LocalTime.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
                     String time = now.format(formatter);
-                	String form = "<div class=\"item yourmsg on\"><div class=\"box\"><p class=\"msg\"> "+ sender + " : " + message +" </p><span class=\"time\">" + time + "</span></div></div>";
+                    String messageEsc = message.replaceAll("<", "&lt;");
+                	String form = "<div class=\"item yourmsg on\"><div class=\"box\"><p class=\"msg\"> "+ sender + " : " + messageEsc +" </p><span class=\"time\">" + time + "</span></div></div>";
                     session.getBasicRemote().sendText(form);
                 }
             }
@@ -79,7 +80,8 @@ public class ChatServerController {
             LocalTime now = LocalTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             String time = now.format(formatter);
-            String form = "<div class=\"item mymsg on\"><div class=\"box\"><p class=\"msg\"> " + message + " </p><span class=\"time\">" + time + "</span></div></div>";
+            String messageEsc = message.replaceAll("<", "&lt;");
+            String form = "<div class=\"item mymsg on\"><div class=\"box\"><p class=\"msg\"> " + messageEsc + " </p><span class=\"time\">" + time + "</span></div></div>";
             basic.sendText(form);
         }catch (Exception e) {
             System.out.println(e.getMessage());
