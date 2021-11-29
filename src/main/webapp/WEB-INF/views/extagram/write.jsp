@@ -4,7 +4,7 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <!-- 스마트 에디터 2 라이브러리 로드 -->
-<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+<!-- <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script> -->
 
 <script type="text/javascript">
 function submitContents(elClickedObj) {
@@ -51,12 +51,13 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
-<c:if test="${not login}">
-	var message = "${msg}";
-	var url = "${url}";
-	alert(message);
-	document.location.href = url;
-</c:if>
+$(document).ready(function() {
+    $('#exContent').on('keyup', function() {
+        if($(this).val().length > 1000) {
+            $(this).val($(this).val().substring(0, 1000));
+        }
+    });
+});
 </script>
 
 <div class="container">
@@ -77,7 +78,7 @@ $(document).ready(function() {
 </div>
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent"></textarea>
+	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent" maxlength="2000"></textarea>
 </div>
 
 <div class="form-group">

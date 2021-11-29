@@ -4,7 +4,7 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <!-- 스마트 에디터 2 라이브러리 로드 -->
-<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+<!-- <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script> -->
 
 <script type="text/javascript">
 function submitContents(elClickedObj) {

@@ -9,10 +9,10 @@
 		<div id="a">
 			<img style="width: 30px; height: 30px; border-radius: 70%;" src="/upload/${list.PROFILE}">&nbsp;&nbsp;&nbsp;${list.NICK }
 			<c:if test="${admin eq 'S' || admin eq 'M' }">
-			<div id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button class="btn">삭제</button></a></div>
+				<div id="aDelete"><a href="/admin/extagram/delete?exNo=${list.EX_NO }"><button class="btn">삭제</button></a></div>
 			</c:if>
 		</div>
-		<div id="b" style="width: 251px;">${list.EX_CONTENT }</div>
+		<div id="b" style="width: 251px;"><c:out value="${list.EX_CONTENT }"/></div>
 		<div id="c" style="display:table;">
 			<div id="cCenter" style="display:table-cell; vertical-align:middle;">
 			<img style="max-width: 240px; max-height: 240px; display: block; margin: 0 auto;" src="/upload/${list.PICTURE}">

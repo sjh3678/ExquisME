@@ -114,6 +114,8 @@ public class ExtaController {
 		
 		//댓글
 		List<HashMap<String, Object>> commentList = extaService.getCommentList(viewExta);
+		
+		logger.info("##viewComm : {}", commentList);
 		model.addAttribute("viewComm", commentList);
 
 		
@@ -139,11 +141,14 @@ public class ExtaController {
 	
 //COMMENT DELETE
 	@RequestMapping(value="/extagram/deleteComment")
-	public String extaCommentDelete(ExComm comment) {
+	public String extaCommentDelete(ExComm comment, HttpSession session) {
 		
 		ExComm comm = extaService.getInfoComment(comment);
+		logger.info("##comm : {}", comm);
 		
-		extaService.deleteComment(comm);
+		if( (Integer) session.getAttribute("userNo") == comm.getUserNo()) {
+			extaService.deleteComment(comm);
+		}
 		
 		return "redirect:/extagram/view?exNo=" + comm.getExPostNo();
 	}
@@ -177,6 +182,7 @@ public class ExtaController {
 			model.addAttribute("msg", "로그인 후 글 작성이 가능합니다.");
 			model.addAttribute("url", "/extagram/list");
 		}
+		
 		return "/extagram/write";
 	}
 	@RequestMapping(value="/extagram/write", method=RequestMethod.POST)
@@ -193,6 +199,9 @@ public class ExtaController {
 	@RequestMapping(value="/extagram/update", method=RequestMethod.GET)
 	public String extaUpdate(Extagram viewExta, HttpSession session, Model model) {
 		
+		if( (Integer) session.getAttribute("userNo") != viewExta.getUserNo()) {
+			return "/layout/errors";
+		}
 		//첨부파일 정보
 		FileUpload fileUpload = extaService.getAttachFile(viewExta);
 		model.addAttribute("fileUpload", fileUpload);
@@ -204,7 +213,7 @@ public class ExtaController {
 		return "/extagram/update";
 	}
 	@RequestMapping(value="/extagram/update", method=RequestMethod.POST)
-	public String extaUpdateProc(Extagram viewExta, MultipartFile file) {
+	public String extaUpdateProc(Extagram viewExta, MultipartFile file, HttpSession session) {
 		
 		extaService.setExtaUpdate(viewExta, file);
 		
@@ -213,9 +222,17 @@ public class ExtaController {
 	
 //DELETE
 	@RequestMapping(value="/extagram/delete")
-	public String extaDelete(Extagram extagram, Model model) {
+	public String extaDelete(Extagram extagram, Model model, HttpSession session) {
 		
-		extaService.deleteExta(extagram);
+		HashMap<String, Object> view = extaService.getExtaView(extagram);
+		
+		
+		logger.info("##session 11 : {}", session.getAttribute("userNo"));
+		logger.info("##extagram 11 : {}", view.get("USER_NO"));
+		
+		if( (Object) session.getAttribute("userNo").equals((Object) view.get("USER_NO")) != null ) {
+			extaService.deleteExta(extagram);
+		}
 		
 		return"redirect:/extagram/list";
 	}
@@ -246,7 +263,6 @@ public class ExtaController {
 
 		//댓글에 대한 정보
 		List<HashMap<String, Object>> commentList = extaService.getCommentList(viewExta);
-		logger.info("##viewComm : {}", commentList);
 		
 		model.addAttribute("viewExta",view);
 		model.addAttribute("viewComm", commentList);		
