@@ -57,6 +57,9 @@ $(document).ready(function(){
 </script>
 
 <style type="text/css">
+.container{
+	margin-bottom: 50px;
+}
 #modalUpdate {
   position: absolute;
   top: 0;
@@ -80,7 +83,7 @@ $(document).ready(function(){
   left: 50%;
 
   width: 800px;
-  height: 600px;
+  height: 700px;
 
   padding: 40px;
 
@@ -140,15 +143,23 @@ $(document).ready(function(){
 	font-weight: 700;
  	margin-bottom: 5px;
  	border-radius: 10px;
+ 	height: 30px;
 }
 .titleText{
-	margin: 20px;
+	margin: 0 20px;
+	width: 700px;
+	display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .contentChild{
 	background: #ECE6CC;
 	margin-bottom: 5px;
 	padding: 30px;
  	border-radius: 10px;
+    overflow: hidden;
+    word-break: break-all;
 /* 	overflow-y: scroll; */
 }
 .title button{
@@ -170,6 +181,9 @@ $(document).ready(function(){
 .titleChild{
 	padding-right: 15px;
 	padding-left: 15px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .btnWrite{
 	background-color: #8A7E6B;

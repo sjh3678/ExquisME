@@ -208,6 +208,9 @@ td:nth-child(2) {
 	margin:4px;
 	background: #ECE6CC;
 }
+#flex-items:hover {
+	transform: scale(1.02);
+} 
 #perf_pic {
 	position: relative;
 	margin: 10px;
@@ -283,6 +286,9 @@ td:nth-child(2) {
     position: absolute;
     height: 30px;
     padding-left: 110px;
+}
+#heartInner img:hover{
+	transform: scale(1.05);
 }
 #heartInner span {
 	vertical-align: middle;

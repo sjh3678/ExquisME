@@ -4,6 +4,9 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 <style type="text/css">
+.container{
+	margin-bottom: 50px;
+}
 .row{
 	width: 900px;
 	margin: 0 auto;
@@ -24,6 +27,8 @@
 	margin-bottom: 5px;
 	padding: 30px;
  	border-radius: 10px;
+    overflow: hidden;
+    word-break: break-all;
 /* 	overflow-y: scroll; */
 }
 .title button{
@@ -41,9 +46,17 @@
 .titleChild{
 	padding-right: 15px;
 	padding-left: 15px;
+	width: 700px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .contentFile{
 	text-align: center;
+}
+.contentFile img{
+	max-height: 300px;
+	margin-bottom: 30px;
 }
 .contentDate{
 	text-align: right;

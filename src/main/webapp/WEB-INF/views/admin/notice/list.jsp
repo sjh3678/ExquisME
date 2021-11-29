@@ -78,6 +78,9 @@ function fileCheck(obj) {
 </script>
 
 <style type="text/css">
+.container{
+	margin-bottom: 50px;
+}
 #modalUpdate {
   position: absolute;
   top: 0;
@@ -139,7 +142,7 @@ function fileCheck(obj) {
   left: 50%;
 
   width: 800px;
-  height: 600px;
+  height: 700px;
 
   padding: 40px;
 
@@ -165,15 +168,23 @@ function fileCheck(obj) {
 	font-weight: 700;
  	margin-bottom: 5px;
  	border-radius: 10px;
+ 	height: 30px;
 }
 .titleText{
-	margin: 20px;
+	margin: 0 20px;
+	width: 700px;
+	display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .contentChild{
 	background: #ECE6CC;
 	margin-bottom: 5px;
 	padding: 30px;
  	border-radius: 10px;
+    overflow: hidden;
+    word-break: break-all;
 /* 	overflow-y: scroll; */
 }
 .title button{
@@ -199,6 +210,10 @@ function fileCheck(obj) {
 .contentFile{
 	text-align: center;
 }
+.contentFile img{
+	max-height: 300px;
+	margin-bottom: 30px;
+}
 .btnWrite{
 	background-color: #8A7E6B;
 	color: #ECE6CC;
@@ -206,6 +221,9 @@ function fileCheck(obj) {
 .btnWrite:hover{
 	background-color: #35312B;
 	color: #ECE6CC;
+}
+.contentDate{
+	text-align: right;
 }
 </style>
 

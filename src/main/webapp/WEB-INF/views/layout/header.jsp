@@ -116,6 +116,7 @@
 .container{
 	min-height: 800px;
 	width: 1100px;
+	margin-bottom: 50px;
 }
 
 .header{
@@ -197,7 +198,7 @@ h1{
 	transform: scale(1.02);
 }
 .btn:hover{
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 </style>
 
