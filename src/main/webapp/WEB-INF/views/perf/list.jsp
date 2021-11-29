@@ -207,7 +207,8 @@ jQuery(document).ready(function () {
 	font-weight: 400;
 }
 .flex-items:hover{
-	filter: brightness(0.85);
+	filter: brightness(0.9);
+	transform: scale(1.02);
 }
 .perf_pic {
 	border-radius: 10px; 
