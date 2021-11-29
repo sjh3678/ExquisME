@@ -129,7 +129,7 @@
 
 <select id="selectMainAccordByPerfNo" resultType="hashmap" parameterType="web.dto.Perf">
 	SELECT * FROM (
-		SELECT DENSE_RANK() OVER(ORDER BY CASE WHEN cnt IS NULL THEN 1 ELSE 0 END, cnt DESC) ranking, NR.* FROM (
+		SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN cnt IS NULL THEN 1 ELSE 0 END, cnt DESC) ranking, NR.* FROM (
 			SELECT MA.note_no, MA.cnt, N.note_name FROM (
 				SELECT note_no, count(note_like_no) cnt FROM(
 	            	SELECT p.note_no, nl.note_like_no FROM tb_perf_note P
@@ -138,8 +138,8 @@
 	            GROUP BY note_no
 	            ORDER BY cnt DESC) MA
 			LEFT OUTER JOIN tb_note N ON MA.note_no = N.note_no) NR
-			)
-	WHERE ranking = 1
+			) 
+	WHERE 4 > ranking
 </select>
 
 <select id="selectPerfLikeByPerfNo" resultType="hashmap" parameterType="int">
