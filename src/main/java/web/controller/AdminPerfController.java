@@ -73,7 +73,7 @@ public class AdminPerfController {
 	public String perfUpdateProc(MultipartFile file, Perf perf, Model model) {
 		
 		//향수 사진파일 수정
-		if(file.getSize() <= 0) {
+		if(file.getSize() > 0) {
 			perfService.setPerfFileUpdate(file, perf.getFileNo());
 		}
 		
