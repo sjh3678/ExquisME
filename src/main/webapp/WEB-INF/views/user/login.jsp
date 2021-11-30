@@ -80,7 +80,7 @@ $(document).ready(function(){
 			success: function(res){
 				if(res == false){
 					alert("조회결과가 없습니다. 다시 확인해주세요.");
-						
+					
 				}else{
 					alert("작성하신 메일을 통해 아이디 정보가 전달되었습니다.")
 					$(location).attr("href", "/user/login");
@@ -322,10 +322,39 @@ label{
 </div>
 </div>
 <input type="hidden" id="banDate" value="${banDate }"/>
-
+<script type="text/javascript">
+function socialAjax(){
+	console.log("소셜 로그인 시작");
+	var formData = $("#socialLogin").serialize();
+	$.ajax({
+		type: "get",
+		data: formData,
+		dataType: "text",
+		url: "/user/social/login",
+		success: function(res){
+			console.log("AJAX 성공 res : ", res)
+			if(res == "ban"){
+				console.log("제재 대상");
+				alert("회원님은 제재 대상입니다.");
+			}else if(res == "true"){
+				console.log("정상 로그인");
+				$(location).attr("href", "/");
+			}else {
+				console.log("로그인 실패");
+				alert("로그인을 위해 추가정보를 입력해주세요.");
+				$("#socialLogin").submit();
+			}
+		}, error: function(error){
+			console.log(error)
+		}
+	
+	})
+}
+</script>
 <script type="text/javascript">
 //google signin API
 var googleUser = {};
+/* document.ready에 안들어감 */
 function init() {
 	 gapi.load('auth2', function() {
 	  console.log("init()시작");
@@ -333,6 +362,7 @@ function init() {
 	        client_id: '866297020402-d2ac85ogcm3kbgbc9i6vmsp1a50bv45f.apps.googleusercontent.com',
 	        cookiepolicy: 'single_host_origin',
 	      });
+	  /* 2번누르게하는거 => 다른곳에 빼면 작동 X.... */
 	      attachSignin(document.getElementById('google'));
 	 });
 }
@@ -344,13 +374,17 @@ function attachSignin(element) {
     		var profile = googleUser.getBasicProfile();
     		var id_token = googleUser.getAuthResponse().id_token;
 	  	  	const name = profile.getName();
-			const email = profile.getEmail();
-			console.log(email);
+			const mail = profile.getEmail();
+			console.log(mail);
 			console.log(name);
 			
-			$("#social-email").val(email);
+			$("#social-email").val(mail);
 			$("#social-nick").val(name);
-			$("#socialLogin").submit();
+			
+// 			var email = $("#social-email");
+// 			var nick = $("#social-nick");
+			
+			socialAjax();
         }, function(error) {
           alert(JSON.stringify(error, undefined, 2));
         });
@@ -373,18 +407,20 @@ function kakaoLogin() {
 			console.log(authObj);
 			Kakao.API.request({
 				url:'/v2/user/me',
-				success: res=>{
+				success: res => {
 					console.log("파라미터 확인");
-					const email = res.kakao_account.email;
+					const mail = res.kakao_account.email;
 					const name = res.properties.nickname;
 					
-					console.log(email);
+					console.log(mail);
 					console.log(name);
 					
-					$("#social-email").val(email);
+					$("#social-email").val(mail);
 					$("#social-nick").val(name);
-					$("#socialLogin").submit();
-				}, fail: error=>{
+// 					var email = $("#social-email");
+// 					var nick = $("#social-nick");
+					socialAjax();
+				}, fail: error => {
 					console.log(error)
 				}
 			});	
@@ -415,14 +451,18 @@ var naver_id_login = new naver_id_login("vwYk8fTxfuBjhAvAFcA5", "http://${pageCo
 naver_id_login.get_naver_userprofile("naverSignInCallback()");
 // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 function naverSignInCallback() {
-  	const email = naver_id_login.getProfileData('email');
-  	const nick = naver_id_login.getProfileData('nickname');
- 	console.log(email);
+  	const mail = naver_id_login.getProfileData('email');
+  	const name = naver_id_login.getProfileData('nickname');
+ 	console.log(mail);
 	console.log(name);
 	
-	$("#social-email").val(email);
+	$("#social-email").val(mail);
 	$("#social-nick").val(name);
-	$("#socialLogin").submit();
+	
+// 	var email = $("#social-email");
+// 	var nick = $("#social-nick");
+	
+	socialAjax();
 }
 $("#naver").click(function(){
 	console.log("naver clicked")
