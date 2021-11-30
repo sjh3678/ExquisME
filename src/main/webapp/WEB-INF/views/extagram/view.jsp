@@ -257,7 +257,7 @@ ${viewExta.EX_CONTENT }
 						<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 						<input type="hidden" name="exPostNo" value="${viewExta.EX_NO }" />
 						<input type="hidden" name="userNo" value="${viewExta.USER_NO }" />
-						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" style="width: 475px; height: 34px; border: none;"/>
+						<input type="text" id="exCommWrite" name="exComm" placeholder="댓글" maxlength="70" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" style="width: 475px; height: 34px; border: none;"/>
 						<button id="btnCommInsert" class="btn pull-right" style="height:35px;">POST</button>
 					</form>
 				</div>
