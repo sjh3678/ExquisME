@@ -539,10 +539,10 @@ span{
 						</c:when>
 						<c:when test="${user.email eq null }">
 							<td class="info-show" id="email-show" style="color: #777;">&nbsp;&nbsp;이메일을 입력해 주세요.</td>
-						</c:when>
+s						</c:when>
 					</c:choose>
 					<td class="info-write invisible" id="email-write">
-						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="email" name="email" value="${user.email }">
+						&nbsp;&nbsp;<input class="form-control classInput" type="text" id="email" onkeyup=characterCheck(this) name="email" value="${user.email }">
 						<span id="emailChk" class="error invisible">올바른 이메일 형식이 아닙니다.</span> 
 						<span id="emailError" class="error invisible">이미 존재하는 이메일입니다.</span> 
 						<span id="valid-email" class="valid invisible">사용 가능한 이메일입니다.</span>
@@ -557,7 +557,7 @@ span{
 				<tr class="info keyCheck invisible">
 					<td><label for="emailCheck" id="emailCheckLabel" class="info-write" style="font-weight: 400;">인증번호 </label></td>
 					<td>
-						&nbsp;&nbsp;<input id="emailCheck" type="text" class="info-write form-control" name="emailCheck" placeholder="메일을 확인해 주세요.">
+						&nbsp;&nbsp;<input id="emailCheck" type="number" class="info-write form-control" name="emailCheck" placeholder="메일을 확인해 주세요.">
 						<span id="sendSucess" class="valid invisible">인증되었습니다.</span>
 						<span id="sendFail" class="error invisible">인증번호가 일치하지않습니다.</span>
 					</td>
@@ -575,7 +575,7 @@ span{
 						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
-						&nbsp;&nbsp;<input class="form-control classInput" maxlength="8" type="text" onkeyup=characterCheck(obj) name="nick" id="nick" value="${user.nick }">
+						&nbsp;&nbsp;<input class="form-control classInput" maxlength="8" type="text" onkeyup=characterCheck(this) name="nick" id="nick" value="${user.nick }">
 						<span id="nickChk" class="error invisible">닉네임을 입력해 주세요.</span> 
 						<span id="nickError" class="error invisible">이미 존재하는 닉네임입니다.</span> 
 						<span id="valid-nick" class="valid invisible">사용 가능한 닉네임입니다.</span>
