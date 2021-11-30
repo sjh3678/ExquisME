@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>exquis me</title>
+<title> exquis me</title>
+<link rel="icon" type="image/x-icon" href="/resources/img/favicon.ico">
+<!-- <link rel="shortcut icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png"> -->
 
 <%-- JQUERY --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -16,6 +18,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+a{
+  text-decoration-line: none;
+}
+a:hover{
+  text-decoration-line: none;
+}
 		<%-- ################################################## --%>
 		/* noto-sans-kr-300 - korean */
 		@font-face {
@@ -245,12 +253,22 @@ h1{
 		        <input style="background: white;" type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
 		    </div>
 		    <div>
-		        <button type="submit" class="form-control btn btnModal">채팅 페이지로 이동</button>
+		        <button id="btnSubmit" type="submit" class="form-control btn btnModal">채팅 페이지로 이동</button>
 		    </div>
 		</form>
 	</div>
 </div><%-- .modal --%>
 <script>
+$(function() {
+    $("#btnSubmit").click(function() {
+        var result = $.trim($("input[type=text]").val());
+        if (!result) {
+          alert("별명을 입력해 주세요.");
+          return false
+        }
+    })
+})
+
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal_header');
 const btnOpenPopup = document.querySelector('.btn-open-popup');
