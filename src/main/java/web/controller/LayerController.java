@@ -31,7 +31,7 @@ public class LayerController {
 	
 	@RequestMapping(value="/layer/error")
 	public String layerError() {
-		return "/layout/error";
+		return "/layout/loginError";
 	}
 	
 	@RequestMapping(value="/layer/list")

@@ -24,7 +24,7 @@
     font-weight: bold;
     border-radius: 10px;
 }
-#prev:hover{background: #ccc; color:white;}
+#prev:hover{background: #ccc; color:black;}
 #main{
     width: 130px;
     height: 40px;

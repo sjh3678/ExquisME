@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:import url="/WEB-INF/views/layout/header.jsp" />
 <style type="text/css">
 .error-wrap {
     width: 1100px;
@@ -16,8 +14,8 @@
     width: 130px;
     height: 40px;
     position: relative;
-    top: -300px;
-    left: 250px;
+    top: -155px;
+    left: 390px;
     border: 3.5px solid black;
     cursor: pointer;
     line-height: 38px;
@@ -25,32 +23,33 @@
     border-radius: 10px;
 }
 #prev:hover{background: #ccc; color:black;}
-#main{
+#login{
     width: 130px;
     height: 40px;
     position: relative;
-    top: -346px;
-    left: 725px;
+    top: -195px;
+    left: 585px;
     border: 3.5px solid black;
     cursor: pointer;
     line-height: 38px;
 	font-weight: bold;
     border-radius: 10px;
 }
-#main:hover{background: #ccc;}
+#login:hover{background: #ccc;}
 
 a{text-decoration: none; color: black;}
 a:hover{text-decoration: none;}
 a:active{text-decoration:none;}
 a:visited{text-decoration: none; color: black;}
 </style>
-</head>
-<body>
+<div class="container">
+
 <div class="error-wrap">
-	<img alt="" src="/resources/img/error/errors.png">
+	<img alt="" src="/resources/img/error/loginError.png">
 	<a href="javascript:history.back();"><div id="prev">이전 페이지</div></a>
-	<a href="/"><div id="main">메인 페이지</div></a>
+	<a href="/user/login"><div id="login">로그인 페이지</div></a>
 </div>
 
-</body>
-</html>
+</div><!-- .container -->
+
+<c:import url="/WEB-INF/views/layout/footer.jsp" />
