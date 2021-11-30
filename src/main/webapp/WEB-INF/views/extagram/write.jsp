@@ -3,19 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-<!-- 스마트 에디터 2 라이브러리 로드 -->
-<!-- <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script> -->
-
-<script type="text/javascript">
-function submitContents(elClickedObj) {
-	oEditors.getById["exContent"].exec("UPDATE_CONTENTS_FIELD", []);
-	
-	try {
-		elClickedObj.form.submit();
-	} catch(e) {}
-}
-</script>
-
 <script type="text/javascript">
 <c:if test="${not login}">
 	var message = "${msg}";
@@ -31,15 +18,12 @@ $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		var answer = confirm("Extagram을 등록하시겠습니까?");
 		if(answer == true) {
-			var fileChecked = document.getElementById("fileCheck(this)").value;
+			var fileChecked = document.getElementById("fileCheck").value;
 			
 			if( !fileChecked ) {
 				alert("Extagram 작성 시 사진을 업로드해야 합니다.");
 				return false;
 			} else {
-				
-				
-				
 				submitContents( $("#btnWrite") )
 				$("form").submit();
 			}	
@@ -62,23 +46,22 @@ $(document).ready(function() {
 });
 </script>
 
-<script type="text/javascript">
+<script>
 function fileCheck(obj) {
 	pathpoint = obj.value.lastIndexOf('.');
     filepoint = obj.value.substring(pathpoint+1,obj.length);
     filetype = filepoint.toLowerCase();
     
-    if(filetype=='jpg' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
 
     } else {
-        alert('이미지 파일( jpg/jpeg, png )만 등록할 수 있습니다.');
+        alert('이미지 파일( jpg, gif, png )만 선택할 수 있습니다.');
 
         parentObj  = obj.parentNode
         node = parentObj.replaceChild(obj.cloneNode(true),obj);
         
-        //파일입력창 초기화
-        $("#fileCheck(this)").val("");
-
+        $("#fileChecked").val("");
+        
         return false;
     }
     if(filetype=='bmp') {
@@ -111,7 +94,7 @@ function fileCheck(obj) {
 
 <div class="form-group">
 	<label for="file">사진 첨부</label>
-	<input type="file" id="fileCheck(this)" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"/>
+	<input type="file" id="fileChecked" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />
 </div>
 
 <div class="text-center">
@@ -119,16 +102,6 @@ function fileCheck(obj) {
 	<input type="reset" id="btnCancel" class="btn" value="취소"/>
 </div>
 </form>
-
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "exContent",
-	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
-});
-</script>
 
 </div><!-- .container -->
 
