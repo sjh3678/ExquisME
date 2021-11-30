@@ -184,6 +184,7 @@ input[type=range]:focus::-ms-fill-upper {
 	min-width: 1080px;
 	font-size: 9px;
 	margin: 0 auto;
+	justify-content: center;
 }
 .flex-items {
 	min-width: 150px;
@@ -192,7 +193,7 @@ input[type=range]:focus::-ms-fill-upper {
 /* 	border: 1px solid red; */
 	background: #ECE6CC;
 	border-radius: 5px; 
-	margin: 4px auto;
+	margin: 4px;
 	padding: 15px;
 }
 .perf_pic {
@@ -225,18 +226,12 @@ input[type=range]:focus::-ms-fill-upper {
     text-align: center;
 }
 
-.search{
-	width: 250px;
-	height:25px;
-	margin: 0px;
-	padding: 0px;
-	float:left;
-}
+
 .search_div{
-	padding: 20px 0px 0px 0px;
     position: relative;
-    top: -30px;
-    left: 8px;
+    top: -4px;
+    left: 85px;
+    float:left;
 }
 }
 #paging{
@@ -849,11 +844,9 @@ $(function(){
 	</div><!-- layer-container -->
 
 
-<div class="search">
-		<div class="search_div">
-			<input class="form-control" type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해 보세요." />
-		</div>
-</div>
+	<div class="search_div">
+		<input class="form-control" type="text" id="keyWord" onkeyup="keyword()" name="search" size="20px" maxlength="30" placeholder="상품을 검색해 보세요." />
+	</div>
 
 
 <%-- <div class="flex-container">

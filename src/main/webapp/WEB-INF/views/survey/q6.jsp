@@ -50,6 +50,12 @@
 	width: 130px;
 	height: 130px;
 	cursor: pointer;
+	border: 3px solid #000;	
+	border-radius: 10px;	
+}
+
+.item img:hover {
+	transform:scale(1.1);
 }
 
 .item div {

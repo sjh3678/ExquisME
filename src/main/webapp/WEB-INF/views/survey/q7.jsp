@@ -44,6 +44,7 @@
 	width: 100%;
 	margin:0 auto;
 	float: left;
+	padding-bottom:10px;
 }
 
 .item div {
@@ -61,8 +62,17 @@ a:active {
 	top: 1px;
 }
 .note {
-	background-color: gray; 
+	background-color: #35312B; 
 	color: white;
+	border: 5px solid #35312B;
+	display:table-cell;
+	vertical-align: middle;
+	
+}
+.note:hover {
+	background-color: #fff;
+	color: #35312B;
+	border: 5px solid #35312B;
 	display:table-cell;
 	vertical-align: middle;
 }
