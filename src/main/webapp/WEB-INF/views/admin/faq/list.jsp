@@ -173,10 +173,11 @@ $(document).ready(function(){
 	color: #8A7E6B;
 	text-decoration: none;
 }
-.titleChild:hover{
+.title:hover{
 	background-color: #35312B;
 	color: #ECE6CC;
 	border-radius: 10px;
+	transform: scale(1.01);
 }
 .titleChild{
 	padding-right: 15px;

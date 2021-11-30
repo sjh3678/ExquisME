@@ -32,7 +32,7 @@ public class ChatServerController {
 		logger.info("session.getId() : {}", session.getId());
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText("채팅방에 입장하였습니다.");
+			basic.sendText("<div style='text-align: center; background: #8A7E6B; border-radius: 10px; width: 180px; font-size: 15px; margin: 0 auto; color: #ECE6CC;'>채팅방에 입장하였습니다.</div>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

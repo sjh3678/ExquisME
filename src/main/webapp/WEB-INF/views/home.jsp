@@ -321,7 +321,7 @@ $(document).ready(function(){
 					<div class="cardTitleImage">
 					<img style="width: 30px; height: 30px; border-radius: 70%;" src="/upload/${listExta.PROFILE}">
 					</div>
-					<div class="cardTitleNick">${listExta.NICK }</div>
+					<div class="cardTitleNick"><c:out value="${listExta.NICK }"/></div>
 				</div>
 				<div class="cardImage">
 					<img style="max-width: 95%; max-height: 240px; display: block; margin: 10px auto;" src="/upload/${listExta.PICTURE}">

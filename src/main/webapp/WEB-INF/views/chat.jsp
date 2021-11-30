@@ -20,18 +20,21 @@
 .chat_wrap .item.mymsg .box .time{right:auto; left:-75px}
 .chat_wrap .item .box{transition:all .3s ease-out; margin:0 0 0 20px;opacity:0}
 .chat_wrap .item.mymsg .box{transition:all .3s ease-out; margin:0 20px 0 0;}
-.chat_wrap .item.on .box{margin:0; opacity: 1;}
+.chat_wrap .item.on .box{margin:0; opacity: 1; word-break: break-all;}
 
 input[type="text"]{border:0; width:100%;background:#ddd; border-radius:5px; height:30px; padding-left:5px; box-sizing:border-box; margin-top:5px}
 input[type="text"]::placeholder{color:#999}
 .container{
 	min-height: 650px;
 }
+#btnFadeOut{
+	margin-left: 10px;
+}
 </style>
 
 <div class="container">
 
-<div class="fadeOutArea">
+<div class="fadeOutArea" style="text-align: center;">
 <br>
 안녕하세요, ${chatNick }님! 현재 페이지로부터 이동할 경우 채팅이 종료됩니다. <button type="button" onclick="openSocket()" id="btnFadeOut" class="btn">확인</button>
 </div>

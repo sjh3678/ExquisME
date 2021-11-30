@@ -67,6 +67,9 @@ function fileCheck(obj) {
 
         parentObj  = obj.parentNode
         node = parentObj.replaceChild(obj.cloneNode(true),obj);
+        
+        $("#fileWrite").val("");
+        $("#fileUpdate").val("");
 
         return false;
     }
@@ -198,11 +201,17 @@ function fileCheck(obj) {
 	color: #8A7E6B;
 	text-decoration: none;
 }
-.titleChild:hover{
+.title:hover{
 	background-color: #35312B;
 	color: #ECE6CC;
 	border-radius: 10px;
+	transform: scale(1.01);
 }
+/* .titleChild:hover{ */
+/* 	background-color: #35312B; */
+/* 	color: #ECE6CC; */
+/* 	border-radius: 10px; */
+/* } */
 .titleChild{
 	padding-right: 15px;
 	padding-left: 15px;
@@ -247,7 +256,7 @@ function fileCheck(obj) {
 			<textarea rows="10" style="width: 100%;" id="contentWrite" name="noticeContent"></textarea>
 
 			<label for="file">첨부파일</label>
-			<input type="file" id="file" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />		
+			<input type="file" id="fileWrite" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />		
 		</form>
 		<button class="btn btnWrite" id="btnWriteProc">작성</button>
 	</div>
@@ -290,7 +299,7 @@ function fileCheck(obj) {
 		
 		<div class="form-group">
 			<label for="file">교체할 이미지 업로드</label>
-			<input type="file" id="file" name="file" />
+			<input type="file" id="fileUpdate" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />		
 		</div>
 		
 		<input type="hidden" name="noticeNo" id="boardNo" />

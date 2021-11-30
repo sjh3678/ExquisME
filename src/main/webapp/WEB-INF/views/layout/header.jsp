@@ -87,6 +87,7 @@
   height: 200px;
 
   padding: 40px;
+  padding-top: 25px;
 
   text-align: center;
 
@@ -194,11 +195,15 @@
 h1{
 	margin-top: 0px;
 }
-.titleChild:hover{
-	transform: scale(1.02);
-}
 .btn:hover{
 	transform: scale(1.05);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 15px;
 }
 </style>
 
@@ -234,10 +239,10 @@ h1{
 <%-- 모달 채팅방 입장 영역 --%>
 <div class="modal_header">
 	<div class="modal_body_header">
-		<div class="panel-title">${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?<br></div>
+		<div class="panel-title">향수에 대해 얘기를 나눠 보세요.<br>${nick }님,<br>채팅에 사용하실 닉네임은 무엇인가요?<br></div>
 		<form id="login-form" method="post" action="/chat">
 		    <div>
-		        <input type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
+		        <input style="background: white;" type="text" name="chatNick" class="form-control" placeholder="별명을 입력해 주세요." autofocus>
 		    </div>
 		    <div>
 		        <button type="submit" class="form-control btn btnModal">채팅 페이지로 이동</button>
