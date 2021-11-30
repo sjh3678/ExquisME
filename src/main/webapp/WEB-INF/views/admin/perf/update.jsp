@@ -32,6 +32,29 @@ $(document).ready(function(){
 	})
 })
 
+function fileCheck(obj) {
+	pathpoint = obj.value.lastIndexOf('.');
+    filepoint = obj.value.substring(pathpoint+1,obj.length);
+    filetype = filepoint.toLowerCase();
+    
+    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+
+    } else {
+        alert('이미지 파일(jpg, gif, png만 선택할 수 있습니다.');
+
+        parentObj  = obj.parentNode
+        node = parentObj.replaceChild(obj.cloneNode(true),obj);
+
+        $("#file").val("");
+        
+        return false;
+    }
+    if(filetype=='bmp') {
+        upload = confirm('BMP 파일은 적절한 이미지 포맷이 아닙니다.\n업로드를 계속 하시겠습니까?');
+        if(!upload) return false;
+    }
+}
+
 </script>
 
 
@@ -75,14 +98,14 @@ $(document).ready(function(){
 		<thead>
 		  <tr>
 		    <th class="tg-baqh">사진 등록</th>
-		    <th class="tg-baqh"><input type="file" id="file" name="file"/><span>기존 파일 : ${perf.ORIGIN_NAME }</span>
+		    <th class="tg-baqh"><input type="file" id="file" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" /><span>기존 파일 : ${perf.ORIGIN_NAME }</span>
 		    </th>
 		  </tr>
 		</thead>
 		<tbody>
 		  <tr>
 		    <td class="tg-baqh">향수 이름</td>
-		    <td class="tg-baqh"><input type="text" id="perfName" name="perfumeName" value="${perf.PERFUME_NAME }" style="width:280px;"/></td>
+		    <td class="tg-baqh"><input type="text" id="perfName" maxlength="40" name="perfumeName" value="${perf.PERFUME_NAME }" style="width:280px;"/></td>
 		  </tr>
 		  <tr>
 		    <td class="tg-baqh">브랜드</td>

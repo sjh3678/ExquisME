@@ -80,6 +80,8 @@ public class PerfController {
 		HashMap<String, Object> viewPerf = perfService.getPerfView(perf);
 		logger.info("viewPerf : {}", viewPerf);
 		
+		
+		
 		//RANKING, NOTE_NO, CNT(노트 추천수), NOTE_NAME
 		List<HashMap<String, Object>> viewPerfMainAccord = perfService.getPerfMainAccord(perf);
 		logger.info("viewPerfMainAccord : {}", viewPerfMainAccord);

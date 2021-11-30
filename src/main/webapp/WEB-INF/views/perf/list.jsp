@@ -205,6 +205,7 @@ jQuery(document).ready(function () {
 	background: #ECE6CC;
 	color: #35312B;
 	font-weight: 400;
+	padding-top: 1px;
 }
 .flex-items:hover{
 	filter: brightness(0.9);
@@ -227,6 +228,7 @@ jQuery(document).ready(function () {
 	font-size: 15px;
 	padding: 0px 5px;
  	background: white;
+ 	white-space: normal;
 }
 .brand_name {
 	margin: 10px;

@@ -15,6 +15,7 @@
 <h1 style="text-align: center;"> ${user.nick } 님의 Extagram 게시글</h1>
 <hr>
 <div style="text-align: center;">
+<a href="/admin/user/list"><button>user list</button></a>
 <a href="/admin/user/history/extagram?userNo=${user.userNo }"><button>extagram</button></a>
 <a href="/admin/user/history/extagramComment?userNo=${user.userNo }"><button>extagram comment</button></a>
 <a href="/admin/user/history/layer?userNo=${user.userNo }"><button>layering</button></a>

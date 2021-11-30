@@ -139,7 +139,7 @@
 	            ORDER BY cnt DESC) MA
 			LEFT OUTER JOIN tb_note N ON MA.note_no = N.note_no) NR
 			) 
-	WHERE 4 > ranking
+	WHERE 4 > ranking AND CNT > 0
 </select>
 
 <select id="selectPerfLikeByPerfNo" resultType="hashmap" parameterType="int">
