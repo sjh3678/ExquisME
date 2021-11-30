@@ -228,7 +228,7 @@ function loadHeartComm() {
 </div>
 
 <div id="viewContent" style="margin: 20px; height: 100px; width: 500px; overflow-y: scroll;">
-${viewExta.EX_CONTENT }
+<c:out value="${viewExta.EX_CONTENT }"/>
 </div>
 
 <div id="flex-container">

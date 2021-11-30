@@ -89,7 +89,7 @@ function fileCheck(obj) {
 </div>
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent" maxlength="2000"></textarea>
+	<textarea rows="10" style="width: 100%; resize: none;" id="exContent" name="exContent" maxlength="2000" ></textarea>
 </div>
 
 <div class="form-group">

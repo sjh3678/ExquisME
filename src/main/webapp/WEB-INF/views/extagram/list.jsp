@@ -63,6 +63,10 @@
     padding: 0 10px;
 }
 
+#a, #b, #c, #d, #e {
+
+}
+
 #go-top {
   display: none;
   position: fixed;

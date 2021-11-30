@@ -121,7 +121,7 @@ $(document).ready(function() {
     <td class="tg-title" colspan="6">신고 사유<br>(클릭 시 해당 게시글 이동)</td>
   </tr>
   <tr>
-    <td class="tg-content" colspan="6"><div style="height: 500px;"><a href="/extagram/view?exNo=${reportList.EX_POST_NO }"><c:out value="${reportList.REPORT_CONTENT}"/></a></div></td>
+    <td class="tg-content" colspan="6"><div style="height: 500px; resize: none;"><a href="/extagram/view?exNo=${reportList.EX_POST_NO }"><c:out value="${reportList.REPORT_CONTENT}"/></a></div></td>
   </tr>
 </tbody>
 </table>

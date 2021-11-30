@@ -86,7 +86,7 @@ $(document).ready(function() {
 </div>
 <div class="form-group">
 	<label for="content">신고 사유</label>
-	<textarea rows="10" style="width: 100%;" id="reportContent" name="reportContent"></textarea>
+	<textarea rows="10" style="width: 100%; resize: none;" id="reportContent" name="reportContent"></textarea>
 </div>
 
 
