@@ -55,19 +55,19 @@
 		SELECT count(*) FROM tb_user
 		WHERE 1=1
 		<if test='id != null and !id.equals("")'>
-			OR id = #{id}
+			AND id = #{id}
 		</if>
 			
 		<if test='email != null and !email.equals("")'>
-			OR email = #{email}
+			AND email = #{email}
 		</if>
 			
 		<if test='nick != null and !nick.equals("")'>
-			OR nick = #{nick}
+			AND nick = #{nick}
 		</if>
 			
 		<if test='userNo != 0'>
-			OR user_no = #{userNo}
+			AND user_no = #{userNo}
 		</if>
 
 	</select>
