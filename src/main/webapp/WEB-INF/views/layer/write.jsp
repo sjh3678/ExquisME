@@ -56,7 +56,7 @@
     position: relative;
     background: #8A7E6B;
     color: #ECE6CC;
-    top: 3px;
+    top: 4px;
     left: 48px;
     width: 42px;
     height: 58px;
@@ -66,7 +66,7 @@
 }
 #btnCancle:hover{
 	transform: scale(1.1);
-	background: #35312B;
+ 	background: #35312B; 
 }
 
 input[type=range] {
