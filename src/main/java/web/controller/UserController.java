@@ -64,13 +64,16 @@ public class UserController {
 			//신고 여부 조회
 			boolean isReport = userService.getCheckReport(user);
 			
-			if(isReport && report.getExpireDate() != null) {
+			logger.info("제재결과 존재 여부 : {}", isReport);
+			
+			if(isReport) {
 				report = userService.getReportInfo(user, report);
-				
-				if( new Date().before( report.getExpireDate() ) ) {
-		        	logger.info("제재된 유저 [로그인 거부]");
+				int dateNumber = new Date().compareTo( report.getExpireDate());
+				if(dateNumber < 0) {
+					logger.info("로그인 거부");
 					return "ban";
 				}
+				
 			}
 			session.setAttribute("login", isLogin);
 			session.setAttribute("admin", user.getIsAdmin());
@@ -395,21 +398,38 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/social/join", method=RequestMethod.GET)
-	public String socialLogin(User user, Model model,HttpSession session) {
+	public String socialLogin(User user, Report report, Model model,HttpSession session) {
 		logger.info("socialLogin called 전달값 : {}", user);
-		boolean isJoin = userService.isJoinUser(user);
-		logger.info("조회결과 : {}", isJoin);
-		if(isJoin) { // 조회결과가 존재할때
+		user= userService.getUserInfoByEmail(user);
+		
+		user = userService.getUserInfo(user);
+		
+		//신고 여부 조회
+		boolean isReport = userService.getCheckReport(user);
+		logger.info("신고 조회결과 : {}", isReport);
+		if(isReport && report.getExpireDate() != null) {
+			report = userService.getReportInfo(user, report);
+			logger.info("제재 여부 : {}", new Date().before(report.getExpireDate()));
+			
+			//두 날짜를 비교해서 같으면 0, 작으면 음수, 크면 양수 
+			int dateNumber = new Date().compareTo( report.getExpireDate());
+			if( dateNumber < 0 ) {
+	        	logger.info("제재된 유저 [로그인 거부]");
+				return "redirect:/user/login";
+			}
+		}
+		
+		if(user != null) { // 조회결과가 존재할때
+			logger.info("로그인 성공");
 			user = userService.getUserInfoByEmail(user);
-			session.setAttribute("login", isJoin);
+			session.setAttribute("login", true);
 			session.setAttribute("nick", user.getNick());
 			session.setAttribute("userNo", user.getUserNo());
-			logger.info("userNo : {}",session.getAttribute("userNo"));
 			
 			return "redirect:/";
 		}else {//조회결과 없을 때
 			model.addAttribute("user", user);
-			return "user/social/join";
+			return "/user/social/join";
 		}
 	}
 	

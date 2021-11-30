@@ -2,6 +2,7 @@ package web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -424,7 +425,7 @@ public class UserServiceImpl implements UserService{
 				logger.info("이전 기록 삭제 완료");
 				return true;
 			}else {
-				logger.info("파일이 없거나 삭제 실패");		
+				logger.info("파일이 없거나 삭제 실패");
 				return false;
 			}
 		}
@@ -543,7 +544,9 @@ public class UserServiceImpl implements UserService{
 		List<Report> list = null;//리스트 초기화
 		list = userDao.selectReportByUserNo(user); 
 		
-		report = list.get(0);
+		report = list.get(0);//날짜 내림차순으로 정렬되어 최상위행을 가져옴
+		logger.info("report : {}", report);
+		logger.info("today : {}", new Date());
 		
 		return report;
 	}

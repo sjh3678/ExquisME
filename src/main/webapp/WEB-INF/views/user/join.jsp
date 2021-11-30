@@ -619,6 +619,7 @@ $(document).ready(function(){
 		
 		if(joinCnt == 0 ){
 			if($(".chkSub1").is(":checked") == true && $(".chkSub2").is(":checked") == true && $(".chkSub3").is(":checked") == true){
+				if($(".chkSub4").is(":checked") == true) $(".chkSubAll").attr("checked", true);
 				console.log("약관 동의 완료");
 				joinCnt++;
 				$("#info").css("color", "#35312B");
@@ -821,11 +822,11 @@ function f_datepicker(obj) {
 </div>
 <div class="text-center" id="agreement">
 <div class="text-left">
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub1" name="chkBox" value="1">
+<input type="checkbox" id="agree1" class="chkSub chkSub1" name="chkBox" value="1">
+<label for="agree1">
   <span>이용약관 동의<strong>(필수)</strong><br></span>
 </label><br>
-<textarea class="text-area" rows="200" cols="10">
+<textarea style="resize: none;" readonly class="text-area" rows="200" cols="10">
 제 1 장 총칙
 
 제 1 조 (목적)
@@ -971,11 +972,12 @@ function f_datepicker(obj) {
 부 칙
 (시행일) 본 약관은 2018년 8월 1일부터 시행됩니다. 개정된 약관의 적용일자 이전 이용자 또는 회원은 개정된 이용약관의 적용을 받습니다.
 </textarea><br><br>
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub2" name="chkBox" value="2">
+
+<input type="checkbox" id="agree2" class="chkSub chkSub2" name="chkBox" value="2">
+<label for="agree2">
   <span>개인정보 수집, 이용 동의<strong>(필수)<br></strong></span>
 </label>
-<textarea class="text-area" rows="40" cols="10">
+<textarea style="resize: none;" readonly class="text-area" rows="40" cols="10">
 1. 개인정보의 수집항목 및 수집방법 
 통계청 나라통계사이트에서는 기본적인 회원 서비스 제공을 위한 필수정보로 실명인증정보와 가입정보로 구분하여 다음의 정보를 수집하고 있습니다. 필수정보를 입력해주셔야 회원 서비스 이용이 가능합니다.
 
@@ -1011,11 +1013,12 @@ function f_datepicker(obj) {
 3. 수집한 개인정보 제3자 제공
 통계청 나라통계사이트에서는 정보주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.
 </textarea><br><br>
-<label for="agree">
-  <input type="checkbox" class="chkSub chkSub3" name="chkBox" value="3">
+
+<input type="checkbox" id="agree3" class="chkSub chkSub3" name="chkBox" value="3">
+<label for="agree3">
   <span>개인 처리 방침 동의<strong>(필수)</strong><br></span>
 </label>
-<textarea class="text-area" rows="40" cols="10">
+<textarea style="resize: none;" readonly class="text-area" rows="40" cols="10">
 4. 개인정보 처리업무 안내
 통계청 나라통계사이트에서는 개인정보의 취급위탁은 하지 않고 있으며, 원활한 서비스 제공을 위해 아래의 기관을 통한 실명인증 및 공공 I-PIN, GPKI 인증을 하고 있습니다. 
 
@@ -1027,11 +1030,13 @@ function f_datepicker(obj) {
       · 위탁업무 내용 : 공공 I-PIN, GPKI 인증
       · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음
 </textarea><br><br>
+
+<input type="checkbox" class="chkSub chkSub4" value="4">
 <label for="agree">
-  <input type="checkbox" class="chkSub chkSub4" value="4">
   <span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)<br></strong></span>
 </label>
-<textarea class="text-area" rows="40" cols="10">
+
+<textarea style="resize: none;" readonly class="text-area" rows="40" cols="10">
 분류			
 이벤트 및 정보 안내 수신 서비스 이용자	이벤트 및 광고성 정보 안내, 이벤트 당첨 및 상품배송, 
 수집 목적
@@ -1042,8 +1047,8 @@ function f_datepicker(obj) {
 </textarea><br>
 </div>
 <div class="text-right">
+<input type="checkbox" class="chkSub chkSubAll" id="agree_all">
 <label for="agree_all">
-  <input type="checkbox" class="chkSub chkSubAll" id="agree_all">
   <span>모두 동의합니다</span>
 </label>
 </div>
@@ -1107,7 +1112,7 @@ function f_datepicker(obj) {
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" readonly onclick="javascript:f_datepicker(this);" name="birth" placeholder="ex) 2021-11-28의 형식으로 입력하거나 날짜를 선택하세요">
+<input type="text" class="form-control" id="birth" readonly onclick="javascript:f_datepicker(this);" name="birth" placeholder="ex) 클릭하여 날짜를 선택하세요">
 <span id="birthChk" class="error col-xs-offset-3 feedback">잘못된 형식의 입력입니다.</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">확인 되었습니다.</span>
 <br><br>
@@ -1122,7 +1127,7 @@ function f_datepicker(obj) {
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
 <input type="text" class="col-xs-offset-3 form-control"  onKeyup="characterCheck(this)" id="questionAnwser" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
-<span id="answerChk" class="error col-xs-offset-3 feedback">답을 입력해주세요</span>
+<span id="answerChk" class="error col-xs-offset-3 feedback">답을 입력해주세요.(공백 없이 작성해주세요)</span>
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>
 </form>
