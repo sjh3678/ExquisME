@@ -28,23 +28,7 @@ public interface PerfDao {
 	 */
 	public List<HashMap<String, Object>> selectPerfAll(PagingPerf pagingPerf);
 	
-	/**
-	 * 필터링 정보로 향수리스트 가져오기
-	 * 
-	 * @param paging
-	 * @param req
-	 * @return
-	 */
-	public List<Perf>  selectPerfByFilter(PagingPerf pagingPerf, HttpServletRequest req);
 	
-	/**
-	 * 검색 키워드로 향수리스트 가져오기
-	 * 
-	 * @param paging
-	 * @param req
-	 * @return
-	 */
-	public List<Perf> selectListByKeyword(PagingPerf pagingPerf, String search);
 	
 	/**
 	 * 상세보기시 향수번호로 향수하나의 객체 가져오기
@@ -54,21 +38,8 @@ public interface PerfDao {
 	 */
 	public HashMap<String, Object> selectPerfByPerfNo(Perf perf);
 	
-	/**
-	 * 향수 정보 좋아요 업데이트하기
-	 * 
-	 * @param perf
-	 * @return
-	 */
-	public boolean updatePerfLike(Perf perf);
 	
-	/**
-	 * 향수 정보 싫어요 업데이트하기
-	 *
-	 * @param perf
-	 * @return
-	 */
-	public boolean updatePerfDislike(Perf perf);
+
 	
 	/**
 	 * 향수 정보 수정(업데이트)하기

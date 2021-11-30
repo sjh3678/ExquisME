@@ -243,8 +243,6 @@
     WHERE FILE_NO = #{fileNo }
 </update>
 
-<update id="updatePerfDislike">
-</update>
 
 <update id="updatePerf" parameterType="web.dto.Perf">
 	UPDATE tb_perf SET

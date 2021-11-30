@@ -46,19 +46,6 @@ public interface PerfService {
 	 */
 	public void setPerfUpdate(Perf perf);
 	
-	/**
-	 * 향수정보 삭제하기
-	 * 
-	 * @param perf
-	 */
-	public void setPerfDelete(Perf perf);
-	
-	/**
-	 * 향수정보 삽입하기
-	 * 
-	 * @param req
-	 */
-	public void setPerfWrite(HttpServletRequest req);
 
 	/**
 	 * 향수 상세보기 하기위해 향수하나의 topnote 정보 가져오기

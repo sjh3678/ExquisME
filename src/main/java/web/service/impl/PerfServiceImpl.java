@@ -57,16 +57,6 @@ public class PerfServiceImpl implements PerfService{
 
 
 	@Override
-	public void setPerfDelete(Perf perf) {
-		
-	}
-
-	@Override
-	public void setPerfWrite(HttpServletRequest req) {
-		
-	}
-
-	@Override
 	public List<HashMap<String, Object>> getPerfTopNote(Perf perf) {
 		return perfDao.selectTopNoteByPerfNo(perf);
 	}
@@ -332,5 +322,6 @@ public class PerfServiceImpl implements PerfService{
 	public List<HashMap<String, Object>> getPerfMostLike() {
 		return perfDao.selectPerfMostLike();
 	}
+
 	
 }
