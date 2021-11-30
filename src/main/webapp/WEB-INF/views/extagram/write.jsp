@@ -31,12 +31,15 @@ $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		var answer = confirm("Extagram을 등록하시겠습니까?");
 		if(answer == true) {
-			var fileCheck = document.getElementById("fileCheck(this)").value;
+			var fileChecked = document.getElementById("fileCheck(this)").value;
 			
-			if( !fileCheck ) {
+			if( !fileChecked ) {
 				alert("Extagram 작성 시 사진을 업로드해야 합니다.");
 				return false;
 			} else {
+				
+				
+				
 				submitContents( $("#btnWrite") )
 				$("form").submit();
 			}	
@@ -65,13 +68,16 @@ function fileCheck(obj) {
     filepoint = obj.value.substring(pathpoint+1,obj.length);
     filetype = filepoint.toLowerCase();
     
-    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+    if(filetype=='jpg' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
 
     } else {
-        alert('이미지 파일(jpg, gif, png만 선택할 수 있습니다. 이 외의 파일 첨부 시 게시글은 삭제됩니다.');
+        alert('이미지 파일( jpg/jpeg, png )만 등록할 수 있습니다.');
 
         parentObj  = obj.parentNode
         node = parentObj.replaceChild(obj.cloneNode(true),obj);
+        
+        //파일입력창 초기화
+        $("#fileCheck(this)").val("");
 
         return false;
     }

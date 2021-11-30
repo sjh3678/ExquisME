@@ -173,7 +173,7 @@ function heartClick() {
 		, dataType: "html"
 		, success: function(res) {
 			console.log("좋아요 성공")
-			
+			$("#exCommWrite").val("");
 			loadList();
 		}	
 		, error: function() {
