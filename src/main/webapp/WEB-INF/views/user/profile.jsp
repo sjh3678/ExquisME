@@ -84,8 +84,9 @@ async function checkEmailExist() {
 		
 		$("#emailChk").removeClass("invisible");
 		$("#emailError").addClass("invisible");
-		$("#valid-email").css("display", "none");
+		$("#valid-email").addClass("invisible");
 		$("#sendMail").addClass("invisible");
+		
 		return false;
 	}
 	
@@ -107,7 +108,7 @@ async function checkEmailExist() {
 			// 중복되는 이메일 있음
 			$("#emailChk").addClass("invisible");
 			$("#emailError").removeClass("invisible");
-			$("#valid-email").css("display", "none");
+			$("#valid-email").addClass("invisible");
 			$("#sendMail").addClass("invisible");
 			
 			//이메일 체크 패스못함
@@ -279,6 +280,32 @@ function checkBirth() {
 	}
 }
 
+//파일 형식 검사 미리보기
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+
+    filesArr.forEach(function(f) {
+        if (!f.type.match(reg)) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            $("#file").val("");
+            return false;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+        	$(".pre-show").removeClass("invisible");
+            $("#img").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+        return true;
+    });
+}
+
 //수정 버튼 눌렀을 때
 async function checked() {
 	console.log("가입버튼 눌림");
@@ -296,7 +323,9 @@ async function checked() {
 	console.log(isvalid);
 	
 	if(await authKeyCheck() == false) isvalid = false;
-		
+	if($("#file").val() == ""){
+		console.log("파일 없음")
+	}else isvalid = handleImgFileSelect(file)
 	return isvalid;
 }
 
@@ -333,39 +362,9 @@ $(document).ready(function(){
 	
 	//파일 바뀔때 - 1개만
 	$("#file").on("change", handleImgFileSelect);
-	
-	//파일 형식 검사 미리보기
-	function handleImgFileSelect(e) {
-	    var files = e.target.files;
-	    var filesArr = Array.prototype.slice.call(files);
-
-	    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-
-	    filesArr.forEach(function(f) {
-	        if (!f.type.match(reg)) {
-	            alert("확장자는 이미지 확장자만 가능합니다.");
-	            return;
-	        }
-
-	        sel_file = f;
-
-	        var reader = new FileReader();
-	        reader.onload = function(e) {
-	        	$(".pre-show").removeClass("invisible");
-	            $("#img").attr("src", e.target.result);
-	        }
-	        reader.readAsDataURL(f);
-	    });
-	}
 	    
 	$("#email").blur(function(){
-		var isCheck = checkEmailExist();
-// 		$(".keyCheck").removeClass("invisible");
-		if(isCheck == false){
-			console.log("이메일 중복");
-		}else{
-			console.log("이메일 체크 완료")
-		}
+		checkEmailExist();
 	});
 	$("#nick").blur(function(){
 		checkNickExist();

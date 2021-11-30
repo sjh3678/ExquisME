@@ -303,8 +303,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.POST)
-	public String profileUpdate(User user, 
-			MultipartFile file, String emailCheck,
+	public String profileUpdate(User user, MultipartFile file, String emailCheck,
 			FileUpload fileUpload, HttpSession session, Model model) {
 		if(emailCheck == null || emailCheck.equals("")) {
 			logger.info("[정보 수정 실패] 인증키 값이 없음");

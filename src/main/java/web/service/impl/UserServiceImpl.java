@@ -257,16 +257,18 @@ public class UserServiceImpl implements UserService{
 			
 			user = userDao.selectUserByUserno(user.getUserNo());
 			logger.info("db email : {}", user.getEmail());
-			if(email.equals("")) {
-				logger.info("비어있거나 형식에 맞지않는 이메일");
-				isChecked = true;
-			}else if(email.equals(user.getEmail())){
+			if(cnt == 0 && !email.equals("")) {
+				logger.info("중복 없음 유효한 형식");
+				isChecked = false;
+
+			}else if(email.equals(user.getEmail()) && !email.equals("")){
 				logger.info("기존 이메일");
 				isChecked = false;
 			}else {
-				logger.info("유효한 형식");
-				isChecked = false;
+				logger.info("유효하지 않은 형식");
+				isChecked = true;
 			}
+			
 		}else {
 			if(cnt == 0) {
 				logger.info("매칭된 이메일 없음");
@@ -285,32 +287,31 @@ public class UserServiceImpl implements UserService{
 	public boolean searchNick(User user) {
 		int cnt = userDao.selectUserCnt(user);
 		boolean isChecked = true;
-		
-		if(cnt == 0) {
-			logger.info("매칭된 닉네임 없음");
-			isChecked =  false;	
-		}else {
-			logger.info("닉네임 중복");
-			isChecked = true;
-		}
-		
 		if(user.getUserNo() != 0) {
-			
 			//입력값 저장
 			String nick = user.getNick();
 			//DB데이터 조회
 			user = userDao.selectUserByUserno(user.getUserNo());
 			
-			if(nick.equals("")) {
-				logger.info("비어있거나 형식에 맞지않는 닉네임");
-				isChecked = true;
+			if(cnt == 0 && !nick.equals("")) {
+				logger.info("유효한 형식");
+				isChecked = false;
 			}else if(nick.equals(user.getNick())){
 				logger.info("기존 닉네임");
 				isChecked = false;	
 			}else {
-				logger.info("유효한 형식");
-				isChecked = false;
+				logger.info("비어있거나 형식에 맞지않는 닉네임");
+				isChecked = true;
+				
 			}
+		}else {
+			if(cnt == 0) {
+				logger.info("매칭된 닉네임 없음");
+				isChecked =  false;	
+			}else {
+				logger.info("닉네임 중복");
+				isChecked = true;
+			}			
 		}
 
 		return isChecked;
@@ -435,8 +436,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserInfoByEmail(User user) {
 		int cnt = userDao.selectCntByEmail(user);
+		
 		if(cnt == 1) {
 			user = userDao.selectUserByEmail(user);
+			
 		}
 		return user;
 	}

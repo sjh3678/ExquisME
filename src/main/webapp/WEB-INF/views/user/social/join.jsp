@@ -664,18 +664,21 @@ function f_datepicker(obj) {
 <br><br>
 
 <label for="gender" class="col-xs-3 control-label">성별 </label>
+<div style="position: relative; left: -350px;">
 <input type="radio" name="gender" value="F" id="female" checked="checked"/> <label id="woman">여성</label>
 <input type="radio" name="gender" value="M" id="male"/> <label id="male">남성</label><br>
+</div>
 <br><br>
 
 <label for="birth" class="col-xs-3 control-label">생일 </label>
-<input type="text" class="form-control" id="birth" readonly onclick="javascript:f_datepicker(this);">
+<input type="text" class="form-control" id="birth" name="birth" readonly onclick="javascript:f_datepicker(this);">
 <span id="birthChk" class="error col-xs-offset-3 feedback">생일을 선택해주세요</span>
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>
 
 <label for="questionAnwser" class="col-xs-3 control-label">본인 확인 질문 </label>
-<select id="questionNo" name="questionNo" style="width:500px;border: 1px solid #ccc;border-radius: 5px;margin-bottom:5px;">
+<select id="questionNo" name="questionNo" style="width:500px;border: 1px solid #ccc;border-radius: 5px;margin-bottom:5px; position: relative;
+    left: -150px">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
       <option value="2">다시 태어나면 되고 싶은 것은?</option>
       <option value="3">가장 감명깊게 본 영화는?</option>
@@ -683,7 +686,7 @@ function f_datepicker(obj) {
       <option value="5">받았던 선물중에 가장 기억에 남는 선물은?</option>
       <option value="6">읽은 책 중에서 가장 좋아하는 구절은?</option>
 </select>
-<input type="text" class="col-xs-offset-3 form-control" id="questionAnwser" onKeyup="characterCheck(this)" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
+<input type="text" class="col-xs-offset-3 form-control"  onKeyup="characterCheck(this)" id="questionAnwser" onKeyup="characterCheck(this)" name="questionAnwser" placeholder="질문에 답을 입력해주세요"> 
 <span id="answerChk" class="error col-xs-offset-3 feedback">답을 입력해주세요</span>
 <span id="valid-answer" class="valid col-xs-offset-3 feedback">입력 되었습니다.</span>
 <br>
