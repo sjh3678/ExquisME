@@ -61,6 +61,7 @@ $(document).ready(function(){
 		curSlide++
 		curSlide %= $slider_list.length
 		}
+		$("#sliderbox").clearQueue()
 	})
 })
 
@@ -250,13 +251,16 @@ $(document).ready(function(){
 	font-size: 28px;
 }
 #middleImg{
-	 width: 270px;
-	 height: 270px;
-	 background: #FFF;
-	 border-radius: 10px;
+	width: 270px;
+	height: 270px;
+	background: #FFF;
+	border-radius: 10px;
+	position: relative;
+    left: 7px;
+    top: 3px;
 }
 #middleImg:hover {
-	transform: scale(1.02);
+	filter: brightness(0.9)
 }
 .cardFrame:hover { 
 	transform: scale(1.02);
