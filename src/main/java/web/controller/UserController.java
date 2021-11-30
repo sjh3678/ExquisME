@@ -68,6 +68,9 @@ public class UserController {
 			
 			if(isReport) {
 				report = userService.getReportInfo(user, report);
+				if(report.getExpireDate() == null) report.setExpireDate(new Date());//오늘날짜로 넣기
+				
+				// 같으면 0 낮으면 음수 높으면 양수
 				int dateNumber = new Date().compareTo( report.getExpireDate());
 				if(dateNumber < 0) {
 					logger.info("로그인 거부");
@@ -100,6 +103,8 @@ public class UserController {
 		logger.info("신고 조회결과 : {}", isReport);
 		if(isReport) {
 			report = userService.getReportInfo(user, report);
+			
+			if(report.getExpireDate() == null) report.setExpireDate(new Date());//오늘날짜로 넣기
 			
 			//두 날짜를 비교해서 같으면 0, 작으면 음수, 크면 양수 
 			int dateNumber = new Date().compareTo( report.getExpireDate());

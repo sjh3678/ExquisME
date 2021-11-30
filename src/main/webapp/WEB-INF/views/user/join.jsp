@@ -136,13 +136,23 @@ async function checkEmailExist() {
 	console.log("이메일 중복 검사");
 	
 	var email = $("#email");
+	var regExp = /[<>\\]/gi; 
 	
 	if (checkEmail() == false) {
 		console.log("유효하지 않은 이메일형식");
 		$("#sendMail").css("display", "none");
 		return false;
 	}
-	
+	if( regExp.test(email.val()) ){
+		console.log("유효하지 않은 이메일형식");
+		
+		$("#emailChk").removeClass("invisible");
+		$("#emailError").addClass("invisible");
+		$("#valid-email").addClass("invisible");
+		$("#sendMail").addClass("invisible");
+		
+		return false;
+	}
 	try {
 		const result = await ajaxPost('/user/check/email', {email: email.val()});
 		console.log("이메일 체크 결과 : ",result);
@@ -228,6 +238,7 @@ function checkNick() {
 //닉네임 중복 검사
 async function checkNickExist() {
 	console.log("닉네임 중복검사");
+	var regExp = /[<>\\]/gi; 
 	
 	var nick = $("#nick");
 	
@@ -235,7 +246,15 @@ async function checkNickExist() {
 		console.log("닉네임 공백이거나 공백문자")
 		return;
 	}
-	
+	if( regExp.test(nick.val()) ){
+		console.log("유효하지 않은 닉네임형식");
+		
+		$("#valid-email").css("display", "none");
+		$("#nickError").css("display", "none");
+		$("#nickChk").css("display", "inline");
+		
+		return false;
+	}
 	try {
 		const result = await ajaxPost('/user/check/nick', {nick: nick.val()});
 		
@@ -425,8 +444,15 @@ function checkAnswer() {
 	
 	var	answer = $("#questionAnwser");
 	var pattern = /\s/g;// 스페이스바 거르기
-	
-	if (answer.val() == "") {
+	var regExp = /[<>\\]/gi; 
+	if( regExp.test(answer.val()) ){
+		console.log("유효하지 않은 문답형식");
+		
+		$("#answerChk").css("display", "inline");
+		$("#valid-answer").css("display", "none");
+		
+		return false;
+	}else if (answer.val() == "") {
 		console.log("답 공백");
 		answer.addClass("is-invalid");
 		answer.removeClass("is-valid");
@@ -1079,7 +1105,7 @@ function f_datepicker(obj) {
 
 <label for="nick" class="col-xs-3 control-label">닉네임 </label>
 <input type="text" class="form-control" id="nick"  onKeyup="characterCheck(this)" name="nick" maxlength="8" placeholder="닉네임을 입력해 주세요">
-<span id="nickChk" class="error col-xs-offset-3 feedback">닉네임을 입력해주세요</span>
+<span id="nickChk" class="error col-xs-offset-3 feedback">공백 문자 및 일부 특수 문자는 작성이 제한됩니다.</span>
 <span id="nickError" class="error col-xs-offset-3 feedback">이미 존재하는 닉네임입니다.</span>
 <span id="valid-nick" class="valid col-xs-offset-3 feedback">사용가능한 닉네임입니다.</span>
 <br><br>

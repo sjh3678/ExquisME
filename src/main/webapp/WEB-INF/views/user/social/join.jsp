@@ -150,7 +150,15 @@ async function checkEmailExist() {
 		console.log("유효하지 않은 이메일형식");
 		return false;
 	}
-	
+	if( regExp.test(email.val()) ){
+		console.log("유효하지 않은 닉네임형식");
+		
+		$("#valid-email").css("display", "none");
+		$("#nickError").css("display", "none");
+		$("#nickChk").css("display", "inline");
+		
+		return;
+	}
 	try {
 		const result = await ajaxPost('/user/check/email', {email: email.val()});
 		
@@ -429,8 +437,14 @@ function checkAnswer() {
 	
 	var	answer = $("#questionAnwser");
 	var pattern = /\s/g;// 스페이스바 거르기
-	
-	if (answer.val() == "") {
+	if( regExp.test(answer.val()) ){
+		console.log("유효하지 않은 문답형식");
+		
+		$("#answerChk").css("display", "inline");
+		$("#valid-answer").css("display", "none");
+		
+		return false;
+	}else if (answer.val() == "") {
 		console.log("답 공백");
 		answer.addClass("is-invalid");
 		answer.removeClass("is-valid");

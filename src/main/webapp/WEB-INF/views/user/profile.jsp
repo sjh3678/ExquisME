@@ -78,6 +78,7 @@ async function checkEmailExist() {
 	console.log("이메일 중복 검사");
 	
 	var email = $("#email");
+	var regExp = /[<>\\]/gi; 
 	
 	if (checkEmail() == false) {
 		console.log("유효하지 않은 이메일형식");
@@ -89,7 +90,16 @@ async function checkEmailExist() {
 		
 		return false;
 	}
-	
+	if( regExp.test(email.val()) ){
+		console.log("유효하지 않은 이메일형식");
+		
+		$("#emailChk").removeClass("invisible");
+		$("#emailError").addClass("invisible");
+		$("#valid-email").addClass("invisible");
+		$("#sendMail").addClass("invisible");
+		
+		return false;
+	}
 	try {
 		const result = await ajaxPost('/user/check/email', {email: email.val()});
 		
@@ -187,6 +197,7 @@ async function checkNickExist() {
 	console.log("닉네임 중복검사");
 	
 	var nick = $("#nick");
+	var regExp = /[<>\\]/gi; 
 	
 	if (checkNick() == false) {
 		console.log("닉네임 공백이거나 공백문자")
@@ -195,9 +206,17 @@ async function checkNickExist() {
 		$("#nickError").addClass("invisible");
 		$("#nickChk").removeClass("invisible");
 		
-		return;
+		return false;
 	}
-	
+	if( regExp.test(nick.val()) ){
+		console.log("닉네임 공백이거나 공백문자")
+		
+		$("#valid-nick").addClass("invisible");
+		$("#nickError").addClass("invisible");
+		$("#nickChk").removeClass("invisible");
+		
+		return false;
+	}
 	try {
 		const result = await ajaxPost('/user/check/nick', {nick: nick.val()});
 		
@@ -576,7 +595,7 @@ s						</c:when>
 					</c:choose>
 					<td class="info-write invisible">
 						&nbsp;&nbsp;<input class="form-control classInput" maxlength="8" type="text" onkeyup=characterCheck(this) name="nick" id="nick" value="${user.nick }">
-						<span id="nickChk" class="error invisible">닉네임을 입력해 주세요.</span> 
+						<span id="nickChk" class="error invisible">공백 문자 및 일부 특수문자는 작성이 불가능합니다.</span> 
 						<span id="nickError" class="error invisible">이미 존재하는 닉네임입니다.</span> 
 						<span id="valid-nick" class="valid invisible">사용 가능한 닉네임입니다.</span>
 					</td>
