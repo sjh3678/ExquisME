@@ -65,13 +65,13 @@
 		<if test='nick != null and !nick.equals("")'>
 			AND nick = #{nick}
 		</if>
-			
-		<if test='userNo != 0'>
-			AND user_no = #{userNo}
-		</if>
 
 	</select>
 	
+	<select id="selectUserCntByUserNo" parameterType="web.dto.User" resultType="int">
+		SELECT count(*) FROM tb_user
+		WHERE user_no = #{userNo}
+	</select>
 	<select id="selectUserById" parameterType="web.dto.User" resultMap="User">
 		SELECT 
 			user_no, file_no, id, pw, nick, email, phone, birth, gender, create_date, is_admin

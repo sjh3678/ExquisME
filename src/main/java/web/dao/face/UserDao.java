@@ -272,4 +272,11 @@ public interface UserDao {
 	 * @return - 조회된 리스트 반환
 	 */
 	public List<User> selectUserList();
+
+	/**
+	 * 유저 매칭 정보 조회
+	 * @param user - 매칭할 유저 정보
+	 * @return - 조회결과 반환
+	 */
+	public int selectUserCntByUserNo(User user);
 }

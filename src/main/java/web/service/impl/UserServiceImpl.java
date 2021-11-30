@@ -214,7 +214,7 @@ public class UserServiceImpl implements UserService{
 			userDao.deleteFileByFileNo(user.getFileNo()); // 프로필 사진 삭제 (기본 프로필 제외)
 		}
 		
-		cnt = userDao.selectUserCnt(user);
+		cnt = userDao.selectUserCntByUserNo(user);
 		
 		logger.info("cnt : {}", cnt);
 		if(cnt == 0) {
