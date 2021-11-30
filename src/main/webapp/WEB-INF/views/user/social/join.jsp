@@ -674,7 +674,7 @@ function f_datepicker(obj) {
 <span id="valid-birth" class="valid col-xs-offset-3 feedback">선택 되었습니다.</span>
 <br><br>
 
-<label for="questionAnwser" class="col-xs-3 control-label">자주묻는 질문 </label>
+<label for="questionAnwser" class="col-xs-3 control-label">본인 확인 질문 </label>
 <select id="questionNo" name="questionNo" style="width:500px;border: 1px solid #ccc;border-radius: 5px;margin-bottom:5px;">
       <option value="1">내가 좋아하는 캐릭터(인물)는?</option>
       <option value="2">다시 태어나면 되고 싶은 것은?</option>
