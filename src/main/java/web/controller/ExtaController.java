@@ -149,6 +149,16 @@ public class ExtaController {
 		
 		return "redirect:/extagram/view?exNo=" + comm.getExPostNo();
 	}
+//ADMIN - COMMENT DELETE
+	@RequestMapping(value="/admin/extagram/deleteComment")
+	public String adminExtaCommentDelete(ExComm comment) {
+		
+		ExComm comm = extaService.getInfoComment(comment);
+		
+		extaService.deleteComment(comm);
+		
+		return "redirect:/extagram/view?exNo=" + comm.getExPostNo();
+	}
 	
 //HEART(ajax)
 	@RequestMapping(value="/extagram/heart", method=RequestMethod.GET)
