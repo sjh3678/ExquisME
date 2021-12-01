@@ -15,10 +15,10 @@
 <h1 style="text-align: center;"> ${user.nick } 님의 Layering</h1>
 <hr>
 <div style="text-align: center;">
-<a href="/admin/user/list"><button>user list</button></a>
-<a href="/admin/user/history/extagram?userNo=${user.userNo }"><button>extagram</button></a>
-<a href="/admin/user/history/extagramComment?userNo=${user.userNo }"><button>extagram comment</button></a>
-<a href="/admin/user/history/layer?userNo=${user.userNo }"><button>layering</button></a>
+<a href="/admin/user/list"><button class="btn">user list</button></a>
+<a href="/admin/user/history/extagram?userNo=${user.userNo }"><button class="btn">extagram</button></a>
+<a href="/admin/user/history/extagramComment?userNo=${user.userNo }"><button class="btn">extagram comment</button></a>
+<a href="/admin/user/history/layer?userNo=${user.userNo }"><button class="btn">layering</button></a>
 </div>
 <br>
 <table class="table table-striped table-hover">
@@ -43,7 +43,7 @@
 					src="/upload/${list.PERFUME2 }"></td>
 		<td style="text-align: center;">${list.PERFUME1_PER } / ${100 - list.PERFUME1_PER }</td>
 		<td style="text-align: center;">${list.LAYERING_DATE }</td>
-		<td style="text-align: center;"><a href="/admin/user/history/layer/delete?layeringNo=${list.LAYERING_NO }&userNo=${list.USER_NO }" onclick="return confirm('레이어링을 삭제하시겠습니까? 삭제된 레이어링은 원상복구 할 수 없습니다.');"><button>레이어링 삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/layer/delete?layeringNo=${list.LAYERING_NO }&userNo=${list.USER_NO }" onclick="return confirm('레이어링을 삭제하시겠습니까? 삭제된 레이어링은 원상복구 할 수 없습니다.');"><button class="btn">레이어링 삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

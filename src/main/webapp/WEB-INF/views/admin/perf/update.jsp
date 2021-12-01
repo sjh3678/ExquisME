@@ -370,7 +370,7 @@ function fileCheck(obj) {
 	<hr>
 	<input type="text" name = "perfumeNo" value = ${perf.PERFUME_NO } readonly style="display: none;"/>
 	<input type="text" name = "fileNo" value = ${perf.FILE_NO } readonly style="display: none;"/>
-	<button id="btnWrite" type="button">향수 수정</button> <button id = "btnCancel" type="button">수정 취소</button>
+	<button id="btnWrite" class="btn" type="button">향수 수정</button> <button id = "btnCancel"  class="btn" type="button">수정 취소</button>
 </form>
 
 </div>

@@ -39,8 +39,8 @@
 		<td style="text-align: center;">${user.PHONE }</td>
 		<td style="text-align: center;">${user.GENDER }</td>
 		<td style="text-align: center;">${user.IS_ADMIN }</td>
-		<td style="text-align: center;"><a href="/admin/user/history/extagram?userNo=${user.USER_NO }""><button id="btnDelete">작성글 보기</button></a></td>
-		<td style="text-align: center;"><a href="/admin/user/delete?userNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete">회원 탈퇴</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagram?userNo=${user.USER_NO }""><button class="btn">작성글 보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/delete?userNo=${user.USER_NO }" onclick="return confirm('회원을 삭제하시겠습니까? 삭제된 회원은 원상복구 할 수 없습니다.');"><button id="btnDelete" class="btn">회원 탈퇴</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

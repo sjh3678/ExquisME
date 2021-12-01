@@ -374,7 +374,7 @@ function fileCheck(obj) {
 
 	<hr>
 
-	<button id="btnWrite" type="button">향수 등록</button> <button id = "btnCancel" type="button">등록 취소</button>
+	<button id="btnWrite" class="btn" type="button">향수 등록</button> <button id = "btnCancel" class="btn" type="button">등록 취소</button>
 </form>
 
 </div>

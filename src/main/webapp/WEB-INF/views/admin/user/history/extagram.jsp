@@ -15,10 +15,10 @@
 <h1 style="text-align: center;"> ${user.nick } 님의 Extagram 게시글</h1>
 <hr>
 <div style="text-align: center;">
-<a href="/admin/user/list"><button>user list</button></a>
-<a href="/admin/user/history/extagram?userNo=${user.userNo }"><button>extagram</button></a>
-<a href="/admin/user/history/extagramComment?userNo=${user.userNo }"><button>extagram comment</button></a>
-<a href="/admin/user/history/layer?userNo=${user.userNo }"><button>layering</button></a>
+<a href="/admin/user/list"><button  class="btn">user list</button></a>
+<a href="/admin/user/history/extagram?userNo=${user.userNo }"><button  class="btn">extagram</button></a>
+<a href="/admin/user/history/extagramComment?userNo=${user.userNo }"><button  class="btn">extagram comment</button></a>
+<a href="/admin/user/history/layer?userNo=${user.userNo }"><button  class="btn">layering</button></a>
 </div>
 <br>
 <table class="table table-striped table-hover">
@@ -39,8 +39,8 @@
 					src="/upload/${exta.UPFILE }"></td>
 		<td style="text-align: center;">${exta.EX_CONTENT }</td>
 		<td style="text-align: center;">${exta.EX_DATE  }</td>
-		<td style="text-align: center;"><a href="/extagram/view?exNo=${exta.EX_NO }"><button>상세보기</button></a></td>
-		<td style="text-align: center;"><a href="/admin/user/history/extagram/delete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시글은 원상복구 할 수 없습니다.');"><button>게시글 삭제</button></a></td>
+		<td style="text-align: center;"><a href="/extagram/view?exNo=${exta.EX_NO }"><button  class="btn">상세보기</button></a></td>
+		<td style="text-align: center;"><a href="/admin/user/history/extagram/delete?exNo=${exta.EX_NO }&userNo=${exta.POSTOWNER }" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시글은 원상복구 할 수 없습니다.');"><button  class="btn">게시글 삭제</button></a></td>
 	</tr>	
 </c:forEach>
 </tbody>

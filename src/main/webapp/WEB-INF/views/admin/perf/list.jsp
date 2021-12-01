@@ -9,7 +9,7 @@
 <h1>관리자 향수 리스트</h1>
 <hr>
 <div style="text-align: center;">
-<a href="/admin/perf/write"><button>신규 향수 등록</button></a>
+<a href="/admin/perf/write"><button class="btn">신규 향수 등록</button></a>
 <br><br>
 <form action="/admin/perf/list" method="get">
 <input type="text" name="search"><button>검색</button>
@@ -40,8 +40,8 @@
 					src="/resources/img/brand/${perf.BRAND_NAME }.png">
 		</td>
 		<td style="text-align: center;"><a href="/perf/view?perfumeNo=${perf.PERFUME_NO }">${perf.PERFUME_NAME }</a></td>
-		<td style="text-align: center;"><a href="/admin/perf/update?perfumeNo=${perf.PERFUME_NO }"><button>수정</button></a></td>
-		<td style="text-align: center;"><a href="/admin/perf/delete?perfumeNo=${perf.PERFUME_NO }" onclick="return confirm('향수를 삭제하시겠습니까? 삭제된 향수는 원상복구 할 수 없습니다.');"><button id="btnDelete">삭제</button></a></td>
+		<td style="text-align: center;"><a href="/admin/perf/update?perfumeNo=${perf.PERFUME_NO }"><button class="btn">수정</button></a></td>
+		<td style="text-align: center;"><a href="/admin/perf/delete?perfumeNo=${perf.PERFUME_NO }" onclick="return confirm('향수를 삭제하시겠습니까? 삭제된 향수는 원상복구 할 수 없습니다.');"><button class="btn" id="btnDelete">삭제</button></a></td>
 	</tr>
 </c:forEach>
 </tbody>
