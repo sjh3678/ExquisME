@@ -18,7 +18,7 @@ $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		var answer = confirm("Extagram을 등록하시겠습니까?");
 		if(answer == true) {
-			var fileChecked = document.getElementById("fileCheck").value;
+			var fileChecked = document.getElementById("fileChecked").value;
 			
 			if( !fileChecked ) {
 				alert("Extagram 작성 시 사진을 업로드해야 합니다.");
