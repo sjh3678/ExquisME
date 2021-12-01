@@ -107,7 +107,7 @@ function fileCheck(obj) {
 		<tbody>
 		  <tr>
 		    <td class="tg-baqh">향수 이름</td>
-		    <td class="tg-baqh"><input type="text" id="perfName" name="perfumeName" maxlength="40" placeholder="향수이름을 입력해주세요" style="width:280px;"/></td>
+		    <td class="tg-baqh"><input type="text" id="perfName" name="perfumeName" maxlength="35" placeholder="향수이름을 입력해주세요" style="width:280px;"/></td>
 		  </tr>
 		  <tr>
 		    <td class="tg-baqh">브랜드</td>

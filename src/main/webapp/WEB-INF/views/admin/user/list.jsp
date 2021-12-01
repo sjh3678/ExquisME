@@ -17,14 +17,14 @@
 <table class="table table-striped table-hover">
 <thead>
 	<tr>
-		<th style="width: 15%; text-align: center;">프로필사진</th>
-		<th style="width: 10%; text-align: center;">아이디</th>
-		<th style="width: 15%; text-align: center;">닉네임</th>
+		<th style="width: 10%; text-align: center;">프로필사진</th>
+		<th style="width: 15%; text-align: center;">아이디</th>
+		<th style="width: 10%; text-align: center;">닉네임</th>
 		<th style="width: 15%; text-align: center;">이메일</th>
 		<th style="width: 15%; text-align: center;">전화번호</th>
 		<th style="width: 5%; text-align: center;">성별</th>
 		<th style="width: 5%; text-align: center;">등급</th>
-		<th style="width: 10%; text-align: center;">상세보기</th>
+		<th style="width: 15%; text-align: center;">상세보기</th>
 		<th style="width: 10%; text-align: center;">회원탈퇴</th>
 	</tr>
 </thead>
