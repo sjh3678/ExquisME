@@ -108,8 +108,6 @@ public class ExtaServiceImpl implements ExtaService {
 		} else { //좋아요 안 눌린 상태
 			extaDao.insertHeart(heart);
 		}
-		
-		
 		return true;
 	}
 	

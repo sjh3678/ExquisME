@@ -122,8 +122,7 @@
 		SELECT COUNT(*) FROM tb_ex_like
 		WHERE ex_post_no = #{exPostNo}
 	</select>
-	
-<!-- 여기까지 좋아요 맵퍼 -->
+
 
 <!-- WRITE -->	
 	<insert id="insertFile" parameterType="web.dto.FileUpload">
@@ -257,6 +256,7 @@
 		            LEFT OUTER JOIN tb_file FU ON u.file_no = FU.file_no
 		            LEFT OUTER JOIN tb_ex_comm c ON x.ex_no = c.ex_post_no
 		            LEFT OUTER JOIN tb_ex_like l ON x.ex_no = l.ex_post_no
+		        WHERE x.ex_date Between sysdate - 7 AND sysdate
 		        ORDER BY heart DESC
 		    ) E
 		) tb_extagram

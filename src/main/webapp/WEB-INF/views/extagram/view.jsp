@@ -107,6 +107,7 @@ $(document).ready(function() {
 /* AJAX */
 $(document).ready(function() {
 	
+	//main ajax(댓글내용 + 좋아요/댓글 숫자 + 좋아요상태)
 	loadList();
 	$("#btnCommInsert").click(function() {
 		$.ajax({
@@ -182,6 +183,7 @@ function heartClick() {
 	})
 }
 
+//리스트불러오기
 function loadList() {
 	$.ajax({
 		type: "post"

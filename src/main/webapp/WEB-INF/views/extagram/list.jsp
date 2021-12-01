@@ -7,7 +7,8 @@
 .flex-container {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: wrap;		/* flex-flow : row wrap; */
+	/* flex : auto; */
 	width: 90%;
 	min-width: 1080px;
 }
