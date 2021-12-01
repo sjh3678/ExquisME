@@ -43,7 +43,7 @@ $(document).ready(function() {
 	<label for="content">본문</label>
 	<input type="hidden" name="exNo" value="${viewExta.EX_NO }" />
 	<input type="hidden" name="fileNo" value="${fileUpload.fileNo }" />
-	<textarea rows="10" style="width: 100%;" id="exContent" name="exContent">${viewExta.EX_CONTENT }</textarea>
+	<textarea rows="10" style="width: 100%; resize: none;" id="exContent" name="exContent">${viewExta.EX_CONTENT }</textarea>
 </div>
 
 <div class="form-group">

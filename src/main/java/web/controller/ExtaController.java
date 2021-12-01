@@ -29,7 +29,6 @@ public class ExtaController {
 	private static final Logger logger = LoggerFactory.getLogger(ExtaController.class);
 	
 	@Autowired ExtaService extaService;
-	@Autowired ExtaDao extaDao;
 	
 	
 //LIST	
