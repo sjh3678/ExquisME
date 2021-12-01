@@ -300,19 +300,14 @@ function checkBirth() {
 	}
 }
 
-//파일 형식 검사 미리보기
 function handleImgFileSelect(e) {
+	
     var files = e.target.files;
     var filesArr = Array.prototype.slice.call(files);
 
-    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-
+    //유효성 검사를 추가하려다 보니 이게 꼬인거 같습니다.
+    
     filesArr.forEach(function(f) {
-        if (!f.type.match(reg)) {
-            alert("확장자는 이미지 확장자만 가능합니다.");
-            $("#file").val("");
-            return false;
-        }
 
         sel_file = f;
 
@@ -343,9 +338,16 @@ async function checked() {
 	console.log(isvalid);
 	
 	if(await authKeyCheck() == false) isvalid = false;
+	
 	if($("#file").val() == ""){
 		console.log("파일 없음")
-	}else isvalid = handleImgFileSelect(file)
+	}else {
+		var ext = $('#file').val().split('.').pop().toLowerCase();
+	  	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+	  	     isvalid = false
+	 	  }
+		
+    }
 	return isvalid;
 }
 
