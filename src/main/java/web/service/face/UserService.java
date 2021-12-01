@@ -244,12 +244,4 @@ public interface UserService {
 	 */
 	public boolean sendMailPw(User user, String id, int questionNo, String questionAnswer);
 
-	/**
-	 * 
-	 * @param pw
-	 * @param userNo
-	 * @return
-	 */
-	public boolean getCheckPw(String pw, int userNo);
-
 }

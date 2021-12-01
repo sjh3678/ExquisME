@@ -533,6 +533,9 @@ async function submit() {
 		})
 	}
 }
+</script>
+
+<script type="text/javascript">
 $(document).ready(function(){
 	
 	//날짜 선택기
@@ -588,6 +591,7 @@ $(document).ready(function(){
     })
 })
 </script>
+
 <script>
 //특수문자(<, >, \) 입력 방지 네이버SE2에는 적용 안 되므로 글 내용 작성에는 영향 없음
 function characterCheck(obj){

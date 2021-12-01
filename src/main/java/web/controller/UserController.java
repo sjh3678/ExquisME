@@ -242,17 +242,11 @@ public class UserController {
 		user.setPw(user.getPw()); // 암호화 전
 		user.setPw(UserSHA256.encrypt(user)); // 변경값 암호화 후 저장
 		
-		boolean pwCheck = userService.getCheckPw(user.getPw(), userNo);
-		logger.info("비밀번호 중복 : {}", pwCheck);
 		
-		//비밀번호 중복검사
-		if(pwCheck) {
-			return false;
-		}else {
-			boolean isUpdate = userService.setUpdatePw(user, pwChk);
-			logger.info("결과 : {}", isUpdate);
-			return isUpdate;
-		}
+		boolean isUpdate = userService.setUpdatePw(user, pwChk);
+		logger.info("결과 : {}", isUpdate);
+		return isUpdate;
+		
 	}
 	@RequestMapping(value="/pw/check", method=RequestMethod.POST)
 	public @ResponseBody boolean pwCheck(User user, HttpSession session) {

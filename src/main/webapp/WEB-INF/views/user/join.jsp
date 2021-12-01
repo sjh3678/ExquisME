@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
+<!-- 유효성 검사 및  ajax 처리 -->
 <script type="text/javascript">
 async function ajaxPost(url, data) {
 	return new Promise((resolve, reject) => {
@@ -597,7 +597,9 @@ async function submit() {
 		}
 	})
 }
-
+</script>
+<!-- 태그의 이벤트 처리 및 유효성 검사 호출 -->
+<script type="text/javascript">
 $(document).ready(function(){
 	
 	$(".btnPerf").click(function(){
@@ -1059,6 +1061,8 @@ function f_datepicker(obj) {
 
 <input type="checkbox" id="agree4" class="chkSub chkSub4" value="4">
 <label for="agree4">
+  <span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)<br></strong></span>
+</label>
   <span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)<br></strong></span>
 </label>
 

@@ -706,8 +706,6 @@ public class UserServiceImpl implements UserService{
             session.setAttribute("mail", mail);
             session.setAttribute("authKey", authKey);
             
-            session.setMaxInactiveInterval(5*60); //5분뒤 세션값 삭제
-            
         } catch (MessagingException e) {
             e.printStackTrace();
             return false;
@@ -826,24 +824,6 @@ public class UserServiceImpl implements UserService{
         }
         logger.info("조회된 결과 없음 [ERROR]");
 		return false;
-	}
-
-	@Override
-	public boolean getCheckPw(String pw, int userNo) {
-		
-		List<User> list = userDao.selectUserList();
-		int cnt = 0;
-		for(User u : list) {
-			if(pw.equals(u.getPw())) {
-				cnt++;
-			}
-		}
-		if(cnt < 1) {
-			logger.info("중복없음");
-			return false;
-		}
-		logger.info("비밀번호 중복");
-		return true;
 	}
 
 }

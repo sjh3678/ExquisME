@@ -87,7 +87,7 @@ async function checkEmailExist() {
 		$("#emailError").addClass("invisible");
 		$("#valid-email").addClass("invisible");
 		$("#sendMail").addClass("invisible");
-		
+		$(".keyCheck").addClass("invisible");
 		return false;
 	}
 	if( regExp.test(email.val()) ){
@@ -97,7 +97,7 @@ async function checkEmailExist() {
 		$("#emailError").addClass("invisible");
 		$("#valid-email").addClass("invisible");
 		$("#sendMail").addClass("invisible");
-		
+		$(".keyCheck").addClass("invisible");
 		return false;
 	}
 	try {
@@ -120,6 +120,7 @@ async function checkEmailExist() {
 			$("#emailError").removeClass("invisible");
 			$("#valid-email").addClass("invisible");
 			$("#sendMail").addClass("invisible");
+			$(".keyCheck").addClass("invisible");
 			
 			//이메일 체크 패스못함
 			return false;
@@ -274,7 +275,7 @@ function checkBirth() {
 	if (birth.val() == "") {
 		console.log("생일 공백");
 		
-		$("#birthChk").removeClass("invisible");
+		$("#birthChk").removeClass("invisible"); // 보이게
 		$("#valid-birth").addClass("invisible");
 
 		return false;
@@ -503,12 +504,16 @@ input[name=file] {
 	top: 0px;
 	border-collapse: collapse;
  	border-spacing: 5px 0px;
-	table-layout: relative;
+	table-layout: fixed;
 /* 	text-overflow: ellipsis; */
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
 	top: 160px;
+}
+td{
+	
+	word-wrap:break-word;
 }
 .btnProfile{
 	background: #8A7E6B;
@@ -522,7 +527,8 @@ span{
 	font-size: 12px;
 }
 .classInput{
-	height: 27px;
+	height: 50%;
+    margin-bottom: 14px;
 }
 #modifyBtn{
 	position: relative;
@@ -574,9 +580,9 @@ s						</c:when>
 				</tr>
 
 				<tr class="info keyCheck invisible">
-					<td><label for="emailCheck" id="emailCheckLabel" class="info-write" style="font-weight: 400;">인증번호 </label></td>
+					<td><label for="emailCheck" id="emailCheckLabel"  class="info-write" style="font-weight: 400;">인증번호 </label></td>
 					<td>
-						&nbsp;&nbsp;<input id="emailCheck" type="number" class="info-write form-control" name="emailCheck" placeholder="메일을 확인해 주세요.">
+						&nbsp;&nbsp;<input id="emailCheck" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="info-write classInput form-control" name="emailCheck" maxlength="6" placeholder="메일을 확인해 주세요.">
 						<span id="sendSucess" class="valid invisible">인증되었습니다.</span>
 						<span id="sendFail" class="error invisible">인증번호가 일치하지않습니다.</span>
 					</td>
@@ -657,10 +663,20 @@ s						</c:when>
 							<td class="info-show">&nbsp;&nbsp;<i class="fas fa-ban"></i></td>
 						</c:when>
 					</c:choose>
-					<td class="info-write invisible">&nbsp;&nbsp;
-						<input type="radio" name="gender" value="F" id="female" checked="checked"><label for="female" style="font-weight:300">여성</label>&nbsp;&nbsp; 
-						<input type="radio" name="gender" value="M" id="male"><label for="male" style="font-weight:300">남성</label>
-					</td>
+					
+					<c:if test="${user.gender eq 'F' }">
+						<td class="info-write invisible">&nbsp;&nbsp;
+							<input type="radio" name="gender" value="F" id="female" checked="checked"><label for="female" style="font-weight:300">여성</label>&nbsp;&nbsp; 
+							<input type="radio" name="gender" value="M" id="male"><label for="male" style="font-weight:300">남성</label>
+						</td>
+					</c:if>
+					
+					<c:if test="${user.gender eq 'M' }">
+						<td class="info-write invisible">&nbsp;&nbsp;
+							<input type="radio" name="gender" value="F" id="female" ><label for="female" style="font-weight:300">여성</label>&nbsp;&nbsp; 
+							<input type="radio" name="gender" value="M" id="male" checked="checked"><label for="male" style="font-weight:300">남성</label>
+						</td>
+					</c:if>
 				</tr>
 			</tbody>
 		</table>

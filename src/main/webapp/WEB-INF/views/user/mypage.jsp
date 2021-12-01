@@ -117,12 +117,13 @@ $(document).ready(function(){
 				console.log(res);
 				if(res == false){
 					console.log("인증 실패")
-					alert("인증 실패")
+					alert("인증 실패");
 					authkey = 0;
 				}else{
 					console.log("인증 확인됨")
+					console.log("인증 성공")
 					authkey = 1;	
-					$("#modal").css("display", "none")
+					$("#modal").css("display", "none");
 				}
 			}, error : function(error){
 				console.log(error)
