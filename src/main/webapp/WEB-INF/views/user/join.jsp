@@ -1057,8 +1057,8 @@ function f_datepicker(obj) {
       · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음
 </textarea><br><br>
 
-<input type="checkbox" class="chkSub chkSub4" value="4">
-<label for="agree">
+<input type="checkbox" id="agree4" class="chkSub chkSub4" value="4">
+<label for="agree4">
   <span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)<br></strong></span>
 </label>
 
