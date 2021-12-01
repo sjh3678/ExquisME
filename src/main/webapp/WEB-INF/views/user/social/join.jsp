@@ -145,7 +145,7 @@ async function checkEmailExist() {
 	console.log("이메일 중복 검사");
 	
 	var email = $("#email");
-	
+	var regExp = /[<>\\]/gi; 
 	if (checkEmail() == false) {
 		console.log("유효하지 않은 이메일형식");
 		return false;
@@ -200,7 +200,7 @@ function checkNick() {
 	
 	var nick = $("#nick");
 	var pattern = /\s/g;
-	
+	var regExp = /[<>\\]/gi; 
 	if (nick.val() == "") {
 		console.log("닉네임 공백")
 		
@@ -434,7 +434,7 @@ function checkBirth() {
 //질문 답 공백 검사
 function checkAnswer() {
 	console.log("질문 답 공백 검사")
-	
+	var regExp = /[<>\\]/gi; 
 	var	answer = $("#questionAnwser");
 	var pattern = /\s/g;// 스페이스바 거르기
 	if( regExp.test(answer.val()) ){
