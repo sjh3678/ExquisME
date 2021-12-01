@@ -8,15 +8,15 @@
     	${perfLike.CNT }
    		</div>
    		<br>
-   		<c:if test="${userLikeCnt eq 0 && not empty login }">	
-    	<i id="perfLike" class="far fa-thumbs-up" style="font-size: 30px; color: blue;"></i>
+   		<c:if test="${userLikeCnt eq 0 && not empty login }">
+    		<img id="perfLike" src="/resources/img/like/like_empty.png">
     	</c:if>
     	<c:if test="${userLikeCnt eq 1 && not empty login }">
-    	<i id="perfLikeCancel" class="fas fa-thumbs-up" style="font-size: 30px; color: blue;"></i>
+    		<img id="perfLikeCancel" src="/resources/img/like/like_filled.png">
     	</c:if>
     	<br>
-    </th>
-    <th class="tg-c3ow">
+</th>
+<th class="tg-c3ow">
     <div style="font-size: 21px; font-weight: 300;">Dislike</div>
     
     	<div>
@@ -24,10 +24,10 @@
     	</div>
     	<br>
     	<c:if test="${userDislikeCnt eq 0 && not empty login }">
-    	<i id="perfDislike" class="far fa-thumbs-down" style="font-size: 30px; color: red;"></i>
+    		<img id="perfDislike" src="/resources/img/like/dislike_empty.png">
     	</c:if>
     	<c:if test="${userDislikeCnt eq 1 && not empty login }">
-    	<i id="perfDislikeCancel" class="fas fa-thumbs-down" style="font-size: 30px; color: red;"></i>
+    		<img id="perfDislikeCancel" src="/resources/img/like/dislike_filled.png">
     	</c:if>
     	<br>
-    </th>
+</th>
