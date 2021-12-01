@@ -27,7 +27,7 @@ $(document).ready(function(){
 	$("#btnWriteProc").click(function(){
 		if(confirm("새로운 게시글을 등록하시겠습니까?")){
 			submitContents($("#btnWriteProc"));
-			var isFile = $("#file").val();
+			var isFile = $("#fileWrite").val();
 			if(!isFile){
 				alert("공지사항은 반드시 이미지 파일과 함께 작성할 수 있습니다.")
 				return false;
