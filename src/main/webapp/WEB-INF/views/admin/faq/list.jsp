@@ -119,7 +119,7 @@ $(document).ready(function(){
   left: 50%;
 
   width: 800px;
-  height: 600px;
+  height: 700px;
 
   padding: 40px;
 
@@ -286,7 +286,6 @@ btnOpenPopupWrite.addEventListener('click', () => {
 		
 		//btnOpenPopupWrite에 맞춰서 SE2 스킨 씌우기
 		initSEWrite();
-		
 		modalWrite.classList.toggle('show');
 		
 	    if (modalWrite.classList.contains('show')) {
