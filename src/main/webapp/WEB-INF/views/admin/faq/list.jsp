@@ -45,7 +45,7 @@ $(document).ready(function(){
 	
 	//게시글 상세보기 토글
     $(".titleChild").click(function(){
-		$(this).parent().next("div").children().slideToggle();
+		$(this).parent().next("div").children().stop().slideToggle();
     })
 })
 

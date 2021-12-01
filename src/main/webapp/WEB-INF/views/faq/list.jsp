@@ -62,7 +62,7 @@
 $(document).ready(function(){
 	
     $(".titleChild").click(function(){
-		$(this).parent().next("div").children().slideToggle();
+		$(this).parent().next("div").children().stop().slideToggle();
     });
 	
 })
