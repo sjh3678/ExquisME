@@ -254,7 +254,7 @@ function fileCheck(obj) {
 			<input type="text" id="title" name="noticeTitle" class="form-control"/>
 		
 			<label for="contentWrite">본문</label>
-			<textarea rows="10" style="width: 100%;" id="contentWrite" name="noticeContent"></textarea>
+			<textarea rows="10" style="width: 100%; height: 370px;" id="contentWrite" name="noticeContent"></textarea>
 
 			<label for="file">첨부파일</label>
 			<input type="file" id="fileWrite" name="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" />		
@@ -269,8 +269,8 @@ function fileCheck(obj) {
 	<div class="title">
 		<div class="titleChild" style="cursor: pointer;">
 			<span class="titleText"><c:out value="${i.NOTICE_TITLE}"/></span>
-			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시물은 원상복구 할 수 없습니다.');">삭제</a>&nbsp;&nbsp;&nbsp;</span>
-			<span style="float: right; font-size: 18px; font-weight: 700;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
+			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="/admin/notice/delete?noticeNo=${i.NOTICE_NO}" onclick="return confirm('게시글을 삭제하시겠습니까? 삭제된 게시물은 원상복구 할 수 없습니다.');">삭제</a>&nbsp;&nbsp;&nbsp;</span>
+			<span style="float: right; font-size: 18px; font-weight: 400;"><a href="#" class="btn-open-popup-update">수정</a>&nbsp;&nbsp;&nbsp;</span>
 		</div>
 	</div>
 	<div class="content">
@@ -309,7 +309,7 @@ function fileCheck(obj) {
 			<input type="text" id="title" name="noticeTitle" class="form-control"/>
 		
 			<label for="contentUpdtae">본문</label>
-			<textarea rows="10" style="width: 100%;" id="contentUpdate" name="noticeContent"></textarea>
+			<textarea rows="10" style="width: 100%; height: 370px;" id="contentUpdate" name="noticeContent"></textarea>
 		</form>
 		<button class="btn btnWrite" id="btnUpdateProc">작성</button>
 	</div>

@@ -211,7 +211,7 @@ $(document).ready(function(){
 			<input type="text" id="title" name="faqTitle" class="form-control"/>
 		
 			<label for="contentWrite">본문</label>
-			<textarea rows="10" style="width: 100%;" id="contentWrite" name="faqContent"></textarea>
+			<textarea rows="10" style="width: 100%; height: 370px;" id="contentWrite" name="faqContent"></textarea>
 		</form>
 		<button class="btn btnWrite" id="btnWriteProc">작성</button>
 	</div>
@@ -246,7 +246,7 @@ $(document).ready(function(){
 			<input type="text" id="title" name="faqTitle" class="form-control"/>
 		
 			<label for="contentUpdtae">본문</label>
-			<textarea rows="10" style="width: 100%;" id="contentUpdate" name="faqContent"></textarea>
+			<textarea rows="10" style="width: 100%; height: 370px;" id="contentUpdate" name="faqContent"></textarea>
 		</form>
 		<button class="btn btnWrite" id="btnUpdateProc">작성</button>
 	</div>
