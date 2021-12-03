@@ -344,6 +344,7 @@ async function checked() {
 	}else {
 		var ext = $('#file').val().split('.').pop().toLowerCase();
 	  	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+	  		 $("#file").val(""); 
 	  	     isvalid = false
 	 	  }
 		
