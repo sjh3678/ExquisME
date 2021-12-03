@@ -38,7 +38,7 @@
 	<tr>
 		<td style="text-align: center;">${list.EX_POST_NO }</td>
 		<td style="text-align: center;">${list.POSTOWNER }</td>
-		<td style="text-align: center;">${list.EX_COMM }</td>
+		<td style="text-align: center;"><c:out value="${list.EX_COMM }"/></td>
 		<td style="text-align: center;">${list.EX_COMM_DATE }</td>
 		<td style="text-align: center;"><a href="/extagram/view?exNo=${list.EX_POST_NO }"><button class="btn">상세보기</button></a></td>
 		<td style="text-align: center;"><a href="/admin/user/history/extagramComment/delete?exCommNo=${list.EX_COMM_NO }&userNo=${list.USER_NO }" onclick="return confirm('댓글을 삭제하시겠습니까? 삭제된 댓글은 원상복구 할 수 없습니다.');"><button class="btn">댓글 삭제</button></a></td>
